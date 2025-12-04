@@ -1,0 +1,127 @@
+<?php
+
+declare(strict_types=1);
+
+namespace ModerationAPI\Services\Queue;
+
+use ModerationAPI\Client;
+use ModerationAPI\Core\Exceptions\APIException;
+use ModerationAPI\Queue\Items\ItemListParams;
+use ModerationAPI\Queue\Items\ItemListResponse;
+use ModerationAPI\Queue\Items\ItemResolveParams;
+use ModerationAPI\Queue\Items\ItemResolveResponse;
+use ModerationAPI\Queue\Items\ItemUnresolveParams;
+use ModerationAPI\Queue\Items\ItemUnresolveResponse;
+use ModerationAPI\RequestOptions;
+use ModerationAPI\ServiceContracts\Queue\ItemsContract;
+
+final class ItemsService implements ItemsContract
+{
+    /**
+     * @internal
+     */
+    public function __construct(private Client $client) {}
+
+    /**
+     * @api
+     *
+     * Get paginated list of items in a moderation queue with filtering options
+     *
+     * @param array{
+     *   afterDate?: string,
+     *   authorId?: string,
+     *   beforeDate?: string,
+     *   conversationIds?: string,
+     *   filteredActionIds?: string,
+     *   includeResolved?: string,
+     *   labels?: string,
+     *   pageNumber?: float,
+     *   pageSize?: float,
+     *   sortDirection?: 'asc'|'desc',
+     *   sortField?: 'createdAt'|'severity'|'reviewedAt',
+     * }|ItemListParams $params
+     *
+     * @throws APIException
+     */
+    public function list(
+        string $id,
+        array|ItemListParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): ItemListResponse {
+        [$parsed, $options] = ItemListParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['queue/%1$s/items', $id],
+            query: $parsed,
+            options: $options,
+            convert: ItemListResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Mark a queue item as resolved with a specific moderation action
+     *
+     * @param array{id: string, comment?: string}|ItemResolveParams $params
+     *
+     * @throws APIException
+     */
+    public function resolve(
+        string $itemID,
+        array|ItemResolveParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): ItemResolveResponse {
+        [$parsed, $options] = ItemResolveParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+        $id = $parsed['id'];
+        unset($parsed['id']);
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['queue/%1$s/items/%2$s/resolve', $id, $itemID],
+            body: (object) array_diff_key($parsed, ['id']),
+            options: $options,
+            convert: ItemResolveResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Mark a previously resolved queue item as unresolved/pending
+     *
+     * @param array{id: string, comment?: string}|ItemUnresolveParams $params
+     *
+     * @throws APIException
+     */
+    public function unresolve(
+        string $itemID,
+        array|ItemUnresolveParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): ItemUnresolveResponse {
+        [$parsed, $options] = ItemUnresolveParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+        $id = $parsed['id'];
+        unset($parsed['id']);
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['queue/%1$s/items/%2$s/unresolve', $id, $itemID],
+            body: (object) array_diff_key($parsed, ['id']),
+            options: $options,
+            convert: ItemUnresolveResponse::class,
+        );
+    }
+}
