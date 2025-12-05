@@ -1,4 +1,4 @@
-# Moderation API PHP API library
+# Moderation API PHP library
 
 > [!NOTE]
 > The Moderation API PHP API Library is currently in **beta** and we're excited for you to experiment with it!
@@ -9,8 +9,6 @@
 
 The Moderation API PHP library provides convenient access to the Moderation API REST API from any PHP 8.1.0+ application.
 
-It is generated with [Stainless](https://www.stainless.com/).
-
 ## Documentation
 
 The REST API documentation can be found on [docs.moderationapi.com](https://docs.moderationapi.com).
@@ -20,7 +18,7 @@ The REST API documentation can be found on [docs.moderationapi.com](https://docs
 <!-- x-release-please-start-version -->
 
 ```
-composer require "moderation-api/sdk-php 0.1.0"
+composer require "moderation-api/sdk-php 0.1.1"
 ```
 
 <!-- x-release-please-end -->
