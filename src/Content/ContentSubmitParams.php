@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace ModerationAPI\Content;
 
 use ModerationAPI\Content\ContentSubmitParams\Content\Audio;
-use ModerationAPI\Content\ContentSubmitParams\Content\ContentNode;
 use ModerationAPI\Content\ContentSubmitParams\Content\Image;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object1;
 use ModerationAPI\Content\ContentSubmitParams\Content\Text;
 use ModerationAPI\Content\ContentSubmitParams\Content\Video;
 use ModerationAPI\Content\ContentSubmitParams\MetaType;
@@ -43,7 +43,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @see ModerationAPI\Services\ContentService::submit()
  *
  * @phpstan-type ContentSubmitParamsShape = array{
- *   content: Text|Image|Video|Audio|ContentNode,
+ *   content: Text|Image|Video|Audio|Object1,
  *   authorId?: string,
  *   channel?: string,
  *   contentId?: string,
@@ -64,7 +64,7 @@ final class ContentSubmitParams implements BaseModel
      * The content sent for moderation.
      */
     #[Api]
-    public Text|Image|Video|Audio|ContentNode $content;
+    public Text|Image|Video|Audio|Object1 $content;
 
     /**
      * The author of the content.
@@ -113,7 +113,7 @@ final class ContentSubmitParams implements BaseModel
     public ?string $metaType;
 
     /**
-     * Optionally override the channel policies for this moderation request only (enterprise).
+     * (Enterprise) override the channel policies for this moderation request only.
      *
      * @var list<Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Sexual|Flirtation|Profanity|Violence|SelfHarm|Spam|SelfPromotion|Political|Religion|CodeAbuse|PiiMasking|URLMasking|Guideline>|null $policies
      */
@@ -149,7 +149,7 @@ final class ContentSubmitParams implements BaseModel
      * @param list<Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Sexual|Flirtation|Profanity|Violence|SelfHarm|Spam|SelfPromotion|Political|Religion|CodeAbuse|PiiMasking|URLMasking|Guideline> $policies
      */
     public static function with(
-        Text|Image|Video|Audio|ContentNode $content,
+        Text|Image|Video|Audio|Object1 $content,
         ?string $authorId = null,
         ?string $channel = null,
         ?string $contentId = null,
@@ -178,9 +178,8 @@ final class ContentSubmitParams implements BaseModel
     /**
      * The content sent for moderation.
      */
-    public function withContent(
-        Text|Image|Video|Audio|ContentNode $content
-    ): self {
+    public function withContent(Text|Image|Video|Audio|Object1 $content): self
+    {
         $obj = clone $this;
         $obj->content = $content;
 
@@ -269,7 +268,7 @@ final class ContentSubmitParams implements BaseModel
     }
 
     /**
-     * Optionally override the channel policies for this moderation request only (enterprise).
+     * (Enterprise) override the channel policies for this moderation request only.
      *
      * @param list<Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Sexual|Flirtation|Profanity|Violence|SelfHarm|Spam|SelfPromotion|Political|Religion|CodeAbuse|PiiMasking|URLMasking|Guideline> $policies
      */

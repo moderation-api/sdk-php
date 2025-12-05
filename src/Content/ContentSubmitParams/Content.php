@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitParams;
 
 use ModerationAPI\Content\ContentSubmitParams\Content\Audio;
-use ModerationAPI\Content\ContentSubmitParams\Content\ContentNode;
 use ModerationAPI\Content\ContentSubmitParams\Content\Image;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object1;
 use ModerationAPI\Content\ContentSubmitParams\Content\Text;
 use ModerationAPI\Content\ContentSubmitParams\Content\Video;
 use ModerationAPI\Core\Concerns\SdkUnion;
@@ -26,7 +26,7 @@ final class Content implements ConverterSource
     public static function variants(): array
     {
         return [
-            Text::class, Image::class, Video::class, Audio::class, ContentNode::class,
+            Text::class, Image::class, Video::class, Audio::class, Object1::class,
         ];
     }
 }
