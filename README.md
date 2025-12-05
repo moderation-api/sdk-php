@@ -17,22 +17,10 @@ The REST API documentation can be found on [docs.moderationapi.com](https://docs
 
 ## Installation
 
-To use this package, install via Composer by adding the following to your application's `composer.json`:
-
 <!-- x-release-please-start-version -->
 
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:moderation-api/sdk-php.git"
-    }
-  ],
-  "require": {
-    "org-placeholder/moderation-api": "dev-main"
-  }
-}
+```
+composer require "moderation-api/sdk-php 0.0.1"
 ```
 
 <!-- x-release-please-end -->
