@@ -2,44 +2,44 @@
 
 declare(strict_types=1);
 
-namespace ModerationAPI\Content\ContentSubmitParams\Content\ContentNode\Data;
+namespace ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data;
 
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * Text.
+ * Video.
  *
- * @phpstan-type TextShape = array{text: string, type: 'text'}
+ * @phpstan-type VideoShape = array{type: 'video', url: string}
  */
-final class Text implements BaseModel
+final class Video implements BaseModel
 {
-    /** @use SdkModel<TextShape> */
+    /** @use SdkModel<VideoShape> */
     use SdkModel;
 
-    /** @var 'text' $type */
+    /** @var 'video' $type */
     #[Api]
-    public string $type = 'text';
+    public string $type = 'video';
 
     /**
-     * The content text.
+     * A public URL of the video content.
      */
     #[Api]
-    public string $text;
+    public string $url;
 
     /**
-     * `new Text()` is missing required properties by the API.
+     * `new Video()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Text::with(text: ...)
+     * Video::with(url: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Text)->withText(...)
+     * (new Video)->withURL(...)
      * ```
      */
     public function __construct()
@@ -52,22 +52,22 @@ final class Text implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $text): self
+    public static function with(string $url): self
     {
         $obj = new self;
 
-        $obj->text = $text;
+        $obj->url = $url;
 
         return $obj;
     }
 
     /**
-     * The content text.
+     * A public URL of the video content.
      */
-    public function withText(string $text): self
+    public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj->url = $url;
 
         return $obj;
     }
