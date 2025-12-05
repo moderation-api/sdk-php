@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1 (2025-12-05)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/moderation-api/sdk-php/compare/v0.1.0...v0.1.1)
+
+### Chores
+
+* readme ([65df962](https://github.com/moderation-api/sdk-php/commit/65df96240020a24218c8651e75bdddcacc99c9fb))
+
 ## 0.1.0 (2025-12-05)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/moderation-api/sdk-php/compare/v0.0.1...v0.1.0)
