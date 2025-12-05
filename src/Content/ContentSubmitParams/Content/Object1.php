@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Content;
 
-use ModerationAPI\Content\ContentSubmitParams\Content\ContentNode\Data;
-use ModerationAPI\Content\ContentSubmitParams\Content\ContentNode\Data\Audio;
-use ModerationAPI\Content\ContentSubmitParams\Content\ContentNode\Data\Image;
-use ModerationAPI\Content\ContentSubmitParams\Content\ContentNode\Data\Text;
-use ModerationAPI\Content\ContentSubmitParams\Content\ContentNode\Data\Video;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video;
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -16,14 +16,14 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * Object.
  *
- * @phpstan-type ContentNodeShape = array{
- *   data: array<string,\ModerationAPI\Content\ContentSubmitParams\Content\ContentNode\Data\Text|\ModerationAPI\Content\ContentSubmitParams\Content\ContentNode\Data\Image|\ModerationAPI\Content\ContentSubmitParams\Content\ContentNode\Data\Video|\ModerationAPI\Content\ContentSubmitParams\Content\ContentNode\Data\Audio>,
+ * @phpstan-type Object1Shape = array{
+ *   data: array<string,\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio>,
  *   type: 'object',
  * }
  */
-final class ContentNode implements BaseModel
+final class Object1 implements BaseModel
 {
-    /** @use SdkModel<ContentNodeShape> */
+    /** @use SdkModel<Object1Shape> */
     use SdkModel;
 
     /** @var 'object' $type */
@@ -39,17 +39,17 @@ final class ContentNode implements BaseModel
     public array $data;
 
     /**
-     * `new ContentNode()` is missing required properties by the API.
+     * `new Object1()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ContentNode::with(data: ...)
+     * Object1::with(data: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new ContentNode)->withData(...)
+     * (new Object1)->withData(...)
      * ```
      */
     public function __construct()
