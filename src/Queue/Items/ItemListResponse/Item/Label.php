@@ -65,9 +65,9 @@ final class Label implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->flagged = $flagged;
-        $obj->label = $label;
-        $obj->score = $score;
+        $obj['flagged'] = $flagged;
+        $obj['label'] = $label;
+        $obj['score'] = $score;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class Label implements BaseModel
     public function withFlagged(bool $flagged): self
     {
         $obj = clone $this;
-        $obj->flagged = $flagged;
+        $obj['flagged'] = $flagged;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class Label implements BaseModel
     public function withLabel(string $label): self
     {
         $obj = clone $this;
-        $obj->label = $label;
+        $obj['label'] = $label;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class Label implements BaseModel
     public function withScore(float $score): self
     {
         $obj = clone $this;
-        $obj->score = $score;
+        $obj['score'] = $score;
 
         return $obj;
     }

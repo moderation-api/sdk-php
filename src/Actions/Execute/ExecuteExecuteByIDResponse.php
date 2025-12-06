@@ -78,9 +78,9 @@ final class ExecuteExecuteByIDResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->actionId = $actionId;
-        $obj->ids = $ids;
-        $obj->success = $success;
+        $obj['actionId'] = $actionId;
+        $obj['ids'] = $ids;
+        $obj['success'] = $success;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class ExecuteExecuteByIDResponse implements BaseModel, ResponseConverter
     public function withActionID(string $actionID): self
     {
         $obj = clone $this;
-        $obj->actionId = $actionID;
+        $obj['actionId'] = $actionID;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class ExecuteExecuteByIDResponse implements BaseModel, ResponseConverter
     public function withIDs(array $ids): self
     {
         $obj = clone $this;
-        $obj->ids = $ids;
+        $obj['ids'] = $ids;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class ExecuteExecuteByIDResponse implements BaseModel, ResponseConverter
     public function withSuccess(bool $success): self
     {
         $obj = clone $this;
-        $obj->success = $success;
+        $obj['success'] = $success;
 
         return $obj;
     }

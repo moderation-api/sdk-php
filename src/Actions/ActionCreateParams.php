@@ -27,11 +27,13 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   freeText?: bool,
  *   key?: string|null,
  *   position?: Position|value-of<Position>,
- *   possibleValues?: list<PossibleValue>,
+ *   possibleValues?: list<PossibleValue|array{value: string}>,
  *   queueBehaviour?: QueueBehaviour|value-of<QueueBehaviour>,
  *   type?: null|Type|value-of<Type>,
  *   valueRequired?: bool,
- *   webhooks?: list<Webhook>,
+ *   webhooks?: list<Webhook|array{
+ *     name: string, url: string, id?: string|null, description?: string|null
+ *   }>,
  * }
  */
 final class ActionCreateParams implements BaseModel
@@ -150,10 +152,12 @@ final class ActionCreateParams implements BaseModel
      *
      * @param list<string> $filterInQueueIds
      * @param Position|value-of<Position> $position
-     * @param list<PossibleValue> $possibleValues
+     * @param list<PossibleValue|array{value: string}> $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour
      * @param Type|value-of<Type>|null $type
-     * @param list<Webhook> $webhooks
+     * @param list<Webhook|array{
+     *   name: string, url: string, id?: string|null, description?: string|null
+     * }> $webhooks
      */
     public static function with(
         string $name,
@@ -171,19 +175,19 @@ final class ActionCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->name = $name;
+        $obj['name'] = $name;
 
-        null !== $builtIn && $obj->builtIn = $builtIn;
-        null !== $description && $obj->description = $description;
-        null !== $filterInQueueIds && $obj->filterInQueueIds = $filterInQueueIds;
-        null !== $freeText && $obj->freeText = $freeText;
-        null !== $key && $obj->key = $key;
+        null !== $builtIn && $obj['builtIn'] = $builtIn;
+        null !== $description && $obj['description'] = $description;
+        null !== $filterInQueueIds && $obj['filterInQueueIds'] = $filterInQueueIds;
+        null !== $freeText && $obj['freeText'] = $freeText;
+        null !== $key && $obj['key'] = $key;
         null !== $position && $obj['position'] = $position;
-        null !== $possibleValues && $obj->possibleValues = $possibleValues;
+        null !== $possibleValues && $obj['possibleValues'] = $possibleValues;
         null !== $queueBehaviour && $obj['queueBehaviour'] = $queueBehaviour;
         null !== $type && $obj['type'] = $type;
-        null !== $valueRequired && $obj->valueRequired = $valueRequired;
-        null !== $webhooks && $obj->webhooks = $webhooks;
+        null !== $valueRequired && $obj['valueRequired'] = $valueRequired;
+        null !== $webhooks && $obj['webhooks'] = $webhooks;
 
         return $obj;
     }
@@ -194,7 +198,7 @@ final class ActionCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -205,7 +209,7 @@ final class ActionCreateParams implements BaseModel
     public function withBuiltIn(?bool $builtIn): self
     {
         $obj = clone $this;
-        $obj->builtIn = $builtIn;
+        $obj['builtIn'] = $builtIn;
 
         return $obj;
     }
@@ -216,7 +220,7 @@ final class ActionCreateParams implements BaseModel
     public function withDescription(?string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -229,7 +233,7 @@ final class ActionCreateParams implements BaseModel
     public function withFilterInQueueIDs(array $filterInQueueIDs): self
     {
         $obj = clone $this;
-        $obj->filterInQueueIds = $filterInQueueIDs;
+        $obj['filterInQueueIds'] = $filterInQueueIDs;
 
         return $obj;
     }
@@ -240,7 +244,7 @@ final class ActionCreateParams implements BaseModel
     public function withFreeText(bool $freeText): self
     {
         $obj = clone $this;
-        $obj->freeText = $freeText;
+        $obj['freeText'] = $freeText;
 
         return $obj;
     }
@@ -251,7 +255,7 @@ final class ActionCreateParams implements BaseModel
     public function withKey(?string $key): self
     {
         $obj = clone $this;
-        $obj->key = $key;
+        $obj['key'] = $key;
 
         return $obj;
     }
@@ -272,12 +276,12 @@ final class ActionCreateParams implements BaseModel
     /**
      * The possible values of the action. The user will be prompted to select one of these values when executing the action.
      *
-     * @param list<PossibleValue> $possibleValues
+     * @param list<PossibleValue|array{value: string}> $possibleValues
      */
     public function withPossibleValues(array $possibleValues): self
     {
         $obj = clone $this;
-        $obj->possibleValues = $possibleValues;
+        $obj['possibleValues'] = $possibleValues;
 
         return $obj;
     }
@@ -315,7 +319,7 @@ final class ActionCreateParams implements BaseModel
     public function withValueRequired(bool $valueRequired): self
     {
         $obj = clone $this;
-        $obj->valueRequired = $valueRequired;
+        $obj['valueRequired'] = $valueRequired;
 
         return $obj;
     }
@@ -323,12 +327,14 @@ final class ActionCreateParams implements BaseModel
     /**
      * The action's webhooks.
      *
-     * @param list<Webhook> $webhooks
+     * @param list<Webhook|array{
+     *   name: string, url: string, id?: string|null, description?: string|null
+     * }> $webhooks
      */
     public function withWebhooks(array $webhooks): self
     {
         $obj = clone $this;
-        $obj->webhooks = $webhooks;
+        $obj['webhooks'] = $webhooks;
 
         return $obj;
     }

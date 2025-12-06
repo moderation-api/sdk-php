@@ -80,23 +80,25 @@ final class Author implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Block|array{reason?: string|null, until?: float|null}|null $block
      * @param Status|value-of<Status> $status
+     * @param TrustLevel|array{level: float, manual: bool} $trust_level
      */
     public static function with(
         string $id,
-        ?Block $block,
+        Block|array|null $block,
         Status|string $status,
-        TrustLevel $trust_level,
+        TrustLevel|array $trust_level,
         ?string $external_id = null,
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->block = $block;
+        $obj['id'] = $id;
+        $obj['block'] = $block;
         $obj['status'] = $status;
-        $obj->trust_level = $trust_level;
+        $obj['trust_level'] = $trust_level;
 
-        null !== $external_id && $obj->external_id = $external_id;
+        null !== $external_id && $obj['external_id'] = $external_id;
 
         return $obj;
     }
@@ -107,18 +109,20 @@ final class Author implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
     /**
      * Block or suspension details, if applicable. Null if the author is enabled.
+     *
+     * @param Block|array{reason?: string|null, until?: float|null}|null $block
      */
-    public function withBlock(?Block $block): self
+    public function withBlock(Block|array|null $block): self
     {
         $obj = clone $this;
-        $obj->block = $block;
+        $obj['block'] = $block;
 
         return $obj;
     }
@@ -136,10 +140,13 @@ final class Author implements BaseModel
         return $obj;
     }
 
-    public function withTrustLevel(TrustLevel $trustLevel): self
+    /**
+     * @param TrustLevel|array{level: float, manual: bool} $trustLevel
+     */
+    public function withTrustLevel(TrustLevel|array $trustLevel): self
     {
         $obj = clone $this;
-        $obj->trust_level = $trustLevel;
+        $obj['trust_level'] = $trustLevel;
 
         return $obj;
     }
@@ -150,7 +157,7 @@ final class Author implements BaseModel
     public function withExternalID(?string $externalID): self
     {
         $obj = clone $this;
-        $obj->external_id = $externalID;
+        $obj['external_id'] = $externalID;
 
         return $obj;
     }

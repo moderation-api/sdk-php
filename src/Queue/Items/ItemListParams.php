@@ -109,15 +109,15 @@ final class ItemListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $afterDate && $obj->afterDate = $afterDate;
-        null !== $authorId && $obj->authorId = $authorId;
-        null !== $beforeDate && $obj->beforeDate = $beforeDate;
-        null !== $conversationIds && $obj->conversationIds = $conversationIds;
-        null !== $filteredActionIds && $obj->filteredActionIds = $filteredActionIds;
-        null !== $includeResolved && $obj->includeResolved = $includeResolved;
-        null !== $labels && $obj->labels = $labels;
-        null !== $pageNumber && $obj->pageNumber = $pageNumber;
-        null !== $pageSize && $obj->pageSize = $pageSize;
+        null !== $afterDate && $obj['afterDate'] = $afterDate;
+        null !== $authorId && $obj['authorId'] = $authorId;
+        null !== $beforeDate && $obj['beforeDate'] = $beforeDate;
+        null !== $conversationIds && $obj['conversationIds'] = $conversationIds;
+        null !== $filteredActionIds && $obj['filteredActionIds'] = $filteredActionIds;
+        null !== $includeResolved && $obj['includeResolved'] = $includeResolved;
+        null !== $labels && $obj['labels'] = $labels;
+        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
         null !== $sortDirection && $obj['sortDirection'] = $sortDirection;
         null !== $sortField && $obj['sortField'] = $sortField;
 
@@ -127,7 +127,7 @@ final class ItemListParams implements BaseModel
     public function withAfterDate(string $afterDate): self
     {
         $obj = clone $this;
-        $obj->afterDate = $afterDate;
+        $obj['afterDate'] = $afterDate;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class ItemListParams implements BaseModel
     public function withAuthorID(string $authorID): self
     {
         $obj = clone $this;
-        $obj->authorId = $authorID;
+        $obj['authorId'] = $authorID;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class ItemListParams implements BaseModel
     public function withBeforeDate(string $beforeDate): self
     {
         $obj = clone $this;
-        $obj->beforeDate = $beforeDate;
+        $obj['beforeDate'] = $beforeDate;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class ItemListParams implements BaseModel
     public function withConversationIDs(string $conversationIDs): self
     {
         $obj = clone $this;
-        $obj->conversationIds = $conversationIDs;
+        $obj['conversationIds'] = $conversationIDs;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class ItemListParams implements BaseModel
     public function withFilteredActionIDs(string $filteredActionIDs): self
     {
         $obj = clone $this;
-        $obj->filteredActionIds = $filteredActionIDs;
+        $obj['filteredActionIds'] = $filteredActionIDs;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class ItemListParams implements BaseModel
     public function withIncludeResolved(string $includeResolved): self
     {
         $obj = clone $this;
-        $obj->includeResolved = $includeResolved;
+        $obj['includeResolved'] = $includeResolved;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class ItemListParams implements BaseModel
     public function withLabels(string $labels): self
     {
         $obj = clone $this;
-        $obj->labels = $labels;
+        $obj['labels'] = $labels;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class ItemListParams implements BaseModel
     public function withPageNumber(float $pageNumber): self
     {
         $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $obj['pageNumber'] = $pageNumber;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class ItemListParams implements BaseModel
     public function withPageSize(float $pageSize): self
     {
         $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }

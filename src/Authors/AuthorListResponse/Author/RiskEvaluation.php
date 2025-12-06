@@ -38,7 +38,7 @@ final class RiskEvaluation implements BaseModel
     {
         $obj = new self;
 
-        null !== $risk_level && $obj->risk_level = $risk_level;
+        null !== $risk_level && $obj['risk_level'] = $risk_level;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class RiskEvaluation implements BaseModel
     public function withRiskLevel(?float $riskLevel): self
     {
         $obj = clone $this;
-        $obj->risk_level = $riskLevel;
+        $obj['risk_level'] = $riskLevel;
 
         return $obj;
     }

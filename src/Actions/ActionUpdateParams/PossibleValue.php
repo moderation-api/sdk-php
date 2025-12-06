@@ -50,7 +50,7 @@ final class PossibleValue implements BaseModel
     {
         $obj = new self;
 
-        $obj->value = $value;
+        $obj['value'] = $value;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class PossibleValue implements BaseModel
     public function withValue(string $value): self
     {
         $obj = clone $this;
-        $obj->value = $value;
+        $obj['value'] = $value;
 
         return $obj;
     }

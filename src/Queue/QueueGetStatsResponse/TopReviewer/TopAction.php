@@ -67,9 +67,9 @@ final class TopAction implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->actionId = $actionId;
-        $obj->actionName = $actionName;
-        $obj->count = $count;
+        $obj['actionId'] = $actionId;
+        $obj['actionName'] = $actionName;
+        $obj['count'] = $count;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class TopAction implements BaseModel
     public function withActionID(string $actionID): self
     {
         $obj = clone $this;
-        $obj->actionId = $actionID;
+        $obj['actionId'] = $actionID;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class TopAction implements BaseModel
     public function withActionName(string $actionName): self
     {
         $obj = clone $this;
-        $obj->actionName = $actionName;
+        $obj['actionName'] = $actionName;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class TopAction implements BaseModel
     public function withCount(float $count): self
     {
         $obj = clone $this;
-        $obj->count = $count;
+        $obj['count'] = $count;
 
         return $obj;
     }

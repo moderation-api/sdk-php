@@ -173,7 +173,7 @@ final class ActionNewResponse implements BaseModel, ResponseConverter
      *
      * @param list<string> $filterInQueueIds
      * @param Position|value-of<Position> $position
-     * @param list<PossibleValue> $possibleValues
+     * @param list<PossibleValue|array{value: string}> $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour
      * @param Type|value-of<Type>|null $type
      */
@@ -194,19 +194,19 @@ final class ActionNewResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->builtIn = $builtIn;
-        $obj->createdAt = $createdAt;
-        $obj->filterInQueueIds = $filterInQueueIds;
-        $obj->freeText = $freeText;
-        $obj->name = $name;
+        $obj['id'] = $id;
+        $obj['builtIn'] = $builtIn;
+        $obj['createdAt'] = $createdAt;
+        $obj['filterInQueueIds'] = $filterInQueueIds;
+        $obj['freeText'] = $freeText;
+        $obj['name'] = $name;
         $obj['position'] = $position;
-        $obj->possibleValues = $possibleValues;
+        $obj['possibleValues'] = $possibleValues;
         $obj['queueBehaviour'] = $queueBehaviour;
-        $obj->valueRequired = $valueRequired;
+        $obj['valueRequired'] = $valueRequired;
 
-        null !== $description && $obj->description = $description;
-        null !== $key && $obj->key = $key;
+        null !== $description && $obj['description'] = $description;
+        null !== $key && $obj['key'] = $key;
         null !== $type && $obj['type'] = $type;
 
         return $obj;
@@ -218,7 +218,7 @@ final class ActionNewResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -229,7 +229,7 @@ final class ActionNewResponse implements BaseModel, ResponseConverter
     public function withBuiltIn(?bool $builtIn): self
     {
         $obj = clone $this;
-        $obj->builtIn = $builtIn;
+        $obj['builtIn'] = $builtIn;
 
         return $obj;
     }
@@ -240,7 +240,7 @@ final class ActionNewResponse implements BaseModel, ResponseConverter
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -253,7 +253,7 @@ final class ActionNewResponse implements BaseModel, ResponseConverter
     public function withFilterInQueueIDs(array $filterInQueueIDs): self
     {
         $obj = clone $this;
-        $obj->filterInQueueIds = $filterInQueueIDs;
+        $obj['filterInQueueIds'] = $filterInQueueIDs;
 
         return $obj;
     }
@@ -264,7 +264,7 @@ final class ActionNewResponse implements BaseModel, ResponseConverter
     public function withFreeText(bool $freeText): self
     {
         $obj = clone $this;
-        $obj->freeText = $freeText;
+        $obj['freeText'] = $freeText;
 
         return $obj;
     }
@@ -275,7 +275,7 @@ final class ActionNewResponse implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -296,12 +296,12 @@ final class ActionNewResponse implements BaseModel, ResponseConverter
     /**
      * The possible values of the action. The user will be prompted to select one of these values when executing the action.
      *
-     * @param list<PossibleValue> $possibleValues
+     * @param list<PossibleValue|array{value: string}> $possibleValues
      */
     public function withPossibleValues(array $possibleValues): self
     {
         $obj = clone $this;
-        $obj->possibleValues = $possibleValues;
+        $obj['possibleValues'] = $possibleValues;
 
         return $obj;
     }
@@ -326,7 +326,7 @@ final class ActionNewResponse implements BaseModel, ResponseConverter
     public function withValueRequired(bool $valueRequired): self
     {
         $obj = clone $this;
-        $obj->valueRequired = $valueRequired;
+        $obj['valueRequired'] = $valueRequired;
 
         return $obj;
     }
@@ -337,7 +337,7 @@ final class ActionNewResponse implements BaseModel, ResponseConverter
     public function withDescription(?string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -348,7 +348,7 @@ final class ActionNewResponse implements BaseModel, ResponseConverter
     public function withKey(?string $key): self
     {
         $obj = clone $this;
-        $obj->key = $key;
+        $obj['key'] = $key;
 
         return $obj;
     }

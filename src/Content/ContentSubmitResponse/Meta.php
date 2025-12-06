@@ -83,12 +83,12 @@ final class Meta implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->channel_key = $channel_key;
+        $obj['channel_key'] = $channel_key;
         $obj['status'] = $status;
-        $obj->timestamp = $timestamp;
-        $obj->usage = $usage;
+        $obj['timestamp'] = $timestamp;
+        $obj['usage'] = $usage;
 
-        null !== $processing_time && $obj->processing_time = $processing_time;
+        null !== $processing_time && $obj['processing_time'] = $processing_time;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Meta implements BaseModel
     public function withChannelKey(string $channelKey): self
     {
         $obj = clone $this;
-        $obj->channel_key = $channelKey;
+        $obj['channel_key'] = $channelKey;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class Meta implements BaseModel
     public function withTimestamp(float $timestamp): self
     {
         $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Meta implements BaseModel
     public function withUsage(float $usage): self
     {
         $obj = clone $this;
-        $obj->usage = $usage;
+        $obj['usage'] = $usage;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class Meta implements BaseModel
     public function withProcessingTime(string $processingTime): self
     {
         $obj = clone $this;
-        $obj->processing_time = $processingTime;
+        $obj['processing_time'] = $processingTime;
 
         return $obj;
     }

@@ -65,10 +65,10 @@ final class Metadata implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $email_verified && $obj->email_verified = $email_verified;
-        null !== $identity_verified && $obj->identity_verified = $identity_verified;
-        null !== $is_paying_customer && $obj->is_paying_customer = $is_paying_customer;
-        null !== $phone_verified && $obj->phone_verified = $phone_verified;
+        null !== $email_verified && $obj['email_verified'] = $email_verified;
+        null !== $identity_verified && $obj['identity_verified'] = $identity_verified;
+        null !== $is_paying_customer && $obj['is_paying_customer'] = $is_paying_customer;
+        null !== $phone_verified && $obj['phone_verified'] = $phone_verified;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Metadata implements BaseModel
     public function withEmailVerified(?bool $emailVerified): self
     {
         $obj = clone $this;
-        $obj->email_verified = $emailVerified;
+        $obj['email_verified'] = $emailVerified;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Metadata implements BaseModel
     public function withIdentityVerified(?bool $identityVerified): self
     {
         $obj = clone $this;
-        $obj->identity_verified = $identityVerified;
+        $obj['identity_verified'] = $identityVerified;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class Metadata implements BaseModel
     public function withIsPayingCustomer(?bool $isPayingCustomer): self
     {
         $obj = clone $this;
-        $obj->is_paying_customer = $isPayingCustomer;
+        $obj['is_paying_customer'] = $isPayingCustomer;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Metadata implements BaseModel
     public function withPhoneVerified(?bool $phoneVerified): self
     {
         $obj = clone $this;
-        $obj->phone_verified = $phoneVerified;
+        $obj['phone_verified'] = $phoneVerified;
 
         return $obj;
     }

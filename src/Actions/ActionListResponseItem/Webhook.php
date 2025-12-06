@@ -85,12 +85,12 @@ final class Webhook implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->name = $name;
-        $obj->url = $url;
+        $obj['id'] = $id;
+        $obj['name'] = $name;
+        $obj['url'] = $url;
 
-        null !== $description && $obj->description = $description;
-        null !== $moderationActionId && $obj->moderationActionId = $moderationActionId;
+        null !== $description && $obj['description'] = $description;
+        null !== $moderationActionId && $obj['moderationActionId'] = $moderationActionId;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class Webhook implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Webhook implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class Webhook implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class Webhook implements BaseModel
     public function withDescription(?string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Webhook implements BaseModel
     public function withModerationActionID(?string $moderationActionID): self
     {
         $obj = clone $this;
-        $obj->moderationActionId = $moderationActionID;
+        $obj['moderationActionId'] = $moderationActionID;
 
         return $obj;
     }

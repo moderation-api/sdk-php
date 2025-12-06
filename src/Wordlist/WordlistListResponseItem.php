@@ -92,11 +92,11 @@ final class WordlistListResponseItem implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->createdAt = $createdAt;
-        $obj->description = $description;
-        $obj->name = $name;
-        $obj->userId = $userId;
+        $obj['id'] = $id;
+        $obj['createdAt'] = $createdAt;
+        $obj['description'] = $description;
+        $obj['name'] = $name;
+        $obj['userId'] = $userId;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class WordlistListResponseItem implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class WordlistListResponseItem implements BaseModel
     public function withCreatedAt(?string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class WordlistListResponseItem implements BaseModel
     public function withDescription(?string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class WordlistListResponseItem implements BaseModel
     public function withName(?string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class WordlistListResponseItem implements BaseModel
     public function withUserID(?string $userID): self
     {
         $obj = clone $this;
-        $obj->userId = $userID;
+        $obj['userId'] = $userID;
 
         return $obj;
     }

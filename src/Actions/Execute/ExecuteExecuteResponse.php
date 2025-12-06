@@ -56,7 +56,7 @@ final class ExecuteExecuteResponse implements BaseModel, ResponseConverter
     {
         $obj = new self;
 
-        $obj->success = $success;
+        $obj['success'] = $success;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class ExecuteExecuteResponse implements BaseModel, ResponseConverter
     public function withSuccess(bool $success): self
     {
         $obj = clone $this;
-        $obj->success = $success;
+        $obj['success'] = $success;
 
         return $obj;
     }

@@ -60,7 +60,7 @@ final class WordRemoveParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->words = $words;
+        $obj['words'] = $words;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class WordRemoveParams implements BaseModel
     public function withWords(array $words): self
     {
         $obj = clone $this;
-        $obj->words = $words;
+        $obj['words'] = $words;
 
         return $obj;
     }

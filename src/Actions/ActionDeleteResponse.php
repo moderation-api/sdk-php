@@ -60,8 +60,8 @@ final class ActionDeleteResponse implements BaseModel, ResponseConverter
     {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->deleted = $deleted;
+        $obj['id'] = $id;
+        $obj['deleted'] = $deleted;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class ActionDeleteResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class ActionDeleteResponse implements BaseModel, ResponseConverter
     public function withDeleted(bool $deleted): self
     {
         $obj = clone $this;
-        $obj->deleted = $deleted;
+        $obj['deleted'] = $deleted;
 
         return $obj;
     }

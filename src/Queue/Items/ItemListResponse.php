@@ -10,6 +10,9 @@ use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 use ModerationAPI\Queue\Items\ItemListResponse\Item;
+use ModerationAPI\Queue\Items\ItemListResponse\Item\Action;
+use ModerationAPI\Queue\Items\ItemListResponse\Item\Label;
+use ModerationAPI\Queue\Items\ItemListResponse\Item\Status;
 use ModerationAPI\Queue\Items\ItemListResponse\Pagination;
 
 /**
@@ -55,33 +58,75 @@ final class ItemListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Item> $items
+     * @param list<Item|array{
+     *   id: string,
+     *   content: string,
+     *   flagged: bool,
+     *   labels: list<Label>,
+     *   status: value-of<Status>,
+     *   timestamp: float,
+     *   actions?: list<Action>|null,
+     *   authorId?: string|null,
+     *   contentType?: string|null,
+     *   conversationId?: string|null,
+     *   language?: string|null,
+     * }> $items
+     * @param Pagination|array{
+     *   currentPage: float,
+     *   hasNextPage: bool,
+     *   hasPreviousPage: bool,
+     *   totalItems: float,
+     *   totalPages: float,
+     * } $pagination
      */
-    public static function with(array $items, Pagination $pagination): self
-    {
+    public static function with(
+        array $items,
+        Pagination|array $pagination
+    ): self {
         $obj = new self;
 
-        $obj->items = $items;
-        $obj->pagination = $pagination;
+        $obj['items'] = $items;
+        $obj['pagination'] = $pagination;
 
         return $obj;
     }
 
     /**
-     * @param list<Item> $items
+     * @param list<Item|array{
+     *   id: string,
+     *   content: string,
+     *   flagged: bool,
+     *   labels: list<Label>,
+     *   status: value-of<Status>,
+     *   timestamp: float,
+     *   actions?: list<Action>|null,
+     *   authorId?: string|null,
+     *   contentType?: string|null,
+     *   conversationId?: string|null,
+     *   language?: string|null,
+     * }> $items
      */
     public function withItems(array $items): self
     {
         $obj = clone $this;
-        $obj->items = $items;
+        $obj['items'] = $items;
 
         return $obj;
     }
 
-    public function withPagination(Pagination $pagination): self
+    /**
+     * @param Pagination|array{
+     *   currentPage: float,
+     *   hasNextPage: bool,
+     *   hasPreviousPage: bool,
+     *   totalItems: float,
+     *   totalPages: float,
+     * } $pagination
+     */
+    public function withPagination(Pagination|array $pagination): self
     {
         $obj = clone $this;
-        $obj->pagination = $pagination;
+        $obj['pagination'] = $pagination;
 
         return $obj;
     }

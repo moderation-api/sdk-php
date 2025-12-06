@@ -75,11 +75,11 @@ final class Entity implements BaseModel
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj->enable = $enable;
-        $obj->flag = $flag;
-        $obj->shouldMask = $shouldMask;
+        $obj['enable'] = $enable;
+        $obj['flag'] = $flag;
+        $obj['shouldMask'] = $shouldMask;
 
-        null !== $mask && $obj->mask = $mask;
+        null !== $mask && $obj['mask'] = $mask;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class Entity implements BaseModel
     public function withEnable(bool $enable): self
     {
         $obj = clone $this;
-        $obj->enable = $enable;
+        $obj['enable'] = $enable;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Entity implements BaseModel
     public function withFlag(bool $flag): self
     {
         $obj = clone $this;
-        $obj->flag = $flag;
+        $obj['flag'] = $flag;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Entity implements BaseModel
     public function withShouldMask(bool $shouldMask): self
     {
         $obj = clone $this;
-        $obj->shouldMask = $shouldMask;
+        $obj['shouldMask'] = $shouldMask;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class Entity implements BaseModel
     public function withMask(string $mask): self
     {
         $obj = clone $this;
-        $obj->mask = $mask;
+        $obj['mask'] = $mask;
 
         return $obj;
     }

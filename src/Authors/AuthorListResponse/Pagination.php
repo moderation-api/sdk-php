@@ -81,11 +81,11 @@ final class Pagination implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->hasNextPage = $hasNextPage;
-        $obj->hasPreviousPage = $hasPreviousPage;
-        $obj->pageNumber = $pageNumber;
-        $obj->pageSize = $pageSize;
-        $obj->total = $total;
+        $obj['hasNextPage'] = $hasNextPage;
+        $obj['hasPreviousPage'] = $hasPreviousPage;
+        $obj['pageNumber'] = $pageNumber;
+        $obj['pageSize'] = $pageSize;
+        $obj['total'] = $total;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Pagination implements BaseModel
     public function withHasNextPage(bool $hasNextPage): self
     {
         $obj = clone $this;
-        $obj->hasNextPage = $hasNextPage;
+        $obj['hasNextPage'] = $hasNextPage;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class Pagination implements BaseModel
     public function withHasPreviousPage(bool $hasPreviousPage): self
     {
         $obj = clone $this;
-        $obj->hasPreviousPage = $hasPreviousPage;
+        $obj['hasPreviousPage'] = $hasPreviousPage;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class Pagination implements BaseModel
     public function withPageNumber(float $pageNumber): self
     {
         $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $obj['pageNumber'] = $pageNumber;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Pagination implements BaseModel
     public function withPageSize(float $pageSize): self
     {
         $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Pagination implements BaseModel
     public function withTotal(float $total): self
     {
         $obj = clone $this;
-        $obj->total = $total;
+        $obj['total'] = $total;
 
         return $obj;
     }

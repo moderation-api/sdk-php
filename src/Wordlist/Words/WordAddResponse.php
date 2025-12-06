@@ -78,9 +78,9 @@ final class WordAddResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->addedCount = $addedCount;
-        $obj->addedWords = $addedWords;
-        $obj->totalCount = $totalCount;
+        $obj['addedCount'] = $addedCount;
+        $obj['addedWords'] = $addedWords;
+        $obj['totalCount'] = $totalCount;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class WordAddResponse implements BaseModel, ResponseConverter
     public function withAddedCount(float $addedCount): self
     {
         $obj = clone $this;
-        $obj->addedCount = $addedCount;
+        $obj['addedCount'] = $addedCount;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class WordAddResponse implements BaseModel, ResponseConverter
     public function withAddedWords(array $addedWords): self
     {
         $obj = clone $this;
-        $obj->addedWords = $addedWords;
+        $obj['addedWords'] = $addedWords;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class WordAddResponse implements BaseModel, ResponseConverter
     public function withTotalCount(float $totalCount): self
     {
         $obj = clone $this;
-        $obj->totalCount = $totalCount;
+        $obj['totalCount'] = $totalCount;
 
         return $obj;
     }

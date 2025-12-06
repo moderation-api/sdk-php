@@ -71,7 +71,11 @@ final class Content implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|array<string,Text|Image|Video|Audio>|null $modified
+     * @param string|array<string,Text|array{
+     *   text: string, type: 'text'
+     * }|Image|array{type: 'image', url: string}|Video|array{
+     *   type: 'video', url: string
+     * }|Audio|array{type: 'audio', url: string}>|null $modified
      */
     public static function with(
         string $id,
@@ -80,9 +84,9 @@ final class Content implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->masked = $masked;
-        $obj->modified = $modified;
+        $obj['id'] = $id;
+        $obj['masked'] = $masked;
+        $obj['modified'] = $modified;
 
         return $obj;
     }
@@ -93,7 +97,7 @@ final class Content implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -104,7 +108,7 @@ final class Content implements BaseModel
     public function withMasked(bool $masked): self
     {
         $obj = clone $this;
-        $obj->masked = $masked;
+        $obj['masked'] = $masked;
 
         return $obj;
     }
@@ -112,12 +116,16 @@ final class Content implements BaseModel
     /**
      * The modified content, if any.
      *
-     * @param string|array<string,Text|Image|Video|Audio>|null $modified
+     * @param string|array<string,Text|array{
+     *   text: string, type: 'text'
+     * }|Image|array{type: 'image', url: string}|Video|array{
+     *   type: 'video', url: string
+     * }|Audio|array{type: 'audio', url: string}>|null $modified
      */
     public function withModified(string|array|null $modified): self
     {
         $obj = clone $this;
-        $obj->modified = $modified;
+        $obj['modified'] = $modified;
 
         return $obj;
     }

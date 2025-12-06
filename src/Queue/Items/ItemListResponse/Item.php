@@ -131,9 +131,15 @@ final class Item implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Label> $labels
+     * @param list<Label|array{flagged: bool, label: string, score: float}> $labels
      * @param Status|value-of<Status> $status
-     * @param list<Action> $actions
+     * @param list<Action|array{
+     *   id: string,
+     *   name: string,
+     *   timestamp: float,
+     *   comment?: string|null,
+     *   reviewer?: string|null,
+     * }> $actions
      */
     public static function with(
         string $id,
@@ -150,18 +156,18 @@ final class Item implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->content = $content;
-        $obj->flagged = $flagged;
-        $obj->labels = $labels;
+        $obj['id'] = $id;
+        $obj['content'] = $content;
+        $obj['flagged'] = $flagged;
+        $obj['labels'] = $labels;
         $obj['status'] = $status;
-        $obj->timestamp = $timestamp;
+        $obj['timestamp'] = $timestamp;
 
-        null !== $actions && $obj->actions = $actions;
-        null !== $authorId && $obj->authorId = $authorId;
-        null !== $contentType && $obj->contentType = $contentType;
-        null !== $conversationId && $obj->conversationId = $conversationId;
-        null !== $language && $obj->language = $language;
+        null !== $actions && $obj['actions'] = $actions;
+        null !== $authorId && $obj['authorId'] = $authorId;
+        null !== $contentType && $obj['contentType'] = $contentType;
+        null !== $conversationId && $obj['conversationId'] = $conversationId;
+        null !== $language && $obj['language'] = $language;
 
         return $obj;
     }
@@ -172,7 +178,7 @@ final class Item implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -183,7 +189,7 @@ final class Item implements BaseModel
     public function withContent(string $content): self
     {
         $obj = clone $this;
-        $obj->content = $content;
+        $obj['content'] = $content;
 
         return $obj;
     }
@@ -194,18 +200,18 @@ final class Item implements BaseModel
     public function withFlagged(bool $flagged): self
     {
         $obj = clone $this;
-        $obj->flagged = $flagged;
+        $obj['flagged'] = $flagged;
 
         return $obj;
     }
 
     /**
-     * @param list<Label> $labels
+     * @param list<Label|array{flagged: bool, label: string, score: float}> $labels
      */
     public function withLabels(array $labels): self
     {
         $obj = clone $this;
-        $obj->labels = $labels;
+        $obj['labels'] = $labels;
 
         return $obj;
     }
@@ -229,7 +235,7 @@ final class Item implements BaseModel
     public function withTimestamp(float $timestamp): self
     {
         $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }
@@ -237,12 +243,18 @@ final class Item implements BaseModel
     /**
      * Action IDs taken on this item.
      *
-     * @param list<Action> $actions
+     * @param list<Action|array{
+     *   id: string,
+     *   name: string,
+     *   timestamp: float,
+     *   comment?: string|null,
+     *   reviewer?: string|null,
+     * }> $actions
      */
     public function withActions(array $actions): self
     {
         $obj = clone $this;
-        $obj->actions = $actions;
+        $obj['actions'] = $actions;
 
         return $obj;
     }
@@ -253,7 +265,7 @@ final class Item implements BaseModel
     public function withAuthorID(string $authorID): self
     {
         $obj = clone $this;
-        $obj->authorId = $authorID;
+        $obj['authorId'] = $authorID;
 
         return $obj;
     }
@@ -264,7 +276,7 @@ final class Item implements BaseModel
     public function withContentType(string $contentType): self
     {
         $obj = clone $this;
-        $obj->contentType = $contentType;
+        $obj['contentType'] = $contentType;
 
         return $obj;
     }
@@ -275,7 +287,7 @@ final class Item implements BaseModel
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj->conversationId = $conversationID;
+        $obj['conversationId'] = $conversationID;
 
         return $obj;
     }
@@ -286,7 +298,7 @@ final class Item implements BaseModel
     public function withLanguage(string $language): self
     {
         $obj = clone $this;
-        $obj->language = $language;
+        $obj['language'] = $language;
 
         return $obj;
     }
