@@ -89,11 +89,11 @@ final class AuthorListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $contentTypes && $obj->contentTypes = $contentTypes;
-        null !== $lastActiveDate && $obj->lastActiveDate = $lastActiveDate;
-        null !== $memberSinceDate && $obj->memberSinceDate = $memberSinceDate;
-        null !== $pageNumber && $obj->pageNumber = $pageNumber;
-        null !== $pageSize && $obj->pageSize = $pageSize;
+        null !== $contentTypes && $obj['contentTypes'] = $contentTypes;
+        null !== $lastActiveDate && $obj['lastActiveDate'] = $lastActiveDate;
+        null !== $memberSinceDate && $obj['memberSinceDate'] = $memberSinceDate;
+        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
         null !== $sortBy && $obj['sortBy'] = $sortBy;
         null !== $sortDirection && $obj['sortDirection'] = $sortDirection;
 
@@ -103,7 +103,7 @@ final class AuthorListParams implements BaseModel
     public function withContentTypes(string $contentTypes): self
     {
         $obj = clone $this;
-        $obj->contentTypes = $contentTypes;
+        $obj['contentTypes'] = $contentTypes;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class AuthorListParams implements BaseModel
     public function withLastActiveDate(string $lastActiveDate): self
     {
         $obj = clone $this;
-        $obj->lastActiveDate = $lastActiveDate;
+        $obj['lastActiveDate'] = $lastActiveDate;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class AuthorListParams implements BaseModel
     public function withMemberSinceDate(string $memberSinceDate): self
     {
         $obj = clone $this;
-        $obj->memberSinceDate = $memberSinceDate;
+        $obj['memberSinceDate'] = $memberSinceDate;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class AuthorListParams implements BaseModel
     public function withPageNumber(float $pageNumber): self
     {
         $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $obj['pageNumber'] = $pageNumber;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class AuthorListParams implements BaseModel
     public function withPageSize(float $pageSize): self
     {
         $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }

@@ -9,6 +9,7 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Core\Conversion\ListOf;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\FilterLabel;
+use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\FilterLabel\Type;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\RecommendationAction;
 
 /**
@@ -79,7 +80,12 @@ final class Filter implements BaseModel
      * @param list<string|null> $conversationIds
      * @param list<string> $filteredActionIds
      * @param list<string> $filteredChannelIds
-     * @param list<FilterLabel> $filterLabels
+     * @param list<FilterLabel|array{
+     *   label: string,
+     *   type: value-of<Type>,
+     *   maxThreshold?: float|null,
+     *   minThreshold?: float|null,
+     * }> $filterLabels
      * @param list<string> $labels
      * @param list<RecommendationAction|value-of<RecommendationAction>> $recommendationActions
      */
@@ -97,16 +103,16 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $afterDate && $obj->afterDate = $afterDate;
-        null !== $authorID && $obj->authorID = $authorID;
-        null !== $beforeDate && $obj->beforeDate = $beforeDate;
-        null !== $conversationIds && $obj->conversationIds = $conversationIds;
-        null !== $filteredActionIds && $obj->filteredActionIds = $filteredActionIds;
-        null !== $filteredChannelIds && $obj->filteredChannelIds = $filteredChannelIds;
-        null !== $filterLabels && $obj->filterLabels = $filterLabels;
-        null !== $labels && $obj->labels = $labels;
+        null !== $afterDate && $obj['afterDate'] = $afterDate;
+        null !== $authorID && $obj['authorID'] = $authorID;
+        null !== $beforeDate && $obj['beforeDate'] = $beforeDate;
+        null !== $conversationIds && $obj['conversationIds'] = $conversationIds;
+        null !== $filteredActionIds && $obj['filteredActionIds'] = $filteredActionIds;
+        null !== $filteredChannelIds && $obj['filteredChannelIds'] = $filteredChannelIds;
+        null !== $filterLabels && $obj['filterLabels'] = $filterLabels;
+        null !== $labels && $obj['labels'] = $labels;
         null !== $recommendationActions && $obj['recommendationActions'] = $recommendationActions;
-        null !== $showChecked && $obj->showChecked = $showChecked;
+        null !== $showChecked && $obj['showChecked'] = $showChecked;
 
         return $obj;
     }
@@ -114,7 +120,7 @@ final class Filter implements BaseModel
     public function withAfterDate(string $afterDate): self
     {
         $obj = clone $this;
-        $obj->afterDate = $afterDate;
+        $obj['afterDate'] = $afterDate;
 
         return $obj;
     }
@@ -122,7 +128,7 @@ final class Filter implements BaseModel
     public function withAuthorID(string $authorID): self
     {
         $obj = clone $this;
-        $obj->authorID = $authorID;
+        $obj['authorID'] = $authorID;
 
         return $obj;
     }
@@ -130,7 +136,7 @@ final class Filter implements BaseModel
     public function withBeforeDate(string $beforeDate): self
     {
         $obj = clone $this;
-        $obj->beforeDate = $beforeDate;
+        $obj['beforeDate'] = $beforeDate;
 
         return $obj;
     }
@@ -141,7 +147,7 @@ final class Filter implements BaseModel
     public function withConversationIDs(array $conversationIDs): self
     {
         $obj = clone $this;
-        $obj->conversationIds = $conversationIDs;
+        $obj['conversationIds'] = $conversationIDs;
 
         return $obj;
     }
@@ -152,7 +158,7 @@ final class Filter implements BaseModel
     public function withFilteredActionIDs(array $filteredActionIDs): self
     {
         $obj = clone $this;
-        $obj->filteredActionIds = $filteredActionIDs;
+        $obj['filteredActionIds'] = $filteredActionIDs;
 
         return $obj;
     }
@@ -163,18 +169,23 @@ final class Filter implements BaseModel
     public function withFilteredChannelIDs(array $filteredChannelIDs): self
     {
         $obj = clone $this;
-        $obj->filteredChannelIds = $filteredChannelIDs;
+        $obj['filteredChannelIds'] = $filteredChannelIDs;
 
         return $obj;
     }
 
     /**
-     * @param list<FilterLabel> $filterLabels
+     * @param list<FilterLabel|array{
+     *   label: string,
+     *   type: value-of<Type>,
+     *   maxThreshold?: float|null,
+     *   minThreshold?: float|null,
+     * }> $filterLabels
      */
     public function withFilterLabels(array $filterLabels): self
     {
         $obj = clone $this;
-        $obj->filterLabels = $filterLabels;
+        $obj['filterLabels'] = $filterLabels;
 
         return $obj;
     }
@@ -185,7 +196,7 @@ final class Filter implements BaseModel
     public function withLabels(array $labels): self
     {
         $obj = clone $this;
-        $obj->labels = $labels;
+        $obj['labels'] = $labels;
 
         return $obj;
     }
@@ -205,7 +216,7 @@ final class Filter implements BaseModel
     public function withShowChecked(bool $showChecked): self
     {
         $obj = clone $this;
-        $obj->showChecked = $showChecked;
+        $obj['showChecked'] = $showChecked;
 
         return $obj;
     }

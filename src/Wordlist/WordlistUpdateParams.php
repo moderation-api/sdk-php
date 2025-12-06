@@ -81,11 +81,11 @@ final class WordlistUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $description && $obj->description = $description;
-        null !== $key && $obj->key = $key;
-        null !== $name && $obj->name = $name;
-        null !== $strict && $obj->strict = $strict;
-        null !== $words && $obj->words = $words;
+        null !== $description && $obj['description'] = $description;
+        null !== $key && $obj['key'] = $key;
+        null !== $name && $obj['name'] = $name;
+        null !== $strict && $obj['strict'] = $strict;
+        null !== $words && $obj['words'] = $words;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class WordlistUpdateParams implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class WordlistUpdateParams implements BaseModel
     public function withKey(string $key): self
     {
         $obj = clone $this;
-        $obj->key = $key;
+        $obj['key'] = $key;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class WordlistUpdateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class WordlistUpdateParams implements BaseModel
     public function withStrict(bool $strict): self
     {
         $obj = clone $this;
-        $obj->strict = $strict;
+        $obj['strict'] = $strict;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class WordlistUpdateParams implements BaseModel
     public function withWords(array $words): self
     {
         $obj = clone $this;
-        $obj->words = $words;
+        $obj['words'] = $words;
 
         return $obj;
     }

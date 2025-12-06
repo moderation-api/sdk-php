@@ -85,12 +85,12 @@ final class Action implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->name = $name;
-        $obj->timestamp = $timestamp;
+        $obj['id'] = $id;
+        $obj['name'] = $name;
+        $obj['timestamp'] = $timestamp;
 
-        null !== $comment && $obj->comment = $comment;
-        null !== $reviewer && $obj->reviewer = $reviewer;
+        null !== $comment && $obj['comment'] = $comment;
+        null !== $reviewer && $obj['reviewer'] = $reviewer;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class Action implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Action implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class Action implements BaseModel
     public function withTimestamp(float $timestamp): self
     {
         $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class Action implements BaseModel
     public function withComment(string $comment): self
     {
         $obj = clone $this;
-        $obj->comment = $comment;
+        $obj['comment'] = $comment;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Action implements BaseModel
     public function withReviewer(string $reviewer): self
     {
         $obj = clone $this;
-        $obj->reviewer = $reviewer;
+        $obj['reviewer'] = $reviewer;
 
         return $obj;
     }

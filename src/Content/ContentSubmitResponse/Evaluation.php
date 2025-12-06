@@ -82,11 +82,11 @@ final class Evaluation implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->flag_probability = $flag_probability;
-        $obj->flagged = $flagged;
-        $obj->severity_score = $severity_score;
+        $obj['flag_probability'] = $flag_probability;
+        $obj['flagged'] = $flagged;
+        $obj['severity_score'] = $severity_score;
 
-        null !== $unicode_spoofed && $obj->unicode_spoofed = $unicode_spoofed;
+        null !== $unicode_spoofed && $obj['unicode_spoofed'] = $unicode_spoofed;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Evaluation implements BaseModel
     public function withFlagProbability(float $flagProbability): self
     {
         $obj = clone $this;
-        $obj->flag_probability = $flagProbability;
+        $obj['flag_probability'] = $flagProbability;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Evaluation implements BaseModel
     public function withFlagged(bool $flagged): self
     {
         $obj = clone $this;
-        $obj->flagged = $flagged;
+        $obj['flagged'] = $flagged;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Evaluation implements BaseModel
     public function withSeverityScore(float $severityScore): self
     {
         $obj = clone $this;
-        $obj->severity_score = $severityScore;
+        $obj['severity_score'] = $severityScore;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Evaluation implements BaseModel
     public function withUnicodeSpoofed(bool $unicodeSpoofed): self
     {
         $obj = clone $this;
-        $obj->unicode_spoofed = $unicodeSpoofed;
+        $obj['unicode_spoofed'] = $unicodeSpoofed;
 
         return $obj;
     }

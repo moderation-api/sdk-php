@@ -56,8 +56,8 @@ final class FlaggedContentTrend implements BaseModel
     {
         $obj = new self;
 
-        $obj->label = $label;
-        $obj->trend = $trend;
+        $obj['label'] = $label;
+        $obj['trend'] = $trend;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class FlaggedContentTrend implements BaseModel
     public function withLabel(string $label): self
     {
         $obj = clone $this;
-        $obj->label = $label;
+        $obj['label'] = $label;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class FlaggedContentTrend implements BaseModel
     public function withTrend(float $trend): self
     {
         $obj = clone $this;
-        $obj->trend = $trend;
+        $obj['trend'] = $trend;
 
         return $obj;
     }

@@ -56,9 +56,9 @@ final class Label implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->flagged = $flagged;
-        $obj->probability = $probability;
+        $obj['id'] = $id;
+        $obj['flagged'] = $flagged;
+        $obj['probability'] = $probability;
 
         return $obj;
     }
@@ -66,7 +66,7 @@ final class Label implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Label implements BaseModel
     public function withFlagged(bool $flagged): self
     {
         $obj = clone $this;
-        $obj->flagged = $flagged;
+        $obj['flagged'] = $flagged;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Label implements BaseModel
     public function withProbability(float $probability): self
     {
         $obj = clone $this;
-        $obj->probability = $probability;
+        $obj['probability'] = $probability;
 
         return $obj;
     }

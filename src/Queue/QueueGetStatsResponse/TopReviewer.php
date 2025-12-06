@@ -97,7 +97,9 @@ final class TopReviewer implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TopAction> $topActions
+     * @param list<TopAction|array{
+     *   actionId: string, actionName: string, count: float
+     * }> $topActions
      */
     public static function with(
         float $averageTimePerReview,
@@ -109,13 +111,13 @@ final class TopReviewer implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->averageTimePerReview = $averageTimePerReview;
-        $obj->name = $name;
-        $obj->reviewCount = $reviewCount;
-        $obj->topActions = $topActions;
-        $obj->userId = $userId;
+        $obj['averageTimePerReview'] = $averageTimePerReview;
+        $obj['name'] = $name;
+        $obj['reviewCount'] = $reviewCount;
+        $obj['topActions'] = $topActions;
+        $obj['userId'] = $userId;
 
-        null !== $accuracyScore && $obj->accuracyScore = $accuracyScore;
+        null !== $accuracyScore && $obj['accuracyScore'] = $accuracyScore;
 
         return $obj;
     }
@@ -126,7 +128,7 @@ final class TopReviewer implements BaseModel
     public function withAverageTimePerReview(float $averageTimePerReview): self
     {
         $obj = clone $this;
-        $obj->averageTimePerReview = $averageTimePerReview;
+        $obj['averageTimePerReview'] = $averageTimePerReview;
 
         return $obj;
     }
@@ -137,7 +139,7 @@ final class TopReviewer implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -148,7 +150,7 @@ final class TopReviewer implements BaseModel
     public function withReviewCount(float $reviewCount): self
     {
         $obj = clone $this;
-        $obj->reviewCount = $reviewCount;
+        $obj['reviewCount'] = $reviewCount;
 
         return $obj;
     }
@@ -156,12 +158,14 @@ final class TopReviewer implements BaseModel
     /**
      * Most common actions taken by this reviewer.
      *
-     * @param list<TopAction> $topActions
+     * @param list<TopAction|array{
+     *   actionId: string, actionName: string, count: float
+     * }> $topActions
      */
     public function withTopActions(array $topActions): self
     {
         $obj = clone $this;
-        $obj->topActions = $topActions;
+        $obj['topActions'] = $topActions;
 
         return $obj;
     }
@@ -172,7 +176,7 @@ final class TopReviewer implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userId = $userID;
+        $obj['userId'] = $userID;
 
         return $obj;
     }
@@ -183,7 +187,7 @@ final class TopReviewer implements BaseModel
     public function withAccuracyScore(float $accuracyScore): self
     {
         $obj = clone $this;
-        $obj->accuracyScore = $accuracyScore;
+        $obj['accuracyScore'] = $accuracyScore;
 
         return $obj;
     }

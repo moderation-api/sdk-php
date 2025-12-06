@@ -51,7 +51,7 @@ final class Hate implements BaseModel
     {
         $obj = new self;
 
-        $obj->flag = $flag;
+        $obj['flag'] = $flag;
 
         return $obj;
     }
@@ -59,7 +59,7 @@ final class Hate implements BaseModel
     public function withFlag(bool $flag): self
     {
         $obj = clone $this;
-        $obj->flag = $flag;
+        $obj['flag'] = $flag;
 
         return $obj;
     }

@@ -75,7 +75,9 @@ final class EntityMatcherOutput implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Match1> $matches
+     * @param list<Match1|array{
+     *   match: string, probability: float, span: list<int>
+     * }> $matches
      * @param list<string> $flagged_fields
      */
     public static function with(
@@ -87,12 +89,12 @@ final class EntityMatcherOutput implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->flagged = $flagged;
-        $obj->matches = $matches;
-        $obj->probability = $probability;
+        $obj['id'] = $id;
+        $obj['flagged'] = $flagged;
+        $obj['matches'] = $matches;
+        $obj['probability'] = $probability;
 
-        null !== $flagged_fields && $obj->flagged_fields = $flagged_fields;
+        null !== $flagged_fields && $obj['flagged_fields'] = $flagged_fields;
 
         return $obj;
     }
@@ -100,7 +102,7 @@ final class EntityMatcherOutput implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -108,18 +110,20 @@ final class EntityMatcherOutput implements BaseModel
     public function withFlagged(bool $flagged): self
     {
         $obj = clone $this;
-        $obj->flagged = $flagged;
+        $obj['flagged'] = $flagged;
 
         return $obj;
     }
 
     /**
-     * @param list<Match1> $matches
+     * @param list<Match1|array{
+     *   match: string, probability: float, span: list<int>
+     * }> $matches
      */
     public function withMatches(array $matches): self
     {
         $obj = clone $this;
-        $obj->matches = $matches;
+        $obj['matches'] = $matches;
 
         return $obj;
     }
@@ -127,7 +131,7 @@ final class EntityMatcherOutput implements BaseModel
     public function withProbability(float $probability): self
     {
         $obj = clone $this;
-        $obj->probability = $probability;
+        $obj['probability'] = $probability;
 
         return $obj;
     }
@@ -138,7 +142,7 @@ final class EntityMatcherOutput implements BaseModel
     public function withFlaggedFields(array $flaggedFields): self
     {
         $obj = clone $this;
-        $obj->flagged_fields = $flaggedFields;
+        $obj['flagged_fields'] = $flaggedFields;
 
         return $obj;
     }

@@ -71,9 +71,9 @@ final class ItemUnresolveResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->status = $status;
-        $obj->success = $success;
-        $obj->unresolvedAt = $unresolvedAt;
+        $obj['status'] = $status;
+        $obj['success'] = $success;
+        $obj['unresolvedAt'] = $unresolvedAt;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class ItemUnresolveResponse implements BaseModel, ResponseConverter
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class ItemUnresolveResponse implements BaseModel, ResponseConverter
     public function withSuccess(bool $success): self
     {
         $obj = clone $this;
-        $obj->success = $success;
+        $obj['success'] = $success;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class ItemUnresolveResponse implements BaseModel, ResponseConverter
     public function withUnresolvedAt(string $unresolvedAt): self
     {
         $obj = clone $this;
-        $obj->unresolvedAt = $unresolvedAt;
+        $obj['unresolvedAt'] = $unresolvedAt;
 
         return $obj;
     }

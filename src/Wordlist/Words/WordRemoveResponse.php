@@ -78,9 +78,9 @@ final class WordRemoveResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->removedCount = $removedCount;
-        $obj->removedWords = $removedWords;
-        $obj->totalCount = $totalCount;
+        $obj['removedCount'] = $removedCount;
+        $obj['removedWords'] = $removedWords;
+        $obj['totalCount'] = $totalCount;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class WordRemoveResponse implements BaseModel, ResponseConverter
     public function withRemovedCount(float $removedCount): self
     {
         $obj = clone $this;
-        $obj->removedCount = $removedCount;
+        $obj['removedCount'] = $removedCount;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class WordRemoveResponse implements BaseModel, ResponseConverter
     public function withRemovedWords(array $removedWords): self
     {
         $obj = clone $this;
-        $obj->removedWords = $removedWords;
+        $obj['removedWords'] = $removedWords;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class WordRemoveResponse implements BaseModel, ResponseConverter
     public function withTotalCount(float $totalCount): self
     {
         $obj = clone $this;
-        $obj->totalCount = $totalCount;
+        $obj['totalCount'] = $totalCount;
 
         return $obj;
     }

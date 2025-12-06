@@ -50,8 +50,8 @@ final class Error implements BaseModel
     {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->message = $message;
+        $obj['id'] = $id;
+        $obj['message'] = $message;
 
         return $obj;
     }
@@ -59,7 +59,7 @@ final class Error implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class Error implements BaseModel
     public function withMessage(string $message): self
     {
         $obj = clone $this;
-        $obj->message = $message;
+        $obj['message'] = $message;
 
         return $obj;
     }

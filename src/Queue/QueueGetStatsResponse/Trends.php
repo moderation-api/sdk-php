@@ -53,8 +53,12 @@ final class Trends implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DailyReviewCount> $dailyReviewCounts
-     * @param list<FlaggedContentTrend> $flaggedContentTrends
+     * @param list<DailyReviewCount|array{
+     *   count: float, date: string
+     * }> $dailyReviewCounts
+     * @param list<FlaggedContentTrend|array{
+     *   label: string, trend: float
+     * }> $flaggedContentTrends
      */
     public static function with(
         array $dailyReviewCounts,
@@ -62,30 +66,34 @@ final class Trends implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->dailyReviewCounts = $dailyReviewCounts;
-        $obj->flaggedContentTrends = $flaggedContentTrends;
+        $obj['dailyReviewCounts'] = $dailyReviewCounts;
+        $obj['flaggedContentTrends'] = $flaggedContentTrends;
 
         return $obj;
     }
 
     /**
-     * @param list<DailyReviewCount> $dailyReviewCounts
+     * @param list<DailyReviewCount|array{
+     *   count: float, date: string
+     * }> $dailyReviewCounts
      */
     public function withDailyReviewCounts(array $dailyReviewCounts): self
     {
         $obj = clone $this;
-        $obj->dailyReviewCounts = $dailyReviewCounts;
+        $obj['dailyReviewCounts'] = $dailyReviewCounts;
 
         return $obj;
     }
 
     /**
-     * @param list<FlaggedContentTrend> $flaggedContentTrends
+     * @param list<FlaggedContentTrend|array{
+     *   label: string, trend: float
+     * }> $flaggedContentTrends
      */
     public function withFlaggedContentTrends(array $flaggedContentTrends): self
     {
         $obj = clone $this;
-        $obj->flaggedContentTrends = $flaggedContentTrends;
+        $obj['flaggedContentTrends'] = $flaggedContentTrends;
 
         return $obj;
     }

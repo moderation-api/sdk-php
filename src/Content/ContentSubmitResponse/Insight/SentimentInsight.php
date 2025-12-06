@@ -71,7 +71,7 @@ final class SentimentInsight implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->probability = $probability;
+        $obj['probability'] = $probability;
         $obj['value'] = $value;
 
         return $obj;
@@ -80,7 +80,7 @@ final class SentimentInsight implements BaseModel
     public function withProbability(float $probability): self
     {
         $obj = clone $this;
-        $obj->probability = $probability;
+        $obj['probability'] = $probability;
 
         return $obj;
     }

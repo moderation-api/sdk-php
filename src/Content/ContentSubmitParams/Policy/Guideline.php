@@ -62,9 +62,9 @@ final class Guideline implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->flag = $flag;
-        $obj->guidelineKey = $guidelineKey;
-        $obj->instructions = $instructions;
+        $obj['flag'] = $flag;
+        $obj['guidelineKey'] = $guidelineKey;
+        $obj['instructions'] = $instructions;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class Guideline implements BaseModel
     public function withFlag(bool $flag): self
     {
         $obj = clone $this;
-        $obj->flag = $flag;
+        $obj['flag'] = $flag;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class Guideline implements BaseModel
     public function withGuidelineKey(string $guidelineKey): self
     {
         $obj = clone $this;
-        $obj->guidelineKey = $guidelineKey;
+        $obj['guidelineKey'] = $guidelineKey;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Guideline implements BaseModel
     public function withInstructions(string $instructions): self
     {
         $obj = clone $this;
-        $obj->instructions = $instructions;
+        $obj['instructions'] = $instructions;
 
         return $obj;
     }

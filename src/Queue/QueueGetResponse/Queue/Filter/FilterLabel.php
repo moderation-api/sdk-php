@@ -69,11 +69,11 @@ final class FilterLabel implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->label = $label;
+        $obj['label'] = $label;
         $obj['type'] = $type;
 
-        null !== $maxThreshold && $obj->maxThreshold = $maxThreshold;
-        null !== $minThreshold && $obj->minThreshold = $minThreshold;
+        null !== $maxThreshold && $obj['maxThreshold'] = $maxThreshold;
+        null !== $minThreshold && $obj['minThreshold'] = $minThreshold;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class FilterLabel implements BaseModel
     public function withLabel(string $label): self
     {
         $obj = clone $this;
-        $obj->label = $label;
+        $obj['label'] = $label;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class FilterLabel implements BaseModel
     public function withMaxThreshold(?float $maxThreshold): self
     {
         $obj = clone $this;
-        $obj->maxThreshold = $maxThreshold;
+        $obj['maxThreshold'] = $maxThreshold;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class FilterLabel implements BaseModel
     public function withMinThreshold(?float $minThreshold): self
     {
         $obj = clone $this;
-        $obj->minThreshold = $minThreshold;
+        $obj['minThreshold'] = $minThreshold;
 
         return $obj;
     }

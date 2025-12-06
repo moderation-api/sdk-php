@@ -8,6 +8,8 @@ use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter;
+use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\FilterLabel;
+use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\RecommendationAction;
 
 /**
  * @phpstan-type QueueShape = array{
@@ -84,11 +86,24 @@ final class Queue implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|array{
+     *   afterDate?: string|null,
+     *   authorID?: string|null,
+     *   beforeDate?: string|null,
+     *   conversationIds?: list<string|null>|null,
+     *   filteredActionIds?: list<string>|null,
+     *   filteredChannelIds?: list<string>|null,
+     *   filterLabels?: list<FilterLabel>|null,
+     *   labels?: list<string>|null,
+     *   recommendationActions?: list<value-of<RecommendationAction>>|null,
+     *   showChecked?: bool|null,
+     * } $filter
      */
     public static function with(
         string $id,
         string $description,
-        Filter $filter,
+        Filter|array $filter,
         string $name,
         float $resolvedItemsCount,
         float $totalItemsCount,
@@ -96,13 +111,13 @@ final class Queue implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->description = $description;
-        $obj->filter = $filter;
-        $obj->name = $name;
-        $obj->resolvedItemsCount = $resolvedItemsCount;
-        $obj->totalItemsCount = $totalItemsCount;
-        $obj->unresolvedItemsCount = $unresolvedItemsCount;
+        $obj['id'] = $id;
+        $obj['description'] = $description;
+        $obj['filter'] = $filter;
+        $obj['name'] = $name;
+        $obj['resolvedItemsCount'] = $resolvedItemsCount;
+        $obj['totalItemsCount'] = $totalItemsCount;
+        $obj['unresolvedItemsCount'] = $unresolvedItemsCount;
 
         return $obj;
     }
@@ -110,7 +125,7 @@ final class Queue implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -118,15 +133,29 @@ final class Queue implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
 
-    public function withFilter(Filter $filter): self
+    /**
+     * @param Filter|array{
+     *   afterDate?: string|null,
+     *   authorID?: string|null,
+     *   beforeDate?: string|null,
+     *   conversationIds?: list<string|null>|null,
+     *   filteredActionIds?: list<string>|null,
+     *   filteredChannelIds?: list<string>|null,
+     *   filterLabels?: list<FilterLabel>|null,
+     *   labels?: list<string>|null,
+     *   recommendationActions?: list<value-of<RecommendationAction>>|null,
+     *   showChecked?: bool|null,
+     * } $filter
+     */
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
@@ -134,7 +163,7 @@ final class Queue implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -142,7 +171,7 @@ final class Queue implements BaseModel
     public function withResolvedItemsCount(float $resolvedItemsCount): self
     {
         $obj = clone $this;
-        $obj->resolvedItemsCount = $resolvedItemsCount;
+        $obj['resolvedItemsCount'] = $resolvedItemsCount;
 
         return $obj;
     }
@@ -150,7 +179,7 @@ final class Queue implements BaseModel
     public function withTotalItemsCount(float $totalItemsCount): self
     {
         $obj = clone $this;
-        $obj->totalItemsCount = $totalItemsCount;
+        $obj['totalItemsCount'] = $totalItemsCount;
 
         return $obj;
     }
@@ -158,7 +187,7 @@ final class Queue implements BaseModel
     public function withUnresolvedItemsCount(float $unresolvedItemsCount): self
     {
         $obj = clone $this;
-        $obj->unresolvedItemsCount = $unresolvedItemsCount;
+        $obj['unresolvedItemsCount'] = $unresolvedItemsCount;
 
         return $obj;
     }
