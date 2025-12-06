@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 (2025-12-06)
+
+Full Changelog: [v0.1.1...v0.2.0](https://github.com/moderation-api/sdk-php/compare/v0.1.1...v0.2.0)
+
+### Features
+
+* allow both model class instances and arrays in setters ([1274a2b](https://github.com/moderation-api/sdk-php/commit/1274a2bd53a9f15182101eec6c3859936d03c36d))
+* **api:** api update ([8d25646](https://github.com/moderation-api/sdk-php/commit/8d25646629a65b87ea31fccc053f2b4f45d13a2c))
+
 ## 0.1.1 (2025-12-05)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/moderation-api/sdk-php/compare/v0.1.0...v0.1.1)
