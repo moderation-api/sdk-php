@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitResponse;
 
 use ModerationAPI\Content\ContentSubmitResponse\Content\Modified;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\UnionMember1\Audio;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\UnionMember1\Image;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\UnionMember1\Text;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\UnionMember1\Video;
+use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Audio;
+use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Image;
+use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Text;
+use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Video;
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -19,7 +19,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @phpstan-type ContentShape = array{
  *   id: string,
  *   masked: bool,
- *   modified: string|null|array<string,Text|Image|Video|Audio>,
+ *   modified: string|null|array<string,mixed>|array<string,Text|Image|Video|Audio>,
  * }
  */
 final class Content implements BaseModel
@@ -42,7 +42,7 @@ final class Content implements BaseModel
     /**
      * The modified content, if any.
      *
-     * @var string|array<string,Text|Image|Video|Audio>|null $modified
+     * @var string|array<string,mixed>|array<string,Text|Image|Video|Audio>|null $modified
      */
     #[Api(union: Modified::class)]
     public string|array|null $modified;
@@ -71,7 +71,7 @@ final class Content implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|array<string,Text|array{
+     * @param string|array<string,mixed>|array<string,Text|array{
      *   text: string, type: 'text'
      * }|Image|array{type: 'image', url: string}|Video|array{
      *   type: 'video', url: string
@@ -116,7 +116,7 @@ final class Content implements BaseModel
     /**
      * The modified content, if any.
      *
-     * @param string|array<string,Text|array{
+     * @param string|array<string,mixed>|array<string,Text|array{
      *   text: string, type: 'text'
      * }|Image|array{type: 'image', url: string}|Video|array{
      *   type: 'video', url: string

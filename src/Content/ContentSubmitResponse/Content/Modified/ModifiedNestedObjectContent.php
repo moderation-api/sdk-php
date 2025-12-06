@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitResponse\Content\Modified;
 
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\UnionMember1\Audio;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\UnionMember1\Image;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\UnionMember1\Text;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\UnionMember1\Video;
+use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Audio;
+use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Image;
+use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Text;
+use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Video;
 use ModerationAPI\Core\Concerns\SdkUnion;
 use ModerationAPI\Core\Conversion\Contracts\Converter;
 use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
@@ -15,7 +15,7 @@ use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
 /**
  * Text.
  */
-final class UnionMember1 implements ConverterSource
+final class ModifiedNestedObjectContent implements ConverterSource
 {
     use SdkUnion;
 
