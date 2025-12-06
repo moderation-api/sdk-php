@@ -72,9 +72,9 @@ final class ReviewStats implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->averageTimeToReview = $averageTimeToReview;
-        $obj->totalPending = $totalPending;
-        $obj->totalReviewed = $totalReviewed;
+        $obj['averageTimeToReview'] = $averageTimeToReview;
+        $obj['totalPending'] = $totalPending;
+        $obj['totalReviewed'] = $totalReviewed;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class ReviewStats implements BaseModel
     public function withAverageTimeToReview(float $averageTimeToReview): self
     {
         $obj = clone $this;
-        $obj->averageTimeToReview = $averageTimeToReview;
+        $obj['averageTimeToReview'] = $averageTimeToReview;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class ReviewStats implements BaseModel
     public function withTotalPending(float $totalPending): self
     {
         $obj = clone $this;
-        $obj->totalPending = $totalPending;
+        $obj['totalPending'] = $totalPending;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class ReviewStats implements BaseModel
     public function withTotalReviewed(float $totalReviewed): self
     {
         $obj = clone $this;
-        $obj->totalReviewed = $totalReviewed;
+        $obj['totalReviewed'] = $totalReviewed;
 
         return $obj;
     }

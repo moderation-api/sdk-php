@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
 use ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity;
+use ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity\ID;
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -49,24 +50,36 @@ final class URLMasking implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,Entity> $entities
+     * @param array<string,Entity|array{
+     *   id: value-of<ID>,
+     *   enable: bool,
+     *   flag: bool,
+     *   shouldMask: bool,
+     *   mask?: string|null,
+     * }> $entities
      */
     public static function with(array $entities): self
     {
         $obj = new self;
 
-        $obj->entities = $entities;
+        $obj['entities'] = $entities;
 
         return $obj;
     }
 
     /**
-     * @param array<string,Entity> $entities
+     * @param array<string,Entity|array{
+     *   id: value-of<ID>,
+     *   enable: bool,
+     *   flag: bool,
+     *   shouldMask: bool,
+     *   mask?: string|null,
+     * }> $entities
      */
     public function withEntities(array $entities): self
     {
         $obj = clone $this;
-        $obj->entities = $entities;
+        $obj['entities'] = $entities;
 
         return $obj;
     }

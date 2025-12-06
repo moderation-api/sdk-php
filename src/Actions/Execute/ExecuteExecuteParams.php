@@ -106,13 +106,13 @@ final class ExecuteExecuteParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->actionKey = $actionKey;
+        $obj['actionKey'] = $actionKey;
 
-        null !== $authorIds && $obj->authorIds = $authorIds;
-        null !== $contentIds && $obj->contentIds = $contentIds;
-        null !== $duration && $obj->duration = $duration;
-        null !== $queueId && $obj->queueId = $queueId;
-        null !== $value && $obj->value = $value;
+        null !== $authorIds && $obj['authorIds'] = $authorIds;
+        null !== $contentIds && $obj['contentIds'] = $contentIds;
+        null !== $duration && $obj['duration'] = $duration;
+        null !== $queueId && $obj['queueId'] = $queueId;
+        null !== $value && $obj['value'] = $value;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class ExecuteExecuteParams implements BaseModel
     public function withActionKey(string $actionKey): self
     {
         $obj = clone $this;
-        $obj->actionKey = $actionKey;
+        $obj['actionKey'] = $actionKey;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class ExecuteExecuteParams implements BaseModel
     public function withAuthorIDs(array $authorIDs): self
     {
         $obj = clone $this;
-        $obj->authorIds = $authorIDs;
+        $obj['authorIds'] = $authorIDs;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class ExecuteExecuteParams implements BaseModel
     public function withContentIDs(array $contentIDs): self
     {
         $obj = clone $this;
-        $obj->contentIds = $contentIDs;
+        $obj['contentIds'] = $contentIDs;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class ExecuteExecuteParams implements BaseModel
     public function withDuration(float $duration): self
     {
         $obj = clone $this;
-        $obj->duration = $duration;
+        $obj['duration'] = $duration;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class ExecuteExecuteParams implements BaseModel
     public function withQueueID(string $queueID): self
     {
         $obj = clone $this;
-        $obj->queueId = $queueID;
+        $obj['queueId'] = $queueID;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class ExecuteExecuteParams implements BaseModel
     public function withValue(string $value): self
     {
         $obj = clone $this;
-        $obj->value = $value;
+        $obj['value'] = $value;
 
         return $obj;
     }

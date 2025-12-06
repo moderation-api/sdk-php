@@ -56,8 +56,8 @@ final class DailyReviewCount implements BaseModel
     {
         $obj = new self;
 
-        $obj->count = $count;
-        $obj->date = $date;
+        $obj['count'] = $count;
+        $obj['date'] = $date;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class DailyReviewCount implements BaseModel
     public function withCount(float $count): self
     {
         $obj = clone $this;
-        $obj->count = $count;
+        $obj['count'] = $count;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class DailyReviewCount implements BaseModel
     public function withDate(string $date): self
     {
         $obj = clone $this;
-        $obj->date = $date;
+        $obj['date'] = $date;
 
         return $obj;
     }

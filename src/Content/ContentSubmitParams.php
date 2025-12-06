@@ -23,6 +23,7 @@ use ModerationAPI\Content\ContentSubmitParams\Policy\IllicitGambling;
 use ModerationAPI\Content\ContentSubmitParams\Policy\IllicitTobacco;
 use ModerationAPI\Content\ContentSubmitParams\Policy\PersonalInformation;
 use ModerationAPI\Content\ContentSubmitParams\Policy\PiiMasking;
+use ModerationAPI\Content\ContentSubmitParams\Policy\PiiMasking\Entity;
 use ModerationAPI\Content\ContentSubmitParams\Policy\Political;
 use ModerationAPI\Content\ContentSubmitParams\Policy\Profanity;
 use ModerationAPI\Content\ContentSubmitParams\Policy\Religion;
@@ -43,7 +44,14 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @see ModerationAPI\Services\ContentService::submit()
  *
  * @phpstan-type ContentSubmitParamsShape = array{
- *   content: Text|Image|Video|Audio|Object1,
+ *   content: Text|array{text: string, type: 'text'}|Image|array{
+ *     type: 'image', url: string
+ *   }|Video|array{type: 'video', url: string}|Audio|array{
+ *     type: 'audio', url: string
+ *   }|Object1|array{
+ *     data: array<string,\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio>,
+ *     type: 'object',
+ *   },
  *   authorId?: string,
  *   channel?: string,
  *   contentId?: string,
@@ -51,7 +59,38 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   doNotStore?: bool,
  *   metadata?: array<string,mixed>,
  *   metaType?: MetaType|value-of<MetaType>,
- *   policies?: list<Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Sexual|Flirtation|Profanity|Violence|SelfHarm|Spam|SelfPromotion|Political|Religion|CodeAbuse|PiiMasking|URLMasking|Guideline>,
+ *   policies?: list<Toxicity|array{
+ *     id: 'toxicity', flag: bool
+ *   }|PersonalInformation|array{
+ *     id: 'personal_information', flag: bool
+ *   }|ToxicitySevere|array{id: 'toxicity_severe', flag: bool}|Hate|array{
+ *     id: 'hate', flag: bool
+ *   }|Illicit|array{id: 'illicit', flag: bool}|IllicitDrugs|array{
+ *     id: 'illicit_drugs', flag: bool
+ *   }|IllicitAlcohol|array{
+ *     id: 'illicit_alcohol', flag: bool
+ *   }|IllicitFirearms|array{
+ *     id: 'illicit_firearms', flag: bool
+ *   }|IllicitTobacco|array{
+ *     id: 'illicit_tobacco', flag: bool
+ *   }|IllicitGambling|array{id: 'illicit_gambling', flag: bool}|Sexual|array{
+ *     id: 'sexual', flag: bool
+ *   }|Flirtation|array{id: 'flirtation', flag: bool}|Profanity|array{
+ *     id: 'profanity', flag: bool
+ *   }|Violence|array{id: 'violence', flag: bool}|SelfHarm|array{
+ *     id: 'self_harm', flag: bool
+ *   }|Spam|array{id: 'spam', flag: bool}|SelfPromotion|array{
+ *     id: 'self_promotion', flag: bool
+ *   }|Political|array{id: 'political', flag: bool}|Religion|array{
+ *     id: 'religion', flag: bool
+ *   }|CodeAbuse|array{id: 'code_abuse', flag: bool}|PiiMasking|array{
+ *     id: 'pii', entities: array<string,Entity>
+ *   }|URLMasking|array{
+ *     id: 'url',
+ *     entities: array<string,\ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity>,
+ *   }|Guideline|array{
+ *     id: 'guideline', flag: bool, guidelineKey: string, instructions: string
+ *   }>,
  * }
  */
 final class ContentSubmitParams implements BaseModel
@@ -144,12 +183,47 @@ final class ContentSubmitParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Text|array{text: string, type: 'text'}|Image|array{
+     *   type: 'image', url: string
+     * }|Video|array{type: 'video', url: string}|Audio|array{
+     *   type: 'audio', url: string
+     * }|Object1|array{
+     *   data: array<string,Object1\Data\Text|Object1\Data\Image|Object1\Data\Video|Object1\Data\Audio>,
+     *   type: 'object',
+     * } $content
      * @param array<string,mixed> $metadata
      * @param MetaType|value-of<MetaType> $metaType
-     * @param list<Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Sexual|Flirtation|Profanity|Violence|SelfHarm|Spam|SelfPromotion|Political|Religion|CodeAbuse|PiiMasking|URLMasking|Guideline> $policies
+     * @param list<Toxicity|array{
+     *   id: 'toxicity', flag: bool
+     * }|PersonalInformation|array{
+     *   id: 'personal_information', flag: bool
+     * }|ToxicitySevere|array{id: 'toxicity_severe', flag: bool}|Hate|array{
+     *   id: 'hate', flag: bool
+     * }|Illicit|array{id: 'illicit', flag: bool}|IllicitDrugs|array{
+     *   id: 'illicit_drugs', flag: bool
+     * }|IllicitAlcohol|array{id: 'illicit_alcohol', flag: bool}|IllicitFirearms|array{
+     *   id: 'illicit_firearms', flag: bool
+     * }|IllicitTobacco|array{id: 'illicit_tobacco', flag: bool}|IllicitGambling|array{
+     *   id: 'illicit_gambling', flag: bool
+     * }|Sexual|array{id: 'sexual', flag: bool}|Flirtation|array{
+     *   id: 'flirtation', flag: bool
+     * }|Profanity|array{id: 'profanity', flag: bool}|Violence|array{
+     *   id: 'violence', flag: bool
+     * }|SelfHarm|array{id: 'self_harm', flag: bool}|Spam|array{
+     *   id: 'spam', flag: bool
+     * }|SelfPromotion|array{id: 'self_promotion', flag: bool}|Political|array{
+     *   id: 'political', flag: bool
+     * }|Religion|array{id: 'religion', flag: bool}|CodeAbuse|array{
+     *   id: 'code_abuse', flag: bool
+     * }|PiiMasking|array{id: 'pii', entities: array<string,Entity>}|URLMasking|array{
+     *   id: 'url',
+     *   entities: array<string,URLMasking\Entity>,
+     * }|Guideline|array{
+     *   id: 'guideline', flag: bool, guidelineKey: string, instructions: string
+     * }> $policies
      */
     public static function with(
-        Text|Image|Video|Audio|Object1 $content,
+        Text|array|Image|Video|Audio|Object1 $content,
         ?string $authorId = null,
         ?string $channel = null,
         ?string $contentId = null,
@@ -161,27 +235,37 @@ final class ContentSubmitParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->content = $content;
+        $obj['content'] = $content;
 
-        null !== $authorId && $obj->authorId = $authorId;
-        null !== $channel && $obj->channel = $channel;
-        null !== $contentId && $obj->contentId = $contentId;
-        null !== $conversationId && $obj->conversationId = $conversationId;
-        null !== $doNotStore && $obj->doNotStore = $doNotStore;
-        null !== $metadata && $obj->metadata = $metadata;
+        null !== $authorId && $obj['authorId'] = $authorId;
+        null !== $channel && $obj['channel'] = $channel;
+        null !== $contentId && $obj['contentId'] = $contentId;
+        null !== $conversationId && $obj['conversationId'] = $conversationId;
+        null !== $doNotStore && $obj['doNotStore'] = $doNotStore;
+        null !== $metadata && $obj['metadata'] = $metadata;
         null !== $metaType && $obj['metaType'] = $metaType;
-        null !== $policies && $obj->policies = $policies;
+        null !== $policies && $obj['policies'] = $policies;
 
         return $obj;
     }
 
     /**
      * The content sent for moderation.
+     *
+     * @param Text|array{text: string, type: 'text'}|Image|array{
+     *   type: 'image', url: string
+     * }|Video|array{type: 'video', url: string}|Audio|array{
+     *   type: 'audio', url: string
+     * }|Object1|array{
+     *   data: array<string,Object1\Data\Text|Object1\Data\Image|Object1\Data\Video|Object1\Data\Audio>,
+     *   type: 'object',
+     * } $content
      */
-    public function withContent(Text|Image|Video|Audio|Object1 $content): self
-    {
+    public function withContent(
+        Text|array|Image|Video|Audio|Object1 $content
+    ): self {
         $obj = clone $this;
-        $obj->content = $content;
+        $obj['content'] = $content;
 
         return $obj;
     }
@@ -192,7 +276,7 @@ final class ContentSubmitParams implements BaseModel
     public function withAuthorID(string $authorID): self
     {
         $obj = clone $this;
-        $obj->authorId = $authorID;
+        $obj['authorId'] = $authorID;
 
         return $obj;
     }
@@ -203,7 +287,7 @@ final class ContentSubmitParams implements BaseModel
     public function withChannel(string $channel): self
     {
         $obj = clone $this;
-        $obj->channel = $channel;
+        $obj['channel'] = $channel;
 
         return $obj;
     }
@@ -214,7 +298,7 @@ final class ContentSubmitParams implements BaseModel
     public function withContentID(string $contentID): self
     {
         $obj = clone $this;
-        $obj->contentId = $contentID;
+        $obj['contentId'] = $contentID;
 
         return $obj;
     }
@@ -225,7 +309,7 @@ final class ContentSubmitParams implements BaseModel
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj->conversationId = $conversationID;
+        $obj['conversationId'] = $conversationID;
 
         return $obj;
     }
@@ -236,7 +320,7 @@ final class ContentSubmitParams implements BaseModel
     public function withDoNotStore(bool $doNotStore): self
     {
         $obj = clone $this;
-        $obj->doNotStore = $doNotStore;
+        $obj['doNotStore'] = $doNotStore;
 
         return $obj;
     }
@@ -249,7 +333,7 @@ final class ContentSubmitParams implements BaseModel
     public function withMetadata(array $metadata): self
     {
         $obj = clone $this;
-        $obj->metadata = $metadata;
+        $obj['metadata'] = $metadata;
 
         return $obj;
     }
@@ -270,12 +354,39 @@ final class ContentSubmitParams implements BaseModel
     /**
      * (Enterprise) override the channel policies for this moderation request only.
      *
-     * @param list<Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Sexual|Flirtation|Profanity|Violence|SelfHarm|Spam|SelfPromotion|Political|Religion|CodeAbuse|PiiMasking|URLMasking|Guideline> $policies
+     * @param list<Toxicity|array{
+     *   id: 'toxicity', flag: bool
+     * }|PersonalInformation|array{
+     *   id: 'personal_information', flag: bool
+     * }|ToxicitySevere|array{id: 'toxicity_severe', flag: bool}|Hate|array{
+     *   id: 'hate', flag: bool
+     * }|Illicit|array{id: 'illicit', flag: bool}|IllicitDrugs|array{
+     *   id: 'illicit_drugs', flag: bool
+     * }|IllicitAlcohol|array{id: 'illicit_alcohol', flag: bool}|IllicitFirearms|array{
+     *   id: 'illicit_firearms', flag: bool
+     * }|IllicitTobacco|array{id: 'illicit_tobacco', flag: bool}|IllicitGambling|array{
+     *   id: 'illicit_gambling', flag: bool
+     * }|Sexual|array{id: 'sexual', flag: bool}|Flirtation|array{
+     *   id: 'flirtation', flag: bool
+     * }|Profanity|array{id: 'profanity', flag: bool}|Violence|array{
+     *   id: 'violence', flag: bool
+     * }|SelfHarm|array{id: 'self_harm', flag: bool}|Spam|array{
+     *   id: 'spam', flag: bool
+     * }|SelfPromotion|array{id: 'self_promotion', flag: bool}|Political|array{
+     *   id: 'political', flag: bool
+     * }|Religion|array{id: 'religion', flag: bool}|CodeAbuse|array{
+     *   id: 'code_abuse', flag: bool
+     * }|PiiMasking|array{id: 'pii', entities: array<string,Entity>}|URLMasking|array{
+     *   id: 'url',
+     *   entities: array<string,URLMasking\Entity>,
+     * }|Guideline|array{
+     *   id: 'guideline', flag: bool, guidelineKey: string, instructions: string
+     * }> $policies
      */
     public function withPolicies(array $policies): self
     {
         $obj = clone $this;
-        $obj->policies = $policies;
+        $obj['policies'] = $policies;
 
         return $obj;
     }

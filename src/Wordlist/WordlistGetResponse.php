@@ -124,13 +124,13 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->createdAt = $createdAt;
-        $obj->name = $name;
-        $obj->organizationId = $organizationId;
-        $obj->strict = $strict;
-        $obj->userId = $userId;
-        $obj->words = $words;
+        $obj['id'] = $id;
+        $obj['createdAt'] = $createdAt;
+        $obj['name'] = $name;
+        $obj['organizationId'] = $organizationId;
+        $obj['strict'] = $strict;
+        $obj['userId'] = $userId;
+        $obj['words'] = $words;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
     public function withName(?string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj->organizationId = $organizationID;
+        $obj['organizationId'] = $organizationID;
 
         return $obj;
     }
@@ -185,7 +185,7 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
     public function withStrict(bool $strict): self
     {
         $obj = clone $this;
-        $obj->strict = $strict;
+        $obj['strict'] = $strict;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
     public function withUserID(?string $userID): self
     {
         $obj = clone $this;
-        $obj->userId = $userID;
+        $obj['userId'] = $userID;
 
         return $obj;
     }
@@ -209,7 +209,7 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
     public function withWords(array $words): self
     {
         $obj = clone $this;
-        $obj->words = $words;
+        $obj['words'] = $words;
 
         return $obj;
     }

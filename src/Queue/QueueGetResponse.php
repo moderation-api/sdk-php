@@ -10,6 +10,7 @@ use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 use ModerationAPI\Queue\QueueGetResponse\Queue;
+use ModerationAPI\Queue\QueueGetResponse\Queue\Filter;
 
 /**
  * @phpstan-type QueueGetResponseShape = array{queue: Queue}
@@ -47,20 +48,41 @@ final class QueueGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Queue|array{
+     *   id: string,
+     *   description: string,
+     *   filter: Filter,
+     *   name: string,
+     *   resolvedItemsCount: float,
+     *   totalItemsCount: float,
+     *   unresolvedItemsCount: float,
+     * } $queue
      */
-    public static function with(Queue $queue): self
+    public static function with(Queue|array $queue): self
     {
         $obj = new self;
 
-        $obj->queue = $queue;
+        $obj['queue'] = $queue;
 
         return $obj;
     }
 
-    public function withQueue(Queue $queue): self
+    /**
+     * @param Queue|array{
+     *   id: string,
+     *   description: string,
+     *   filter: Filter,
+     *   name: string,
+     *   resolvedItemsCount: float,
+     *   totalItemsCount: float,
+     *   unresolvedItemsCount: float,
+     * } $queue
+     */
+    public function withQueue(Queue|array $queue): self
     {
         $obj = clone $this;
-        $obj->queue = $queue;
+        $obj['queue'] = $queue;
 
         return $obj;
     }

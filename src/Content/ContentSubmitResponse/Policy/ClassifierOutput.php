@@ -79,7 +79,7 @@ final class ClassifierOutput implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $flagged_fields
-     * @param list<Label> $labels
+     * @param list<Label|array{id: string, flagged: bool, probability: float}> $labels
      */
     public static function with(
         string $id,
@@ -90,12 +90,12 @@ final class ClassifierOutput implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->flagged = $flagged;
-        $obj->probability = $probability;
+        $obj['id'] = $id;
+        $obj['flagged'] = $flagged;
+        $obj['probability'] = $probability;
 
-        null !== $flagged_fields && $obj->flagged_fields = $flagged_fields;
-        null !== $labels && $obj->labels = $labels;
+        null !== $flagged_fields && $obj['flagged_fields'] = $flagged_fields;
+        null !== $labels && $obj['labels'] = $labels;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class ClassifierOutput implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class ClassifierOutput implements BaseModel
     public function withFlagged(bool $flagged): self
     {
         $obj = clone $this;
-        $obj->flagged = $flagged;
+        $obj['flagged'] = $flagged;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class ClassifierOutput implements BaseModel
     public function withProbability(float $probability): self
     {
         $obj = clone $this;
-        $obj->probability = $probability;
+        $obj['probability'] = $probability;
 
         return $obj;
     }
@@ -135,18 +135,18 @@ final class ClassifierOutput implements BaseModel
     public function withFlaggedFields(array $flaggedFields): self
     {
         $obj = clone $this;
-        $obj->flagged_fields = $flaggedFields;
+        $obj['flagged_fields'] = $flaggedFields;
 
         return $obj;
     }
 
     /**
-     * @param list<Label> $labels
+     * @param list<Label|array{id: string, flagged: bool, probability: float}> $labels
      */
     public function withLabels(array $labels): self
     {
         $obj = clone $this;
-        $obj->labels = $labels;
+        $obj['labels'] = $labels;
 
         return $obj;
     }

@@ -62,13 +62,21 @@ final class Object1 implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,Text|Image|Video|Audio> $data
+     * @param array<string,Text|array{
+     *   text: string, type: 'text'
+     * }|Image|array{
+     *   type: 'image', url: string
+     * }|Video|array{
+     *   type: 'video', url: string
+     * }|Audio|array{
+     *   type: 'audio', url: string
+     * }> $data
      */
     public static function with(array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
@@ -76,12 +84,20 @@ final class Object1 implements BaseModel
     /**
      * Values in the object. Can be mixed content types.
      *
-     * @param array<string,Text|Image|Video|Audio> $data
+     * @param array<string,Text|array{
+     *   text: string, type: 'text'
+     * }|Image|array{
+     *   type: 'image', url: string
+     * }|Video|array{
+     *   type: 'video', url: string
+     * }|Audio|array{
+     *   type: 'audio', url: string
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

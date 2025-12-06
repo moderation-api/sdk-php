@@ -67,10 +67,10 @@ final class Metrics implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->flagged_content = $flagged_content;
-        $obj->total_content = $total_content;
+        $obj['flagged_content'] = $flagged_content;
+        $obj['total_content'] = $total_content;
 
-        null !== $average_sentiment && $obj->average_sentiment = $average_sentiment;
+        null !== $average_sentiment && $obj['average_sentiment'] = $average_sentiment;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class Metrics implements BaseModel
     public function withFlaggedContent(float $flaggedContent): self
     {
         $obj = clone $this;
-        $obj->flagged_content = $flaggedContent;
+        $obj['flagged_content'] = $flaggedContent;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class Metrics implements BaseModel
     public function withTotalContent(float $totalContent): self
     {
         $obj = clone $this;
-        $obj->total_content = $totalContent;
+        $obj['total_content'] = $totalContent;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class Metrics implements BaseModel
     public function withAverageSentiment(?float $averageSentiment): self
     {
         $obj = clone $this;
-        $obj->average_sentiment = $averageSentiment;
+        $obj['average_sentiment'] = $averageSentiment;
 
         return $obj;
     }

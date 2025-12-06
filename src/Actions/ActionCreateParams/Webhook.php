@@ -74,11 +74,11 @@ final class Webhook implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->name = $name;
-        $obj->url = $url;
+        $obj['name'] = $name;
+        $obj['url'] = $url;
 
-        null !== $id && $obj->id = $id;
-        null !== $description && $obj->description = $description;
+        null !== $id && $obj['id'] = $id;
+        null !== $description && $obj['description'] = $description;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class Webhook implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class Webhook implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class Webhook implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class Webhook implements BaseModel
     public function withDescription(?string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }

@@ -62,8 +62,8 @@ final class LanguageInsight implements BaseModel
     {
         $obj = new self;
 
-        $obj->probability = $probability;
-        $obj->value = $value;
+        $obj['probability'] = $probability;
+        $obj['value'] = $value;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class LanguageInsight implements BaseModel
     public function withProbability(float $probability): self
     {
         $obj = clone $this;
-        $obj->probability = $probability;
+        $obj['probability'] = $probability;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class LanguageInsight implements BaseModel
     public function withValue(?string $value): self
     {
         $obj = clone $this;
-        $obj->value = $value;
+        $obj['value'] = $value;
 
         return $obj;
     }

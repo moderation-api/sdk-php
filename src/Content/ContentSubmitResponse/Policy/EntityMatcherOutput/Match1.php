@@ -61,9 +61,9 @@ final class Match1 implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->match = $match;
-        $obj->probability = $probability;
-        $obj->span = $span;
+        $obj['match'] = $match;
+        $obj['probability'] = $probability;
+        $obj['span'] = $span;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class Match1 implements BaseModel
     public function withMatch(string $match): self
     {
         $obj = clone $this;
-        $obj->match = $match;
+        $obj['match'] = $match;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Match1 implements BaseModel
     public function withProbability(float $probability): self
     {
         $obj = clone $this;
-        $obj->probability = $probability;
+        $obj['probability'] = $probability;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Match1 implements BaseModel
     public function withSpan(array $span): self
     {
         $obj = clone $this;
-        $obj->span = $span;
+        $obj['span'] = $span;
 
         return $obj;
     }

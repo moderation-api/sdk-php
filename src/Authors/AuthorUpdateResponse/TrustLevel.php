@@ -56,8 +56,8 @@ final class TrustLevel implements BaseModel
     {
         $obj = new self;
 
-        $obj->level = $level;
-        $obj->manual = $manual;
+        $obj['level'] = $level;
+        $obj['manual'] = $manual;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class TrustLevel implements BaseModel
     public function withLevel(float $level): self
     {
         $obj = clone $this;
-        $obj->level = $level;
+        $obj['level'] = $level;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class TrustLevel implements BaseModel
     public function withManual(bool $manual): self
     {
         $obj = clone $this;
-        $obj->manual = $manual;
+        $obj['manual'] = $manual;
 
         return $obj;
     }

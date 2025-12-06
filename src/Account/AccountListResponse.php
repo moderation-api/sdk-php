@@ -83,22 +83,24 @@ final class AccountListResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CurrentProject|array{id: string, name: string} $current_project
      */
     public static function with(
         string $id,
         string $paid_plan_name,
         float $remaining_quota,
         float $text_api_quota,
-        ?CurrentProject $current_project = null,
+        CurrentProject|array|null $current_project = null,
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->paid_plan_name = $paid_plan_name;
-        $obj->remaining_quota = $remaining_quota;
-        $obj->text_api_quota = $text_api_quota;
+        $obj['id'] = $id;
+        $obj['paid_plan_name'] = $paid_plan_name;
+        $obj['remaining_quota'] = $remaining_quota;
+        $obj['text_api_quota'] = $text_api_quota;
 
-        null !== $current_project && $obj->current_project = $current_project;
+        null !== $current_project && $obj['current_project'] = $current_project;
 
         return $obj;
     }
@@ -109,7 +111,7 @@ final class AccountListResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -120,7 +122,7 @@ final class AccountListResponse implements BaseModel, ResponseConverter
     public function withPaidPlanName(string $paidPlanName): self
     {
         $obj = clone $this;
-        $obj->paid_plan_name = $paidPlanName;
+        $obj['paid_plan_name'] = $paidPlanName;
 
         return $obj;
     }
@@ -131,7 +133,7 @@ final class AccountListResponse implements BaseModel, ResponseConverter
     public function withRemainingQuota(float $remainingQuota): self
     {
         $obj = clone $this;
-        $obj->remaining_quota = $remainingQuota;
+        $obj['remaining_quota'] = $remainingQuota;
 
         return $obj;
     }
@@ -142,15 +144,19 @@ final class AccountListResponse implements BaseModel, ResponseConverter
     public function withTextAPIQuota(float $textAPIQuota): self
     {
         $obj = clone $this;
-        $obj->text_api_quota = $textAPIQuota;
+        $obj['text_api_quota'] = $textAPIQuota;
 
         return $obj;
     }
 
-    public function withCurrentProject(CurrentProject $currentProject): self
-    {
+    /**
+     * @param CurrentProject|array{id: string, name: string} $currentProject
+     */
+    public function withCurrentProject(
+        CurrentProject|array $currentProject
+    ): self {
         $obj = clone $this;
-        $obj->current_project = $currentProject;
+        $obj['current_project'] = $currentProject;
 
         return $obj;
     }

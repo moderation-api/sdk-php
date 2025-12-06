@@ -68,10 +68,10 @@ final class ItemResolveResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->resolvedAt = $resolvedAt;
-        $obj->success = $success;
+        $obj['resolvedAt'] = $resolvedAt;
+        $obj['success'] = $success;
 
-        null !== $comment && $obj->comment = $comment;
+        null !== $comment && $obj['comment'] = $comment;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class ItemResolveResponse implements BaseModel, ResponseConverter
     public function withResolvedAt(string $resolvedAt): self
     {
         $obj = clone $this;
-        $obj->resolvedAt = $resolvedAt;
+        $obj['resolvedAt'] = $resolvedAt;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class ItemResolveResponse implements BaseModel, ResponseConverter
     public function withSuccess(bool $success): self
     {
         $obj = clone $this;
-        $obj->success = $success;
+        $obj['success'] = $success;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class ItemResolveResponse implements BaseModel, ResponseConverter
     public function withComment(string $comment): self
     {
         $obj = clone $this;
-        $obj->comment = $comment;
+        $obj['comment'] = $comment;
 
         return $obj;
     }

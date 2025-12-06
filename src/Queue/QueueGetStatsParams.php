@@ -42,7 +42,7 @@ final class QueueGetStatsParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $withinDays && $obj->withinDays = $withinDays;
+        null !== $withinDays && $obj['withinDays'] = $withinDays;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class QueueGetStatsParams implements BaseModel
     public function withWithinDays(string $withinDays): self
     {
         $obj = clone $this;
-        $obj->withinDays = $withinDays;
+        $obj['withinDays'] = $withinDays;
 
         return $obj;
     }

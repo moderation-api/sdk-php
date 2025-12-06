@@ -60,8 +60,8 @@ final class AuthGetResponse implements BaseModel, ResponseConverter
     {
         $obj = new self;
 
-        $obj->message = $message;
-        $obj->status = $status;
+        $obj['message'] = $message;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class AuthGetResponse implements BaseModel, ResponseConverter
     public function withMessage(string $message): self
     {
         $obj = clone $this;
-        $obj->message = $message;
+        $obj['message'] = $message;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class AuthGetResponse implements BaseModel, ResponseConverter
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

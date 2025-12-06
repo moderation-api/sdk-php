@@ -21,7 +21,12 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   first_seen?: float,
  *   last_seen?: float,
  *   manual_trust_level?: float|null,
- *   metadata?: Metadata,
+ *   metadata?: Metadata|array{
+ *     email_verified?: bool|null,
+ *     identity_verified?: bool|null,
+ *     is_paying_customer?: bool|null,
+ *     phone_verified?: bool|null,
+ *   },
  *   name?: string|null,
  *   profile_picture?: string|null,
  * }
@@ -86,6 +91,13 @@ final class AuthorUpdateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Metadata|array{
+     *   email_verified?: bool|null,
+     *   identity_verified?: bool|null,
+     *   is_paying_customer?: bool|null,
+     *   phone_verified?: bool|null,
+     * } $metadata
      */
     public static function with(
         ?string $email = null,
@@ -93,20 +105,20 @@ final class AuthorUpdateParams implements BaseModel
         ?float $first_seen = null,
         ?float $last_seen = null,
         ?float $manual_trust_level = null,
-        ?Metadata $metadata = null,
+        Metadata|array|null $metadata = null,
         ?string $name = null,
         ?string $profile_picture = null,
     ): self {
         $obj = new self;
 
-        null !== $email && $obj->email = $email;
-        null !== $external_link && $obj->external_link = $external_link;
-        null !== $first_seen && $obj->first_seen = $first_seen;
-        null !== $last_seen && $obj->last_seen = $last_seen;
-        null !== $manual_trust_level && $obj->manual_trust_level = $manual_trust_level;
-        null !== $metadata && $obj->metadata = $metadata;
-        null !== $name && $obj->name = $name;
-        null !== $profile_picture && $obj->profile_picture = $profile_picture;
+        null !== $email && $obj['email'] = $email;
+        null !== $external_link && $obj['external_link'] = $external_link;
+        null !== $first_seen && $obj['first_seen'] = $first_seen;
+        null !== $last_seen && $obj['last_seen'] = $last_seen;
+        null !== $manual_trust_level && $obj['manual_trust_level'] = $manual_trust_level;
+        null !== $metadata && $obj['metadata'] = $metadata;
+        null !== $name && $obj['name'] = $name;
+        null !== $profile_picture && $obj['profile_picture'] = $profile_picture;
 
         return $obj;
     }
@@ -117,7 +129,7 @@ final class AuthorUpdateParams implements BaseModel
     public function withEmail(?string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
@@ -128,7 +140,7 @@ final class AuthorUpdateParams implements BaseModel
     public function withExternalLink(?string $externalLink): self
     {
         $obj = clone $this;
-        $obj->external_link = $externalLink;
+        $obj['external_link'] = $externalLink;
 
         return $obj;
     }
@@ -139,7 +151,7 @@ final class AuthorUpdateParams implements BaseModel
     public function withFirstSeen(float $firstSeen): self
     {
         $obj = clone $this;
-        $obj->first_seen = $firstSeen;
+        $obj['first_seen'] = $firstSeen;
 
         return $obj;
     }
@@ -150,7 +162,7 @@ final class AuthorUpdateParams implements BaseModel
     public function withLastSeen(float $lastSeen): self
     {
         $obj = clone $this;
-        $obj->last_seen = $lastSeen;
+        $obj['last_seen'] = $lastSeen;
 
         return $obj;
     }
@@ -158,18 +170,25 @@ final class AuthorUpdateParams implements BaseModel
     public function withManualTrustLevel(?float $manualTrustLevel): self
     {
         $obj = clone $this;
-        $obj->manual_trust_level = $manualTrustLevel;
+        $obj['manual_trust_level'] = $manualTrustLevel;
 
         return $obj;
     }
 
     /**
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
+     *
+     * @param Metadata|array{
+     *   email_verified?: bool|null,
+     *   identity_verified?: bool|null,
+     *   is_paying_customer?: bool|null,
+     *   phone_verified?: bool|null,
+     * } $metadata
      */
-    public function withMetadata(Metadata $metadata): self
+    public function withMetadata(Metadata|array $metadata): self
     {
         $obj = clone $this;
-        $obj->metadata = $metadata;
+        $obj['metadata'] = $metadata;
 
         return $obj;
     }
@@ -180,7 +199,7 @@ final class AuthorUpdateParams implements BaseModel
     public function withName(?string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -191,7 +210,7 @@ final class AuthorUpdateParams implements BaseModel
     public function withProfilePicture(?string $profilePicture): self
     {
         $obj = clone $this;
-        $obj->profile_picture = $profilePicture;
+        $obj['profile_picture'] = $profilePicture;
 
         return $obj;
     }

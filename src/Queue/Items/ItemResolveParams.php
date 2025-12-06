@@ -62,9 +62,9 @@ final class ItemResolveParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->id = $id;
+        $obj['id'] = $id;
 
-        null !== $comment && $obj->comment = $comment;
+        null !== $comment && $obj['comment'] = $comment;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class ItemResolveParams implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class ItemResolveParams implements BaseModel
     public function withComment(string $comment): self
     {
         $obj = clone $this;
-        $obj->comment = $comment;
+        $obj['comment'] = $comment;
 
         return $obj;
     }

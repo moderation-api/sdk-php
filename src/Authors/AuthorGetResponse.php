@@ -171,18 +171,30 @@ final class AuthorGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Block|array{reason?: string|null, until?: float|null}|null $block
+     * @param Metadata|array{
+     *   email_verified?: bool|null,
+     *   identity_verified?: bool|null,
+     *   is_paying_customer?: bool|null,
+     *   phone_verified?: bool|null,
+     * } $metadata
+     * @param Metrics|array{
+     *   flagged_content: float, total_content: float, average_sentiment?: float|null
+     * } $metrics
+     * @param RiskEvaluation|array{risk_level?: float|null}|null $risk_evaluation
      * @param Status|value-of<Status> $status
+     * @param TrustLevel|array{level: float, manual: bool} $trust_level
      */
     public static function with(
         string $id,
-        ?Block $block,
+        Block|array|null $block,
         float $first_seen,
         float $last_seen,
-        Metadata $metadata,
-        Metrics $metrics,
-        ?RiskEvaluation $risk_evaluation,
+        Metadata|array $metadata,
+        Metrics|array $metrics,
+        RiskEvaluation|array|null $risk_evaluation,
         Status|string $status,
-        TrustLevel $trust_level,
+        TrustLevel|array $trust_level,
         ?string $email = null,
         ?string $external_id = null,
         ?string $external_link = null,
@@ -192,22 +204,22 @@ final class AuthorGetResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->block = $block;
-        $obj->first_seen = $first_seen;
-        $obj->last_seen = $last_seen;
-        $obj->metadata = $metadata;
-        $obj->metrics = $metrics;
-        $obj->risk_evaluation = $risk_evaluation;
+        $obj['id'] = $id;
+        $obj['block'] = $block;
+        $obj['first_seen'] = $first_seen;
+        $obj['last_seen'] = $last_seen;
+        $obj['metadata'] = $metadata;
+        $obj['metrics'] = $metrics;
+        $obj['risk_evaluation'] = $risk_evaluation;
         $obj['status'] = $status;
-        $obj->trust_level = $trust_level;
+        $obj['trust_level'] = $trust_level;
 
-        null !== $email && $obj->email = $email;
-        null !== $external_id && $obj->external_id = $external_id;
-        null !== $external_link && $obj->external_link = $external_link;
-        null !== $last_incident && $obj->last_incident = $last_incident;
-        null !== $name && $obj->name = $name;
-        null !== $profile_picture && $obj->profile_picture = $profile_picture;
+        null !== $email && $obj['email'] = $email;
+        null !== $external_id && $obj['external_id'] = $external_id;
+        null !== $external_link && $obj['external_link'] = $external_link;
+        null !== $last_incident && $obj['last_incident'] = $last_incident;
+        null !== $name && $obj['name'] = $name;
+        null !== $profile_picture && $obj['profile_picture'] = $profile_picture;
 
         return $obj;
     }
@@ -218,18 +230,20 @@ final class AuthorGetResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
     /**
      * Block or suspension details, if applicable. Null if the author is enabled.
+     *
+     * @param Block|array{reason?: string|null, until?: float|null}|null $block
      */
-    public function withBlock(?Block $block): self
+    public function withBlock(Block|array|null $block): self
     {
         $obj = clone $this;
-        $obj->block = $block;
+        $obj['block'] = $block;
 
         return $obj;
     }
@@ -240,7 +254,7 @@ final class AuthorGetResponse implements BaseModel, ResponseConverter
     public function withFirstSeen(float $firstSeen): self
     {
         $obj = clone $this;
-        $obj->first_seen = $firstSeen;
+        $obj['first_seen'] = $firstSeen;
 
         return $obj;
     }
@@ -251,37 +265,52 @@ final class AuthorGetResponse implements BaseModel, ResponseConverter
     public function withLastSeen(float $lastSeen): self
     {
         $obj = clone $this;
-        $obj->last_seen = $lastSeen;
+        $obj['last_seen'] = $lastSeen;
 
         return $obj;
     }
 
     /**
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
+     *
+     * @param Metadata|array{
+     *   email_verified?: bool|null,
+     *   identity_verified?: bool|null,
+     *   is_paying_customer?: bool|null,
+     *   phone_verified?: bool|null,
+     * } $metadata
      */
-    public function withMetadata(Metadata $metadata): self
+    public function withMetadata(Metadata|array $metadata): self
     {
         $obj = clone $this;
-        $obj->metadata = $metadata;
+        $obj['metadata'] = $metadata;
 
         return $obj;
     }
 
-    public function withMetrics(Metrics $metrics): self
+    /**
+     * @param Metrics|array{
+     *   flagged_content: float, total_content: float, average_sentiment?: float|null
+     * } $metrics
+     */
+    public function withMetrics(Metrics|array $metrics): self
     {
         $obj = clone $this;
-        $obj->metrics = $metrics;
+        $obj['metrics'] = $metrics;
 
         return $obj;
     }
 
     /**
      * Risk assessment details, if available.
+     *
+     * @param RiskEvaluation|array{risk_level?: float|null}|null $riskEvaluation
      */
-    public function withRiskEvaluation(?RiskEvaluation $riskEvaluation): self
-    {
+    public function withRiskEvaluation(
+        RiskEvaluation|array|null $riskEvaluation
+    ): self {
         $obj = clone $this;
-        $obj->risk_evaluation = $riskEvaluation;
+        $obj['risk_evaluation'] = $riskEvaluation;
 
         return $obj;
     }
@@ -299,10 +328,13 @@ final class AuthorGetResponse implements BaseModel, ResponseConverter
         return $obj;
     }
 
-    public function withTrustLevel(TrustLevel $trustLevel): self
+    /**
+     * @param TrustLevel|array{level: float, manual: bool} $trustLevel
+     */
+    public function withTrustLevel(TrustLevel|array $trustLevel): self
     {
         $obj = clone $this;
-        $obj->trust_level = $trustLevel;
+        $obj['trust_level'] = $trustLevel;
 
         return $obj;
     }
@@ -313,7 +345,7 @@ final class AuthorGetResponse implements BaseModel, ResponseConverter
     public function withEmail(?string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
@@ -324,7 +356,7 @@ final class AuthorGetResponse implements BaseModel, ResponseConverter
     public function withExternalID(?string $externalID): self
     {
         $obj = clone $this;
-        $obj->external_id = $externalID;
+        $obj['external_id'] = $externalID;
 
         return $obj;
     }
@@ -335,7 +367,7 @@ final class AuthorGetResponse implements BaseModel, ResponseConverter
     public function withExternalLink(?string $externalLink): self
     {
         $obj = clone $this;
-        $obj->external_link = $externalLink;
+        $obj['external_link'] = $externalLink;
 
         return $obj;
     }
@@ -346,7 +378,7 @@ final class AuthorGetResponse implements BaseModel, ResponseConverter
     public function withLastIncident(?float $lastIncident): self
     {
         $obj = clone $this;
-        $obj->last_incident = $lastIncident;
+        $obj['last_incident'] = $lastIncident;
 
         return $obj;
     }
@@ -357,7 +389,7 @@ final class AuthorGetResponse implements BaseModel, ResponseConverter
     public function withName(?string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -368,7 +400,7 @@ final class AuthorGetResponse implements BaseModel, ResponseConverter
     public function withProfilePicture(?string $profilePicture): self
     {
         $obj = clone $this;
-        $obj->profile_picture = $profilePicture;
+        $obj['profile_picture'] = $profilePicture;
 
         return $obj;
     }
