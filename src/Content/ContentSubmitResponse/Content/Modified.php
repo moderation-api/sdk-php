@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitResponse\Content;
 
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\UnionMember1;
+use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent;
 use ModerationAPI\Core\Concerns\SdkUnion;
 use ModerationAPI\Core\Conversion\Contracts\Converter;
 use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
@@ -22,6 +22,10 @@ final class Modified implements ConverterSource
      */
     public static function variants(): array
     {
-        return ['string', new MapOf(UnionMember1::class)];
+        return [
+            'string',
+            new MapOf('mixed'),
+            new MapOf(ModifiedNestedObjectContent::class),
+        ];
     }
 }
