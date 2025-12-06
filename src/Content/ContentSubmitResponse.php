@@ -9,10 +9,10 @@ use ModerationAPI\Content\ContentSubmitResponse\Author\Block;
 use ModerationAPI\Content\ContentSubmitResponse\Author\Status;
 use ModerationAPI\Content\ContentSubmitResponse\Author\TrustLevel;
 use ModerationAPI\Content\ContentSubmitResponse\Content;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\UnionMember1\Audio;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\UnionMember1\Image;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\UnionMember1\Text;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\UnionMember1\Video;
+use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Audio;
+use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Image;
+use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Text;
+use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Video;
 use ModerationAPI\Content\ContentSubmitResponse\Error;
 use ModerationAPI\Content\ContentSubmitResponse\Evaluation;
 use ModerationAPI\Content\ContentSubmitResponse\Insight;
@@ -156,7 +156,7 @@ final class ContentSubmitResponse implements BaseModel, ResponseConverter
      * @param Content|array{
      *   id: string,
      *   masked: bool,
-     *   modified: string|array<string,Text|Image|Video|Audio>|null,
+     *   modified: string|array<string,mixed>|array<string,Text|Image|Video|Audio>|null,
      * } $content
      * @param Evaluation|array{
      *   flag_probability: float,
@@ -249,7 +249,7 @@ final class ContentSubmitResponse implements BaseModel, ResponseConverter
      * @param Content|array{
      *   id: string,
      *   masked: bool,
-     *   modified: string|array<string,Text|Image|Video|Audio>|null,
+     *   modified: string|array<string,mixed>|array<string,Text|Image|Video|Audio>|null,
      * } $content
      */
     public function withContent(Content|array $content): self
