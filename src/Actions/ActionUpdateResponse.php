@@ -18,7 +18,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   id: string,
  *   builtIn: bool|null,
  *   createdAt: string,
- *   filterInQueueIds: list<string>,
+ *   filterInQueueIDs: list<string>,
  *   freeText: bool,
  *   name: string,
  *   position: value-of<Position>,
@@ -56,10 +56,10 @@ final class ActionUpdateResponse implements BaseModel
     /**
      * The IDs of the queues the action is available in.
      *
-     * @var list<string> $filterInQueueIds
+     * @var list<string> $filterInQueueIDs
      */
-    #[Required(list: 'string')]
-    public array $filterInQueueIds;
+    #[Required('filterInQueueIds', list: 'string')]
+    public array $filterInQueueIDs;
 
     /**
      * Whether the action allows any text to be entered as a value or if it must be one of the possible values.
@@ -132,7 +132,7 @@ final class ActionUpdateResponse implements BaseModel
      *   id: ...,
      *   builtIn: ...,
      *   createdAt: ...,
-     *   filterInQueueIds: ...,
+     *   filterInQueueIDs: ...,
      *   freeText: ...,
      *   name: ...,
      *   position: ...,
@@ -168,7 +168,7 @@ final class ActionUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $filterInQueueIds
+     * @param list<string> $filterInQueueIDs
      * @param Position|value-of<Position> $position
      * @param list<PossibleValue|array{value: string}> $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour
@@ -179,7 +179,7 @@ final class ActionUpdateResponse implements BaseModel
         string $createdAt,
         string $name,
         ?bool $builtIn = false,
-        array $filterInQueueIds = [],
+        array $filterInQueueIDs = [],
         bool $freeText = false,
         Position|string $position = 'ALL_QUEUES',
         array $possibleValues = [],
@@ -194,7 +194,7 @@ final class ActionUpdateResponse implements BaseModel
         $obj['id'] = $id;
         $obj['builtIn'] = $builtIn;
         $obj['createdAt'] = $createdAt;
-        $obj['filterInQueueIds'] = $filterInQueueIds;
+        $obj['filterInQueueIDs'] = $filterInQueueIDs;
         $obj['freeText'] = $freeText;
         $obj['name'] = $name;
         $obj['position'] = $position;
@@ -250,7 +250,7 @@ final class ActionUpdateResponse implements BaseModel
     public function withFilterInQueueIDs(array $filterInQueueIDs): self
     {
         $obj = clone $this;
-        $obj['filterInQueueIds'] = $filterInQueueIDs;
+        $obj['filterInQueueIDs'] = $filterInQueueIDs;
 
         return $obj;
     }

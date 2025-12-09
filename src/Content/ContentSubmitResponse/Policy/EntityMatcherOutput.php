@@ -19,7 +19,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   matches: list<Match1>,
  *   probability: float,
  *   type?: 'entity_matcher',
- *   flagged_fields?: list<string>|null,
+ *   flaggedFields?: list<string>|null,
  * }
  */
 final class EntityMatcherOutput implements BaseModel
@@ -44,9 +44,9 @@ final class EntityMatcherOutput implements BaseModel
     #[Required]
     public float $probability;
 
-    /** @var list<string>|null $flagged_fields */
-    #[Optional(list: 'string')]
-    public ?array $flagged_fields;
+    /** @var list<string>|null $flaggedFields */
+    #[Optional('flagged_fields', list: 'string')]
+    public ?array $flaggedFields;
 
     /**
      * `new EntityMatcherOutput()` is missing required properties by the API.
@@ -79,14 +79,14 @@ final class EntityMatcherOutput implements BaseModel
      * @param list<Match1|array{
      *   match: string, probability: float, span: list<int>
      * }> $matches
-     * @param list<string> $flagged_fields
+     * @param list<string> $flaggedFields
      */
     public static function with(
         string $id,
         bool $flagged,
         array $matches,
         float $probability,
-        ?array $flagged_fields = null,
+        ?array $flaggedFields = null,
     ): self {
         $obj = new self;
 
@@ -95,7 +95,7 @@ final class EntityMatcherOutput implements BaseModel
         $obj['matches'] = $matches;
         $obj['probability'] = $probability;
 
-        null !== $flagged_fields && $obj['flagged_fields'] = $flagged_fields;
+        null !== $flaggedFields && $obj['flaggedFields'] = $flaggedFields;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class EntityMatcherOutput implements BaseModel
     public function withFlaggedFields(array $flaggedFields): self
     {
         $obj = clone $this;
-        $obj['flagged_fields'] = $flaggedFields;
+        $obj['flaggedFields'] = $flaggedFields;
 
         return $obj;
     }

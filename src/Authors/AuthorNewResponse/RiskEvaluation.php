@@ -11,7 +11,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * Risk assessment details, if available.
  *
- * @phpstan-type RiskEvaluationShape = array{risk_level?: float|null}
+ * @phpstan-type RiskEvaluationShape = array{riskLevel?: float|null}
  */
 final class RiskEvaluation implements BaseModel
 {
@@ -21,8 +21,8 @@ final class RiskEvaluation implements BaseModel
     /**
      * Calculated risk level based on more than 10 behavioral signals.
      */
-    #[Optional(nullable: true)]
-    public ?float $risk_level;
+    #[Optional('risk_level', nullable: true)]
+    public ?float $riskLevel;
 
     public function __construct()
     {
@@ -34,11 +34,11 @@ final class RiskEvaluation implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?float $risk_level = null): self
+    public static function with(?float $riskLevel = null): self
     {
         $obj = new self;
 
-        null !== $risk_level && $obj['risk_level'] = $risk_level;
+        null !== $riskLevel && $obj['riskLevel'] = $riskLevel;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class RiskEvaluation implements BaseModel
     public function withRiskLevel(?float $riskLevel): self
     {
         $obj = clone $this;
-        $obj['risk_level'] = $riskLevel;
+        $obj['riskLevel'] = $riskLevel;
 
         return $obj;
     }

@@ -13,9 +13,9 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   id: string,
  *   createdAt: string,
  *   name: string|null,
- *   organizationId: string,
+ *   organizationID: string,
  *   strict: bool,
- *   userId: string|null,
+ *   userID: string|null,
  *   words: list<string>,
  * }
  */
@@ -45,8 +45,8 @@ final class WordlistUpdateResponse implements BaseModel
     /**
      * ID of the organization.
      */
-    #[Required]
-    public string $organizationId;
+    #[Required('organizationId')]
+    public string $organizationID;
 
     /**
      * Strict mode.
@@ -57,8 +57,8 @@ final class WordlistUpdateResponse implements BaseModel
     /**
      * ID of the user.
      */
-    #[Required]
-    public ?string $userId;
+    #[Required('userId')]
+    public ?string $userID;
 
     /**
      * Words in the wordlist.
@@ -77,9 +77,9 @@ final class WordlistUpdateResponse implements BaseModel
      *   id: ...,
      *   createdAt: ...,
      *   name: ...,
-     *   organizationId: ...,
+     *   organizationID: ...,
      *   strict: ...,
-     *   userId: ...,
+     *   userID: ...,
      *   words: ...,
      * )
      * ```
@@ -113,9 +113,9 @@ final class WordlistUpdateResponse implements BaseModel
         string $id,
         string $createdAt,
         ?string $name,
-        string $organizationId,
+        string $organizationID,
         bool $strict,
-        ?string $userId,
+        ?string $userID,
         array $words,
     ): self {
         $obj = new self;
@@ -123,9 +123,9 @@ final class WordlistUpdateResponse implements BaseModel
         $obj['id'] = $id;
         $obj['createdAt'] = $createdAt;
         $obj['name'] = $name;
-        $obj['organizationId'] = $organizationId;
+        $obj['organizationID'] = $organizationID;
         $obj['strict'] = $strict;
-        $obj['userId'] = $userId;
+        $obj['userID'] = $userID;
         $obj['words'] = $words;
 
         return $obj;
@@ -170,7 +170,7 @@ final class WordlistUpdateResponse implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj['organizationId'] = $organizationID;
+        $obj['organizationID'] = $organizationID;
 
         return $obj;
     }
@@ -192,7 +192,7 @@ final class WordlistUpdateResponse implements BaseModel
     public function withUserID(?string $userID): self
     {
         $obj = clone $this;
-        $obj['userId'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }

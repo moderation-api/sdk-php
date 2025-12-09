@@ -51,10 +51,10 @@ final class ContentTest extends TestCase
 
         $result = $this->client->content->submit([
             'content' => ['text' => 'x', 'type' => 'text'],
-            'authorId' => 'authorId',
+            'authorID' => 'authorId',
             'channel' => 'channel',
-            'contentId' => 'contentId',
-            'conversationId' => 'conversationId',
+            'contentID' => 'contentId',
+            'conversationID' => 'conversationId',
             'doNotStore' => true,
             'metadata' => ['foo' => 'bar'],
             'metaType' => 'profile',

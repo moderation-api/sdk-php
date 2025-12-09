@@ -28,10 +28,10 @@ final class ExecuteService implements ExecuteContract
      *
      * @param array{
      *   actionKey: string,
-     *   authorIds?: list<string>,
-     *   contentIds?: list<string>,
+     *   authorIDs?: list<string>,
+     *   contentIDs?: list<string>,
      *   duration?: float,
-     *   queueId?: string,
+     *   queueID?: string,
      *   value?: string,
      * }|ExecuteExecuteParams $params
      *
@@ -66,9 +66,9 @@ final class ExecuteService implements ExecuteContract
      * Execute an action on a set of content items in a queue.
      *
      * @param array{
-     *   authorIds?: list<string>,
-     *   contentIds?: list<string>,
-     *   queueId?: string,
+     *   authorIDs?: list<string>,
+     *   contentIDs?: list<string>,
+     *   queueID?: string,
      *   value?: string,
      * }|ExecuteExecuteByIDParams $params
      *

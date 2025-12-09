@@ -147,8 +147,8 @@ final class ContentSubmitResponse implements BaseModel
      *   id: string,
      *   block: Block|null,
      *   status: value-of<Status>,
-     *   trust_level: TrustLevel,
-     *   external_id?: string|null,
+     *   trustLevel: TrustLevel,
+     *   externalID?: string|null,
      * }|null $author
      * @param Content|array{
      *   id: string,
@@ -156,10 +156,10 @@ final class ContentSubmitResponse implements BaseModel
      *   modified: string|array<string,mixed>|array<string,Text|Image|Video|Audio>|null,
      * } $content
      * @param Evaluation|array{
-     *   flag_probability: float,
+     *   flagProbability: float,
      *   flagged: bool,
-     *   severity_score: float,
-     *   unicode_spoofed?: bool|null,
+     *   severityScore: float,
+     *   unicodeSpoofed?: bool|null,
      * } $evaluation
      * @param list<SentimentInsight|array{
      *   id?: 'sentiment',
@@ -170,18 +170,18 @@ final class ContentSubmitResponse implements BaseModel
      *   id?: 'language', probability: float, type?: 'insight', value: string|null
      * }> $insights
      * @param Meta|array{
-     *   channel_key: string,
+     *   channelKey: string,
      *   status: value-of<Meta\Status>,
      *   timestamp: float,
      *   usage: float,
-     *   processing_time?: string|null,
+     *   processingTime?: string|null,
      * } $meta
      * @param list<ClassifierOutput|array{
      *   id: string,
      *   flagged: bool,
      *   probability: float,
      *   type?: 'classifier',
-     *   flagged_fields?: list<string>|null,
+     *   flaggedFields?: list<string>|null,
      *   labels?: list<Label>|null,
      * }|EntityMatcherOutput|array{
      *   id: string,
@@ -189,10 +189,10 @@ final class ContentSubmitResponse implements BaseModel
      *   matches: list<Match1>,
      *   probability: float,
      *   type?: 'entity_matcher',
-     *   flagged_fields?: list<string>|null,
+     *   flaggedFields?: list<string>|null,
      * }> $policies
      * @param Recommendation|array{
-     *   action: value-of<Action>, reason_codes: list<value-of<ReasonCode>>
+     *   action: value-of<Action>, reasonCodes: list<value-of<ReasonCode>>
      * } $recommendation
      * @param list<Error|array{id: string, message: string}> $errors
      */
@@ -228,8 +228,8 @@ final class ContentSubmitResponse implements BaseModel
      *   id: string,
      *   block: Block|null,
      *   status: value-of<Status>,
-     *   trust_level: TrustLevel,
-     *   external_id?: string|null,
+     *   trustLevel: TrustLevel,
+     *   externalID?: string|null,
      * }|null $author
      */
     public function withAuthor(Author|array|null $author): self
@@ -261,10 +261,10 @@ final class ContentSubmitResponse implements BaseModel
      * The evaluation of the content after running the channel policies.
      *
      * @param Evaluation|array{
-     *   flag_probability: float,
+     *   flagProbability: float,
      *   flagged: bool,
-     *   severity_score: float,
-     *   unicode_spoofed?: bool|null,
+     *   severityScore: float,
+     *   unicodeSpoofed?: bool|null,
      * } $evaluation
      */
     public function withEvaluation(Evaluation|array $evaluation): self
@@ -299,11 +299,11 @@ final class ContentSubmitResponse implements BaseModel
      * Metadata about the moderation request.
      *
      * @param Meta|array{
-     *   channel_key: string,
+     *   channelKey: string,
      *   status: value-of<Meta\Status>,
      *   timestamp: float,
      *   usage: float,
-     *   processing_time?: string|null,
+     *   processingTime?: string|null,
      * } $meta
      */
     public function withMeta(Meta|array $meta): self
@@ -322,7 +322,7 @@ final class ContentSubmitResponse implements BaseModel
      *   flagged: bool,
      *   probability: float,
      *   type?: 'classifier',
-     *   flagged_fields?: list<string>|null,
+     *   flaggedFields?: list<string>|null,
      *   labels?: list<Label>|null,
      * }|EntityMatcherOutput|array{
      *   id: string,
@@ -330,7 +330,7 @@ final class ContentSubmitResponse implements BaseModel
      *   matches: list<Match1>,
      *   probability: float,
      *   type?: 'entity_matcher',
-     *   flagged_fields?: list<string>|null,
+     *   flaggedFields?: list<string>|null,
      * }> $policies
      */
     public function withPolicies(array $policies): self
@@ -345,7 +345,7 @@ final class ContentSubmitResponse implements BaseModel
      * The recommendation for the content based on the evaluation.
      *
      * @param Recommendation|array{
-     *   action: value-of<Action>, reason_codes: list<value-of<ReasonCode>>
+     *   action: value-of<Action>, reasonCodes: list<value-of<ReasonCode>>
      * } $recommendation
      */
     public function withRecommendation(

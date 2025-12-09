@@ -38,7 +38,7 @@ final class AuthorsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authors->create(['external_id' => 'external_id']);
+        $result = $this->client->authors->create(['externalID' => 'external_id']);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AuthorNewResponse::class, $result);
@@ -52,20 +52,20 @@ final class AuthorsTest extends TestCase
         }
 
         $result = $this->client->authors->create([
-            'external_id' => 'external_id',
+            'externalID' => 'external_id',
             'email' => 'dev@stainless.com',
-            'external_link' => 'https://example.com',
-            'first_seen' => 0,
-            'last_seen' => 0,
-            'manual_trust_level' => -1,
+            'externalLink' => 'https://example.com',
+            'firstSeen' => 0,
+            'lastSeen' => 0,
+            'manualTrustLevel' => -1,
             'metadata' => [
-                'email_verified' => true,
-                'identity_verified' => true,
-                'is_paying_customer' => true,
-                'phone_verified' => true,
+                'emailVerified' => true,
+                'identityVerified' => true,
+                'isPayingCustomer' => true,
+                'phoneVerified' => true,
             ],
             'name' => 'name',
-            'profile_picture' => 'https://example.com',
+            'profilePicture' => 'https://example.com',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

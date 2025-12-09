@@ -77,7 +77,7 @@ final class QueueGetStatsResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<ActionStat|array{
-     *   actionId: string, actionName: string, count: float, percentageOfTotal: float
+     *   actionID: string, actionName: string, count: float, percentageOfTotal: float
      * }> $actionStats
      * @param ReviewStats|array{
      *   averageTimeToReview: float, totalPending: float, totalReviewed: float
@@ -87,7 +87,7 @@ final class QueueGetStatsResponse implements BaseModel
      *   name: string,
      *   reviewCount: float,
      *   topActions: list<TopAction>,
-     *   userId: string,
+     *   userID: string,
      *   accuracyScore?: float|null,
      * }> $topReviewers
      * @param Trends|array{
@@ -113,7 +113,7 @@ final class QueueGetStatsResponse implements BaseModel
 
     /**
      * @param list<ActionStat|array{
-     *   actionId: string, actionName: string, count: float, percentageOfTotal: float
+     *   actionID: string, actionName: string, count: float, percentageOfTotal: float
      * }> $actionStats
      */
     public function withActionStats(array $actionStats): self
@@ -145,7 +145,7 @@ final class QueueGetStatsResponse implements BaseModel
      *   name: string,
      *   reviewCount: float,
      *   topActions: list<TopAction>,
-     *   userId: string,
+     *   userID: string,
      *   accuracyScore?: float|null,
      * }> $topReviewers
      */

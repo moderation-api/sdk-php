@@ -53,10 +53,10 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *     data: array<string,\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio>,
  *     type?: 'object',
  *   },
- *   authorId?: string,
+ *   authorID?: string,
  *   channel?: string,
- *   contentId?: string,
- *   conversationId?: string,
+ *   contentID?: string,
+ *   conversationID?: string,
  *   doNotStore?: bool,
  *   metadata?: array<string,mixed>,
  *   metaType?: MetaType|value-of<MetaType>,
@@ -109,8 +109,8 @@ final class ContentSubmitParams implements BaseModel
     /**
      * The author of the content.
      */
-    #[Optional]
-    public ?string $authorId;
+    #[Optional('authorId')]
+    public ?string $authorID;
 
     /**
      * Provide a channel ID or key. Will use the project's default channel if not provided.
@@ -121,14 +121,14 @@ final class ContentSubmitParams implements BaseModel
     /**
      * The unique ID of the content in your database.
      */
-    #[Optional]
-    public ?string $contentId;
+    #[Optional('contentId')]
+    public ?string $contentID;
 
     /**
      * For example the ID of a chat room or a post.
      */
-    #[Optional]
-    public ?string $conversationId;
+    #[Optional('conversationId')]
+    public ?string $conversationID;
 
     /**
      * Do not store the content. The content won't enter the review queue.
@@ -229,10 +229,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public static function with(
         Text|array|Image|Video|Audio|Object1 $content,
-        ?string $authorId = null,
+        ?string $authorID = null,
         ?string $channel = null,
-        ?string $contentId = null,
-        ?string $conversationId = null,
+        ?string $contentID = null,
+        ?string $conversationID = null,
         ?bool $doNotStore = null,
         ?array $metadata = null,
         MetaType|string|null $metaType = null,
@@ -242,10 +242,10 @@ final class ContentSubmitParams implements BaseModel
 
         $obj['content'] = $content;
 
-        null !== $authorId && $obj['authorId'] = $authorId;
+        null !== $authorID && $obj['authorID'] = $authorID;
         null !== $channel && $obj['channel'] = $channel;
-        null !== $contentId && $obj['contentId'] = $contentId;
-        null !== $conversationId && $obj['conversationId'] = $conversationId;
+        null !== $contentID && $obj['contentID'] = $contentID;
+        null !== $conversationID && $obj['conversationID'] = $conversationID;
         null !== $doNotStore && $obj['doNotStore'] = $doNotStore;
         null !== $metadata && $obj['metadata'] = $metadata;
         null !== $metaType && $obj['metaType'] = $metaType;
@@ -281,7 +281,7 @@ final class ContentSubmitParams implements BaseModel
     public function withAuthorID(string $authorID): self
     {
         $obj = clone $this;
-        $obj['authorId'] = $authorID;
+        $obj['authorID'] = $authorID;
 
         return $obj;
     }
@@ -303,7 +303,7 @@ final class ContentSubmitParams implements BaseModel
     public function withContentID(string $contentID): self
     {
         $obj = clone $this;
-        $obj['contentId'] = $contentID;
+        $obj['contentID'] = $contentID;
 
         return $obj;
     }
@@ -314,7 +314,7 @@ final class ContentSubmitParams implements BaseModel
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj['conversationId'] = $conversationID;
+        $obj['conversationID'] = $conversationID;
 
         return $obj;
     }

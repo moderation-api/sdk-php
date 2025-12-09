@@ -19,6 +19,7 @@ use ModerationAPI\Client;
 use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Conversion\ListOf;
 use ModerationAPI\Core\Exceptions\APIException;
+use ModerationAPI\Core\Util;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\ActionsContract;
 use ModerationAPI\Services\Actions\ExecuteService;
@@ -47,7 +48,7 @@ final class ActionsService implements ActionsContract
      *   name: string,
      *   builtIn?: bool|null,
      *   description?: string|null,
-     *   filterInQueueIds?: list<string>,
+     *   filterInQueueIDs?: list<string>,
      *   freeText?: bool,
      *   key?: string|null,
      *   position?: 'ALL_QUEUES'|'SOME_QUEUES'|'HIDDEN'|Position,
@@ -113,7 +114,7 @@ final class ActionsService implements ActionsContract
      * @param array{
      *   builtIn?: bool|null,
      *   description?: string|null,
-     *   filterInQueueIds?: list<string>,
+     *   filterInQueueIDs?: list<string>,
      *   freeText?: bool,
      *   key?: string|null,
      *   name?: string,
@@ -156,7 +157,7 @@ final class ActionsService implements ActionsContract
      *
      * List all available moderation actions for the authenticated organization.
      *
-     * @param array{queueId?: string}|ActionListParams $params
+     * @param array{queueID?: string}|ActionListParams $params
      *
      * @return list<ActionListResponseItem>
      *
@@ -175,7 +176,7 @@ final class ActionsService implements ActionsContract
         $response = $this->client->request(
             method: 'get',
             path: 'actions',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['queueID' => 'queueId']),
             options: $options,
             convert: new ListOf(ActionListResponseItem::class),
         );

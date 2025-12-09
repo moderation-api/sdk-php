@@ -14,7 +14,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @see ModerationAPI\Services\ActionsService::list()
  *
- * @phpstan-type ActionListParamsShape = array{queueId?: string}
+ * @phpstan-type ActionListParamsShape = array{queueID?: string}
  */
 final class ActionListParams implements BaseModel
 {
@@ -23,7 +23,7 @@ final class ActionListParams implements BaseModel
     use SdkParams;
 
     #[Optional]
-    public ?string $queueId;
+    public ?string $queueID;
 
     public function __construct()
     {
@@ -35,11 +35,11 @@ final class ActionListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $queueId = null): self
+    public static function with(?string $queueID = null): self
     {
         $obj = new self;
 
-        null !== $queueId && $obj['queueId'] = $queueId;
+        null !== $queueID && $obj['queueID'] = $queueID;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class ActionListParams implements BaseModel
     public function withQueueID(string $queueID): self
     {
         $obj = clone $this;
-        $obj['queueId'] = $queueID;
+        $obj['queueID'] = $queueID;
 
         return $obj;
     }

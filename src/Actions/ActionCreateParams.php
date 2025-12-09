@@ -24,7 +24,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   name: string,
  *   builtIn?: bool|null,
  *   description?: string|null,
- *   filterInQueueIds?: list<string>,
+ *   filterInQueueIDs?: list<string>,
  *   freeText?: bool,
  *   key?: string|null,
  *   position?: Position|value-of<Position>,
@@ -64,10 +64,10 @@ final class ActionCreateParams implements BaseModel
     /**
      * The IDs of the queues the action is available in.
      *
-     * @var list<string>|null $filterInQueueIds
+     * @var list<string>|null $filterInQueueIDs
      */
-    #[Optional(list: 'string')]
-    public ?array $filterInQueueIds;
+    #[Optional('filterInQueueIds', list: 'string')]
+    public ?array $filterInQueueIDs;
 
     /**
      * Whether the action allows any text to be entered as a value or if it must be one of the possible values.
@@ -151,7 +151,7 @@ final class ActionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $filterInQueueIds
+     * @param list<string> $filterInQueueIDs
      * @param Position|value-of<Position> $position
      * @param list<PossibleValue|array{value: string}> $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour
@@ -164,7 +164,7 @@ final class ActionCreateParams implements BaseModel
         string $name,
         ?bool $builtIn = null,
         ?string $description = null,
-        ?array $filterInQueueIds = null,
+        ?array $filterInQueueIDs = null,
         ?bool $freeText = null,
         ?string $key = null,
         Position|string|null $position = null,
@@ -180,7 +180,7 @@ final class ActionCreateParams implements BaseModel
 
         null !== $builtIn && $obj['builtIn'] = $builtIn;
         null !== $description && $obj['description'] = $description;
-        null !== $filterInQueueIds && $obj['filterInQueueIds'] = $filterInQueueIds;
+        null !== $filterInQueueIDs && $obj['filterInQueueIDs'] = $filterInQueueIDs;
         null !== $freeText && $obj['freeText'] = $freeText;
         null !== $key && $obj['key'] = $key;
         null !== $position && $obj['position'] = $position;
@@ -234,7 +234,7 @@ final class ActionCreateParams implements BaseModel
     public function withFilterInQueueIDs(array $filterInQueueIDs): self
     {
         $obj = clone $this;
-        $obj['filterInQueueIds'] = $filterInQueueIDs;
+        $obj['filterInQueueIDs'] = $filterInQueueIDs;
 
         return $obj;
     }

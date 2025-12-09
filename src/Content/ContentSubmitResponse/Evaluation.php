@@ -13,10 +13,10 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * The evaluation of the content after running the channel policies.
  *
  * @phpstan-type EvaluationShape = array{
- *   flag_probability: float,
+ *   flagProbability: float,
  *   flagged: bool,
- *   severity_score: float,
- *   unicode_spoofed?: bool|null,
+ *   severityScore: float,
+ *   unicodeSpoofed?: bool|null,
  * }
  */
 final class Evaluation implements BaseModel
@@ -27,8 +27,8 @@ final class Evaluation implements BaseModel
     /**
      * The probability that the content should be flagged.
      */
-    #[Required]
-    public float $flag_probability;
+    #[Required('flag_probability')]
+    public float $flagProbability;
 
     /**
      * Whether the content was flagged by any policy.
@@ -39,21 +39,21 @@ final class Evaluation implements BaseModel
     /**
      * The severity score of the content. A higher score indicates more severe content.
      */
-    #[Required]
-    public float $severity_score;
+    #[Required('severity_score')]
+    public float $severityScore;
 
     /**
      * Whether the content was flagged for Unicode spoofing.
      */
-    #[Optional]
-    public ?bool $unicode_spoofed;
+    #[Optional('unicode_spoofed')]
+    public ?bool $unicodeSpoofed;
 
     /**
      * `new Evaluation()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Evaluation::with(flag_probability: ..., flagged: ..., severity_score: ...)
+     * Evaluation::with(flagProbability: ..., flagged: ..., severityScore: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -76,18 +76,18 @@ final class Evaluation implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        float $flag_probability,
+        float $flagProbability,
         bool $flagged,
-        float $severity_score,
-        ?bool $unicode_spoofed = null,
+        float $severityScore,
+        ?bool $unicodeSpoofed = null,
     ): self {
         $obj = new self;
 
-        $obj['flag_probability'] = $flag_probability;
+        $obj['flagProbability'] = $flagProbability;
         $obj['flagged'] = $flagged;
-        $obj['severity_score'] = $severity_score;
+        $obj['severityScore'] = $severityScore;
 
-        null !== $unicode_spoofed && $obj['unicode_spoofed'] = $unicode_spoofed;
+        null !== $unicodeSpoofed && $obj['unicodeSpoofed'] = $unicodeSpoofed;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class Evaluation implements BaseModel
     public function withFlagProbability(float $flagProbability): self
     {
         $obj = clone $this;
-        $obj['flag_probability'] = $flagProbability;
+        $obj['flagProbability'] = $flagProbability;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class Evaluation implements BaseModel
     public function withSeverityScore(float $severityScore): self
     {
         $obj = clone $this;
-        $obj['severity_score'] = $severityScore;
+        $obj['severityScore'] = $severityScore;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class Evaluation implements BaseModel
     public function withUnicodeSpoofed(bool $unicodeSpoofed): self
     {
         $obj = clone $this;
-        $obj['unicode_spoofed'] = $unicodeSpoofed;
+        $obj['unicodeSpoofed'] = $unicodeSpoofed;
 
         return $obj;
     }

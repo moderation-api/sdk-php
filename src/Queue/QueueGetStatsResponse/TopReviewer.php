@@ -16,7 +16,7 @@ use ModerationAPI\Queue\QueueGetStatsResponse\TopReviewer\TopAction;
  *   name: string,
  *   reviewCount: float,
  *   topActions: list<TopAction>,
- *   userId: string,
+ *   userID: string,
  *   accuracyScore?: float|null,
  * }
  */
@@ -54,8 +54,8 @@ final class TopReviewer implements BaseModel
     /**
      * ID of the reviewer.
      */
-    #[Required]
-    public string $userId;
+    #[Required('userId')]
+    public string $userID;
 
     /**
      * Optional accuracy score based on review quality metrics.
@@ -73,7 +73,7 @@ final class TopReviewer implements BaseModel
      *   name: ...,
      *   reviewCount: ...,
      *   topActions: ...,
-     *   userId: ...,
+     *   userID: ...,
      * )
      * ```
      *
@@ -99,7 +99,7 @@ final class TopReviewer implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<TopAction|array{
-     *   actionId: string, actionName: string, count: float
+     *   actionID: string, actionName: string, count: float
      * }> $topActions
      */
     public static function with(
@@ -107,7 +107,7 @@ final class TopReviewer implements BaseModel
         string $name,
         float $reviewCount,
         array $topActions,
-        string $userId,
+        string $userID,
         ?float $accuracyScore = null,
     ): self {
         $obj = new self;
@@ -116,7 +116,7 @@ final class TopReviewer implements BaseModel
         $obj['name'] = $name;
         $obj['reviewCount'] = $reviewCount;
         $obj['topActions'] = $topActions;
-        $obj['userId'] = $userId;
+        $obj['userID'] = $userID;
 
         null !== $accuracyScore && $obj['accuracyScore'] = $accuracyScore;
 
@@ -160,7 +160,7 @@ final class TopReviewer implements BaseModel
      * Most common actions taken by this reviewer.
      *
      * @param list<TopAction|array{
-     *   actionId: string, actionName: string, count: float
+     *   actionID: string, actionName: string, count: float
      * }> $topActions
      */
     public function withTopActions(array $topActions): self
@@ -177,7 +177,7 @@ final class TopReviewer implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['userId'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }

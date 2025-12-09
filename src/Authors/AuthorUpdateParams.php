@@ -17,18 +17,18 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @phpstan-type AuthorUpdateParamsShape = array{
  *   email?: string|null,
- *   external_link?: string|null,
- *   first_seen?: float,
- *   last_seen?: float,
- *   manual_trust_level?: float|null,
+ *   externalLink?: string|null,
+ *   firstSeen?: float,
+ *   lastSeen?: float,
+ *   manualTrustLevel?: float|null,
  *   metadata?: Metadata|array{
- *     email_verified?: bool|null,
- *     identity_verified?: bool|null,
- *     is_paying_customer?: bool|null,
- *     phone_verified?: bool|null,
+ *     emailVerified?: bool|null,
+ *     identityVerified?: bool|null,
+ *     isPayingCustomer?: bool|null,
+ *     phoneVerified?: bool|null,
  *   },
  *   name?: string|null,
- *   profile_picture?: string|null,
+ *   profilePicture?: string|null,
  * }
  */
 final class AuthorUpdateParams implements BaseModel
@@ -46,23 +46,23 @@ final class AuthorUpdateParams implements BaseModel
     /**
      * URL of the author's external profile.
      */
-    #[Optional(nullable: true)]
-    public ?string $external_link;
+    #[Optional('external_link', nullable: true)]
+    public ?string $externalLink;
 
     /**
      * Timestamp when author first appeared.
      */
-    #[Optional]
-    public ?float $first_seen;
+    #[Optional('first_seen')]
+    public ?float $firstSeen;
 
     /**
      * Timestamp of last activity.
      */
-    #[Optional]
-    public ?float $last_seen;
+    #[Optional('last_seen')]
+    public ?float $lastSeen;
 
-    #[Optional(nullable: true)]
-    public ?float $manual_trust_level;
+    #[Optional('manual_trust_level', nullable: true)]
+    public ?float $manualTrustLevel;
 
     /**
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
@@ -79,8 +79,8 @@ final class AuthorUpdateParams implements BaseModel
     /**
      * URL of the author's profile picture.
      */
-    #[Optional(nullable: true)]
-    public ?string $profile_picture;
+    #[Optional('profile_picture', nullable: true)]
+    public ?string $profilePicture;
 
     public function __construct()
     {
@@ -93,32 +93,32 @@ final class AuthorUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Metadata|array{
-     *   email_verified?: bool|null,
-     *   identity_verified?: bool|null,
-     *   is_paying_customer?: bool|null,
-     *   phone_verified?: bool|null,
+     *   emailVerified?: bool|null,
+     *   identityVerified?: bool|null,
+     *   isPayingCustomer?: bool|null,
+     *   phoneVerified?: bool|null,
      * } $metadata
      */
     public static function with(
         ?string $email = null,
-        ?string $external_link = null,
-        ?float $first_seen = null,
-        ?float $last_seen = null,
-        ?float $manual_trust_level = null,
+        ?string $externalLink = null,
+        ?float $firstSeen = null,
+        ?float $lastSeen = null,
+        ?float $manualTrustLevel = null,
         Metadata|array|null $metadata = null,
         ?string $name = null,
-        ?string $profile_picture = null,
+        ?string $profilePicture = null,
     ): self {
         $obj = new self;
 
         null !== $email && $obj['email'] = $email;
-        null !== $external_link && $obj['external_link'] = $external_link;
-        null !== $first_seen && $obj['first_seen'] = $first_seen;
-        null !== $last_seen && $obj['last_seen'] = $last_seen;
-        null !== $manual_trust_level && $obj['manual_trust_level'] = $manual_trust_level;
+        null !== $externalLink && $obj['externalLink'] = $externalLink;
+        null !== $firstSeen && $obj['firstSeen'] = $firstSeen;
+        null !== $lastSeen && $obj['lastSeen'] = $lastSeen;
+        null !== $manualTrustLevel && $obj['manualTrustLevel'] = $manualTrustLevel;
         null !== $metadata && $obj['metadata'] = $metadata;
         null !== $name && $obj['name'] = $name;
-        null !== $profile_picture && $obj['profile_picture'] = $profile_picture;
+        null !== $profilePicture && $obj['profilePicture'] = $profilePicture;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class AuthorUpdateParams implements BaseModel
     public function withExternalLink(?string $externalLink): self
     {
         $obj = clone $this;
-        $obj['external_link'] = $externalLink;
+        $obj['externalLink'] = $externalLink;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class AuthorUpdateParams implements BaseModel
     public function withFirstSeen(float $firstSeen): self
     {
         $obj = clone $this;
-        $obj['first_seen'] = $firstSeen;
+        $obj['firstSeen'] = $firstSeen;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class AuthorUpdateParams implements BaseModel
     public function withLastSeen(float $lastSeen): self
     {
         $obj = clone $this;
-        $obj['last_seen'] = $lastSeen;
+        $obj['lastSeen'] = $lastSeen;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class AuthorUpdateParams implements BaseModel
     public function withManualTrustLevel(?float $manualTrustLevel): self
     {
         $obj = clone $this;
-        $obj['manual_trust_level'] = $manualTrustLevel;
+        $obj['manualTrustLevel'] = $manualTrustLevel;
 
         return $obj;
     }
@@ -179,10 +179,10 @@ final class AuthorUpdateParams implements BaseModel
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
      *
      * @param Metadata|array{
-     *   email_verified?: bool|null,
-     *   identity_verified?: bool|null,
-     *   is_paying_customer?: bool|null,
-     *   phone_verified?: bool|null,
+     *   emailVerified?: bool|null,
+     *   identityVerified?: bool|null,
+     *   isPayingCustomer?: bool|null,
+     *   phoneVerified?: bool|null,
      * } $metadata
      */
     public function withMetadata(Metadata|array $metadata): self
@@ -210,7 +210,7 @@ final class AuthorUpdateParams implements BaseModel
     public function withProfilePicture(?string $profilePicture): self
     {
         $obj = clone $this;
-        $obj['profile_picture'] = $profilePicture;
+        $obj['profilePicture'] = $profilePicture;
 
         return $obj;
     }

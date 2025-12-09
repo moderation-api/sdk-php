@@ -21,9 +21,9 @@ use ModerationAPI\Queue\Items\ItemListResponse\Item\Status;
  *   status: value-of<Status>,
  *   timestamp: float,
  *   actions?: list<Action>|null,
- *   authorId?: string|null,
+ *   authorID?: string|null,
  *   contentType?: string|null,
- *   conversationId?: string|null,
+ *   conversationID?: string|null,
  *   language?: string|null,
  * }
  */
@@ -79,8 +79,8 @@ final class Item implements BaseModel
     /**
      * Author ID.
      */
-    #[Optional]
-    public ?string $authorId;
+    #[Optional('authorId')]
+    public ?string $authorID;
 
     /**
      * Type of the content object.
@@ -91,8 +91,8 @@ final class Item implements BaseModel
     /**
      * Conversation ID.
      */
-    #[Optional]
-    public ?string $conversationId;
+    #[Optional('conversationId')]
+    public ?string $conversationID;
 
     /**
      * Content language.
@@ -150,9 +150,9 @@ final class Item implements BaseModel
         Status|string $status,
         float $timestamp,
         ?array $actions = null,
-        ?string $authorId = null,
+        ?string $authorID = null,
         ?string $contentType = null,
-        ?string $conversationId = null,
+        ?string $conversationID = null,
         ?string $language = null,
     ): self {
         $obj = new self;
@@ -165,9 +165,9 @@ final class Item implements BaseModel
         $obj['timestamp'] = $timestamp;
 
         null !== $actions && $obj['actions'] = $actions;
-        null !== $authorId && $obj['authorId'] = $authorId;
+        null !== $authorID && $obj['authorID'] = $authorID;
         null !== $contentType && $obj['contentType'] = $contentType;
-        null !== $conversationId && $obj['conversationId'] = $conversationId;
+        null !== $conversationID && $obj['conversationID'] = $conversationID;
         null !== $language && $obj['language'] = $language;
 
         return $obj;
@@ -266,7 +266,7 @@ final class Item implements BaseModel
     public function withAuthorID(string $authorID): self
     {
         $obj = clone $this;
-        $obj['authorId'] = $authorID;
+        $obj['authorID'] = $authorID;
 
         return $obj;
     }
@@ -288,7 +288,7 @@ final class Item implements BaseModel
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj['conversationId'] = $conversationID;
+        $obj['conversationID'] = $conversationID;
 
         return $obj;
     }

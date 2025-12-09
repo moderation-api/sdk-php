@@ -7,6 +7,7 @@ namespace ModerationAPI\Services\Queue;
 use ModerationAPI\Client;
 use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
+use ModerationAPI\Core\Util;
 use ModerationAPI\Queue\Items\ItemListParams;
 use ModerationAPI\Queue\Items\ItemListParams\SortDirection;
 use ModerationAPI\Queue\Items\ItemListParams\SortField;
@@ -32,10 +33,10 @@ final class ItemsService implements ItemsContract
      *
      * @param array{
      *   afterDate?: string,
-     *   authorId?: string,
+     *   authorID?: string,
      *   beforeDate?: string,
-     *   conversationIds?: string,
-     *   filteredActionIds?: string,
+     *   conversationIDs?: string,
+     *   filteredActionIDs?: string,
      *   includeResolved?: string,
      *   labels?: string,
      *   pageNumber?: float,
@@ -60,7 +61,14 @@ final class ItemsService implements ItemsContract
         $response = $this->client->request(
             method: 'get',
             path: ['queue/%1$s/items', $id],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'authorID' => 'authorId',
+                    'conversationIDs' => 'conversationIds',
+                    'filteredActionIDs' => 'filteredActionIds',
+                ],
+            ),
             options: $options,
             convert: ItemListResponse::class,
         );

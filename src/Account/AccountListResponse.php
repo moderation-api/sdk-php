@@ -13,10 +13,10 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * @phpstan-type AccountListResponseShape = array{
  *   id: string,
- *   paid_plan_name: string,
- *   remaining_quota: float,
- *   text_api_quota: float,
- *   current_project?: CurrentProject|null,
+ *   paidPlanName: string,
+ *   remainingQuota: float,
+ *   textAPIQuota: float,
+ *   currentProject?: CurrentProject|null,
  * }
  */
 final class AccountListResponse implements BaseModel
@@ -33,23 +33,23 @@ final class AccountListResponse implements BaseModel
     /**
      * Name of the paid plan.
      */
-    #[Required]
-    public string $paid_plan_name;
+    #[Required('paid_plan_name')]
+    public string $paidPlanName;
 
     /**
      * Remaining quota.
      */
-    #[Required]
-    public float $remaining_quota;
+    #[Required('remaining_quota')]
+    public float $remainingQuota;
 
     /**
      * Text API quota.
      */
-    #[Required]
-    public float $text_api_quota;
+    #[Required('text_api_quota')]
+    public float $textAPIQuota;
 
-    #[Optional]
-    public ?CurrentProject $current_project;
+    #[Optional('current_project')]
+    public ?CurrentProject $currentProject;
 
     /**
      * `new AccountListResponse()` is missing required properties by the API.
@@ -57,7 +57,7 @@ final class AccountListResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * AccountListResponse::with(
-     *   id: ..., paid_plan_name: ..., remaining_quota: ..., text_api_quota: ...
+     *   id: ..., paidPlanName: ..., remainingQuota: ..., textAPIQuota: ...
      * )
      * ```
      *
@@ -81,23 +81,23 @@ final class AccountListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CurrentProject|array{id: string, name: string} $current_project
+     * @param CurrentProject|array{id: string, name: string} $currentProject
      */
     public static function with(
         string $id,
-        string $paid_plan_name,
-        float $remaining_quota,
-        float $text_api_quota,
-        CurrentProject|array|null $current_project = null,
+        string $paidPlanName,
+        float $remainingQuota,
+        float $textAPIQuota,
+        CurrentProject|array|null $currentProject = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['paid_plan_name'] = $paid_plan_name;
-        $obj['remaining_quota'] = $remaining_quota;
-        $obj['text_api_quota'] = $text_api_quota;
+        $obj['paidPlanName'] = $paidPlanName;
+        $obj['remainingQuota'] = $remainingQuota;
+        $obj['textAPIQuota'] = $textAPIQuota;
 
-        null !== $current_project && $obj['current_project'] = $current_project;
+        null !== $currentProject && $obj['currentProject'] = $currentProject;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class AccountListResponse implements BaseModel
     public function withPaidPlanName(string $paidPlanName): self
     {
         $obj = clone $this;
-        $obj['paid_plan_name'] = $paidPlanName;
+        $obj['paidPlanName'] = $paidPlanName;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class AccountListResponse implements BaseModel
     public function withRemainingQuota(float $remainingQuota): self
     {
         $obj = clone $this;
-        $obj['remaining_quota'] = $remainingQuota;
+        $obj['remainingQuota'] = $remainingQuota;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class AccountListResponse implements BaseModel
     public function withTextAPIQuota(float $textAPIQuota): self
     {
         $obj = clone $this;
-        $obj['text_api_quota'] = $textAPIQuota;
+        $obj['textAPIQuota'] = $textAPIQuota;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class AccountListResponse implements BaseModel
         CurrentProject|array $currentProject
     ): self {
         $obj = clone $this;
-        $obj['current_project'] = $currentProject;
+        $obj['currentProject'] = $currentProject;
 
         return $obj;
     }

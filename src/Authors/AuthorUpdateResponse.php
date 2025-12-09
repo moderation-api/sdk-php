@@ -19,19 +19,19 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @phpstan-type AuthorUpdateResponseShape = array{
  *   id: string,
  *   block: Block|null,
- *   first_seen: float,
- *   last_seen: float,
+ *   firstSeen: float,
+ *   lastSeen: float,
  *   metadata: Metadata,
  *   metrics: Metrics,
- *   risk_evaluation: RiskEvaluation|null,
+ *   riskEvaluation: RiskEvaluation|null,
  *   status: value-of<Status>,
- *   trust_level: TrustLevel,
+ *   trustLevel: TrustLevel,
  *   email?: string|null,
- *   external_id?: string|null,
- *   external_link?: string|null,
- *   last_incident?: float|null,
+ *   externalID?: string|null,
+ *   externalLink?: string|null,
+ *   lastIncident?: float|null,
  *   name?: string|null,
- *   profile_picture?: string|null,
+ *   profilePicture?: string|null,
  * }
  */
 final class AuthorUpdateResponse implements BaseModel
@@ -54,14 +54,14 @@ final class AuthorUpdateResponse implements BaseModel
     /**
      * Timestamp when author first appeared.
      */
-    #[Required]
-    public float $first_seen;
+    #[Required('first_seen')]
+    public float $firstSeen;
 
     /**
      * Timestamp of last activity.
      */
-    #[Required]
-    public float $last_seen;
+    #[Required('last_seen')]
+    public float $lastSeen;
 
     /**
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
@@ -75,8 +75,8 @@ final class AuthorUpdateResponse implements BaseModel
     /**
      * Risk assessment details, if available.
      */
-    #[Required]
-    public ?RiskEvaluation $risk_evaluation;
+    #[Required('risk_evaluation')]
+    public ?RiskEvaluation $riskEvaluation;
 
     /**
      * Current author status.
@@ -86,8 +86,8 @@ final class AuthorUpdateResponse implements BaseModel
     #[Required(enum: Status::class)]
     public string $status;
 
-    #[Required]
-    public TrustLevel $trust_level;
+    #[Required('trust_level')]
+    public TrustLevel $trustLevel;
 
     /**
      * Author email address.
@@ -98,20 +98,20 @@ final class AuthorUpdateResponse implements BaseModel
     /**
      * The author's ID from your system.
      */
-    #[Optional(nullable: true)]
-    public ?string $external_id;
+    #[Optional('external_id', nullable: true)]
+    public ?string $externalID;
 
     /**
      * URL of the author's external profile.
      */
-    #[Optional(nullable: true)]
-    public ?string $external_link;
+    #[Optional('external_link', nullable: true)]
+    public ?string $externalLink;
 
     /**
      * Timestamp of last incident.
      */
-    #[Optional(nullable: true)]
-    public ?float $last_incident;
+    #[Optional('last_incident', nullable: true)]
+    public ?float $lastIncident;
 
     /**
      * Author name or identifier.
@@ -122,8 +122,8 @@ final class AuthorUpdateResponse implements BaseModel
     /**
      * URL of the author's profile picture.
      */
-    #[Optional(nullable: true)]
-    public ?string $profile_picture;
+    #[Optional('profile_picture', nullable: true)]
+    public ?string $profilePicture;
 
     /**
      * `new AuthorUpdateResponse()` is missing required properties by the API.
@@ -133,13 +133,13 @@ final class AuthorUpdateResponse implements BaseModel
      * AuthorUpdateResponse::with(
      *   id: ...,
      *   block: ...,
-     *   first_seen: ...,
-     *   last_seen: ...,
+     *   firstSeen: ...,
+     *   lastSeen: ...,
      *   metadata: ...,
      *   metrics: ...,
-     *   risk_evaluation: ...,
+     *   riskEvaluation: ...,
      *   status: ...,
-     *   trust_level: ...,
+     *   trustLevel: ...,
      * )
      * ```
      *
@@ -170,53 +170,53 @@ final class AuthorUpdateResponse implements BaseModel
      *
      * @param Block|array{reason?: string|null, until?: float|null}|null $block
      * @param Metadata|array{
-     *   email_verified?: bool|null,
-     *   identity_verified?: bool|null,
-     *   is_paying_customer?: bool|null,
-     *   phone_verified?: bool|null,
+     *   emailVerified?: bool|null,
+     *   identityVerified?: bool|null,
+     *   isPayingCustomer?: bool|null,
+     *   phoneVerified?: bool|null,
      * } $metadata
      * @param Metrics|array{
-     *   flagged_content: float, total_content: float, average_sentiment?: float|null
+     *   flaggedContent: float, totalContent: float, averageSentiment?: float|null
      * } $metrics
-     * @param RiskEvaluation|array{risk_level?: float|null}|null $risk_evaluation
+     * @param RiskEvaluation|array{riskLevel?: float|null}|null $riskEvaluation
      * @param Status|value-of<Status> $status
-     * @param TrustLevel|array{level: float, manual: bool} $trust_level
+     * @param TrustLevel|array{level: float, manual: bool} $trustLevel
      */
     public static function with(
         string $id,
         Block|array|null $block,
-        float $first_seen,
-        float $last_seen,
+        float $firstSeen,
+        float $lastSeen,
         Metadata|array $metadata,
         Metrics|array $metrics,
-        RiskEvaluation|array|null $risk_evaluation,
+        RiskEvaluation|array|null $riskEvaluation,
         Status|string $status,
-        TrustLevel|array $trust_level,
+        TrustLevel|array $trustLevel,
         ?string $email = null,
-        ?string $external_id = null,
-        ?string $external_link = null,
-        ?float $last_incident = null,
+        ?string $externalID = null,
+        ?string $externalLink = null,
+        ?float $lastIncident = null,
         ?string $name = null,
-        ?string $profile_picture = null,
+        ?string $profilePicture = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
         $obj['block'] = $block;
-        $obj['first_seen'] = $first_seen;
-        $obj['last_seen'] = $last_seen;
+        $obj['firstSeen'] = $firstSeen;
+        $obj['lastSeen'] = $lastSeen;
         $obj['metadata'] = $metadata;
         $obj['metrics'] = $metrics;
-        $obj['risk_evaluation'] = $risk_evaluation;
+        $obj['riskEvaluation'] = $riskEvaluation;
         $obj['status'] = $status;
-        $obj['trust_level'] = $trust_level;
+        $obj['trustLevel'] = $trustLevel;
 
         null !== $email && $obj['email'] = $email;
-        null !== $external_id && $obj['external_id'] = $external_id;
-        null !== $external_link && $obj['external_link'] = $external_link;
-        null !== $last_incident && $obj['last_incident'] = $last_incident;
+        null !== $externalID && $obj['externalID'] = $externalID;
+        null !== $externalLink && $obj['externalLink'] = $externalLink;
+        null !== $lastIncident && $obj['lastIncident'] = $lastIncident;
         null !== $name && $obj['name'] = $name;
-        null !== $profile_picture && $obj['profile_picture'] = $profile_picture;
+        null !== $profilePicture && $obj['profilePicture'] = $profilePicture;
 
         return $obj;
     }
@@ -251,7 +251,7 @@ final class AuthorUpdateResponse implements BaseModel
     public function withFirstSeen(float $firstSeen): self
     {
         $obj = clone $this;
-        $obj['first_seen'] = $firstSeen;
+        $obj['firstSeen'] = $firstSeen;
 
         return $obj;
     }
@@ -262,7 +262,7 @@ final class AuthorUpdateResponse implements BaseModel
     public function withLastSeen(float $lastSeen): self
     {
         $obj = clone $this;
-        $obj['last_seen'] = $lastSeen;
+        $obj['lastSeen'] = $lastSeen;
 
         return $obj;
     }
@@ -271,10 +271,10 @@ final class AuthorUpdateResponse implements BaseModel
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
      *
      * @param Metadata|array{
-     *   email_verified?: bool|null,
-     *   identity_verified?: bool|null,
-     *   is_paying_customer?: bool|null,
-     *   phone_verified?: bool|null,
+     *   emailVerified?: bool|null,
+     *   identityVerified?: bool|null,
+     *   isPayingCustomer?: bool|null,
+     *   phoneVerified?: bool|null,
      * } $metadata
      */
     public function withMetadata(Metadata|array $metadata): self
@@ -287,7 +287,7 @@ final class AuthorUpdateResponse implements BaseModel
 
     /**
      * @param Metrics|array{
-     *   flagged_content: float, total_content: float, average_sentiment?: float|null
+     *   flaggedContent: float, totalContent: float, averageSentiment?: float|null
      * } $metrics
      */
     public function withMetrics(Metrics|array $metrics): self
@@ -301,13 +301,13 @@ final class AuthorUpdateResponse implements BaseModel
     /**
      * Risk assessment details, if available.
      *
-     * @param RiskEvaluation|array{risk_level?: float|null}|null $riskEvaluation
+     * @param RiskEvaluation|array{riskLevel?: float|null}|null $riskEvaluation
      */
     public function withRiskEvaluation(
         RiskEvaluation|array|null $riskEvaluation
     ): self {
         $obj = clone $this;
-        $obj['risk_evaluation'] = $riskEvaluation;
+        $obj['riskEvaluation'] = $riskEvaluation;
 
         return $obj;
     }
@@ -331,7 +331,7 @@ final class AuthorUpdateResponse implements BaseModel
     public function withTrustLevel(TrustLevel|array $trustLevel): self
     {
         $obj = clone $this;
-        $obj['trust_level'] = $trustLevel;
+        $obj['trustLevel'] = $trustLevel;
 
         return $obj;
     }
@@ -353,7 +353,7 @@ final class AuthorUpdateResponse implements BaseModel
     public function withExternalID(?string $externalID): self
     {
         $obj = clone $this;
-        $obj['external_id'] = $externalID;
+        $obj['externalID'] = $externalID;
 
         return $obj;
     }
@@ -364,7 +364,7 @@ final class AuthorUpdateResponse implements BaseModel
     public function withExternalLink(?string $externalLink): self
     {
         $obj = clone $this;
-        $obj['external_link'] = $externalLink;
+        $obj['externalLink'] = $externalLink;
 
         return $obj;
     }
@@ -375,7 +375,7 @@ final class AuthorUpdateResponse implements BaseModel
     public function withLastIncident(?float $lastIncident): self
     {
         $obj = clone $this;
-        $obj['last_incident'] = $lastIncident;
+        $obj['lastIncident'] = $lastIncident;
 
         return $obj;
     }
@@ -397,7 +397,7 @@ final class AuthorUpdateResponse implements BaseModel
     public function withProfilePicture(?string $profilePicture): self
     {
         $obj = clone $this;
-        $obj['profile_picture'] = $profilePicture;
+        $obj['profilePicture'] = $profilePicture;
 
         return $obj;
     }

@@ -10,7 +10,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ActionStatShape = array{
- *   actionId: string, actionName: string, count: float, percentageOfTotal: float
+ *   actionID: string, actionName: string, count: float, percentageOfTotal: float
  * }
  */
 final class ActionStat implements BaseModel
@@ -21,8 +21,8 @@ final class ActionStat implements BaseModel
     /**
      * ID of the moderation action.
      */
-    #[Required]
-    public string $actionId;
+    #[Required('actionId')]
+    public string $actionID;
 
     /**
      * Name of the moderation action.
@@ -48,7 +48,7 @@ final class ActionStat implements BaseModel
      * To enforce required parameters use
      * ```
      * ActionStat::with(
-     *   actionId: ..., actionName: ..., count: ..., percentageOfTotal: ...
+     *   actionID: ..., actionName: ..., count: ..., percentageOfTotal: ...
      * )
      * ```
      *
@@ -73,14 +73,14 @@ final class ActionStat implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $actionId,
+        string $actionID,
         string $actionName,
         float $count,
         float $percentageOfTotal
     ): self {
         $obj = new self;
 
-        $obj['actionId'] = $actionId;
+        $obj['actionID'] = $actionID;
         $obj['actionName'] = $actionName;
         $obj['count'] = $count;
         $obj['percentageOfTotal'] = $percentageOfTotal;
@@ -94,7 +94,7 @@ final class ActionStat implements BaseModel
     public function withActionID(string $actionID): self
     {
         $obj = clone $this;
-        $obj['actionId'] = $actionID;
+        $obj['actionID'] = $actionID;
 
         return $obj;
     }
