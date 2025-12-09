@@ -9,7 +9,7 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ReligionShape = array{id: 'religion', flag: bool}
+ * @phpstan-type ReligionShape = array{id?: 'religion', flag: bool}
  */
 final class Religion implements BaseModel
 {

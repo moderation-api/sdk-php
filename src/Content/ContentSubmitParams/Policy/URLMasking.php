@@ -11,7 +11,9 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type URLMaskingShape = array{id: 'url', entities: array<string,Entity>}
+ * @phpstan-type URLMaskingShape = array{
+ *   id?: 'url', entities: array<string,Entity>
+ * }
  */
 final class URLMasking implements BaseModel
 {

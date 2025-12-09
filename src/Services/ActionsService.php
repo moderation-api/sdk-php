@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace ModerationAPI\Services;
 
 use ModerationAPI\Actions\ActionCreateParams;
+use ModerationAPI\Actions\ActionCreateParams\Position;
+use ModerationAPI\Actions\ActionCreateParams\QueueBehaviour;
 use ModerationAPI\Actions\ActionCreateParams\Type;
 use ModerationAPI\Actions\ActionDeleteResponse;
 use ModerationAPI\Actions\ActionGetResponse;
@@ -48,9 +50,9 @@ final class ActionsService implements ActionsContract
      *   filterInQueueIds?: list<string>,
      *   freeText?: bool,
      *   key?: string|null,
-     *   position?: 'ALL_QUEUES'|'SOME_QUEUES'|'HIDDEN',
+     *   position?: 'ALL_QUEUES'|'SOME_QUEUES'|'HIDDEN'|Position,
      *   possibleValues?: list<array{value: string}>,
-     *   queueBehaviour?: 'REMOVE'|'ADD'|'NO_CHANGE',
+     *   queueBehaviour?: 'REMOVE'|'ADD'|'NO_CHANGE'|QueueBehaviour,
      *   type?: value-of<Type>,
      *   valueRequired?: bool,
      *   webhooks?: list<array{
@@ -115,9 +117,9 @@ final class ActionsService implements ActionsContract
      *   freeText?: bool,
      *   key?: string|null,
      *   name?: string,
-     *   position?: 'ALL_QUEUES'|'SOME_QUEUES'|'HIDDEN',
+     *   position?: 'ALL_QUEUES'|'SOME_QUEUES'|'HIDDEN'|ActionUpdateParams\Position,
      *   possibleValues?: list<array{value: string}>,
-     *   queueBehaviour?: 'REMOVE'|'ADD'|'NO_CHANGE',
+     *   queueBehaviour?: 'REMOVE'|'ADD'|'NO_CHANGE'|ActionUpdateParams\QueueBehaviour,
      *   type?: value-of<ActionUpdateParams\Type>,
      *   valueRequired?: bool,
      *   webhooks?: list<array{

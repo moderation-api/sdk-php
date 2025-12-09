@@ -10,7 +10,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PersonalInformationShape = array{
- *   id: 'personal_information', flag: bool
+ *   id?: 'personal_information', flag: bool
  * }
  */
 final class PersonalInformation implements BaseModel

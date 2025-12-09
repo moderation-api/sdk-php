@@ -11,7 +11,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * Image.
  *
- * @phpstan-type ImageShape = array{type: 'image', url: string}
+ * @phpstan-type ImageShape = array{type?: 'image', url: string}
  */
 final class Image implements BaseModel
 {

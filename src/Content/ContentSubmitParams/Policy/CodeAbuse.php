@@ -9,7 +9,7 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CodeAbuseShape = array{id: 'code_abuse', flag: bool}
+ * @phpstan-type CodeAbuseShape = array{id?: 'code_abuse', flag: bool}
  */
 final class CodeAbuse implements BaseModel
 {

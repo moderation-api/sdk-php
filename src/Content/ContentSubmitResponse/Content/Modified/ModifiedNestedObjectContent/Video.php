@@ -11,7 +11,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * Video.
  *
- * @phpstan-type VideoShape = array{type: 'video', url: string}
+ * @phpstan-type VideoShape = array{type?: 'video', url: string}
  */
 final class Video implements BaseModel
 {

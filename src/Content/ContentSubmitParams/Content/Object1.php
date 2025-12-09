@@ -18,7 +18,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @phpstan-type Object1Shape = array{
  *   data: array<string,\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio>,
- *   type: 'object',
+ *   type?: 'object',
  * }
  */
 final class Object1 implements BaseModel
@@ -63,13 +63,13 @@ final class Object1 implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param array<string,Text|array{
-     *   text: string, type: 'text'
+     *   text: string, type?: 'text'
      * }|Image|array{
-     *   type: 'image', url: string
+     *   type?: 'image', url: string
      * }|Video|array{
-     *   type: 'video', url: string
+     *   type?: 'video', url: string
      * }|Audio|array{
-     *   type: 'audio', url: string
+     *   type?: 'audio', url: string
      * }> $data
      */
     public static function with(array $data): self
@@ -85,13 +85,13 @@ final class Object1 implements BaseModel
      * Values in the object. Can be mixed content types.
      *
      * @param array<string,Text|array{
-     *   text: string, type: 'text'
+     *   text: string, type?: 'text'
      * }|Image|array{
-     *   type: 'image', url: string
+     *   type?: 'image', url: string
      * }|Video|array{
-     *   type: 'video', url: string
+     *   type?: 'video', url: string
      * }|Audio|array{
-     *   type: 'audio', url: string
+     *   type?: 'audio', url: string
      * }> $data
      */
     public function withData(array $data): self

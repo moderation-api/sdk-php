@@ -9,7 +9,7 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type FlirtationShape = array{id: 'flirtation', flag: bool}
+ * @phpstan-type FlirtationShape = array{id?: 'flirtation', flag: bool}
  */
 final class Flirtation implements BaseModel
 {

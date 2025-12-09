@@ -18,7 +18,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   flagged: bool,
  *   matches: list<Match1>,
  *   probability: float,
- *   type: 'entity_matcher',
+ *   type?: 'entity_matcher',
  *   flagged_fields?: list<string>|null,
  * }
  */

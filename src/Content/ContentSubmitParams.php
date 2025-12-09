@@ -45,13 +45,13 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @see ModerationAPI\Services\ContentService::submit()
  *
  * @phpstan-type ContentSubmitParamsShape = array{
- *   content: Text|array{text: string, type: 'text'}|Image|array{
- *     type: 'image', url: string
- *   }|Video|array{type: 'video', url: string}|Audio|array{
- *     type: 'audio', url: string
+ *   content: Text|array{text: string, type?: 'text'}|Image|array{
+ *     type?: 'image', url: string
+ *   }|Video|array{type?: 'video', url: string}|Audio|array{
+ *     type?: 'audio', url: string
  *   }|Object1|array{
  *     data: array<string,\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio>,
- *     type: 'object',
+ *     type?: 'object',
  *   },
  *   authorId?: string,
  *   channel?: string,
@@ -61,36 +61,36 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   metadata?: array<string,mixed>,
  *   metaType?: MetaType|value-of<MetaType>,
  *   policies?: list<Toxicity|array{
- *     id: 'toxicity', flag: bool
+ *     id?: 'toxicity', flag: bool
  *   }|PersonalInformation|array{
- *     id: 'personal_information', flag: bool
- *   }|ToxicitySevere|array{id: 'toxicity_severe', flag: bool}|Hate|array{
- *     id: 'hate', flag: bool
- *   }|Illicit|array{id: 'illicit', flag: bool}|IllicitDrugs|array{
- *     id: 'illicit_drugs', flag: bool
+ *     id?: 'personal_information', flag: bool
+ *   }|ToxicitySevere|array{id?: 'toxicity_severe', flag: bool}|Hate|array{
+ *     id?: 'hate', flag: bool
+ *   }|Illicit|array{id?: 'illicit', flag: bool}|IllicitDrugs|array{
+ *     id?: 'illicit_drugs', flag: bool
  *   }|IllicitAlcohol|array{
- *     id: 'illicit_alcohol', flag: bool
+ *     id?: 'illicit_alcohol', flag: bool
  *   }|IllicitFirearms|array{
- *     id: 'illicit_firearms', flag: bool
+ *     id?: 'illicit_firearms', flag: bool
  *   }|IllicitTobacco|array{
- *     id: 'illicit_tobacco', flag: bool
- *   }|IllicitGambling|array{id: 'illicit_gambling', flag: bool}|Sexual|array{
- *     id: 'sexual', flag: bool
- *   }|Flirtation|array{id: 'flirtation', flag: bool}|Profanity|array{
- *     id: 'profanity', flag: bool
- *   }|Violence|array{id: 'violence', flag: bool}|SelfHarm|array{
- *     id: 'self_harm', flag: bool
- *   }|Spam|array{id: 'spam', flag: bool}|SelfPromotion|array{
- *     id: 'self_promotion', flag: bool
- *   }|Political|array{id: 'political', flag: bool}|Religion|array{
- *     id: 'religion', flag: bool
- *   }|CodeAbuse|array{id: 'code_abuse', flag: bool}|PiiMasking|array{
- *     id: 'pii', entities: array<string,Entity>
+ *     id?: 'illicit_tobacco', flag: bool
+ *   }|IllicitGambling|array{id?: 'illicit_gambling', flag: bool}|Sexual|array{
+ *     id?: 'sexual', flag: bool
+ *   }|Flirtation|array{id?: 'flirtation', flag: bool}|Profanity|array{
+ *     id?: 'profanity', flag: bool
+ *   }|Violence|array{id?: 'violence', flag: bool}|SelfHarm|array{
+ *     id?: 'self_harm', flag: bool
+ *   }|Spam|array{id?: 'spam', flag: bool}|SelfPromotion|array{
+ *     id?: 'self_promotion', flag: bool
+ *   }|Political|array{id?: 'political', flag: bool}|Religion|array{
+ *     id?: 'religion', flag: bool
+ *   }|CodeAbuse|array{id?: 'code_abuse', flag: bool}|PiiMasking|array{
+ *     id?: 'pii', entities: array<string,Entity>
  *   }|URLMasking|array{
- *     id: 'url',
+ *     id?: 'url',
  *     entities: array<string,\ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity>,
  *   }|Guideline|array{
- *     id: 'guideline', flag: bool, guidelineKey: string, instructions: string
+ *     id?: 'guideline', flag: bool, guidelineKey: string, instructions: string
  *   }>,
  * }
  */
@@ -184,43 +184,47 @@ final class ContentSubmitParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Text|array{text: string, type: 'text'}|Image|array{
-     *   type: 'image', url: string
-     * }|Video|array{type: 'video', url: string}|Audio|array{
-     *   type: 'audio', url: string
+     * @param Text|array{text: string, type?: 'text'}|Image|array{
+     *   type?: 'image', url: string
+     * }|Video|array{type?: 'video', url: string}|Audio|array{
+     *   type?: 'audio', url: string
      * }|Object1|array{
      *   data: array<string,Object1\Data\Text|Object1\Data\Image|Object1\Data\Video|Object1\Data\Audio>,
-     *   type: 'object',
+     *   type?: 'object',
      * } $content
      * @param array<string,mixed> $metadata
      * @param MetaType|value-of<MetaType> $metaType
      * @param list<Toxicity|array{
-     *   id: 'toxicity', flag: bool
+     *   id?: 'toxicity', flag: bool
      * }|PersonalInformation|array{
-     *   id: 'personal_information', flag: bool
-     * }|ToxicitySevere|array{id: 'toxicity_severe', flag: bool}|Hate|array{
-     *   id: 'hate', flag: bool
-     * }|Illicit|array{id: 'illicit', flag: bool}|IllicitDrugs|array{
-     *   id: 'illicit_drugs', flag: bool
-     * }|IllicitAlcohol|array{id: 'illicit_alcohol', flag: bool}|IllicitFirearms|array{
-     *   id: 'illicit_firearms', flag: bool
-     * }|IllicitTobacco|array{id: 'illicit_tobacco', flag: bool}|IllicitGambling|array{
-     *   id: 'illicit_gambling', flag: bool
-     * }|Sexual|array{id: 'sexual', flag: bool}|Flirtation|array{
-     *   id: 'flirtation', flag: bool
-     * }|Profanity|array{id: 'profanity', flag: bool}|Violence|array{
-     *   id: 'violence', flag: bool
-     * }|SelfHarm|array{id: 'self_harm', flag: bool}|Spam|array{
-     *   id: 'spam', flag: bool
-     * }|SelfPromotion|array{id: 'self_promotion', flag: bool}|Political|array{
-     *   id: 'political', flag: bool
-     * }|Religion|array{id: 'religion', flag: bool}|CodeAbuse|array{
-     *   id: 'code_abuse', flag: bool
-     * }|PiiMasking|array{id: 'pii', entities: array<string,Entity>}|URLMasking|array{
-     *   id: 'url',
+     *   id?: 'personal_information', flag: bool
+     * }|ToxicitySevere|array{id?: 'toxicity_severe', flag: bool}|Hate|array{
+     *   id?: 'hate', flag: bool
+     * }|Illicit|array{id?: 'illicit', flag: bool}|IllicitDrugs|array{
+     *   id?: 'illicit_drugs', flag: bool
+     * }|IllicitAlcohol|array{
+     *   id?: 'illicit_alcohol', flag: bool
+     * }|IllicitFirearms|array{
+     *   id?: 'illicit_firearms', flag: bool
+     * }|IllicitTobacco|array{
+     *   id?: 'illicit_tobacco', flag: bool
+     * }|IllicitGambling|array{id?: 'illicit_gambling', flag: bool}|Sexual|array{
+     *   id?: 'sexual', flag: bool
+     * }|Flirtation|array{id?: 'flirtation', flag: bool}|Profanity|array{
+     *   id?: 'profanity', flag: bool
+     * }|Violence|array{id?: 'violence', flag: bool}|SelfHarm|array{
+     *   id?: 'self_harm', flag: bool
+     * }|Spam|array{id?: 'spam', flag: bool}|SelfPromotion|array{
+     *   id?: 'self_promotion', flag: bool
+     * }|Political|array{id?: 'political', flag: bool}|Religion|array{
+     *   id?: 'religion', flag: bool
+     * }|CodeAbuse|array{id?: 'code_abuse', flag: bool}|PiiMasking|array{
+     *   id?: 'pii', entities: array<string,Entity>
+     * }|URLMasking|array{
+     *   id?: 'url',
      *   entities: array<string,URLMasking\Entity>,
      * }|Guideline|array{
-     *   id: 'guideline', flag: bool, guidelineKey: string, instructions: string
+     *   id?: 'guideline', flag: bool, guidelineKey: string, instructions: string
      * }> $policies
      */
     public static function with(
@@ -253,13 +257,13 @@ final class ContentSubmitParams implements BaseModel
     /**
      * The content sent for moderation.
      *
-     * @param Text|array{text: string, type: 'text'}|Image|array{
-     *   type: 'image', url: string
-     * }|Video|array{type: 'video', url: string}|Audio|array{
-     *   type: 'audio', url: string
+     * @param Text|array{text: string, type?: 'text'}|Image|array{
+     *   type?: 'image', url: string
+     * }|Video|array{type?: 'video', url: string}|Audio|array{
+     *   type?: 'audio', url: string
      * }|Object1|array{
      *   data: array<string,Object1\Data\Text|Object1\Data\Image|Object1\Data\Video|Object1\Data\Audio>,
-     *   type: 'object',
+     *   type?: 'object',
      * } $content
      */
     public function withContent(
@@ -356,32 +360,36 @@ final class ContentSubmitParams implements BaseModel
      * (Enterprise) override the channel policies for this moderation request only.
      *
      * @param list<Toxicity|array{
-     *   id: 'toxicity', flag: bool
+     *   id?: 'toxicity', flag: bool
      * }|PersonalInformation|array{
-     *   id: 'personal_information', flag: bool
-     * }|ToxicitySevere|array{id: 'toxicity_severe', flag: bool}|Hate|array{
-     *   id: 'hate', flag: bool
-     * }|Illicit|array{id: 'illicit', flag: bool}|IllicitDrugs|array{
-     *   id: 'illicit_drugs', flag: bool
-     * }|IllicitAlcohol|array{id: 'illicit_alcohol', flag: bool}|IllicitFirearms|array{
-     *   id: 'illicit_firearms', flag: bool
-     * }|IllicitTobacco|array{id: 'illicit_tobacco', flag: bool}|IllicitGambling|array{
-     *   id: 'illicit_gambling', flag: bool
-     * }|Sexual|array{id: 'sexual', flag: bool}|Flirtation|array{
-     *   id: 'flirtation', flag: bool
-     * }|Profanity|array{id: 'profanity', flag: bool}|Violence|array{
-     *   id: 'violence', flag: bool
-     * }|SelfHarm|array{id: 'self_harm', flag: bool}|Spam|array{
-     *   id: 'spam', flag: bool
-     * }|SelfPromotion|array{id: 'self_promotion', flag: bool}|Political|array{
-     *   id: 'political', flag: bool
-     * }|Religion|array{id: 'religion', flag: bool}|CodeAbuse|array{
-     *   id: 'code_abuse', flag: bool
-     * }|PiiMasking|array{id: 'pii', entities: array<string,Entity>}|URLMasking|array{
-     *   id: 'url',
+     *   id?: 'personal_information', flag: bool
+     * }|ToxicitySevere|array{id?: 'toxicity_severe', flag: bool}|Hate|array{
+     *   id?: 'hate', flag: bool
+     * }|Illicit|array{id?: 'illicit', flag: bool}|IllicitDrugs|array{
+     *   id?: 'illicit_drugs', flag: bool
+     * }|IllicitAlcohol|array{
+     *   id?: 'illicit_alcohol', flag: bool
+     * }|IllicitFirearms|array{
+     *   id?: 'illicit_firearms', flag: bool
+     * }|IllicitTobacco|array{
+     *   id?: 'illicit_tobacco', flag: bool
+     * }|IllicitGambling|array{id?: 'illicit_gambling', flag: bool}|Sexual|array{
+     *   id?: 'sexual', flag: bool
+     * }|Flirtation|array{id?: 'flirtation', flag: bool}|Profanity|array{
+     *   id?: 'profanity', flag: bool
+     * }|Violence|array{id?: 'violence', flag: bool}|SelfHarm|array{
+     *   id?: 'self_harm', flag: bool
+     * }|Spam|array{id?: 'spam', flag: bool}|SelfPromotion|array{
+     *   id?: 'self_promotion', flag: bool
+     * }|Political|array{id?: 'political', flag: bool}|Religion|array{
+     *   id?: 'religion', flag: bool
+     * }|CodeAbuse|array{id?: 'code_abuse', flag: bool}|PiiMasking|array{
+     *   id?: 'pii', entities: array<string,Entity>
+     * }|URLMasking|array{
+     *   id?: 'url',
      *   entities: array<string,URLMasking\Entity>,
      * }|Guideline|array{
-     *   id: 'guideline', flag: bool, guidelineKey: string, instructions: string
+     *   id?: 'guideline', flag: bool, guidelineKey: string, instructions: string
      * }> $policies
      */
     public function withPolicies(array $policies): self

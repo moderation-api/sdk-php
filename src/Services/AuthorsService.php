@@ -9,6 +9,7 @@ use ModerationAPI\Authors\AuthorDeleteResponse;
 use ModerationAPI\Authors\AuthorGetResponse;
 use ModerationAPI\Authors\AuthorListParams;
 use ModerationAPI\Authors\AuthorListParams\SortBy;
+use ModerationAPI\Authors\AuthorListParams\SortDirection;
 use ModerationAPI\Authors\AuthorListResponse;
 use ModerationAPI\Authors\AuthorNewResponse;
 use ModerationAPI\Authors\AuthorUpdateParams;
@@ -150,7 +151,7 @@ final class AuthorsService implements AuthorsContract
      *   pageNumber?: float,
      *   pageSize?: float,
      *   sortBy?: value-of<SortBy>,
-     *   sortDirection?: 'asc'|'desc',
+     *   sortDirection?: 'asc'|'desc'|SortDirection,
      * }|AuthorListParams $params
      *
      * @throws APIException

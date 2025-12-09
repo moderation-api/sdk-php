@@ -11,7 +11,9 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type PiiMaskingShape = array{id: 'pii', entities: array<string,Entity>}
+ * @phpstan-type PiiMaskingShape = array{
+ *   id?: 'pii', entities: array<string,Entity>
+ * }
  */
 final class PiiMasking implements BaseModel
 {

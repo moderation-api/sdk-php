@@ -6,6 +6,7 @@ namespace ModerationAPI\Services;
 
 use ModerationAPI\Client;
 use ModerationAPI\Content\ContentSubmitParams;
+use ModerationAPI\Content\ContentSubmitParams\MetaType;
 use ModerationAPI\Content\ContentSubmitResponse;
 use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
@@ -30,7 +31,7 @@ final class ContentService implements ContentContract
      *   conversationId?: string,
      *   doNotStore?: bool,
      *   metadata?: array<string,mixed>,
-     *   metaType?: 'profile'|'message'|'post'|'comment'|'event'|'product'|'review'|'other',
+     *   metaType?: 'profile'|'message'|'post'|'comment'|'event'|'product'|'review'|'other'|MetaType,
      *   policies?: list<array<string,mixed>>,
      * }|ContentSubmitParams $params
      *
