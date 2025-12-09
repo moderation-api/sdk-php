@@ -14,7 +14,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   createdAt: string|null,
  *   description: string|null,
  *   name: string|null,
- *   userId: string|null,
+ *   userID: string|null,
  * }
  */
 final class WordlistListResponseItem implements BaseModel
@@ -49,8 +49,8 @@ final class WordlistListResponseItem implements BaseModel
     /**
      * User who created the wordlist.
      */
-    #[Required]
-    public ?string $userId;
+    #[Required('userId')]
+    public ?string $userID;
 
     /**
      * `new WordlistListResponseItem()` is missing required properties by the API.
@@ -58,7 +58,7 @@ final class WordlistListResponseItem implements BaseModel
      * To enforce required parameters use
      * ```
      * WordlistListResponseItem::with(
-     *   id: ..., createdAt: ..., description: ..., name: ..., userId: ...
+     *   id: ..., createdAt: ..., description: ..., name: ..., userID: ...
      * )
      * ```
      *
@@ -88,7 +88,7 @@ final class WordlistListResponseItem implements BaseModel
         ?string $createdAt,
         ?string $description,
         ?string $name,
-        ?string $userId,
+        ?string $userID,
     ): self {
         $obj = new self;
 
@@ -96,7 +96,7 @@ final class WordlistListResponseItem implements BaseModel
         $obj['createdAt'] = $createdAt;
         $obj['description'] = $description;
         $obj['name'] = $name;
-        $obj['userId'] = $userId;
+        $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class WordlistListResponseItem implements BaseModel
     public function withUserID(?string $userID): self
     {
         $obj = clone $this;
-        $obj['userId'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }

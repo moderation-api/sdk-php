@@ -62,9 +62,9 @@ final class ItemListResponse implements BaseModel
      *   status: value-of<Status>,
      *   timestamp: float,
      *   actions?: list<Action>|null,
-     *   authorId?: string|null,
+     *   authorID?: string|null,
      *   contentType?: string|null,
-     *   conversationId?: string|null,
+     *   conversationID?: string|null,
      *   language?: string|null,
      * }> $items
      * @param Pagination|array{
@@ -96,9 +96,9 @@ final class ItemListResponse implements BaseModel
      *   status: value-of<Status>,
      *   timestamp: float,
      *   actions?: list<Action>|null,
-     *   authorId?: string|null,
+     *   authorID?: string|null,
      *   contentType?: string|null,
-     *   conversationId?: string|null,
+     *   conversationID?: string|null,
      *   language?: string|null,
      * }> $items
      */

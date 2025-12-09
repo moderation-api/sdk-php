@@ -22,7 +22,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @phpstan-type ActionUpdateParamsShape = array{
  *   builtIn?: bool|null,
  *   description?: string|null,
- *   filterInQueueIds?: list<string>,
+ *   filterInQueueIDs?: list<string>,
  *   freeText?: bool,
  *   key?: string|null,
  *   name?: string,
@@ -57,10 +57,10 @@ final class ActionUpdateParams implements BaseModel
     /**
      * The IDs of the queues the action is available in.
      *
-     * @var list<string>|null $filterInQueueIds
+     * @var list<string>|null $filterInQueueIDs
      */
-    #[Optional(list: 'string')]
-    public ?array $filterInQueueIds;
+    #[Optional('filterInQueueIds', list: 'string')]
+    public ?array $filterInQueueIDs;
 
     /**
      * Whether the action allows any text to be entered as a value or if it must be one of the possible values.
@@ -136,7 +136,7 @@ final class ActionUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $filterInQueueIds
+     * @param list<string> $filterInQueueIDs
      * @param Position|value-of<Position> $position
      * @param list<PossibleValue|array{value: string}> $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour
@@ -148,7 +148,7 @@ final class ActionUpdateParams implements BaseModel
     public static function with(
         ?bool $builtIn = null,
         ?string $description = null,
-        ?array $filterInQueueIds = null,
+        ?array $filterInQueueIDs = null,
         ?bool $freeText = null,
         ?string $key = null,
         ?string $name = null,
@@ -163,7 +163,7 @@ final class ActionUpdateParams implements BaseModel
 
         null !== $builtIn && $obj['builtIn'] = $builtIn;
         null !== $description && $obj['description'] = $description;
-        null !== $filterInQueueIds && $obj['filterInQueueIds'] = $filterInQueueIds;
+        null !== $filterInQueueIDs && $obj['filterInQueueIDs'] = $filterInQueueIDs;
         null !== $freeText && $obj['freeText'] = $freeText;
         null !== $key && $obj['key'] = $key;
         null !== $name && $obj['name'] = $name;
@@ -207,7 +207,7 @@ final class ActionUpdateParams implements BaseModel
     public function withFilterInQueueIDs(array $filterInQueueIDs): self
     {
         $obj = clone $this;
-        $obj['filterInQueueIds'] = $filterInQueueIDs;
+        $obj['filterInQueueIDs'] = $filterInQueueIDs;
 
         return $obj;
     }

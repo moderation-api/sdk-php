@@ -17,10 +17,10 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @phpstan-type ExecuteExecuteParamsShape = array{
  *   actionKey: string,
- *   authorIds?: list<string>,
- *   contentIds?: list<string>,
+ *   authorIDs?: list<string>,
+ *   contentIDs?: list<string>,
  *   duration?: float,
- *   queueId?: string,
+ *   queueID?: string,
  *   value?: string,
  * }
  */
@@ -39,18 +39,18 @@ final class ExecuteExecuteParams implements BaseModel
     /**
      * IDs of the authors to apply the action to. Provide this or contentIds.
      *
-     * @var list<string>|null $authorIds
+     * @var list<string>|null $authorIDs
      */
-    #[Optional(list: 'string')]
-    public ?array $authorIds;
+    #[Optional('authorIds', list: 'string')]
+    public ?array $authorIDs;
 
     /**
      * IDs of the content items to apply the action to. Provide this or authorIds.
      *
-     * @var list<string>|null $contentIds
+     * @var list<string>|null $contentIDs
      */
-    #[Optional(list: 'string')]
-    public ?array $contentIds;
+    #[Optional('contentIds', list: 'string')]
+    public ?array $contentIDs;
 
     /**
      * Optional duration in milliseconds for actions with timeouts.
@@ -61,8 +61,8 @@ final class ExecuteExecuteParams implements BaseModel
     /**
      * Optional queue ID if the action is queue-specific.
      */
-    #[Optional]
-    public ?string $queueId;
+    #[Optional('queueId')]
+    public ?string $queueID;
 
     /**
      * Optional value to provide with the action.
@@ -94,25 +94,25 @@ final class ExecuteExecuteParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $authorIds
-     * @param list<string> $contentIds
+     * @param list<string> $authorIDs
+     * @param list<string> $contentIDs
      */
     public static function with(
         string $actionKey,
-        ?array $authorIds = null,
-        ?array $contentIds = null,
+        ?array $authorIDs = null,
+        ?array $contentIDs = null,
         ?float $duration = null,
-        ?string $queueId = null,
+        ?string $queueID = null,
         ?string $value = null,
     ): self {
         $obj = new self;
 
         $obj['actionKey'] = $actionKey;
 
-        null !== $authorIds && $obj['authorIds'] = $authorIds;
-        null !== $contentIds && $obj['contentIds'] = $contentIds;
+        null !== $authorIDs && $obj['authorIDs'] = $authorIDs;
+        null !== $contentIDs && $obj['contentIDs'] = $contentIDs;
         null !== $duration && $obj['duration'] = $duration;
-        null !== $queueId && $obj['queueId'] = $queueId;
+        null !== $queueID && $obj['queueID'] = $queueID;
         null !== $value && $obj['value'] = $value;
 
         return $obj;
@@ -137,7 +137,7 @@ final class ExecuteExecuteParams implements BaseModel
     public function withAuthorIDs(array $authorIDs): self
     {
         $obj = clone $this;
-        $obj['authorIds'] = $authorIDs;
+        $obj['authorIDs'] = $authorIDs;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class ExecuteExecuteParams implements BaseModel
     public function withContentIDs(array $contentIDs): self
     {
         $obj = clone $this;
-        $obj['contentIds'] = $contentIDs;
+        $obj['contentIDs'] = $contentIDs;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class ExecuteExecuteParams implements BaseModel
     public function withQueueID(string $queueID): self
     {
         $obj = clone $this;
-        $obj['queueId'] = $queueID;
+        $obj['queueID'] = $queueID;
 
         return $obj;
     }

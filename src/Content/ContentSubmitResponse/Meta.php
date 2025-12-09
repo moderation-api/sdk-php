@@ -14,11 +14,11 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * Metadata about the moderation request.
  *
  * @phpstan-type MetaShape = array{
- *   channel_key: string,
+ *   channelKey: string,
  *   status: value-of<Status>,
  *   timestamp: float,
  *   usage: float,
- *   processing_time?: string|null,
+ *   processingTime?: string|null,
  * }
  */
 final class Meta implements BaseModel
@@ -29,8 +29,8 @@ final class Meta implements BaseModel
     /**
      * The unique key of the channel where the content was handled. Either the channel provided by you or automatically routed.
      */
-    #[Required]
-    public string $channel_key;
+    #[Required('channel_key')]
+    public string $channelKey;
 
     /** @var value-of<Status> $status */
     #[Required(enum: Status::class)]
@@ -42,15 +42,15 @@ final class Meta implements BaseModel
     #[Required]
     public float $usage;
 
-    #[Optional]
-    public ?string $processing_time;
+    #[Optional('processing_time')]
+    public ?string $processingTime;
 
     /**
      * `new Meta()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Meta::with(channel_key: ..., status: ..., timestamp: ..., usage: ...)
+     * Meta::with(channelKey: ..., status: ..., timestamp: ..., usage: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -76,20 +76,20 @@ final class Meta implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        string $channel_key,
+        string $channelKey,
         Status|string $status,
         float $timestamp,
         float $usage,
-        ?string $processing_time = null,
+        ?string $processingTime = null,
     ): self {
         $obj = new self;
 
-        $obj['channel_key'] = $channel_key;
+        $obj['channelKey'] = $channelKey;
         $obj['status'] = $status;
         $obj['timestamp'] = $timestamp;
         $obj['usage'] = $usage;
 
-        null !== $processing_time && $obj['processing_time'] = $processing_time;
+        null !== $processingTime && $obj['processingTime'] = $processingTime;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class Meta implements BaseModel
     public function withChannelKey(string $channelKey): self
     {
         $obj = clone $this;
-        $obj['channel_key'] = $channelKey;
+        $obj['channelKey'] = $channelKey;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class Meta implements BaseModel
     public function withProcessingTime(string $processingTime): self
     {
         $obj = clone $this;
-        $obj['processing_time'] = $processingTime;
+        $obj['processingTime'] = $processingTime;
 
         return $obj;
     }

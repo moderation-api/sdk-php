@@ -25,10 +25,10 @@ final class ContentService implements ContentContract
      *
      * @param array{
      *   content: array<string,mixed>,
-     *   authorId?: string,
+     *   authorID?: string,
      *   channel?: string,
-     *   contentId?: string,
-     *   conversationId?: string,
+     *   contentID?: string,
+     *   conversationID?: string,
      *   doNotStore?: bool,
      *   metadata?: array<string,mixed>,
      *   metaType?: 'profile'|'message'|'post'|'comment'|'event'|'product'|'review'|'other'|MetaType,

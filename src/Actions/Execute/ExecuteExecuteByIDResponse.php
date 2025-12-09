@@ -10,7 +10,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ExecuteExecuteByIDResponseShape = array{
- *   actionId: string, ids: list<string>, success: bool
+ *   actionID: string, ids: list<string>, success: bool
  * }
  */
 final class ExecuteExecuteByIDResponse implements BaseModel
@@ -21,8 +21,8 @@ final class ExecuteExecuteByIDResponse implements BaseModel
     /**
      * The ID of the action.
      */
-    #[Required]
-    public string $actionId;
+    #[Required('actionId')]
+    public string $actionID;
 
     /**
      * The IDs of the content items.
@@ -43,7 +43,7 @@ final class ExecuteExecuteByIDResponse implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ExecuteExecuteByIDResponse::with(actionId: ..., ids: ..., success: ...)
+     * ExecuteExecuteByIDResponse::with(actionID: ..., ids: ..., success: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -68,13 +68,13 @@ final class ExecuteExecuteByIDResponse implements BaseModel
      * @param list<string> $ids
      */
     public static function with(
-        string $actionId,
+        string $actionID,
         array $ids,
         bool $success
     ): self {
         $obj = new self;
 
-        $obj['actionId'] = $actionId;
+        $obj['actionID'] = $actionID;
         $obj['ids'] = $ids;
         $obj['success'] = $success;
 
@@ -87,7 +87,7 @@ final class ExecuteExecuteByIDResponse implements BaseModel
     public function withActionID(string $actionID): self
     {
         $obj = clone $this;
-        $obj['actionId'] = $actionID;
+        $obj['actionID'] = $actionID;
 
         return $obj;
     }

@@ -10,7 +10,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TopActionShape = array{
- *   actionId: string, actionName: string, count: float
+ *   actionID: string, actionName: string, count: float
  * }
  */
 final class TopAction implements BaseModel
@@ -21,8 +21,8 @@ final class TopAction implements BaseModel
     /**
      * Most used action by this reviewer.
      */
-    #[Required]
-    public string $actionId;
+    #[Required('actionId')]
+    public string $actionID;
 
     /**
      * Name of the most used action.
@@ -41,7 +41,7 @@ final class TopAction implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * TopAction::with(actionId: ..., actionName: ..., count: ...)
+     * TopAction::with(actionID: ..., actionName: ..., count: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -61,13 +61,13 @@ final class TopAction implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $actionId,
+        string $actionID,
         string $actionName,
         float $count
     ): self {
         $obj = new self;
 
-        $obj['actionId'] = $actionId;
+        $obj['actionID'] = $actionID;
         $obj['actionName'] = $actionName;
         $obj['count'] = $count;
 
@@ -80,7 +80,7 @@ final class TopAction implements BaseModel
     public function withActionID(string $actionID): self
     {
         $obj = clone $this;
-        $obj['actionId'] = $actionID;
+        $obj['actionID'] = $actionID;
 
         return $obj;
     }

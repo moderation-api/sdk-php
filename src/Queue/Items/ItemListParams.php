@@ -18,10 +18,10 @@ use ModerationAPI\Queue\Items\ItemListParams\SortField;
  *
  * @phpstan-type ItemListParamsShape = array{
  *   afterDate?: string,
- *   authorId?: string,
+ *   authorID?: string,
  *   beforeDate?: string,
- *   conversationIds?: string,
- *   filteredActionIds?: string,
+ *   conversationIDs?: string,
+ *   filteredActionIDs?: string,
  *   includeResolved?: string,
  *   labels?: string,
  *   pageNumber?: float,
@@ -40,16 +40,16 @@ final class ItemListParams implements BaseModel
     public ?string $afterDate;
 
     #[Optional]
-    public ?string $authorId;
+    public ?string $authorID;
 
     #[Optional]
     public ?string $beforeDate;
 
     #[Optional]
-    public ?string $conversationIds;
+    public ?string $conversationIDs;
 
     #[Optional]
-    public ?string $filteredActionIds;
+    public ?string $filteredActionIDs;
 
     #[Optional]
     public ?string $includeResolved;
@@ -96,10 +96,10 @@ final class ItemListParams implements BaseModel
      */
     public static function with(
         ?string $afterDate = null,
-        ?string $authorId = null,
+        ?string $authorID = null,
         ?string $beforeDate = null,
-        ?string $conversationIds = null,
-        ?string $filteredActionIds = null,
+        ?string $conversationIDs = null,
+        ?string $filteredActionIDs = null,
         ?string $includeResolved = null,
         ?string $labels = null,
         ?float $pageNumber = null,
@@ -110,10 +110,10 @@ final class ItemListParams implements BaseModel
         $obj = new self;
 
         null !== $afterDate && $obj['afterDate'] = $afterDate;
-        null !== $authorId && $obj['authorId'] = $authorId;
+        null !== $authorID && $obj['authorID'] = $authorID;
         null !== $beforeDate && $obj['beforeDate'] = $beforeDate;
-        null !== $conversationIds && $obj['conversationIds'] = $conversationIds;
-        null !== $filteredActionIds && $obj['filteredActionIds'] = $filteredActionIds;
+        null !== $conversationIDs && $obj['conversationIDs'] = $conversationIDs;
+        null !== $filteredActionIDs && $obj['filteredActionIDs'] = $filteredActionIDs;
         null !== $includeResolved && $obj['includeResolved'] = $includeResolved;
         null !== $labels && $obj['labels'] = $labels;
         null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
@@ -135,7 +135,7 @@ final class ItemListParams implements BaseModel
     public function withAuthorID(string $authorID): self
     {
         $obj = clone $this;
-        $obj['authorId'] = $authorID;
+        $obj['authorID'] = $authorID;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class ItemListParams implements BaseModel
     public function withConversationIDs(string $conversationIDs): self
     {
         $obj = clone $this;
-        $obj['conversationIds'] = $conversationIDs;
+        $obj['conversationIDs'] = $conversationIDs;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class ItemListParams implements BaseModel
     public function withFilteredActionIDs(string $filteredActionIDs): self
     {
         $obj = clone $this;
-        $obj['filteredActionIds'] = $filteredActionIDs;
+        $obj['filteredActionIDs'] = $filteredActionIDs;
 
         return $obj;
     }

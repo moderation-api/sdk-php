@@ -11,7 +11,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MetricsShape = array{
- *   flagged_content: float, total_content: float, average_sentiment?: float|null
+ *   flaggedContent: float, totalContent: float, averageSentiment?: float|null
  * }
  */
 final class Metrics implements BaseModel
@@ -22,27 +22,27 @@ final class Metrics implements BaseModel
     /**
      * Number of flagged content pieces.
      */
-    #[Required]
-    public float $flagged_content;
+    #[Required('flagged_content')]
+    public float $flaggedContent;
 
     /**
      * Total pieces of content.
      */
-    #[Required]
-    public float $total_content;
+    #[Required('total_content')]
+    public float $totalContent;
 
     /**
      * Average sentiment score of content (-1 to 1). Requires a sentiment model in your project.
      */
-    #[Optional(nullable: true)]
-    public ?float $average_sentiment;
+    #[Optional('average_sentiment', nullable: true)]
+    public ?float $averageSentiment;
 
     /**
      * `new Metrics()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Metrics::with(flagged_content: ..., total_content: ...)
+     * Metrics::with(flaggedContent: ..., totalContent: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -62,16 +62,16 @@ final class Metrics implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        float $flagged_content,
-        float $total_content,
-        ?float $average_sentiment = null,
+        float $flaggedContent,
+        float $totalContent,
+        ?float $averageSentiment = null
     ): self {
         $obj = new self;
 
-        $obj['flagged_content'] = $flagged_content;
-        $obj['total_content'] = $total_content;
+        $obj['flaggedContent'] = $flaggedContent;
+        $obj['totalContent'] = $totalContent;
 
-        null !== $average_sentiment && $obj['average_sentiment'] = $average_sentiment;
+        null !== $averageSentiment && $obj['averageSentiment'] = $averageSentiment;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Metrics implements BaseModel
     public function withFlaggedContent(float $flaggedContent): self
     {
         $obj = clone $this;
-        $obj['flagged_content'] = $flaggedContent;
+        $obj['flaggedContent'] = $flaggedContent;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Metrics implements BaseModel
     public function withTotalContent(float $totalContent): self
     {
         $obj = clone $this;
-        $obj['total_content'] = $totalContent;
+        $obj['totalContent'] = $totalContent;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Metrics implements BaseModel
     public function withAverageSentiment(?float $averageSentiment): self
     {
         $obj = clone $this;
-        $obj['average_sentiment'] = $averageSentiment;
+        $obj['averageSentiment'] = $averageSentiment;
 
         return $obj;
     }

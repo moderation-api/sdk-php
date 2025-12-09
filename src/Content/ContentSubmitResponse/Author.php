@@ -19,8 +19,8 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   id: string,
  *   block: Block|null,
  *   status: value-of<Status>,
- *   trust_level: TrustLevel,
- *   external_id?: string|null,
+ *   trustLevel: TrustLevel,
+ *   externalID?: string|null,
  * }
  */
 final class Author implements BaseModel
@@ -48,21 +48,21 @@ final class Author implements BaseModel
     #[Required(enum: Status::class)]
     public string $status;
 
-    #[Required]
-    public TrustLevel $trust_level;
+    #[Required('trust_level')]
+    public TrustLevel $trustLevel;
 
     /**
      * The author's ID from your system.
      */
-    #[Optional(nullable: true)]
-    public ?string $external_id;
+    #[Optional('external_id', nullable: true)]
+    public ?string $externalID;
 
     /**
      * `new Author()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Author::with(id: ..., block: ..., status: ..., trust_level: ...)
+     * Author::with(id: ..., block: ..., status: ..., trustLevel: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -83,23 +83,23 @@ final class Author implements BaseModel
      *
      * @param Block|array{reason?: string|null, until?: float|null}|null $block
      * @param Status|value-of<Status> $status
-     * @param TrustLevel|array{level: float, manual: bool} $trust_level
+     * @param TrustLevel|array{level: float, manual: bool} $trustLevel
      */
     public static function with(
         string $id,
         Block|array|null $block,
         Status|string $status,
-        TrustLevel|array $trust_level,
-        ?string $external_id = null,
+        TrustLevel|array $trustLevel,
+        ?string $externalID = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
         $obj['block'] = $block;
         $obj['status'] = $status;
-        $obj['trust_level'] = $trust_level;
+        $obj['trustLevel'] = $trustLevel;
 
-        null !== $external_id && $obj['external_id'] = $external_id;
+        null !== $externalID && $obj['externalID'] = $externalID;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class Author implements BaseModel
     public function withTrustLevel(TrustLevel|array $trustLevel): self
     {
         $obj = clone $this;
-        $obj['trust_level'] = $trustLevel;
+        $obj['trustLevel'] = $trustLevel;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class Author implements BaseModel
     public function withExternalID(?string $externalID): self
     {
         $obj = clone $this;
-        $obj['external_id'] = $externalID;
+        $obj['externalID'] = $externalID;
 
         return $obj;
     }

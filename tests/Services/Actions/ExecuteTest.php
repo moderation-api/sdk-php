@@ -52,10 +52,10 @@ final class ExecuteTest extends TestCase
 
         $result = $this->client->actions->execute->execute([
             'actionKey' => 'actionKey',
-            'authorIds' => ['string'],
-            'contentIds' => ['string'],
+            'authorIDs' => ['string'],
+            'contentIDs' => ['string'],
             'duration' => 0,
-            'queueId' => 'queueId',
+            'queueID' => 'queueId',
             'value' => 'value',
         ]);
 

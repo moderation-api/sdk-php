@@ -54,7 +54,7 @@ final class ActionsTest extends TestCase
             'name' => 'name',
             'builtIn' => true,
             'description' => 'description',
-            'filterInQueueIds' => ['string'],
+            'filterInQueueIDs' => ['string'],
             'freeText' => true,
             'key' => 'key',
             'position' => 'ALL_QUEUES',

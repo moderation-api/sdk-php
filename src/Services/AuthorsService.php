@@ -33,20 +33,20 @@ final class AuthorsService implements AuthorsContract
      * Create a new author. Typically not needed as authors are created automatically when content is moderated.
      *
      * @param array{
-     *   external_id: string,
+     *   externalID: string,
      *   email?: string|null,
-     *   external_link?: string|null,
-     *   first_seen?: float,
-     *   last_seen?: float,
-     *   manual_trust_level?: float|null,
+     *   externalLink?: string|null,
+     *   firstSeen?: float,
+     *   lastSeen?: float,
+     *   manualTrustLevel?: float|null,
      *   metadata?: array{
-     *     email_verified?: bool|null,
-     *     identity_verified?: bool|null,
-     *     is_paying_customer?: bool|null,
-     *     phone_verified?: bool|null,
+     *     emailVerified?: bool|null,
+     *     identityVerified?: bool|null,
+     *     isPayingCustomer?: bool|null,
+     *     phoneVerified?: bool|null,
      *   },
      *   name?: string|null,
-     *   profile_picture?: string|null,
+     *   profilePicture?: string|null,
      * }|AuthorCreateParams $params
      *
      * @throws APIException
@@ -101,18 +101,18 @@ final class AuthorsService implements AuthorsContract
      *
      * @param array{
      *   email?: string|null,
-     *   external_link?: string|null,
-     *   first_seen?: float,
-     *   last_seen?: float,
-     *   manual_trust_level?: float|null,
+     *   externalLink?: string|null,
+     *   firstSeen?: float,
+     *   lastSeen?: float,
+     *   manualTrustLevel?: float|null,
      *   metadata?: array{
-     *     email_verified?: bool|null,
-     *     identity_verified?: bool|null,
-     *     is_paying_customer?: bool|null,
-     *     phone_verified?: bool|null,
+     *     emailVerified?: bool|null,
+     *     identityVerified?: bool|null,
+     *     isPayingCustomer?: bool|null,
+     *     phoneVerified?: bool|null,
      *   },
      *   name?: string|null,
-     *   profile_picture?: string|null,
+     *   profilePicture?: string|null,
      * }|AuthorUpdateParams $params
      *
      * @throws APIException

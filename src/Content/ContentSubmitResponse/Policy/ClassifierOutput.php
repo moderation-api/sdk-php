@@ -18,7 +18,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   flagged: bool,
  *   probability: float,
  *   type?: 'classifier',
- *   flagged_fields?: list<string>|null,
+ *   flaggedFields?: list<string>|null,
  *   labels?: list<Label>|null,
  * }
  */
@@ -46,10 +46,10 @@ final class ClassifierOutput implements BaseModel
     /**
      * The keys of the flagged fields if submitting an object.
      *
-     * @var list<string>|null $flagged_fields
+     * @var list<string>|null $flaggedFields
      */
-    #[Optional(list: 'string')]
-    public ?array $flagged_fields;
+    #[Optional('flagged_fields', list: 'string')]
+    public ?array $flaggedFields;
 
     /** @var list<Label>|null $labels */
     #[Optional(list: Label::class)]
@@ -79,14 +79,14 @@ final class ClassifierOutput implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $flagged_fields
+     * @param list<string> $flaggedFields
      * @param list<Label|array{id: string, flagged: bool, probability: float}> $labels
      */
     public static function with(
         string $id,
         bool $flagged,
         float $probability,
-        ?array $flagged_fields = null,
+        ?array $flaggedFields = null,
         ?array $labels = null,
     ): self {
         $obj = new self;
@@ -95,7 +95,7 @@ final class ClassifierOutput implements BaseModel
         $obj['flagged'] = $flagged;
         $obj['probability'] = $probability;
 
-        null !== $flagged_fields && $obj['flagged_fields'] = $flagged_fields;
+        null !== $flaggedFields && $obj['flaggedFields'] = $flaggedFields;
         null !== $labels && $obj['labels'] = $labels;
 
         return $obj;
@@ -136,7 +136,7 @@ final class ClassifierOutput implements BaseModel
     public function withFlaggedFields(array $flaggedFields): self
     {
         $obj = clone $this;
-        $obj['flagged_fields'] = $flaggedFields;
+        $obj['flaggedFields'] = $flaggedFields;
 
         return $obj;
     }

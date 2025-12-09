@@ -15,7 +15,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   name: string,
  *   url: string,
  *   description?: string|null,
- *   moderationActionId?: string|null,
+ *   moderationActionID?: string|null,
  * }
  */
 final class Webhook implements BaseModel
@@ -50,8 +50,8 @@ final class Webhook implements BaseModel
     /**
      * The ID of the moderation action to trigger the webhook on. Only used for moderation action webhooks.
      */
-    #[Optional(nullable: true)]
-    public ?string $moderationActionId;
+    #[Optional('moderationActionId', nullable: true)]
+    public ?string $moderationActionID;
 
     /**
      * `new Webhook()` is missing required properties by the API.
@@ -82,7 +82,7 @@ final class Webhook implements BaseModel
         string $name,
         string $url,
         ?string $description = null,
-        ?string $moderationActionId = null,
+        ?string $moderationActionID = null,
     ): self {
         $obj = new self;
 
@@ -91,7 +91,7 @@ final class Webhook implements BaseModel
         $obj['url'] = $url;
 
         null !== $description && $obj['description'] = $description;
-        null !== $moderationActionId && $obj['moderationActionId'] = $moderationActionId;
+        null !== $moderationActionID && $obj['moderationActionID'] = $moderationActionID;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class Webhook implements BaseModel
     public function withModerationActionID(?string $moderationActionID): self
     {
         $obj = clone $this;
-        $obj['moderationActionId'] = $moderationActionID;
+        $obj['moderationActionID'] = $moderationActionID;
 
         return $obj;
     }
