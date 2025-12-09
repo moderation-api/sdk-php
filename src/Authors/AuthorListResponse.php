@@ -14,21 +14,17 @@ use ModerationAPI\Authors\AuthorListResponse\Author\TrustLevel;
 use ModerationAPI\Authors\AuthorListResponse\Pagination;
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AuthorListResponseShape = array{
  *   authors: list<Author>, pagination: Pagination
  * }
  */
-final class AuthorListResponse implements BaseModel, ResponseConverter
+final class AuthorListResponse implements BaseModel
 {
     /** @use SdkModel<AuthorListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Author> $authors */
     #[Api(list: Author::class)]

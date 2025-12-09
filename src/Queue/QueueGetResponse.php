@@ -6,21 +6,17 @@ namespace ModerationAPI\Queue;
 
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 use ModerationAPI\Queue\QueueGetResponse\Queue;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter;
 
 /**
  * @phpstan-type QueueGetResponseShape = array{queue: Queue}
  */
-final class QueueGetResponse implements BaseModel, ResponseConverter
+final class QueueGetResponse implements BaseModel
 {
     /** @use SdkModel<QueueGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Queue $queue;

@@ -7,9 +7,7 @@ namespace ModerationAPI\Account;
 use ModerationAPI\Account\AccountListResponse\CurrentProject;
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AccountListResponseShape = array{
@@ -20,12 +18,10 @@ use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
  *   current_project?: CurrentProject|null,
  * }
  */
-final class AccountListResponse implements BaseModel, ResponseConverter
+final class AccountListResponse implements BaseModel
 {
     /** @use SdkModel<AccountListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * ID of the account.

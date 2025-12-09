@@ -6,9 +6,7 @@ namespace ModerationAPI\Queue\Items;
 
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 use ModerationAPI\Queue\Items\ItemListResponse\Item;
 use ModerationAPI\Queue\Items\ItemListResponse\Item\Action;
 use ModerationAPI\Queue\Items\ItemListResponse\Item\Label;
@@ -20,12 +18,10 @@ use ModerationAPI\Queue\Items\ItemListResponse\Pagination;
  *   items: list<Item>, pagination: Pagination
  * }
  */
-final class ItemListResponse implements BaseModel, ResponseConverter
+final class ItemListResponse implements BaseModel
 {
     /** @use SdkModel<ItemListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Item> $items */
     #[Api(list: Item::class)]

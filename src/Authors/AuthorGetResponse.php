@@ -12,9 +12,7 @@ use ModerationAPI\Authors\AuthorGetResponse\Status;
 use ModerationAPI\Authors\AuthorGetResponse\TrustLevel;
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AuthorGetResponseShape = array{
@@ -35,12 +33,10 @@ use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
  *   profile_picture?: string|null,
  * }
  */
-final class AuthorGetResponse implements BaseModel, ResponseConverter
+final class AuthorGetResponse implements BaseModel
 {
     /** @use SdkModel<AuthorGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Author ID in Moderation API.

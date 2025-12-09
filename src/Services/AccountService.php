@@ -6,6 +6,7 @@ namespace ModerationAPI\Services;
 
 use ModerationAPI\Account\AccountListResponse;
 use ModerationAPI\Client;
+use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\AccountContract;
@@ -27,12 +28,14 @@ final class AccountService implements AccountContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): AccountListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AccountListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'account',
             options: $requestOptions,
             convert: AccountListResponse::class,
         );
+
+        return $response->parse();
     }
 }

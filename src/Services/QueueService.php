@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Services;
 
 use ModerationAPI\Client;
+use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\Queue\QueueGetResponse;
 use ModerationAPI\Queue\QueueGetStatsParams;
@@ -39,13 +40,15 @@ final class QueueService implements QueueContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): QueueGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<QueueGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['queue/%1$s', $id],
             options: $requestOptions,
             convert: QueueGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -67,13 +70,15 @@ final class QueueService implements QueueContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<QueueGetStatsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['queue/%1$s/stats', $id],
             query: $parsed,
             options: $options,
             convert: QueueGetStatsResponse::class,
         );
+
+        return $response->parse();
     }
 }

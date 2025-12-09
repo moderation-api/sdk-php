@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Services;
 
 use ModerationAPI\Client;
+use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Conversion\ListOf;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
@@ -42,13 +43,15 @@ final class WordlistService implements WordlistContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WordlistGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WordlistGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['wordlist/%1$s', $id],
             options: $requestOptions,
             convert: WordlistGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -76,14 +79,16 @@ final class WordlistService implements WordlistContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WordlistUpdateResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['wordlist/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: WordlistUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -97,13 +102,15 @@ final class WordlistService implements WordlistContract
      */
     public function list(?RequestOptions $requestOptions = null): array
     {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<WordlistListResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'wordlist',
             options: $requestOptions,
             convert: new ListOf(WordlistListResponseItem::class),
         );
+
+        return $response->parse();
     }
 
     /**
@@ -117,12 +124,14 @@ final class WordlistService implements WordlistContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WordlistGetEmbeddingStatusResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WordlistGetEmbeddingStatusResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['wordlist/%1$s/embedding-status', $id],
             options: $requestOptions,
             convert: WordlistGetEmbeddingStatusResponse::class,
         );
+
+        return $response->parse();
     }
 }

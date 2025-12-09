@@ -6,21 +6,17 @@ namespace ModerationAPI\Actions\Execute;
 
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ExecuteExecuteByIDResponseShape = array{
  *   actionId: string, ids: list<string>, success: bool
  * }
  */
-final class ExecuteExecuteByIDResponse implements BaseModel, ResponseConverter
+final class ExecuteExecuteByIDResponse implements BaseModel
 {
     /** @use SdkModel<ExecuteExecuteByIDResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The ID of the action.

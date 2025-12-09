@@ -6,9 +6,7 @@ namespace ModerationAPI\Wordlist;
 
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Embedding status details.
@@ -17,12 +15,10 @@ use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
  *   progress: float, remainingWords: float, totalWords: float
  * }
  */
-final class WordlistGetEmbeddingStatusResponse implements BaseModel, ResponseConverter
+final class WordlistGetEmbeddingStatusResponse implements BaseModel
 {
     /** @use SdkModel<WordlistGetEmbeddingStatusResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Percentage of words that have been embedded (0-100).

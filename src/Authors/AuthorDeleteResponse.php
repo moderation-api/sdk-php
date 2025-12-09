@@ -6,19 +6,15 @@ namespace ModerationAPI\Authors;
 
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AuthorDeleteResponseShape = array{success: bool}
  */
-final class AuthorDeleteResponse implements BaseModel, ResponseConverter
+final class AuthorDeleteResponse implements BaseModel
 {
     /** @use SdkModel<AuthorDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public bool $success;

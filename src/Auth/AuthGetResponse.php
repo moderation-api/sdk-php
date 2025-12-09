@@ -6,19 +6,15 @@ namespace ModerationAPI\Auth;
 
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AuthGetResponseShape = array{message: string, status: string}
  */
-final class AuthGetResponse implements BaseModel, ResponseConverter
+final class AuthGetResponse implements BaseModel
 {
     /** @use SdkModel<AuthGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Message of the authentication.

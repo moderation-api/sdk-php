@@ -10,9 +10,7 @@ use ModerationAPI\Actions\ActionNewResponse\QueueBehaviour;
 use ModerationAPI\Actions\ActionNewResponse\Type;
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionNewResponseShape = array{
@@ -31,12 +29,10 @@ use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
  *   type?: value-of<Type>|null,
  * }
  */
-final class ActionNewResponse implements BaseModel, ResponseConverter
+final class ActionNewResponse implements BaseModel
 {
     /** @use SdkModel<ActionNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The ID of the action.

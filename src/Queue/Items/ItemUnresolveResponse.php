@@ -6,21 +6,17 @@ namespace ModerationAPI\Queue\Items;
 
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ItemUnresolveResponseShape = array{
  *   status: string, success: bool, unresolvedAt: string
  * }
  */
-final class ItemUnresolveResponse implements BaseModel, ResponseConverter
+final class ItemUnresolveResponse implements BaseModel
 {
     /** @use SdkModel<ItemUnresolveResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * New status of the item.
