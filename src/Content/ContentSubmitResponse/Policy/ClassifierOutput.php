@@ -17,7 +17,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   id: string,
  *   flagged: bool,
  *   probability: float,
- *   type: 'classifier',
+ *   type?: 'classifier',
  *   flagged_fields?: list<string>|null,
  *   labels?: list<Label>|null,
  * }

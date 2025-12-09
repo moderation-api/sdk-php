@@ -11,7 +11,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * Audio.
  *
- * @phpstan-type AudioShape = array{type: 'audio', url: string}
+ * @phpstan-type AudioShape = array{type?: 'audio', url: string}
  */
 final class Audio implements BaseModel
 {

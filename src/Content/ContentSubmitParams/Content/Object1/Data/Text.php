@@ -11,7 +11,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * Text.
  *
- * @phpstan-type TextShape = array{text: string, type: 'text'}
+ * @phpstan-type TextShape = array{text: string, type?: 'text'}
  */
 final class Text implements BaseModel
 {

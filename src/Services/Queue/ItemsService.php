@@ -8,6 +8,8 @@ use ModerationAPI\Client;
 use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\Queue\Items\ItemListParams;
+use ModerationAPI\Queue\Items\ItemListParams\SortDirection;
+use ModerationAPI\Queue\Items\ItemListParams\SortField;
 use ModerationAPI\Queue\Items\ItemListResponse;
 use ModerationAPI\Queue\Items\ItemResolveParams;
 use ModerationAPI\Queue\Items\ItemResolveResponse;
@@ -38,8 +40,8 @@ final class ItemsService implements ItemsContract
      *   labels?: string,
      *   pageNumber?: float,
      *   pageSize?: float,
-     *   sortDirection?: 'asc'|'desc',
-     *   sortField?: 'createdAt'|'severity'|'reviewedAt',
+     *   sortDirection?: 'asc'|'desc'|SortDirection,
+     *   sortField?: 'createdAt'|'severity'|'reviewedAt'|SortField,
      * }|ItemListParams $params
      *
      * @throws APIException

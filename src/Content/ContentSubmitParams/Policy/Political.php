@@ -9,7 +9,7 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type PoliticalShape = array{id: 'political', flag: bool}
+ * @phpstan-type PoliticalShape = array{id?: 'political', flag: bool}
  */
 final class Political implements BaseModel
 {

@@ -13,9 +13,9 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * Sentiment insight.
  *
  * @phpstan-type SentimentInsightShape = array{
- *   id: 'sentiment',
+ *   id?: 'sentiment',
  *   probability: float,
- *   type: 'insight',
+ *   type?: 'insight',
  *   value: value-of<Value>|null,
  * }
  */

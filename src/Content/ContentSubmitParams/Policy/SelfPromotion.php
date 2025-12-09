@@ -9,7 +9,7 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type SelfPromotionShape = array{id: 'self_promotion', flag: bool}
+ * @phpstan-type SelfPromotionShape = array{id?: 'self_promotion', flag: bool}
  */
 final class SelfPromotion implements BaseModel
 {

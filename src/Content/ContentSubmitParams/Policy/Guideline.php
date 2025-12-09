@@ -10,7 +10,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type GuidelineShape = array{
- *   id: 'guideline', flag: bool, guidelineKey: string, instructions: string
+ *   id?: 'guideline', flag: bool, guidelineKey: string, instructions: string
  * }
  */
 final class Guideline implements BaseModel

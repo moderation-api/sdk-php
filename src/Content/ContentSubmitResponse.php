@@ -162,12 +162,12 @@ final class ContentSubmitResponse implements BaseModel
      *   unicode_spoofed?: bool|null,
      * } $evaluation
      * @param list<SentimentInsight|array{
-     *   id: 'sentiment',
+     *   id?: 'sentiment',
      *   probability: float,
-     *   type: 'insight',
+     *   type?: 'insight',
      *   value: value-of<Value>|null,
      * }|LanguageInsight|array{
-     *   id: 'language', probability: float, type: 'insight', value: string|null
+     *   id?: 'language', probability: float, type?: 'insight', value: string|null
      * }> $insights
      * @param Meta|array{
      *   channel_key: string,
@@ -180,7 +180,7 @@ final class ContentSubmitResponse implements BaseModel
      *   id: string,
      *   flagged: bool,
      *   probability: float,
-     *   type: 'classifier',
+     *   type?: 'classifier',
      *   flagged_fields?: list<string>|null,
      *   labels?: list<Label>|null,
      * }|EntityMatcherOutput|array{
@@ -188,7 +188,7 @@ final class ContentSubmitResponse implements BaseModel
      *   flagged: bool,
      *   matches: list<Match1>,
      *   probability: float,
-     *   type: 'entity_matcher',
+     *   type?: 'entity_matcher',
      *   flagged_fields?: list<string>|null,
      * }> $policies
      * @param Recommendation|array{
@@ -279,12 +279,12 @@ final class ContentSubmitResponse implements BaseModel
      * Results of all insights enabled in the channel.
      *
      * @param list<SentimentInsight|array{
-     *   id: 'sentiment',
+     *   id?: 'sentiment',
      *   probability: float,
-     *   type: 'insight',
+     *   type?: 'insight',
      *   value: value-of<Value>|null,
      * }|LanguageInsight|array{
-     *   id: 'language', probability: float, type: 'insight', value: string|null
+     *   id?: 'language', probability: float, type?: 'insight', value: string|null
      * }> $insights
      */
     public function withInsights(array $insights): self
@@ -321,7 +321,7 @@ final class ContentSubmitResponse implements BaseModel
      *   id: string,
      *   flagged: bool,
      *   probability: float,
-     *   type: 'classifier',
+     *   type?: 'classifier',
      *   flagged_fields?: list<string>|null,
      *   labels?: list<Label>|null,
      * }|EntityMatcherOutput|array{
@@ -329,7 +329,7 @@ final class ContentSubmitResponse implements BaseModel
      *   flagged: bool,
      *   matches: list<Match1>,
      *   probability: float,
-     *   type: 'entity_matcher',
+     *   type?: 'entity_matcher',
      *   flagged_fields?: list<string>|null,
      * }> $policies
      */
