@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetStatsResponse\Trends;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class FlaggedContentTrend implements BaseModel
     /**
      * Content flag/label.
      */
-    #[Api]
+    #[Required]
     public string $label;
 
     /**
      * Trend indicator (-1 to 1) showing if this type of flagged content is increasing or decreasing.
      */
-    #[Api]
+    #[Required]
     public float $trend;
 
     /**

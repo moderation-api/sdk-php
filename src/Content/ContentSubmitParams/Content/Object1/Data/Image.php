@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Image implements BaseModel
     use SdkModel;
 
     /** @var 'image' $type */
-    #[Api]
+    #[Required]
     public string $type = 'image';
 
     /**
      * A public URL of the image content.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**

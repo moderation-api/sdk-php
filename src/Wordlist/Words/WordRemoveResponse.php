@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Wordlist\Words;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class WordRemoveResponse implements BaseModel
     /**
      * Number of words removed.
      */
-    #[Api]
+    #[Required]
     public float $removedCount;
 
     /**
@@ -29,13 +29,13 @@ final class WordRemoveResponse implements BaseModel
      *
      * @var list<string> $removedWords
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $removedWords;
 
     /**
      * Total number of words in wordlist.
      */
-    #[Api]
+    #[Required]
     public float $totalCount;
 
     /**

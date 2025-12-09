@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetStatsResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,25 +21,25 @@ final class ActionStat implements BaseModel
     /**
      * ID of the moderation action.
      */
-    #[Api]
+    #[Required]
     public string $actionId;
 
     /**
      * Name of the moderation action.
      */
-    #[Api]
+    #[Required]
     public string $actionName;
 
     /**
      * Number of times this action was taken.
      */
-    #[Api]
+    #[Required]
     public float $count;
 
     /**
      * Percentage this action represents of all actions.
      */
-    #[Api]
+    #[Required]
     public float $percentageOfTotal;
 
     /**

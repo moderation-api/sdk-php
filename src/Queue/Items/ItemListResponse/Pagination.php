@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\Items\ItemListResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -22,19 +22,19 @@ final class Pagination implements BaseModel
     /** @use SdkModel<PaginationShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public float $currentPage;
 
-    #[Api]
+    #[Required]
     public bool $hasNextPage;
 
-    #[Api]
+    #[Required]
     public bool $hasPreviousPage;
 
-    #[Api]
+    #[Required]
     public float $totalItems;
 
-    #[Api]
+    #[Required]
     public float $totalPages;
 
     /**

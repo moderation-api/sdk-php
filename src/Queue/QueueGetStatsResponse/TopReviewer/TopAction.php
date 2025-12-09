@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetStatsResponse\TopReviewer;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,19 +21,19 @@ final class TopAction implements BaseModel
     /**
      * Most used action by this reviewer.
      */
-    #[Api]
+    #[Required]
     public string $actionId;
 
     /**
      * Name of the most used action.
      */
-    #[Api]
+    #[Required]
     public string $actionName;
 
     /**
      * Number of times this action was used.
      */
-    #[Api]
+    #[Required]
     public float $count;
 
     /**

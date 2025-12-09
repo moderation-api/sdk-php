@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Auth;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class AuthGetResponse implements BaseModel
     /**
      * Message of the authentication.
      */
-    #[Api]
+    #[Required]
     public string $message;
 
     /**
      * Status of the authentication.
      */
-    #[Api]
+    #[Required]
     public string $status;
 
     /**

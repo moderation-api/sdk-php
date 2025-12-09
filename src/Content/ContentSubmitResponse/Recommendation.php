@@ -6,7 +6,7 @@ namespace ModerationAPI\Content\ContentSubmitResponse;
 
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation\Action;
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation\ReasonCode;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -27,7 +27,7 @@ final class Recommendation implements BaseModel
      *
      * @var value-of<Action> $action
      */
-    #[Api(enum: Action::class)]
+    #[Required(enum: Action::class)]
     public string $action;
 
     /**
@@ -35,7 +35,7 @@ final class Recommendation implements BaseModel
      *
      * @var list<value-of<ReasonCode>> $reason_codes
      */
-    #[Api(list: ReasonCode::class)]
+    #[Required(list: ReasonCode::class)]
     public array $reason_codes;
 
     /**

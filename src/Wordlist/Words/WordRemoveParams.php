@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Wordlist\Words;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class WordRemoveParams implements BaseModel
      *
      * @var list<string> $words
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $words;
 
     /**

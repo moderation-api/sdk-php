@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Content;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Audio implements BaseModel
     use SdkModel;
 
     /** @var 'audio' $type */
-    #[Api]
+    #[Required]
     public string $type = 'audio';
 
     /**
      * The URL of the audio content.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**

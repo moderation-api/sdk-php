@@ -28,7 +28,8 @@ use ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput\Match
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation;
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation\Action;
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation\ReasonCode;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -52,19 +53,19 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * The author of the content if your account has authors enabled. Requires you to send authorId when submitting content.
      */
-    #[Api]
+    #[Required]
     public ?Author $author;
 
     /**
      * Potentially modified content.
      */
-    #[Api]
+    #[Required]
     public Content $content;
 
     /**
      * The evaluation of the content after running the channel policies.
      */
-    #[Api]
+    #[Required]
     public Evaluation $evaluation;
 
     /**
@@ -72,13 +73,13 @@ final class ContentSubmitResponse implements BaseModel
      *
      * @var list<SentimentInsight|LanguageInsight> $insights
      */
-    #[Api(list: Insight::class)]
+    #[Required(list: Insight::class)]
     public array $insights;
 
     /**
      * Metadata about the moderation request.
      */
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**
@@ -86,13 +87,13 @@ final class ContentSubmitResponse implements BaseModel
      *
      * @var list<ClassifierOutput|EntityMatcherOutput> $policies
      */
-    #[Api(list: Policy::class)]
+    #[Required(list: Policy::class)]
     public array $policies;
 
     /**
      * The recommendation for the content based on the evaluation.
      */
-    #[Api]
+    #[Required]
     public Recommendation $recommendation;
 
     /**
@@ -100,7 +101,7 @@ final class ContentSubmitResponse implements BaseModel
      *
      * @var list<Error>|null $errors
      */
-    #[Api(list: Error::class, optional: true)]
+    #[Optional(list: Error::class)]
     public ?array $errors;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Content;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Video implements BaseModel
     use SdkModel;
 
     /** @var 'video' $type */
-    #[Api]
+    #[Required]
     public string $type = 'video';
 
     /**
      * A public URL of the video content.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**

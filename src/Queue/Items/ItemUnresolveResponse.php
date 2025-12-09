@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\Items;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,16 +21,16 @@ final class ItemUnresolveResponse implements BaseModel
     /**
      * New status of the item.
      */
-    #[Api]
+    #[Required]
     public string $status;
 
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**
      * Timestamp when the item was unresolved.
      */
-    #[Api]
+    #[Required]
     public string $unresolvedAt;
 
     /**

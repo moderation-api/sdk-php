@@ -12,7 +12,7 @@ use ModerationAPI\Authors\AuthorListResponse\Author\RiskEvaluation;
 use ModerationAPI\Authors\AuthorListResponse\Author\Status;
 use ModerationAPI\Authors\AuthorListResponse\Author\TrustLevel;
 use ModerationAPI\Authors\AuthorListResponse\Pagination;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -27,10 +27,10 @@ final class AuthorListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Author> $authors */
-    #[Api(list: Author::class)]
+    #[Required(list: Author::class)]
     public array $authors;
 
-    #[Api]
+    #[Required]
     public Pagination $pagination;
 
     /**

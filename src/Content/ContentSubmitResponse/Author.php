@@ -7,7 +7,8 @@ namespace ModerationAPI\Content\ContentSubmitResponse;
 use ModerationAPI\Content\ContentSubmitResponse\Author\Block;
 use ModerationAPI\Content\ContentSubmitResponse\Author\Status;
 use ModerationAPI\Content\ContentSubmitResponse\Author\TrustLevel;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -30,13 +31,13 @@ final class Author implements BaseModel
     /**
      * Author ID in Moderation API.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Block or suspension details, if applicable. Null if the author is enabled.
      */
-    #[Api]
+    #[Required]
     public ?Block $block;
 
     /**
@@ -44,16 +45,16 @@ final class Author implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
-    #[Api]
+    #[Required]
     public TrustLevel $trust_level;
 
     /**
      * The author's ID from your system.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $external_id;
 
     /**

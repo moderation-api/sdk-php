@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetStatsResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\QueueGetStatsResponse\TopReviewer\TopAction;
@@ -27,19 +28,19 @@ final class TopReviewer implements BaseModel
     /**
      * Average review time in milliseconds.
      */
-    #[Api]
+    #[Required]
     public float $averageTimePerReview;
 
     /**
      * Name of the reviewer.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Number of items reviewed.
      */
-    #[Api]
+    #[Required]
     public float $reviewCount;
 
     /**
@@ -47,19 +48,19 @@ final class TopReviewer implements BaseModel
      *
      * @var list<TopAction> $topActions
      */
-    #[Api(list: TopAction::class)]
+    #[Required(list: TopAction::class)]
     public array $topActions;
 
     /**
      * ID of the reviewer.
      */
-    #[Api]
+    #[Required]
     public string $userId;
 
     /**
      * Optional accuracy score based on review quality metrics.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $accuracyScore;
 
     /**

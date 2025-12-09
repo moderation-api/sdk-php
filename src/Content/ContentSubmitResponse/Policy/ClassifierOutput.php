@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitResponse\Policy;
 
 use ModerationAPI\Content\ContentSubmitResponse\Policy\ClassifierOutput\Label;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -27,19 +28,19 @@ final class ClassifierOutput implements BaseModel
     use SdkModel;
 
     /** @var 'classifier' $type */
-    #[Api]
+    #[Required]
     public string $type = 'classifier';
 
     /**
      * The unique identifier for the classifier output.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public bool $flagged;
 
-    #[Api]
+    #[Required]
     public float $probability;
 
     /**
@@ -47,11 +48,11 @@ final class ClassifierOutput implements BaseModel
      *
      * @var list<string>|null $flagged_fields
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $flagged_fields;
 
     /** @var list<Label>|null $labels */
-    #[Api(list: Label::class, optional: true)]
+    #[Optional(list: Label::class)]
     public ?array $labels;
 
     /**

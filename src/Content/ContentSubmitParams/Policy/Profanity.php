@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -17,10 +17,10 @@ final class Profanity implements BaseModel
     use SdkModel;
 
     /** @var 'profanity' $id */
-    #[Api]
+    #[Required]
     public string $id = 'profanity';
 
-    #[Api]
+    #[Required]
     public bool $flag;
 
     /**

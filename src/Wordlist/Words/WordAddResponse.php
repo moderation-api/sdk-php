@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Wordlist\Words;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class WordAddResponse implements BaseModel
     /**
      * Number of words added.
      */
-    #[Api]
+    #[Required]
     public float $addedCount;
 
     /**
@@ -29,13 +29,13 @@ final class WordAddResponse implements BaseModel
      *
      * @var list<string> $addedWords
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $addedWords;
 
     /**
      * Total number of words in wordlist.
      */
-    #[Api]
+    #[Required]
     public float $totalCount;
 
     /**

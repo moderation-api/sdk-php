@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Wordlist;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -25,31 +25,31 @@ final class WordlistListResponseItem implements BaseModel
     /**
      * Unique identifier of the wordlist.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * When the wordlist was created.
      */
-    #[Api]
+    #[Required]
     public ?string $createdAt;
 
     /**
      * Description of the wordlist.
      */
-    #[Api]
+    #[Required]
     public ?string $description;
 
     /**
      * Name of the wordlist.
      */
-    #[Api]
+    #[Required]
     public ?string $name;
 
     /**
      * User who created the wordlist.
      */
-    #[Api]
+    #[Required]
     public ?string $userId;
 
     /**

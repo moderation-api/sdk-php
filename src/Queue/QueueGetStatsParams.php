@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class QueueGetStatsParams implements BaseModel
     /**
      * Number of days to analyze statistics for.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $withinDays;
 
     public function __construct()

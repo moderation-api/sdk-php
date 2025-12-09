@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetStatsResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\QueueGetStatsResponse\Trends\DailyReviewCount;
@@ -22,11 +22,11 @@ final class Trends implements BaseModel
     use SdkModel;
 
     /** @var list<DailyReviewCount> $dailyReviewCounts */
-    #[Api(list: DailyReviewCount::class)]
+    #[Required(list: DailyReviewCount::class)]
     public array $dailyReviewCounts;
 
     /** @var list<FlaggedContentTrend> $flaggedContentTrends */
-    #[Api(list: FlaggedContentTrend::class)]
+    #[Required(list: FlaggedContentTrend::class)]
     public array $flaggedContentTrends;
 
     /**

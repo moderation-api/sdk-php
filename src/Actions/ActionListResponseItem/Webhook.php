@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions\ActionListResponseItem;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -25,31 +26,31 @@ final class Webhook implements BaseModel
     /**
      * The ID of the webhook.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The webhook's name, used to identify it in the dashboard.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The webhook's URL. We'll call this URL when the event occurs.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**
      * The webhook's description.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $description;
 
     /**
      * The ID of the moderation action to trigger the webhook on. Only used for moderation action webhooks.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $moderationActionId;
 
     /**

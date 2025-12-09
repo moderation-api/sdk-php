@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions\Execute;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -33,7 +33,7 @@ final class ExecuteExecuteByIDParams implements BaseModel
      *
      * @var list<string>|null $authorIds
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $authorIds;
 
     /**
@@ -41,19 +41,19 @@ final class ExecuteExecuteByIDParams implements BaseModel
      *
      * @var list<string>|null $contentIds
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $contentIds;
 
     /**
      * The ID of the queue the action was performed from if any.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $queueId;
 
     /**
      * The value of the action. Useful to set a reason for the action etc.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $value;
 
     public function __construct()

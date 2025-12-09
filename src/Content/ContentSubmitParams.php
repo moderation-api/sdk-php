@@ -35,7 +35,8 @@ use ModerationAPI\Content\ContentSubmitParams\Policy\Toxicity;
 use ModerationAPI\Content\ContentSubmitParams\Policy\ToxicitySevere;
 use ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking;
 use ModerationAPI\Content\ContentSubmitParams\Policy\Violence;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -102,37 +103,37 @@ final class ContentSubmitParams implements BaseModel
     /**
      * The content sent for moderation.
      */
-    #[Api]
+    #[Required]
     public Text|Image|Video|Audio|Object1 $content;
 
     /**
      * The author of the content.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorId;
 
     /**
      * Provide a channel ID or key. Will use the project's default channel if not provided.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $channel;
 
     /**
      * The unique ID of the content in your database.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contentId;
 
     /**
      * For example the ID of a chat room or a post.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conversationId;
 
     /**
      * Do not store the content. The content won't enter the review queue.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $doNotStore;
 
     /**
@@ -140,7 +141,7 @@ final class ContentSubmitParams implements BaseModel
      *
      * @var array<string,mixed>|null $metadata
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $metadata;
 
     /**
@@ -148,7 +149,7 @@ final class ContentSubmitParams implements BaseModel
      *
      * @var value-of<MetaType>|null $metaType
      */
-    #[Api(enum: MetaType::class, optional: true)]
+    #[Optional(enum: MetaType::class)]
     public ?string $metaType;
 
     /**
@@ -156,7 +157,7 @@ final class ContentSubmitParams implements BaseModel
      *
      * @var list<Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Sexual|Flirtation|Profanity|Violence|SelfHarm|Spam|SelfPromotion|Political|Religion|CodeAbuse|PiiMasking|URLMasking|Guideline>|null $policies
      */
-    #[Api(list: Policy::class, optional: true)]
+    #[Optional(list: Policy::class)]
     public ?array $policies;
 
     /**

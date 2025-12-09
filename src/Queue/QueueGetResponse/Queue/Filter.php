@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetResponse\Queue;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Core\Conversion\ListOf;
@@ -31,40 +31,40 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $afterDate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $beforeDate;
 
     /** @var list<string|null>|null $conversationIds */
-    #[Api(type: new ListOf('string', nullable: true), optional: true)]
+    #[Optional(type: new ListOf('string', nullable: true))]
     public ?array $conversationIds;
 
     /** @var list<string>|null $filteredActionIds */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $filteredActionIds;
 
     /** @var list<string>|null $filteredChannelIds */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $filteredChannelIds;
 
     /** @var list<FilterLabel>|null $filterLabels */
-    #[Api(list: FilterLabel::class, optional: true)]
+    #[Optional(list: FilterLabel::class)]
     public ?array $filterLabels;
 
     /** @var list<string>|null $labels */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $labels;
 
     /** @var list<value-of<RecommendationAction>>|null $recommendationActions */
-    #[Api(list: RecommendationAction::class, optional: true)]
+    #[Optional(list: RecommendationAction::class)]
     public ?array $recommendationActions;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $showChecked;
 
     public function __construct()

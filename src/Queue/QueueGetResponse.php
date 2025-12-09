@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\QueueGetResponse\Queue;
@@ -18,7 +18,7 @@ final class QueueGetResponse implements BaseModel
     /** @use SdkModel<QueueGetResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Queue $queue;
 
     /**

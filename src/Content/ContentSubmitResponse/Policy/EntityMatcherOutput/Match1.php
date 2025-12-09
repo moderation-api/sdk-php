@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -18,14 +18,14 @@ final class Match1 implements BaseModel
     /** @use SdkModel<Match1Shape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $match;
 
-    #[Api]
+    #[Required]
     public float $probability;
 
     /** @var list<int> $span */
-    #[Api(list: 'int')]
+    #[Required(list: 'int')]
     public array $span;
 
     /**

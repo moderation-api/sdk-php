@@ -8,7 +8,8 @@ use ModerationAPI\Actions\ActionNewResponse\Position;
 use ModerationAPI\Actions\ActionNewResponse\PossibleValue;
 use ModerationAPI\Actions\ActionNewResponse\QueueBehaviour;
 use ModerationAPI\Actions\ActionNewResponse\Type;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -37,19 +38,19 @@ final class ActionNewResponse implements BaseModel
     /**
      * The ID of the action.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Whether the action is a built-in action or a custom one.
      */
-    #[Api]
+    #[Required]
     public ?bool $builtIn;
 
     /**
      * The date the action was created.
      */
-    #[Api]
+    #[Required]
     public string $createdAt;
 
     /**
@@ -57,19 +58,19 @@ final class ActionNewResponse implements BaseModel
      *
      * @var list<string> $filterInQueueIds
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $filterInQueueIds;
 
     /**
      * Whether the action allows any text to be entered as a value or if it must be one of the possible values.
      */
-    #[Api]
+    #[Required]
     public bool $freeText;
 
     /**
      * The name of the action.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -77,7 +78,7 @@ final class ActionNewResponse implements BaseModel
      *
      * @var value-of<Position> $position
      */
-    #[Api(enum: Position::class)]
+    #[Required(enum: Position::class)]
     public string $position;
 
     /**
@@ -85,7 +86,7 @@ final class ActionNewResponse implements BaseModel
      *
      * @var list<PossibleValue> $possibleValues
      */
-    #[Api(list: PossibleValue::class)]
+    #[Required(list: PossibleValue::class)]
     public array $possibleValues;
 
     /**
@@ -93,25 +94,25 @@ final class ActionNewResponse implements BaseModel
      *
      * @var value-of<QueueBehaviour> $queueBehaviour
      */
-    #[Api(enum: QueueBehaviour::class)]
+    #[Required(enum: QueueBehaviour::class)]
     public string $queueBehaviour;
 
     /**
      * Whether the action requires a value to be executed.
      */
-    #[Api]
+    #[Required]
     public bool $valueRequired;
 
     /**
      * The description of the action.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $description;
 
     /**
      * User defined key of the action.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $key;
 
     /**
@@ -119,7 +120,7 @@ final class ActionNewResponse implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, nullable: true, optional: true)]
+    #[Optional(enum: Type::class, nullable: true)]
     public ?string $type;
 
     /**

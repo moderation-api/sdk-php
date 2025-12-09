@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitResponse\Insight;
 
 use ModerationAPI\Content\ContentSubmitResponse\Insight\SentimentInsight\Value;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -25,18 +25,18 @@ final class SentimentInsight implements BaseModel
     use SdkModel;
 
     /** @var 'sentiment' $id */
-    #[Api]
+    #[Required]
     public string $id = 'sentiment';
 
     /** @var 'insight' $type */
-    #[Api]
+    #[Required]
     public string $type = 'insight';
 
-    #[Api]
+    #[Required]
     public float $probability;
 
     /** @var value-of<Value>|null $value */
-    #[Api(enum: Value::class)]
+    #[Required(enum: Value::class)]
     public ?string $value;
 
     /**

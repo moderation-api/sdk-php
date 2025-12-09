@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions\ActionListResponseItem;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class PossibleValue implements BaseModel
     /**
      * The value of the action.
      */
-    #[Api]
+    #[Required]
     public string $value;
 
     /**

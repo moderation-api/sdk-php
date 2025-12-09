@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Account\AccountListResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class CurrentProject implements BaseModel
     /**
      * ID of the current project.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Name of the current project.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
