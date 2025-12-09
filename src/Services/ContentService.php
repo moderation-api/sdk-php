@@ -7,6 +7,7 @@ namespace ModerationAPI\Services;
 use ModerationAPI\Client;
 use ModerationAPI\Content\ContentSubmitParams;
 use ModerationAPI\Content\ContentSubmitResponse;
+use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\ContentContract;
@@ -44,13 +45,15 @@ final class ContentService implements ContentContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ContentSubmitResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'moderate',
             body: (object) $parsed,
             options: $options,
             convert: ContentSubmitResponse::class,
         );
+
+        return $response->parse();
     }
 }

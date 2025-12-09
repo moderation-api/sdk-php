@@ -11,9 +11,7 @@ use ModerationAPI\Actions\ActionGetResponse\Type;
 use ModerationAPI\Actions\ActionGetResponse\Webhook;
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionGetResponseShape = array{
@@ -33,12 +31,10 @@ use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
  *   type?: value-of<Type>|null,
  * }
  */
-final class ActionGetResponse implements BaseModel, ResponseConverter
+final class ActionGetResponse implements BaseModel
 {
     /** @use SdkModel<ActionGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The ID of the action.

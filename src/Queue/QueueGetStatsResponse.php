@@ -6,9 +6,7 @@ namespace ModerationAPI\Queue;
 
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 use ModerationAPI\Queue\QueueGetStatsResponse\ActionStat;
 use ModerationAPI\Queue\QueueGetStatsResponse\ReviewStats;
 use ModerationAPI\Queue\QueueGetStatsResponse\TopReviewer;
@@ -25,12 +23,10 @@ use ModerationAPI\Queue\QueueGetStatsResponse\Trends\FlaggedContentTrend;
  *   trends: Trends,
  * }
  */
-final class QueueGetStatsResponse implements BaseModel, ResponseConverter
+final class QueueGetStatsResponse implements BaseModel
 {
     /** @use SdkModel<QueueGetStatsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<ActionStat> $actionStats */
     #[Api(list: ActionStat::class)]

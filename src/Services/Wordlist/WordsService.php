@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Services\Wordlist;
 
 use ModerationAPI\Client;
+use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\Wordlist\WordsContract;
@@ -39,14 +40,16 @@ final class WordsService implements WordsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WordAddResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['wordlist/%1$s/words', $id],
             body: (object) $parsed,
             options: $options,
             convert: WordAddResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -68,13 +71,15 @@ final class WordsService implements WordsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WordRemoveResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['wordlist/%1$s/words', $id],
             query: $parsed,
             options: $options,
             convert: WordRemoveResponse::class,
         );
+
+        return $response->parse();
     }
 }

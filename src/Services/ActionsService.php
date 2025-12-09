@@ -14,6 +14,7 @@ use ModerationAPI\Actions\ActionNewResponse;
 use ModerationAPI\Actions\ActionUpdateParams;
 use ModerationAPI\Actions\ActionUpdateResponse;
 use ModerationAPI\Client;
+use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Conversion\ListOf;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
@@ -68,14 +69,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'actions',
             body: (object) $parsed,
             options: $options,
             convert: ActionNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -89,13 +92,15 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['actions/%1$s', $id],
             options: $requestOptions,
             convert: ActionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -132,14 +137,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionUpdateResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['actions/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -162,14 +169,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<ActionListResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'actions',
             query: $parsed,
             options: $options,
             convert: new ListOf(ActionListResponseItem::class),
         );
+
+        return $response->parse();
     }
 
     /**
@@ -183,12 +192,14 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['actions/%1$s', $id],
             options: $requestOptions,
             convert: ActionDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

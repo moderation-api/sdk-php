@@ -30,9 +30,7 @@ use ModerationAPI\Content\ContentSubmitResponse\Recommendation\Action;
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation\ReasonCode;
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ContentSubmitResponseShape = array{
@@ -46,12 +44,10 @@ use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
  *   errors?: list<Error>|null,
  * }
  */
-final class ContentSubmitResponse implements BaseModel, ResponseConverter
+final class ContentSubmitResponse implements BaseModel
 {
     /** @use SdkModel<ContentSubmitResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The author of the content if your account has authors enabled. Requires you to send authorId when submitting content.

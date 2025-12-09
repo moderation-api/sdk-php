@@ -6,9 +6,7 @@ namespace ModerationAPI\Wordlist;
 
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type WordlistUpdateResponseShape = array{
@@ -21,12 +19,10 @@ use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
  *   words: list<string>,
  * }
  */
-final class WordlistUpdateResponse implements BaseModel, ResponseConverter
+final class WordlistUpdateResponse implements BaseModel
 {
     /** @use SdkModel<WordlistUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * ID of the wordlist.

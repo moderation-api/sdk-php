@@ -7,6 +7,7 @@ namespace ModerationAPI\Services;
 use ModerationAPI\Auth\AuthGetResponse;
 use ModerationAPI\Auth\AuthNewResponse;
 use ModerationAPI\Client;
+use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\AuthContract;
@@ -28,13 +29,15 @@ final class AuthService implements AuthContract
     public function create(
         ?RequestOptions $requestOptions = null
     ): AuthNewResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AuthNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'auth',
             options: $requestOptions,
             convert: AuthNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -47,12 +50,14 @@ final class AuthService implements AuthContract
     public function retrieve(
         ?RequestOptions $requestOptions = null
     ): AuthGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AuthGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'auth',
             options: $requestOptions,
             convert: AuthGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

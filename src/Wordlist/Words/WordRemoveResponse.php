@@ -6,21 +6,17 @@ namespace ModerationAPI\Wordlist\Words;
 
 use ModerationAPI\Core\Attributes\Api;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type WordRemoveResponseShape = array{
  *   removedCount: float, removedWords: list<string>, totalCount: float
  * }
  */
-final class WordRemoveResponse implements BaseModel, ResponseConverter
+final class WordRemoveResponse implements BaseModel
 {
     /** @use SdkModel<WordRemoveResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Number of words removed.

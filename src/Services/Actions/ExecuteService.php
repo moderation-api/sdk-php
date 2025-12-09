@@ -9,6 +9,7 @@ use ModerationAPI\Actions\Execute\ExecuteExecuteByIDResponse;
 use ModerationAPI\Actions\Execute\ExecuteExecuteParams;
 use ModerationAPI\Actions\Execute\ExecuteExecuteResponse;
 use ModerationAPI\Client;
+use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\Actions\ExecuteContract;
@@ -45,14 +46,16 @@ final class ExecuteService implements ExecuteContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ExecuteExecuteResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'actions/execute',
             body: (object) $parsed,
             options: $options,
             convert: ExecuteExecuteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -81,13 +84,15 @@ final class ExecuteService implements ExecuteContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ExecuteExecuteByIDResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['actions/%1$s/execute', $actionID],
             body: (object) $parsed,
             options: $options,
             convert: ExecuteExecuteByIDResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Services\Queue;
 
 use ModerationAPI\Client;
+use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\Queue\Items\ItemListParams;
 use ModerationAPI\Queue\Items\ItemListResponse;
@@ -53,14 +54,16 @@ final class ItemsService implements ItemsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ItemListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['queue/%1$s/items', $id],
             query: $parsed,
             options: $options,
             convert: ItemListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -84,14 +87,16 @@ final class ItemsService implements ItemsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ItemResolveResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['queue/%1$s/items/%2$s/resolve', $id, $itemID],
             body: (object) array_diff_key($parsed, ['id']),
             options: $options,
             convert: ItemResolveResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -115,13 +120,15 @@ final class ItemsService implements ItemsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ItemUnresolveResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['queue/%1$s/items/%2$s/unresolve', $id, $itemID],
             body: (object) array_diff_key($parsed, ['id']),
             options: $options,
             convert: ItemUnresolveResponse::class,
         );
+
+        return $response->parse();
     }
 }

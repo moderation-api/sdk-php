@@ -14,6 +14,7 @@ use ModerationAPI\Authors\AuthorNewResponse;
 use ModerationAPI\Authors\AuthorUpdateParams;
 use ModerationAPI\Authors\AuthorUpdateResponse;
 use ModerationAPI\Client;
+use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\AuthorsContract;
@@ -58,14 +59,16 @@ final class AuthorsService implements AuthorsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AuthorNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'authors',
             body: (object) $parsed,
             options: $options,
             convert: AuthorNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -79,13 +82,15 @@ final class AuthorsService implements AuthorsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): AuthorGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AuthorGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['authors/%1$s', $id],
             options: $requestOptions,
             convert: AuthorGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -121,14 +126,16 @@ final class AuthorsService implements AuthorsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AuthorUpdateResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['authors/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: AuthorUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -157,14 +164,16 @@ final class AuthorsService implements AuthorsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AuthorListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'authors',
             query: $parsed,
             options: $options,
             convert: AuthorListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -178,12 +187,14 @@ final class AuthorsService implements AuthorsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): AuthorDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AuthorDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['authors/%1$s', $id],
             options: $requestOptions,
             convert: AuthorDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }
