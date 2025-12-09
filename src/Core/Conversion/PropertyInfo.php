@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Core\Conversion;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Conversion\Contracts\Converter;
 use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
 
@@ -28,9 +29,10 @@ final class PropertyInfo
         $apiName = $property->getName();
         $type = $property->getType();
         $optional = false;
+        $attributes = [...$property->getAttributes(Required::class), ...$property->getAttributes(Optional::class)];
 
-        foreach ($property->getAttributes(Api::class) as $attr) {
-            /** @var Api $attribute */
+        foreach ($attributes as $attr) {
+            /** @var Required $attribute */
             $attribute = $attr->newInstance();
 
             $apiName = $attribute->apiName ?? $apiName;

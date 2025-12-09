@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitParams\Policy\PiiMasking;
 
 use ModerationAPI\Content\ContentSubmitParams\Policy\PiiMasking\Entity\ID;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -24,19 +25,19 @@ final class Entity implements BaseModel
     use SdkModel;
 
     /** @var value-of<ID> $id */
-    #[Api(enum: ID::class)]
+    #[Required(enum: ID::class)]
     public string $id;
 
-    #[Api]
+    #[Required]
     public bool $enable;
 
-    #[Api]
+    #[Required]
     public bool $flag;
 
-    #[Api]
+    #[Required]
     public bool $shouldMask;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mask;
 
     /**

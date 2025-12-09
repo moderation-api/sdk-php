@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions\Execute;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class ExecuteExecuteResponse implements BaseModel
     /**
      * Whether the action was executed successfully.
      */
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**

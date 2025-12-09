@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Authors;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -16,7 +16,7 @@ final class AuthorDeleteResponse implements BaseModel
     /** @use SdkModel<AuthorDeleteResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**

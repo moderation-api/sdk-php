@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions\Execute;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class ExecuteExecuteByIDResponse implements BaseModel
     /**
      * The ID of the action.
      */
-    #[Api]
+    #[Required]
     public string $actionId;
 
     /**
@@ -29,13 +29,13 @@ final class ExecuteExecuteByIDResponse implements BaseModel
      *
      * @var list<string> $ids
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $ids;
 
     /**
      * Action executed successfully.
      */
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**

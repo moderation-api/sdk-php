@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace ModerationAPI\Account;
 
 use ModerationAPI\Account\AccountListResponse\CurrentProject;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -26,28 +27,28 @@ final class AccountListResponse implements BaseModel
     /**
      * ID of the account.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Name of the paid plan.
      */
-    #[Api]
+    #[Required]
     public string $paid_plan_name;
 
     /**
      * Remaining quota.
      */
-    #[Api]
+    #[Required]
     public float $remaining_quota;
 
     /**
      * Text API quota.
      */
-    #[Api]
+    #[Required]
     public float $text_api_quota;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CurrentProject $current_project;
 
     /**

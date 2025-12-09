@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetStatsResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,19 +21,19 @@ final class ReviewStats implements BaseModel
     /**
      * Average time in milliseconds to review an item.
      */
-    #[Api]
+    #[Required]
     public float $averageTimeToReview;
 
     /**
      * Total number of items pending review.
      */
-    #[Api]
+    #[Required]
     public float $totalPending;
 
     /**
      * Total number of items reviewed.
      */
-    #[Api]
+    #[Required]
     public float $totalReviewed;
 
     /**

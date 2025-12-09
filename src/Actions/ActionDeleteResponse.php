@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class ActionDeleteResponse implements BaseModel
     /**
      * The ID of the action.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Whether the action was deleted.
      */
-    #[Api]
+    #[Required]
     public bool $deleted;
 
     /**

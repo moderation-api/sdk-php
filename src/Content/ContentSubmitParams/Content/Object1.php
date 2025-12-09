@@ -9,7 +9,7 @@ use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio;
 use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image;
 use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text;
 use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -27,7 +27,7 @@ final class Object1 implements BaseModel
     use SdkModel;
 
     /** @var 'object' $type */
-    #[Api]
+    #[Required]
     public string $type = 'object';
 
     /**
@@ -35,7 +35,7 @@ final class Object1 implements BaseModel
      *
      * @var array<string,Text|Image|Video|Audio> $data
      */
-    #[Api(map: Data::class)]
+    #[Required(map: Data::class)]
     public array $data;
 
     /**

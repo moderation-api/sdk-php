@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\Items\ItemListResponse\Item;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,19 +19,19 @@ final class Label implements BaseModel
     /**
      * Whether this label caused a flag.
      */
-    #[Api]
+    #[Required]
     public bool $flagged;
 
     /**
      * Label name.
      */
-    #[Api]
+    #[Required]
     public string $label;
 
     /**
      * Confidence score of the label.
      */
-    #[Api]
+    #[Required]
     public float $score;
 
     /**

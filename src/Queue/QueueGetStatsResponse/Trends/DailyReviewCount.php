@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetStatsResponse\Trends;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class DailyReviewCount implements BaseModel
     /**
      * Number of reviews on this date.
      */
-    #[Api]
+    #[Required]
     public float $count;
 
     /**
      * Date in YYYY-MM-DD format.
      */
-    #[Api]
+    #[Required]
     public string $date;
 
     /**

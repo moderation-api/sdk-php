@@ -9,7 +9,8 @@ use ModerationAPI\Actions\ActionGetResponse\PossibleValue;
 use ModerationAPI\Actions\ActionGetResponse\QueueBehaviour;
 use ModerationAPI\Actions\ActionGetResponse\Type;
 use ModerationAPI\Actions\ActionGetResponse\Webhook;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -39,19 +40,19 @@ final class ActionGetResponse implements BaseModel
     /**
      * The ID of the action.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Whether the action is a built-in action or a custom one.
      */
-    #[Api]
+    #[Required]
     public ?bool $builtIn;
 
     /**
      * The date the action was created.
      */
-    #[Api]
+    #[Required]
     public string $createdAt;
 
     /**
@@ -59,19 +60,19 @@ final class ActionGetResponse implements BaseModel
      *
      * @var list<string> $filterInQueueIds
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $filterInQueueIds;
 
     /**
      * Whether the action allows any text to be entered as a value or if it must be one of the possible values.
      */
-    #[Api]
+    #[Required]
     public bool $freeText;
 
     /**
      * The name of the action.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -79,7 +80,7 @@ final class ActionGetResponse implements BaseModel
      *
      * @var value-of<Position> $position
      */
-    #[Api(enum: Position::class)]
+    #[Required(enum: Position::class)]
     public string $position;
 
     /**
@@ -87,7 +88,7 @@ final class ActionGetResponse implements BaseModel
      *
      * @var list<PossibleValue> $possibleValues
      */
-    #[Api(list: PossibleValue::class)]
+    #[Required(list: PossibleValue::class)]
     public array $possibleValues;
 
     /**
@@ -95,13 +96,13 @@ final class ActionGetResponse implements BaseModel
      *
      * @var value-of<QueueBehaviour> $queueBehaviour
      */
-    #[Api(enum: QueueBehaviour::class)]
+    #[Required(enum: QueueBehaviour::class)]
     public string $queueBehaviour;
 
     /**
      * Whether the action requires a value to be executed.
      */
-    #[Api]
+    #[Required]
     public bool $valueRequired;
 
     /**
@@ -109,19 +110,19 @@ final class ActionGetResponse implements BaseModel
      *
      * @var list<Webhook> $webhooks
      */
-    #[Api(list: Webhook::class)]
+    #[Required(list: Webhook::class)]
     public array $webhooks;
 
     /**
      * The description of the action.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $description;
 
     /**
      * User defined key of the action.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $key;
 
     /**
@@ -129,7 +130,7 @@ final class ActionGetResponse implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, nullable: true, optional: true)]
+    #[Optional(enum: Type::class, nullable: true)]
     public ?string $type;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -17,10 +17,10 @@ final class Hate implements BaseModel
     use SdkModel;
 
     /** @var 'hate' $id */
-    #[Api]
+    #[Required]
     public string $id = 'hate';
 
-    #[Api]
+    #[Required]
     public bool $flag;
 
     /**

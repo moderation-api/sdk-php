@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Authors\AuthorGetResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class TrustLevel implements BaseModel
     /**
      * Author trust level (-1, 0, 1, 2, 3, or 4).
      */
-    #[Api]
+    #[Required]
     public float $level;
 
     /**
      * True if the trust level was set manually by a moderator.
      */
-    #[Api]
+    #[Required]
     public bool $manual;
 
     /**

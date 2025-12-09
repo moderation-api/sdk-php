@@ -6,7 +6,7 @@ namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
 use ModerationAPI\Content\ContentSubmitParams\Policy\PiiMasking\Entity;
 use ModerationAPI\Content\ContentSubmitParams\Policy\PiiMasking\Entity\ID;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,11 +19,11 @@ final class PiiMasking implements BaseModel
     use SdkModel;
 
     /** @var 'pii' $id */
-    #[Api]
+    #[Required]
     public string $id = 'pii';
 
     /** @var array<string,Entity> $entities */
-    #[Api(map: Entity::class)]
+    #[Required(map: Entity::class)]
     public array $entities;
 
     /**

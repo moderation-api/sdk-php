@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Auth;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,19 +21,19 @@ final class AuthNewResponse implements BaseModel
     /**
      * Message of the authentication.
      */
-    #[Api]
+    #[Required]
     public string $message;
 
     /**
      * Name of the authenticated project.
      */
-    #[Api]
+    #[Required]
     public string $project;
 
     /**
      * Status of the authentication.
      */
-    #[Api]
+    #[Required]
     public string $status;
 
     /**

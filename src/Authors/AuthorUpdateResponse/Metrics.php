@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Authors\AuthorUpdateResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,19 +22,19 @@ final class Metrics implements BaseModel
     /**
      * Number of flagged content pieces.
      */
-    #[Api]
+    #[Required]
     public float $flagged_content;
 
     /**
      * Total pieces of content.
      */
-    #[Api]
+    #[Required]
     public float $total_content;
 
     /**
      * Average sentiment score of content (-1 to 1). Requires a sentiment model in your project.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?float $average_sentiment;
 
     /**

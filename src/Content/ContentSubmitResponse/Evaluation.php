@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -26,25 +27,25 @@ final class Evaluation implements BaseModel
     /**
      * The probability that the content should be flagged.
      */
-    #[Api]
+    #[Required]
     public float $flag_probability;
 
     /**
      * Whether the content was flagged by any policy.
      */
-    #[Api]
+    #[Required]
     public bool $flagged;
 
     /**
      * The severity score of the content. A higher score indicates more severe content.
      */
-    #[Api]
+    #[Required]
     public float $severity_score;
 
     /**
      * Whether the content was flagged for Unicode spoofing.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $unicode_spoofed;
 
     /**

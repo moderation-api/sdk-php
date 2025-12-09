@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\Items;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,16 +22,16 @@ final class ItemResolveResponse implements BaseModel
     /**
      * Timestamp when the item was resolved.
      */
-    #[Api]
+    #[Required]
     public string $resolvedAt;
 
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**
      * Optional comment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $comment;
 
     /**

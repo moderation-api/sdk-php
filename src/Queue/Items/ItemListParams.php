@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\Items;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -36,37 +36,37 @@ final class ItemListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $afterDate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $beforeDate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conversationIds;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filteredActionIds;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $includeResolved;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $labels;
 
     /**
      * Page number to fetch.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $pageNumber;
 
     /**
      * Number of items per page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $pageSize;
 
     /**
@@ -74,11 +74,11 @@ final class ItemListParams implements BaseModel
      *
      * @var value-of<SortDirection>|null $sortDirection
      */
-    #[Api(enum: SortDirection::class, optional: true)]
+    #[Optional(enum: SortDirection::class)]
     public ?string $sortDirection;
 
     /** @var value-of<SortField>|null $sortField */
-    #[Api(enum: SortField::class, optional: true)]
+    #[Optional(enum: SortField::class)]
     public ?string $sortField;
 
     public function __construct()

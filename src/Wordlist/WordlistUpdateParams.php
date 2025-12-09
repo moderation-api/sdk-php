@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Wordlist;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -31,25 +31,25 @@ final class WordlistUpdateParams implements BaseModel
     /**
      * New description for the wordlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * New key for the wordlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $key;
 
     /**
      * New name for the wordlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Deprecated. Now using threshold in project settings.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $strict;
 
     /**
@@ -57,7 +57,7 @@ final class WordlistUpdateParams implements BaseModel
      *
      * @var list<string>|null $words
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $words;
 
     public function __construct()

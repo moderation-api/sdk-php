@@ -6,7 +6,7 @@ namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
 use ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity;
 use ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity\ID;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,11 +19,11 @@ final class URLMasking implements BaseModel
     use SdkModel;
 
     /** @var 'url' $id */
-    #[Api]
+    #[Required]
     public string $id = 'url';
 
     /** @var array<string,Entity> $entities */
-    #[Api(map: Entity::class)]
+    #[Required(map: Entity::class)]
     public array $entities;
 
     /**

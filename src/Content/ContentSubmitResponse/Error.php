@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -16,10 +16,10 @@ final class Error implements BaseModel
     /** @use SdkModel<ErrorShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public string $message;
 
     /**

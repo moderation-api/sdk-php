@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Authors;
 
 use ModerationAPI\Authors\AuthorUpdateParams\Metadata;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -40,46 +40,46 @@ final class AuthorUpdateParams implements BaseModel
     /**
      * Author email address.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $email;
 
     /**
      * URL of the author's external profile.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $external_link;
 
     /**
      * Timestamp when author first appeared.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $first_seen;
 
     /**
      * Timestamp of last activity.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $last_seen;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?float $manual_trust_level;
 
     /**
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Metadata $metadata;
 
     /**
      * Author name or identifier.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $name;
 
     /**
      * URL of the author's profile picture.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $profile_picture;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Authors\AuthorNewResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class RiskEvaluation implements BaseModel
     /**
      * Calculated risk level based on more than 10 behavioral signals.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?float $risk_level;
 
     public function __construct()

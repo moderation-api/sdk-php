@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitResponse;
 
 use ModerationAPI\Content\ContentSubmitResponse\Meta\Status;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -28,20 +29,20 @@ final class Meta implements BaseModel
     /**
      * The unique key of the channel where the content was handled. Either the channel provided by you or automatically routed.
      */
-    #[Api]
+    #[Required]
     public string $channel_key;
 
     /** @var value-of<Status> $status */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
-    #[Api]
+    #[Required]
     public float $timestamp;
 
-    #[Api]
+    #[Required]
     public float $usage;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $processing_time;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitResponse\Insight;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,17 +21,17 @@ final class LanguageInsight implements BaseModel
     use SdkModel;
 
     /** @var 'language' $id */
-    #[Api]
+    #[Required]
     public string $id = 'language';
 
     /** @var 'insight' $type */
-    #[Api]
+    #[Required]
     public string $type = 'insight';
 
-    #[Api]
+    #[Required]
     public float $probability;
 
-    #[Api]
+    #[Required]
     public ?string $value;
 
     /**

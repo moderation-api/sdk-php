@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetResponse\Queue\Filter;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\FilterLabel\Type;
@@ -22,17 +23,17 @@ final class FilterLabel implements BaseModel
     /** @use SdkModel<FilterLabelShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $label;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?float $maxThreshold;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?float $minThreshold;
 
     /**

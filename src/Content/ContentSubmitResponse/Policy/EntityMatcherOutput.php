@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitResponse\Policy;
 
 use ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput\Match1;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -27,24 +28,24 @@ final class EntityMatcherOutput implements BaseModel
     use SdkModel;
 
     /** @var 'entity_matcher' $type */
-    #[Api]
+    #[Required]
     public string $type = 'entity_matcher';
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public bool $flagged;
 
     /** @var list<Match1> $matches */
-    #[Api(list: Match1::class)]
+    #[Required(list: Match1::class)]
     public array $matches;
 
-    #[Api]
+    #[Required]
     public float $probability;
 
     /** @var list<string>|null $flagged_fields */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $flagged_fields;
 
     /**

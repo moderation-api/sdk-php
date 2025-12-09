@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions\Execute;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -32,7 +33,7 @@ final class ExecuteExecuteParams implements BaseModel
     /**
      * ID or key of the action to execute.
      */
-    #[Api]
+    #[Required]
     public string $actionKey;
 
     /**
@@ -40,7 +41,7 @@ final class ExecuteExecuteParams implements BaseModel
      *
      * @var list<string>|null $authorIds
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $authorIds;
 
     /**
@@ -48,25 +49,25 @@ final class ExecuteExecuteParams implements BaseModel
      *
      * @var list<string>|null $contentIds
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $contentIds;
 
     /**
      * Optional duration in milliseconds for actions with timeouts.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $duration;
 
     /**
      * Optional queue ID if the action is queue-specific.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $queueId;
 
     /**
      * Optional value to provide with the action.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $value;
 
     /**

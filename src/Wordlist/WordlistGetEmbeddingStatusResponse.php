@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Wordlist;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class WordlistGetEmbeddingStatusResponse implements BaseModel
     /**
      * Percentage of words that have been embedded (0-100).
      */
-    #[Api]
+    #[Required]
     public float $progress;
 
     /**
      * Number of words still waiting to be embedded.
      */
-    #[Api]
+    #[Required]
     public float $remainingWords;
 
     /**
      * Total number of words in the wordlist.
      */
-    #[Api]
+    #[Required]
     public float $totalWords;
 
     /**

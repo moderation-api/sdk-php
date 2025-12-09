@@ -6,7 +6,7 @@ namespace ModerationAPI\Authors;
 
 use ModerationAPI\Authors\AuthorListParams\SortBy;
 use ModerationAPI\Authors\AuthorListParams\SortDirection;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -32,29 +32,29 @@ final class AuthorListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contentTypes;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lastActiveDate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $memberSinceDate;
 
     /**
      * Page number to fetch.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $pageNumber;
 
     /**
      * Number of authors per page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $pageSize;
 
     /** @var value-of<SortBy>|null $sortBy */
-    #[Api(enum: SortBy::class, optional: true)]
+    #[Optional(enum: SortBy::class)]
     public ?string $sortBy;
 
     /**
@@ -62,7 +62,7 @@ final class AuthorListParams implements BaseModel
      *
      * @var value-of<SortDirection>|null $sortDirection
      */
-    #[Api(enum: SortDirection::class, optional: true)]
+    #[Optional(enum: SortDirection::class)]
     public ?string $sortDirection;
 
     public function __construct()

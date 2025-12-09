@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter;
@@ -27,25 +27,25 @@ final class Queue implements BaseModel
     /** @use SdkModel<QueueShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public string $description;
 
-    #[Api]
+    #[Required]
     public Filter $filter;
 
-    #[Api]
+    #[Required]
     public string $name;
 
-    #[Api]
+    #[Required]
     public float $resolvedItemsCount;
 
-    #[Api]
+    #[Required]
     public float $totalItemsCount;
 
-    #[Api]
+    #[Required]
     public float $unresolvedItemsCount;
 
     /**

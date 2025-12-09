@@ -10,7 +10,8 @@ use ModerationAPI\Authors\AuthorUpdateResponse\Metrics;
 use ModerationAPI\Authors\AuthorUpdateResponse\RiskEvaluation;
 use ModerationAPI\Authors\AuthorUpdateResponse\Status;
 use ModerationAPI\Authors\AuthorUpdateResponse\TrustLevel;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -41,40 +42,40 @@ final class AuthorUpdateResponse implements BaseModel
     /**
      * Author ID in Moderation API.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Block or suspension details, if applicable. Null if the author is enabled.
      */
-    #[Api]
+    #[Required]
     public ?Block $block;
 
     /**
      * Timestamp when author first appeared.
      */
-    #[Api]
+    #[Required]
     public float $first_seen;
 
     /**
      * Timestamp of last activity.
      */
-    #[Api]
+    #[Required]
     public float $last_seen;
 
     /**
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
      */
-    #[Api]
+    #[Required]
     public Metadata $metadata;
 
-    #[Api]
+    #[Required]
     public Metrics $metrics;
 
     /**
      * Risk assessment details, if available.
      */
-    #[Api]
+    #[Required]
     public ?RiskEvaluation $risk_evaluation;
 
     /**
@@ -82,46 +83,46 @@ final class AuthorUpdateResponse implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
-    #[Api]
+    #[Required]
     public TrustLevel $trust_level;
 
     /**
      * Author email address.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $email;
 
     /**
      * The author's ID from your system.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $external_id;
 
     /**
      * URL of the author's external profile.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $external_link;
 
     /**
      * Timestamp of last incident.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?float $last_incident;
 
     /**
      * Author name or identifier.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $name;
 
     /**
      * URL of the author's profile picture.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $profile_picture;
 
     /**

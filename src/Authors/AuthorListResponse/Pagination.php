@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Authors\AuthorListResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -22,19 +22,19 @@ final class Pagination implements BaseModel
     /** @use SdkModel<PaginationShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public bool $hasNextPage;
 
-    #[Api]
+    #[Required]
     public bool $hasPreviousPage;
 
-    #[Api]
+    #[Required]
     public float $pageNumber;
 
-    #[Api]
+    #[Required]
     public float $pageSize;
 
-    #[Api]
+    #[Required]
     public float $total;
 
     /**

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\Items\ItemListResponse\Item;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -25,31 +26,31 @@ final class Action implements BaseModel
     /**
      * Action ID.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Action name.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Unix timestamp of when the action was taken.
      */
-    #[Api]
+    #[Required]
     public float $timestamp;
 
     /**
      * Action comment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $comment;
 
     /**
      * Moderator userID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $reviewer;
 
     /**

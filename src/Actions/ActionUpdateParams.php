@@ -9,7 +9,7 @@ use ModerationAPI\Actions\ActionUpdateParams\PossibleValue;
 use ModerationAPI\Actions\ActionUpdateParams\QueueBehaviour;
 use ModerationAPI\Actions\ActionUpdateParams\Type;
 use ModerationAPI\Actions\ActionUpdateParams\Webhook;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -45,13 +45,13 @@ final class ActionUpdateParams implements BaseModel
     /**
      * Whether the action is a built-in action or a custom one.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?bool $builtIn;
 
     /**
      * The description of the action.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $description;
 
     /**
@@ -59,25 +59,25 @@ final class ActionUpdateParams implements BaseModel
      *
      * @var list<string>|null $filterInQueueIds
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $filterInQueueIds;
 
     /**
      * Whether the action allows any text to be entered as a value or if it must be one of the possible values.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $freeText;
 
     /**
      * User defined key of the action.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $key;
 
     /**
      * The name of the action.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -85,7 +85,7 @@ final class ActionUpdateParams implements BaseModel
      *
      * @var value-of<Position>|null $position
      */
-    #[Api(enum: Position::class, optional: true)]
+    #[Optional(enum: Position::class)]
     public ?string $position;
 
     /**
@@ -93,7 +93,7 @@ final class ActionUpdateParams implements BaseModel
      *
      * @var list<PossibleValue>|null $possibleValues
      */
-    #[Api(list: PossibleValue::class, optional: true)]
+    #[Optional(list: PossibleValue::class)]
     public ?array $possibleValues;
 
     /**
@@ -101,7 +101,7 @@ final class ActionUpdateParams implements BaseModel
      *
      * @var value-of<QueueBehaviour>|null $queueBehaviour
      */
-    #[Api(enum: QueueBehaviour::class, optional: true)]
+    #[Optional(enum: QueueBehaviour::class)]
     public ?string $queueBehaviour;
 
     /**
@@ -109,13 +109,13 @@ final class ActionUpdateParams implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, nullable: true, optional: true)]
+    #[Optional(enum: Type::class, nullable: true)]
     public ?string $type;
 
     /**
      * Whether the action requires a value to be executed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $valueRequired;
 
     /**
@@ -123,7 +123,7 @@ final class ActionUpdateParams implements BaseModel
      *
      * @var list<Webhook>|null $webhooks
      */
-    #[Api(list: Webhook::class, optional: true)]
+    #[Optional(list: Webhook::class)]
     public ?array $webhooks;
 
     public function __construct()

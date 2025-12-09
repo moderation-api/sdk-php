@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\Items\ItemListResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\Items\ItemListResponse\Item\Action;
@@ -34,23 +35,23 @@ final class Item implements BaseModel
     /**
      * Content ID.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The content to be moderated.
      */
-    #[Api]
+    #[Required]
     public string $content;
 
     /**
      * Whether the item is flagged by any label.
      */
-    #[Api]
+    #[Required]
     public bool $flagged;
 
     /** @var list<Label> $labels */
-    #[Api(list: Label::class)]
+    #[Required(list: Label::class)]
     public array $labels;
 
     /**
@@ -58,13 +59,13 @@ final class Item implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
      * Unix timestamp of when the item was created.
      */
-    #[Api]
+    #[Required]
     public float $timestamp;
 
     /**
@@ -72,31 +73,31 @@ final class Item implements BaseModel
      *
      * @var list<Action>|null $actions
      */
-    #[Api(list: Action::class, optional: true)]
+    #[Optional(list: Action::class)]
     public ?array $actions;
 
     /**
      * Author ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorId;
 
     /**
      * Type of the content object.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contentType;
 
     /**
      * Conversation ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conversationId;
 
     /**
      * Content language.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $language;
 
     /**

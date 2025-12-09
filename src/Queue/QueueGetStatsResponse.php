@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\QueueGetStatsResponse\ActionStat;
@@ -29,10 +29,10 @@ final class QueueGetStatsResponse implements BaseModel
     use SdkModel;
 
     /** @var list<ActionStat> $actionStats */
-    #[Api(list: ActionStat::class)]
+    #[Required(list: ActionStat::class)]
     public array $actionStats;
 
-    #[Api]
+    #[Required]
     public ReviewStats $reviewStats;
 
     /**
@@ -40,10 +40,10 @@ final class QueueGetStatsResponse implements BaseModel
      *
      * @var list<TopReviewer> $topReviewers
      */
-    #[Api(list: TopReviewer::class)]
+    #[Required(list: TopReviewer::class)]
     public array $topReviewers;
 
-    #[Api]
+    #[Required]
     public Trends $trends;
 
     /**

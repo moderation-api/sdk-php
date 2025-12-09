@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Wordlist;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -27,37 +27,37 @@ final class WordlistUpdateResponse implements BaseModel
     /**
      * ID of the wordlist.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Creation date of the wordlist.
      */
-    #[Api]
+    #[Required]
     public string $createdAt;
 
     /**
      * Name of the wordlist.
      */
-    #[Api]
+    #[Required]
     public ?string $name;
 
     /**
      * ID of the organization.
      */
-    #[Api]
+    #[Required]
     public string $organizationId;
 
     /**
      * Strict mode.
      */
-    #[Api]
+    #[Required]
     public bool $strict;
 
     /**
      * ID of the user.
      */
-    #[Api]
+    #[Required]
     public ?string $userId;
 
     /**
@@ -65,7 +65,7 @@ final class WordlistUpdateResponse implements BaseModel
      *
      * @var list<string> $words
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $words;
 
     /**

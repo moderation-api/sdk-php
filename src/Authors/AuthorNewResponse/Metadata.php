@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Authors\AuthorNewResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -26,25 +26,25 @@ final class Metadata implements BaseModel
     /**
      * Whether the author's email is verified.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?bool $email_verified;
 
     /**
      * Whether the author's identity is verified.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?bool $identity_verified;
 
     /**
      * Whether the author is a paying customer.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?bool $is_paying_customer;
 
     /**
      * Whether the author's phone number is verified.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?bool $phone_verified;
 
     public function __construct()
