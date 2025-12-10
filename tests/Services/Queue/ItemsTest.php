@@ -36,7 +36,7 @@ final class ItemsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->queue->items->list('id', []);
+        $result = $this->client->queue->items->list('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ItemListResponse::class, $result);
@@ -49,7 +49,7 @@ final class ItemsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->queue->items->resolve('itemId', ['id' => 'id']);
+        $result = $this->client->queue->items->resolve('itemId', id: 'id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ItemResolveResponse::class, $result);
@@ -64,7 +64,8 @@ final class ItemsTest extends TestCase
 
         $result = $this->client->queue->items->resolve(
             'itemId',
-            ['id' => 'id', 'comment' => 'comment']
+            id: 'id',
+            comment: 'comment'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -78,7 +79,7 @@ final class ItemsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->queue->items->unresolve('itemId', ['id' => 'id']);
+        $result = $this->client->queue->items->unresolve('itemId', id: 'id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ItemUnresolveResponse::class, $result);
@@ -93,7 +94,8 @@ final class ItemsTest extends TestCase
 
         $result = $this->client->queue->items->unresolve(
             'itemId',
-            ['id' => 'id', 'comment' => 'comment']
+            id: 'id',
+            comment: 'comment'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

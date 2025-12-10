@@ -35,10 +35,7 @@ final class WordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wordlist->words->add(
-            'id',
-            ['words' => ['string']]
-        );
+        $result = $this->client->wordlist->words->add('id', words: ['string']);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WordAddResponse::class, $result);
@@ -51,10 +48,7 @@ final class WordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wordlist->words->add(
-            'id',
-            ['words' => ['string']]
-        );
+        $result = $this->client->wordlist->words->add('id', words: ['string']);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WordAddResponse::class, $result);
@@ -67,10 +61,7 @@ final class WordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wordlist->words->remove(
-            'id',
-            ['words' => ['string']]
-        );
+        $result = $this->client->wordlist->words->remove('id', words: ['string']);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WordRemoveResponse::class, $result);
@@ -83,10 +74,7 @@ final class WordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wordlist->words->remove(
-            'id',
-            ['words' => ['string']]
-        );
+        $result = $this->client->wordlist->words->remove('id', words: ['string']);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WordRemoveResponse::class, $result);

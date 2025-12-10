@@ -4,38 +4,45 @@ declare(strict_types=1);
 
 namespace ModerationAPI\ServiceContracts\Wordlist;
 
+use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
+use ModerationAPI\Wordlist\Words\WordAddParams;
 use ModerationAPI\Wordlist\Words\WordAddResponse;
+use ModerationAPI\Wordlist\Words\WordRemoveParams;
 use ModerationAPI\Wordlist\Words\WordRemoveResponse;
 
-interface WordsContract
+interface WordsRawContract
 {
     /**
      * @api
      *
      * @param string $id ID of the wordlist to add words to
-     * @param list<string> $words Array of words to add to the wordlist. Duplicate words will be ignored.
+     * @param array<mixed>|WordAddParams $params
+     *
+     * @return BaseResponse<WordAddResponse>
      *
      * @throws APIException
      */
     public function add(
         string $id,
-        array $words,
-        ?RequestOptions $requestOptions = null
-    ): WordAddResponse;
+        array|WordAddParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id ID of the wordlist to remove words from
-     * @param list<string> $words Array of words to remove from the wordlist
+     * @param array<mixed>|WordRemoveParams $params
+     *
+     * @return BaseResponse<WordRemoveResponse>
      *
      * @throws APIException
      */
     public function remove(
         string $id,
-        array $words,
-        ?RequestOptions $requestOptions = null
-    ): WordRemoveResponse;
+        array|WordRemoveParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
 }

@@ -35,9 +35,7 @@ final class ExecuteTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->execute->execute([
-            'actionKey' => 'actionKey',
-        ]);
+        $result = $this->client->actions->execute->execute(actionKey: 'actionKey');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ExecuteExecuteResponse::class, $result);
@@ -50,14 +48,14 @@ final class ExecuteTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->execute->execute([
-            'actionKey' => 'actionKey',
-            'authorIDs' => ['string'],
-            'contentIDs' => ['string'],
-            'duration' => 0,
-            'queueID' => 'queueId',
-            'value' => 'value',
-        ]);
+        $result = $this->client->actions->execute->execute(
+            actionKey: 'actionKey',
+            authorIDs: ['string'],
+            contentIDs: ['string'],
+            duration: 0,
+            queueID: 'queueId',
+            value: 'value',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ExecuteExecuteResponse::class, $result);
@@ -70,7 +68,7 @@ final class ExecuteTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->execute->executeByID('actionId', []);
+        $result = $this->client->actions->execute->executeByID('actionId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ExecuteExecuteByIDResponse::class, $result);

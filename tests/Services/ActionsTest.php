@@ -37,7 +37,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->create(['name' => 'name']);
+        $result = $this->client->actions->create(name: 'name');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionNewResponse::class, $result);
@@ -50,19 +50,19 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->create([
-            'name' => 'name',
-            'builtIn' => true,
-            'description' => 'description',
-            'filterInQueueIDs' => ['string'],
-            'freeText' => true,
-            'key' => 'key',
-            'position' => 'ALL_QUEUES',
-            'possibleValues' => [['value' => 'value']],
-            'queueBehaviour' => 'REMOVE',
-            'type' => 'AUTHOR_BLOCK',
-            'valueRequired' => true,
-            'webhooks' => [
+        $result = $this->client->actions->create(
+            name: 'name',
+            builtIn: true,
+            description: 'description',
+            filterInQueueIDs: ['string'],
+            freeText: true,
+            key: 'key',
+            position: 'ALL_QUEUES',
+            possibleValues: [['value' => 'value']],
+            queueBehaviour: 'REMOVE',
+            type: 'AUTHOR_BLOCK',
+            valueRequired: true,
+            webhooks: [
                 [
                     'name' => 'name',
                     'url' => 'https://example.com',
@@ -70,7 +70,7 @@ final class ActionsTest extends TestCase
                     'description' => 'description',
                 ],
             ],
-        ]);
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionNewResponse::class, $result);
@@ -96,7 +96,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->update('id', []);
+        $result = $this->client->actions->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionUpdateResponse::class, $result);
@@ -109,7 +109,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->list([]);
+        $result = $this->client->actions->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);

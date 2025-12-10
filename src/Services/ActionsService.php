@@ -4,28 +4,27 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Services;
 
-use ModerationAPI\Actions\ActionCreateParams;
 use ModerationAPI\Actions\ActionCreateParams\Position;
 use ModerationAPI\Actions\ActionCreateParams\QueueBehaviour;
 use ModerationAPI\Actions\ActionCreateParams\Type;
 use ModerationAPI\Actions\ActionDeleteResponse;
 use ModerationAPI\Actions\ActionGetResponse;
-use ModerationAPI\Actions\ActionListParams;
 use ModerationAPI\Actions\ActionListResponseItem;
 use ModerationAPI\Actions\ActionNewResponse;
-use ModerationAPI\Actions\ActionUpdateParams;
 use ModerationAPI\Actions\ActionUpdateResponse;
 use ModerationAPI\Client;
-use ModerationAPI\Core\Contracts\BaseResponse;
-use ModerationAPI\Core\Conversion\ListOf;
 use ModerationAPI\Core\Exceptions\APIException;
-use ModerationAPI\Core\Util;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\ActionsContract;
 use ModerationAPI\Services\Actions\ExecuteService;
 
 final class ActionsService implements ActionsContract
 {
+    /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
     /**
      * @api
      */
@@ -36,6 +35,7 @@ final class ActionsService implements ActionsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new ActionsRawService($client);
         $this->execute = new ExecuteService($client);
     }
 
@@ -44,42 +44,59 @@ final class ActionsService implements ActionsContract
      *
      * Create an action.
      *
-     * @param array{
-     *   name: string,
-     *   builtIn?: bool|null,
-     *   description?: string|null,
-     *   filterInQueueIDs?: list<string>,
-     *   freeText?: bool,
-     *   key?: string|null,
-     *   position?: 'ALL_QUEUES'|'SOME_QUEUES'|'HIDDEN'|Position,
-     *   possibleValues?: list<array{value: string}>,
-     *   queueBehaviour?: 'REMOVE'|'ADD'|'NO_CHANGE'|QueueBehaviour,
-     *   type?: value-of<Type>,
-     *   valueRequired?: bool,
-     *   webhooks?: list<array{
-     *     name: string, url: string, id?: string, description?: string|null
-     *   }>,
-     * }|ActionCreateParams $params
+     * @param string $name the name of the action
+     * @param bool|null $builtIn whether the action is a built-in action or a custom one
+     * @param string|null $description the description of the action
+     * @param list<string> $filterInQueueIDs the IDs of the queues the action is available in
+     * @param bool $freeText whether the action allows any text to be entered as a value or if it must be one of the possible values
+     * @param string|null $key user defined key of the action
+     * @param 'ALL_QUEUES'|'SOME_QUEUES'|'HIDDEN'|Position $position show the action in all queues, selected queues or no queues (to use via API only)
+     * @param list<array{
+     *   value: string
+     * }> $possibleValues The possible values of the action. The user will be prompted to select one of these values when executing the action.
+     * @param 'REMOVE'|'ADD'|'NO_CHANGE'|QueueBehaviour $queueBehaviour whether the action resolves and removes the item, unresolves and re-add it to the queue, or does not change the resolve status
+     * @param 'AUTHOR_BLOCK'|'AUTHOR_BLOCK_TEMP'|'AUTHOR_UNBLOCK'|'AUTHOR_DELETE'|'AUTHOR_REPORT'|'AUTHOR_WARN'|'AUTHOR_CUSTOM'|'ITEM_REJECT'|'ITEM_ALLOW'|'ITEM_CUSTOM'|Type|null $type the type of the action
+     * @param bool $valueRequired whether the action requires a value to be executed
+     * @param list<array{
+     *   name: string, url: string, id?: string, description?: string|null
+     * }> $webhooks The action's webhooks
      *
      * @throws APIException
      */
     public function create(
-        array|ActionCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string $name,
+        ?bool $builtIn = false,
+        ?string $description = null,
+        array $filterInQueueIDs = [],
+        bool $freeText = false,
+        ?string $key = null,
+        string|Position $position = 'ALL_QUEUES',
+        array $possibleValues = [],
+        string|QueueBehaviour $queueBehaviour = 'NO_CHANGE',
+        string|Type|null $type = null,
+        bool $valueRequired = false,
+        array $webhooks = [],
+        ?RequestOptions $requestOptions = null,
     ): ActionNewResponse {
-        [$parsed, $options] = ActionCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'name' => $name,
+            'builtIn' => $builtIn,
+            'description' => $description,
+            'filterInQueueIDs' => $filterInQueueIDs,
+            'freeText' => $freeText,
+            'key' => $key,
+            'position' => $position,
+            'possibleValues' => $possibleValues,
+            'queueBehaviour' => $queueBehaviour,
+            'type' => $type,
+            'valueRequired' => $valueRequired,
+            'webhooks' => $webhooks,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ActionNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'actions',
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -89,19 +106,16 @@ final class ActionsService implements ActionsContract
      *
      * Get an action by ID.
      *
+     * @param string $id the ID of the action to get
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionGetResponse {
-        /** @var BaseResponse<ActionGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['actions/%1$s', $id],
-            options: $requestOptions,
-            convert: ActionGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -111,43 +125,61 @@ final class ActionsService implements ActionsContract
      *
      * Update an action.
      *
-     * @param array{
-     *   builtIn?: bool|null,
-     *   description?: string|null,
-     *   filterInQueueIDs?: list<string>,
-     *   freeText?: bool,
-     *   key?: string|null,
-     *   name?: string,
-     *   position?: 'ALL_QUEUES'|'SOME_QUEUES'|'HIDDEN'|ActionUpdateParams\Position,
-     *   possibleValues?: list<array{value: string}>,
-     *   queueBehaviour?: 'REMOVE'|'ADD'|'NO_CHANGE'|ActionUpdateParams\QueueBehaviour,
-     *   type?: value-of<ActionUpdateParams\Type>,
-     *   valueRequired?: bool,
-     *   webhooks?: list<array{
-     *     name: string, url: string, id?: string, description?: string|null
-     *   }>,
-     * }|ActionUpdateParams $params
+     * @param string $id the ID of the action to update
+     * @param bool|null $builtIn whether the action is a built-in action or a custom one
+     * @param string|null $description the description of the action
+     * @param list<string> $filterInQueueIDs the IDs of the queues the action is available in
+     * @param bool $freeText whether the action allows any text to be entered as a value or if it must be one of the possible values
+     * @param string|null $key user defined key of the action
+     * @param string $name the name of the action
+     * @param 'ALL_QUEUES'|'SOME_QUEUES'|'HIDDEN'|\ModerationAPI\Actions\ActionUpdateParams\Position $position show the action in all queues, selected queues or no queues (to use via API only)
+     * @param list<array{
+     *   value: string
+     * }> $possibleValues The possible values of the action. The user will be prompted to select one of these values when executing the action.
+     * @param 'REMOVE'|'ADD'|'NO_CHANGE'|\ModerationAPI\Actions\ActionUpdateParams\QueueBehaviour $queueBehaviour whether the action resolves and removes the item, unresolves and re-add it to the queue, or does not change the resolve status
+     * @param 'AUTHOR_BLOCK'|'AUTHOR_BLOCK_TEMP'|'AUTHOR_UNBLOCK'|'AUTHOR_DELETE'|'AUTHOR_REPORT'|'AUTHOR_WARN'|'AUTHOR_CUSTOM'|'ITEM_REJECT'|'ITEM_ALLOW'|'ITEM_CUSTOM'|\ModerationAPI\Actions\ActionUpdateParams\Type|null $type the type of the action
+     * @param bool $valueRequired whether the action requires a value to be executed
+     * @param list<array{
+     *   name: string, url: string, id?: string, description?: string|null
+     * }> $webhooks The action's webhooks
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|ActionUpdateParams $params,
+        ?bool $builtIn = false,
+        ?string $description = null,
+        array $filterInQueueIDs = [],
+        bool $freeText = false,
+        ?string $key = null,
+        ?string $name = null,
+        string|\ModerationAPI\Actions\ActionUpdateParams\Position $position = 'ALL_QUEUES',
+        array $possibleValues = [],
+        string|\ModerationAPI\Actions\ActionUpdateParams\QueueBehaviour $queueBehaviour = 'NO_CHANGE',
+        string|\ModerationAPI\Actions\ActionUpdateParams\Type|null $type = null,
+        bool $valueRequired = false,
+        array $webhooks = [],
         ?RequestOptions $requestOptions = null,
     ): ActionUpdateResponse {
-        [$parsed, $options] = ActionUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'builtIn' => $builtIn,
+            'description' => $description,
+            'filterInQueueIDs' => $filterInQueueIDs,
+            'freeText' => $freeText,
+            'key' => $key,
+            'name' => $name,
+            'position' => $position,
+            'possibleValues' => $possibleValues,
+            'queueBehaviour' => $queueBehaviour,
+            'type' => $type,
+            'valueRequired' => $valueRequired,
+            'webhooks' => $webhooks,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ActionUpdateResponse> */
-        $response = $this->client->request(
-            method: 'put',
-            path: ['actions/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -157,29 +189,20 @@ final class ActionsService implements ActionsContract
      *
      * List all available moderation actions for the authenticated organization.
      *
-     * @param array{queueID?: string}|ActionListParams $params
-     *
      * @return list<ActionListResponseItem>
      *
      * @throws APIException
      */
     public function list(
-        array|ActionListParams $params,
+        ?string $queueID = null,
         ?RequestOptions $requestOptions = null
     ): array {
-        [$parsed, $options] = ActionListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['queueID' => $queueID];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<list<ActionListResponseItem>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'actions',
-            query: Util::array_transform_keys($parsed, ['queueID' => 'queueId']),
-            options: $options,
-            convert: new ListOf(ActionListResponseItem::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -189,19 +212,16 @@ final class ActionsService implements ActionsContract
      *
      * Delete an action and all of its webhooks.
      *
+     * @param string $id the ID of the action to delete
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionDeleteResponse {
-        /** @var BaseResponse<ActionDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['actions/%1$s', $id],
-            options: $requestOptions,
-            convert: ActionDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
