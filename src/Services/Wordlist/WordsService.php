@@ -5,49 +5,46 @@ declare(strict_types=1);
 namespace ModerationAPI\Services\Wordlist;
 
 use ModerationAPI\Client;
-use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\Wordlist\WordsContract;
-use ModerationAPI\Wordlist\Words\WordAddParams;
 use ModerationAPI\Wordlist\Words\WordAddResponse;
-use ModerationAPI\Wordlist\Words\WordRemoveParams;
 use ModerationAPI\Wordlist\Words\WordRemoveResponse;
 
 final class WordsService implements WordsContract
 {
     /**
+     * @api
+     */
+    public WordsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new WordsRawService($client);
+    }
 
     /**
      * @api
      *
      * Add words to an existing wordlist
      *
-     * @param array{words: list<string>}|WordAddParams $params
+     * @param string $id ID of the wordlist to add words to
+     * @param list<string> $words Array of words to add to the wordlist. Duplicate words will be ignored.
      *
      * @throws APIException
      */
     public function add(
         string $id,
-        array|WordAddParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $words,
+        ?RequestOptions $requestOptions = null
     ): WordAddResponse {
-        [$parsed, $options] = WordAddParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['words' => $words];
 
-        /** @var BaseResponse<WordAddResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['wordlist/%1$s/words', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: WordAddResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->add($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -57,28 +54,20 @@ final class WordsService implements WordsContract
      *
      * Remove words from an existing wordlist
      *
-     * @param array{words: list<string>}|WordRemoveParams $params
+     * @param string $id ID of the wordlist to remove words from
+     * @param list<string> $words Array of words to remove from the wordlist
      *
      * @throws APIException
      */
     public function remove(
         string $id,
-        array|WordRemoveParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $words,
+        ?RequestOptions $requestOptions = null
     ): WordRemoveResponse {
-        [$parsed, $options] = WordRemoveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['words' => $words];
 
-        /** @var BaseResponse<WordRemoveResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['wordlist/%1$s/words', $id],
-            query: $parsed,
-            options: $options,
-            convert: WordRemoveResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->remove($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

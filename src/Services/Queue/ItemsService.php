@@ -5,16 +5,11 @@ declare(strict_types=1);
 namespace ModerationAPI\Services\Queue;
 
 use ModerationAPI\Client;
-use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
-use ModerationAPI\Core\Util;
-use ModerationAPI\Queue\Items\ItemListParams;
 use ModerationAPI\Queue\Items\ItemListParams\SortDirection;
 use ModerationAPI\Queue\Items\ItemListParams\SortField;
 use ModerationAPI\Queue\Items\ItemListResponse;
-use ModerationAPI\Queue\Items\ItemResolveParams;
 use ModerationAPI\Queue\Items\ItemResolveResponse;
-use ModerationAPI\Queue\Items\ItemUnresolveParams;
 use ModerationAPI\Queue\Items\ItemUnresolveResponse;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\Queue\ItemsContract;
@@ -22,56 +17,64 @@ use ModerationAPI\ServiceContracts\Queue\ItemsContract;
 final class ItemsService implements ItemsContract
 {
     /**
+     * @api
+     */
+    public ItemsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ItemsRawService($client);
+    }
 
     /**
      * @api
      *
      * Get paginated list of items in a moderation queue with filtering options
      *
-     * @param array{
-     *   afterDate?: string,
-     *   authorID?: string,
-     *   beforeDate?: string,
-     *   conversationIDs?: string,
-     *   filteredActionIDs?: string,
-     *   includeResolved?: string,
-     *   labels?: string,
-     *   pageNumber?: float,
-     *   pageSize?: float,
-     *   sortDirection?: 'asc'|'desc'|SortDirection,
-     *   sortField?: 'createdAt'|'severity'|'reviewedAt'|SortField,
-     * }|ItemListParams $params
+     * @param string $id The queue ID
+     * @param float $pageNumber Page number to fetch
+     * @param float $pageSize Number of items per page
+     * @param 'asc'|'desc'|SortDirection $sortDirection Sort direction
+     * @param 'createdAt'|'severity'|'reviewedAt'|SortField $sortField
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        array|ItemListParams $params,
+        ?string $afterDate = null,
+        ?string $authorID = null,
+        ?string $beforeDate = null,
+        ?string $conversationIDs = null,
+        ?string $filteredActionIDs = null,
+        ?string $includeResolved = null,
+        ?string $labels = null,
+        float $pageNumber = 1,
+        float $pageSize = 20,
+        string|SortDirection $sortDirection = 'desc',
+        string|SortField|null $sortField = null,
         ?RequestOptions $requestOptions = null,
     ): ItemListResponse {
-        [$parsed, $options] = ItemListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'afterDate' => $afterDate,
+            'authorID' => $authorID,
+            'beforeDate' => $beforeDate,
+            'conversationIDs' => $conversationIDs,
+            'filteredActionIDs' => $filteredActionIDs,
+            'includeResolved' => $includeResolved,
+            'labels' => $labels,
+            'pageNumber' => $pageNumber,
+            'pageSize' => $pageSize,
+            'sortDirection' => $sortDirection,
+            'sortField' => $sortField,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ItemListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['queue/%1$s/items', $id],
-            query: Util::array_transform_keys(
-                $parsed,
-                [
-                    'authorID' => 'authorId',
-                    'conversationIDs' => 'conversationIds',
-                    'filteredActionIDs' => 'filteredActionIds',
-                ],
-            ),
-            options: $options,
-            convert: ItemListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -81,30 +84,24 @@ final class ItemsService implements ItemsContract
      *
      * Mark a queue item as resolved with a specific moderation action
      *
-     * @param array{id: string, comment?: string}|ItemResolveParams $params
+     * @param string $itemID Path param: The item ID to resolve
+     * @param string $id Path param: The queue ID
+     * @param string $comment Body param: Optional comment
      *
      * @throws APIException
      */
     public function resolve(
         string $itemID,
-        array|ItemResolveParams $params,
+        string $id,
+        ?string $comment = null,
         ?RequestOptions $requestOptions = null,
     ): ItemResolveResponse {
-        [$parsed, $options] = ItemResolveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $id = $parsed['id'];
-        unset($parsed['id']);
+        $params = ['id' => $id, 'comment' => $comment];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ItemResolveResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['queue/%1$s/items/%2$s/resolve', $id, $itemID],
-            body: (object) array_diff_key($parsed, ['id']),
-            options: $options,
-            convert: ItemResolveResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->resolve($itemID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -114,30 +111,24 @@ final class ItemsService implements ItemsContract
      *
      * Mark a previously resolved queue item as unresolved/pending
      *
-     * @param array{id: string, comment?: string}|ItemUnresolveParams $params
+     * @param string $itemID Path param: The item ID to unresolve
+     * @param string $id Path param: The queue ID
+     * @param string $comment Body param: Optional reason for unresolving the item
      *
      * @throws APIException
      */
     public function unresolve(
         string $itemID,
-        array|ItemUnresolveParams $params,
+        string $id,
+        ?string $comment = null,
         ?RequestOptions $requestOptions = null,
     ): ItemUnresolveResponse {
-        [$parsed, $options] = ItemUnresolveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $id = $parsed['id'];
-        unset($parsed['id']);
+        $params = ['id' => $id, 'comment' => $comment];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ItemUnresolveResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['queue/%1$s/items/%2$s/unresolve', $id, $itemID],
-            body: (object) array_diff_key($parsed, ['id']),
-            options: $options,
-            convert: ItemUnresolveResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->unresolve($itemID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

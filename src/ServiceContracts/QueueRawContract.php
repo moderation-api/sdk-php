@@ -4,36 +4,42 @@ declare(strict_types=1);
 
 namespace ModerationAPI\ServiceContracts;
 
+use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\Queue\QueueGetResponse;
+use ModerationAPI\Queue\QueueGetStatsParams;
 use ModerationAPI\Queue\QueueGetStatsResponse;
 use ModerationAPI\RequestOptions;
 
-interface QueueContract
+interface QueueRawContract
 {
     /**
      * @api
      *
      * @param string $id The queue ID
      *
+     * @return BaseResponse<QueueGetResponse>
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
-    ): QueueGetResponse;
+    ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id The queue ID
-     * @param string $withinDays Number of days to analyze statistics for
+     * @param array<mixed>|QueueGetStatsParams $params
+     *
+     * @return BaseResponse<QueueGetStatsResponse>
      *
      * @throws APIException
      */
     public function getStats(
         string $id,
-        string $withinDays = '30',
+        array|QueueGetStatsParams $params,
         ?RequestOptions $requestOptions = null,
-    ): QueueGetStatsResponse;
+    ): BaseResponse;
 }

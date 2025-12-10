@@ -38,7 +38,7 @@ final class AuthorsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authors->create(['externalID' => 'external_id']);
+        $result = $this->client->authors->create(externalID: 'external_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AuthorNewResponse::class, $result);
@@ -51,22 +51,22 @@ final class AuthorsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authors->create([
-            'externalID' => 'external_id',
-            'email' => 'dev@stainless.com',
-            'externalLink' => 'https://example.com',
-            'firstSeen' => 0,
-            'lastSeen' => 0,
-            'manualTrustLevel' => -1,
-            'metadata' => [
+        $result = $this->client->authors->create(
+            externalID: 'external_id',
+            email: 'dev@stainless.com',
+            externalLink: 'https://example.com',
+            firstSeen: 0,
+            lastSeen: 0,
+            manualTrustLevel: -1,
+            metadata: [
                 'emailVerified' => true,
                 'identityVerified' => true,
                 'isPayingCustomer' => true,
                 'phoneVerified' => true,
             ],
-            'name' => 'name',
-            'profilePicture' => 'https://example.com',
-        ]);
+            name: 'name',
+            profilePicture: 'https://example.com',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AuthorNewResponse::class, $result);
@@ -92,7 +92,7 @@ final class AuthorsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authors->update('id', []);
+        $result = $this->client->authors->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AuthorUpdateResponse::class, $result);
@@ -105,7 +105,7 @@ final class AuthorsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authors->list([]);
+        $result = $this->client->authors->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AuthorListResponse::class, $result);

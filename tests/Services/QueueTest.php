@@ -48,7 +48,7 @@ final class QueueTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->queue->getStats('id', []);
+        $result = $this->client->queue->getStats('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(QueueGetStatsResponse::class, $result);

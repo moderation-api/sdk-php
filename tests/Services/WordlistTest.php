@@ -49,7 +49,7 @@ final class WordlistTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wordlist->update('id', []);
+        $result = $this->client->wordlist->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WordlistUpdateResponse::class, $result);
