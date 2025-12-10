@@ -7,6 +7,7 @@ namespace ModerationAPI;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 use ModerationAPI\Core\BaseClient;
+use ModerationAPI\Core\Util;
 use ModerationAPI\Services\AccountService;
 use ModerationAPI\Services\ActionsService;
 use ModerationAPI\Services\AuthorsService;
@@ -77,9 +78,9 @@ class Client extends BaseClient
                 'User-Agent' => sprintf('moderation-api/PHP %s', '0.0.1'),
                 'X-Stainless-Lang' => 'php',
                 'X-Stainless-Package-Version' => '0.0.1',
-                'X-Stainless-OS' => $this->getNormalizedOS(),
-                'X-Stainless-Arch' => $this->getNormalizedArchitecture(),
-                'X-Stainless-Runtime' => 'php',
+                'X-Stainless-Arch' => Util::machtype(),
+                'X-Stainless-OS' => Util::ostype(),
+                'X-Stainless-Runtime' => php_sapi_name(),
                 'X-Stainless-Runtime-Version' => phpversion(),
             ],
             // x-release-please-end
