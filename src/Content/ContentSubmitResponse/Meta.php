@@ -82,16 +82,16 @@ final class Meta implements BaseModel
         float $usage,
         ?string $processingTime = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['channelKey'] = $channelKey;
-        $obj['status'] = $status;
-        $obj['timestamp'] = $timestamp;
-        $obj['usage'] = $usage;
+        $self['channelKey'] = $channelKey;
+        $self['status'] = $status;
+        $self['timestamp'] = $timestamp;
+        $self['usage'] = $usage;
 
-        null !== $processingTime && $obj['processingTime'] = $processingTime;
+        null !== $processingTime && $self['processingTime'] = $processingTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class Meta implements BaseModel
      */
     public function withChannelKey(string $channelKey): self
     {
-        $obj = clone $this;
-        $obj['channelKey'] = $channelKey;
+        $self = clone $this;
+        $self['channelKey'] = $channelKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,33 +110,33 @@ final class Meta implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withTimestamp(float $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     public function withUsage(float $usage): self
     {
-        $obj = clone $this;
-        $obj['usage'] = $usage;
+        $self = clone $this;
+        $self['usage'] = $usage;
 
-        return $obj;
+        return $self;
     }
 
     public function withProcessingTime(string $processingTime): self
     {
-        $obj = clone $this;
-        $obj['processingTime'] = $processingTime;
+        $self = clone $this;
+        $self['processingTime'] = $processingTime;
 
-        return $obj;
+        return $self;
     }
 }

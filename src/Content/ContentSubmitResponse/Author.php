@@ -92,16 +92,16 @@ final class Author implements BaseModel
         TrustLevel|array $trustLevel,
         ?string $externalID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['block'] = $block;
-        $obj['status'] = $status;
-        $obj['trustLevel'] = $trustLevel;
+        $self['id'] = $id;
+        $self['block'] = $block;
+        $self['status'] = $status;
+        $self['trustLevel'] = $trustLevel;
 
-        null !== $externalID && $obj['externalID'] = $externalID;
+        null !== $externalID && $self['externalID'] = $externalID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class Author implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class Author implements BaseModel
      */
     public function withBlock(Block|array|null $block): self
     {
-        $obj = clone $this;
-        $obj['block'] = $block;
+        $self = clone $this;
+        $self['block'] = $block;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class Author implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +146,10 @@ final class Author implements BaseModel
      */
     public function withTrustLevel(TrustLevel|array $trustLevel): self
     {
-        $obj = clone $this;
-        $obj['trustLevel'] = $trustLevel;
+        $self = clone $this;
+        $self['trustLevel'] = $trustLevel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,9 +157,9 @@ final class Author implements BaseModel
      */
     public function withExternalID(?string $externalID): self
     {
-        $obj = clone $this;
-        $obj['externalID'] = $externalID;
+        $self = clone $this;
+        $self['externalID'] = $externalID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -57,11 +57,11 @@ final class QueueGetResponse implements BaseModel
      */
     public static function with(Queue|array $queue): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['queue'] = $queue;
+        $self['queue'] = $queue;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +77,9 @@ final class QueueGetResponse implements BaseModel
      */
     public function withQueue(Queue|array $queue): self
     {
-        $obj = clone $this;
-        $obj['queue'] = $queue;
+        $self = clone $this;
+        $self['queue'] = $queue;
 
-        return $obj;
+        return $self;
     }
 }

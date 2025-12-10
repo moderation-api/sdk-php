@@ -79,15 +79,15 @@ final class WordlistUpdateParams implements BaseModel
         ?bool $strict = null,
         ?array $words = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $description && $obj['description'] = $description;
-        null !== $key && $obj['key'] = $key;
-        null !== $name && $obj['name'] = $name;
-        null !== $strict && $obj['strict'] = $strict;
-        null !== $words && $obj['words'] = $words;
+        null !== $description && $self['description'] = $description;
+        null !== $key && $self['key'] = $key;
+        null !== $name && $self['name'] = $name;
+        null !== $strict && $self['strict'] = $strict;
+        null !== $words && $self['words'] = $words;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class WordlistUpdateParams implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class WordlistUpdateParams implements BaseModel
      */
     public function withKey(string $key): self
     {
-        $obj = clone $this;
-        $obj['key'] = $key;
+        $self = clone $this;
+        $self['key'] = $key;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class WordlistUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class WordlistUpdateParams implements BaseModel
      */
     public function withStrict(bool $strict): self
     {
-        $obj = clone $this;
-        $obj['strict'] = $strict;
+        $self = clone $this;
+        $self['strict'] = $strict;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,9 +141,9 @@ final class WordlistUpdateParams implements BaseModel
      */
     public function withWords(array $words): self
     {
-        $obj = clone $this;
-        $obj['words'] = $words;
+        $self = clone $this;
+        $self['words'] = $words;
 
-        return $obj;
+        return $self;
     }
 }

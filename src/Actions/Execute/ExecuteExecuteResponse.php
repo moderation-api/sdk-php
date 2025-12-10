@@ -50,11 +50,11 @@ final class ExecuteExecuteResponse implements BaseModel
      */
     public static function with(bool $success): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['success'] = $success;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,9 +62,9 @@ final class ExecuteExecuteResponse implements BaseModel
      */
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 }

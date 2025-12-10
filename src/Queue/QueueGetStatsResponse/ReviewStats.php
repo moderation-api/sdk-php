@@ -70,13 +70,13 @@ final class ReviewStats implements BaseModel
         float $totalPending,
         float $totalReviewed
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['averageTimeToReview'] = $averageTimeToReview;
-        $obj['totalPending'] = $totalPending;
-        $obj['totalReviewed'] = $totalReviewed;
+        $self['averageTimeToReview'] = $averageTimeToReview;
+        $self['totalPending'] = $totalPending;
+        $self['totalReviewed'] = $totalReviewed;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +84,10 @@ final class ReviewStats implements BaseModel
      */
     public function withAverageTimeToReview(float $averageTimeToReview): self
     {
-        $obj = clone $this;
-        $obj['averageTimeToReview'] = $averageTimeToReview;
+        $self = clone $this;
+        $self['averageTimeToReview'] = $averageTimeToReview;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class ReviewStats implements BaseModel
      */
     public function withTotalPending(float $totalPending): self
     {
-        $obj = clone $this;
-        $obj['totalPending'] = $totalPending;
+        $self = clone $this;
+        $self['totalPending'] = $totalPending;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class ReviewStats implements BaseModel
      */
     public function withTotalReviewed(float $totalReviewed): self
     {
-        $obj = clone $this;
-        $obj['totalReviewed'] = $totalReviewed;
+        $self = clone $this;
+        $self['totalReviewed'] = $totalReviewed;
 
-        return $obj;
+        return $self;
     }
 }

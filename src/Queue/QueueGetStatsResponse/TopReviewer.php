@@ -110,17 +110,17 @@ final class TopReviewer implements BaseModel
         string $userID,
         ?float $accuracyScore = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['averageTimePerReview'] = $averageTimePerReview;
-        $obj['name'] = $name;
-        $obj['reviewCount'] = $reviewCount;
-        $obj['topActions'] = $topActions;
-        $obj['userID'] = $userID;
+        $self['averageTimePerReview'] = $averageTimePerReview;
+        $self['name'] = $name;
+        $self['reviewCount'] = $reviewCount;
+        $self['topActions'] = $topActions;
+        $self['userID'] = $userID;
 
-        null !== $accuracyScore && $obj['accuracyScore'] = $accuracyScore;
+        null !== $accuracyScore && $self['accuracyScore'] = $accuracyScore;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class TopReviewer implements BaseModel
      */
     public function withAverageTimePerReview(float $averageTimePerReview): self
     {
-        $obj = clone $this;
-        $obj['averageTimePerReview'] = $averageTimePerReview;
+        $self = clone $this;
+        $self['averageTimePerReview'] = $averageTimePerReview;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class TopReviewer implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class TopReviewer implements BaseModel
      */
     public function withReviewCount(float $reviewCount): self
     {
-        $obj = clone $this;
-        $obj['reviewCount'] = $reviewCount;
+        $self = clone $this;
+        $self['reviewCount'] = $reviewCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class TopReviewer implements BaseModel
      */
     public function withTopActions(array $topActions): self
     {
-        $obj = clone $this;
-        $obj['topActions'] = $topActions;
+        $self = clone $this;
+        $self['topActions'] = $topActions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class TopReviewer implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,9 +187,9 @@ final class TopReviewer implements BaseModel
      */
     public function withAccuracyScore(float $accuracyScore): self
     {
-        $obj = clone $this;
-        $obj['accuracyScore'] = $accuracyScore;
+        $self = clone $this;
+        $self['accuracyScore'] = $accuracyScore;
 
-        return $obj;
+        return $self;
     }
 }

@@ -44,12 +44,12 @@ final class Block implements BaseModel
         ?string $reason = null,
         ?float $until = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $reason && $obj['reason'] = $reason;
-        null !== $until && $obj['until'] = $until;
+        null !== $reason && $self['reason'] = $reason;
+        null !== $until && $self['until'] = $until;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class Block implements BaseModel
      */
     public function withReason(?string $reason): self
     {
-        $obj = clone $this;
-        $obj['reason'] = $reason;
+        $self = clone $this;
+        $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class Block implements BaseModel
      */
     public function withUntil(?float $until): self
     {
-        $obj = clone $this;
-        $obj['until'] = $until;
+        $self = clone $this;
+        $self['until'] = $until;
 
-        return $obj;
+        return $self;
     }
 }

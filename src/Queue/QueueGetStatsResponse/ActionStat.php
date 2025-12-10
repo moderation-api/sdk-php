@@ -78,14 +78,14 @@ final class ActionStat implements BaseModel
         float $count,
         float $percentageOfTotal
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['actionID'] = $actionID;
-        $obj['actionName'] = $actionName;
-        $obj['count'] = $count;
-        $obj['percentageOfTotal'] = $percentageOfTotal;
+        $self['actionID'] = $actionID;
+        $self['actionName'] = $actionName;
+        $self['count'] = $count;
+        $self['percentageOfTotal'] = $percentageOfTotal;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class ActionStat implements BaseModel
      */
     public function withActionID(string $actionID): self
     {
-        $obj = clone $this;
-        $obj['actionID'] = $actionID;
+        $self = clone $this;
+        $self['actionID'] = $actionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class ActionStat implements BaseModel
      */
     public function withActionName(string $actionName): self
     {
-        $obj = clone $this;
-        $obj['actionName'] = $actionName;
+        $self = clone $this;
+        $self['actionName'] = $actionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class ActionStat implements BaseModel
      */
     public function withCount(float $count): self
     {
-        $obj = clone $this;
-        $obj['count'] = $count;
+        $self = clone $this;
+        $self['count'] = $count;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,9 +126,9 @@ final class ActionStat implements BaseModel
      */
     public function withPercentageOfTotal(float $percentageOfTotal): self
     {
-        $obj = clone $this;
-        $obj['percentageOfTotal'] = $percentageOfTotal;
+        $self = clone $this;
+        $self['percentageOfTotal'] = $percentageOfTotal;
 
-        return $obj;
+        return $self;
     }
 }

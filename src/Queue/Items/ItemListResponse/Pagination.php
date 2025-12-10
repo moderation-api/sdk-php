@@ -79,54 +79,54 @@ final class Pagination implements BaseModel
         float $totalItems,
         float $totalPages,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['currentPage'] = $currentPage;
-        $obj['hasNextPage'] = $hasNextPage;
-        $obj['hasPreviousPage'] = $hasPreviousPage;
-        $obj['totalItems'] = $totalItems;
-        $obj['totalPages'] = $totalPages;
+        $self['currentPage'] = $currentPage;
+        $self['hasNextPage'] = $hasNextPage;
+        $self['hasPreviousPage'] = $hasPreviousPage;
+        $self['totalItems'] = $totalItems;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        return $self;
     }
 
     public function withCurrentPage(float $currentPage): self
     {
-        $obj = clone $this;
-        $obj['currentPage'] = $currentPage;
+        $self = clone $this;
+        $self['currentPage'] = $currentPage;
 
-        return $obj;
+        return $self;
     }
 
     public function withHasNextPage(bool $hasNextPage): self
     {
-        $obj = clone $this;
-        $obj['hasNextPage'] = $hasNextPage;
+        $self = clone $this;
+        $self['hasNextPage'] = $hasNextPage;
 
-        return $obj;
+        return $self;
     }
 
     public function withHasPreviousPage(bool $hasPreviousPage): self
     {
-        $obj = clone $this;
-        $obj['hasPreviousPage'] = $hasPreviousPage;
+        $self = clone $this;
+        $self['hasPreviousPage'] = $hasPreviousPage;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalItems(float $totalItems): self
     {
-        $obj = clone $this;
-        $obj['totalItems'] = $totalItems;
+        $self = clone $this;
+        $self['totalItems'] = $totalItems;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalPages(float $totalPages): self
     {
-        $obj = clone $this;
-        $obj['totalPages'] = $totalPages;
+        $self = clone $this;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        return $self;
     }
 }

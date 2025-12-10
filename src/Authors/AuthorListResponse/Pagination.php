@@ -79,54 +79,54 @@ final class Pagination implements BaseModel
         float $pageSize,
         float $total,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['hasNextPage'] = $hasNextPage;
-        $obj['hasPreviousPage'] = $hasPreviousPage;
-        $obj['pageNumber'] = $pageNumber;
-        $obj['pageSize'] = $pageSize;
-        $obj['total'] = $total;
+        $self['hasNextPage'] = $hasNextPage;
+        $self['hasPreviousPage'] = $hasPreviousPage;
+        $self['pageNumber'] = $pageNumber;
+        $self['pageSize'] = $pageSize;
+        $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 
     public function withHasNextPage(bool $hasNextPage): self
     {
-        $obj = clone $this;
-        $obj['hasNextPage'] = $hasNextPage;
+        $self = clone $this;
+        $self['hasNextPage'] = $hasNextPage;
 
-        return $obj;
+        return $self;
     }
 
     public function withHasPreviousPage(bool $hasPreviousPage): self
     {
-        $obj = clone $this;
-        $obj['hasPreviousPage'] = $hasPreviousPage;
+        $self = clone $this;
+        $self['hasPreviousPage'] = $hasPreviousPage;
 
-        return $obj;
+        return $self;
     }
 
     public function withPageNumber(float $pageNumber): self
     {
-        $obj = clone $this;
-        $obj['pageNumber'] = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withPageSize(float $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotal(float $total): self
     {
-        $obj = clone $this;
-        $obj['total'] = $total;
+        $self = clone $this;
+        $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 }

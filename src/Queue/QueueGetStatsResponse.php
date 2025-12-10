@@ -101,14 +101,14 @@ final class QueueGetStatsResponse implements BaseModel
         array $topReviewers,
         Trends|array $trends,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['actionStats'] = $actionStats;
-        $obj['reviewStats'] = $reviewStats;
-        $obj['topReviewers'] = $topReviewers;
-        $obj['trends'] = $trends;
+        $self['actionStats'] = $actionStats;
+        $self['reviewStats'] = $reviewStats;
+        $self['topReviewers'] = $topReviewers;
+        $self['trends'] = $trends;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class QueueGetStatsResponse implements BaseModel
      */
     public function withActionStats(array $actionStats): self
     {
-        $obj = clone $this;
-        $obj['actionStats'] = $actionStats;
+        $self = clone $this;
+        $self['actionStats'] = $actionStats;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class QueueGetStatsResponse implements BaseModel
      */
     public function withReviewStats(ReviewStats|array $reviewStats): self
     {
-        $obj = clone $this;
-        $obj['reviewStats'] = $reviewStats;
+        $self = clone $this;
+        $self['reviewStats'] = $reviewStats;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class QueueGetStatsResponse implements BaseModel
      */
     public function withTopReviewers(array $topReviewers): self
     {
-        $obj = clone $this;
-        $obj['topReviewers'] = $topReviewers;
+        $self = clone $this;
+        $self['topReviewers'] = $topReviewers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,9 +165,9 @@ final class QueueGetStatsResponse implements BaseModel
      */
     public function withTrends(Trends|array $trends): self
     {
-        $obj = clone $this;
-        $obj['trends'] = $trends;
+        $self = clone $this;
+        $self['trends'] = $trends;
 
-        return $obj;
+        return $self;
     }
 }

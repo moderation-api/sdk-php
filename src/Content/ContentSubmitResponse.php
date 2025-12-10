@@ -206,19 +206,19 @@ final class ContentSubmitResponse implements BaseModel
         Recommendation|array $recommendation,
         ?array $errors = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['author'] = $author;
-        $obj['content'] = $content;
-        $obj['evaluation'] = $evaluation;
-        $obj['insights'] = $insights;
-        $obj['meta'] = $meta;
-        $obj['policies'] = $policies;
-        $obj['recommendation'] = $recommendation;
+        $self['author'] = $author;
+        $self['content'] = $content;
+        $self['evaluation'] = $evaluation;
+        $self['insights'] = $insights;
+        $self['meta'] = $meta;
+        $self['policies'] = $policies;
+        $self['recommendation'] = $recommendation;
 
-        null !== $errors && $obj['errors'] = $errors;
+        null !== $errors && $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +234,10 @@ final class ContentSubmitResponse implements BaseModel
      */
     public function withAuthor(Author|array|null $author): self
     {
-        $obj = clone $this;
-        $obj['author'] = $author;
+        $self = clone $this;
+        $self['author'] = $author;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -251,10 +251,10 @@ final class ContentSubmitResponse implements BaseModel
      */
     public function withContent(Content|array $content): self
     {
-        $obj = clone $this;
-        $obj['content'] = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -269,10 +269,10 @@ final class ContentSubmitResponse implements BaseModel
      */
     public function withEvaluation(Evaluation|array $evaluation): self
     {
-        $obj = clone $this;
-        $obj['evaluation'] = $evaluation;
+        $self = clone $this;
+        $self['evaluation'] = $evaluation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -289,10 +289,10 @@ final class ContentSubmitResponse implements BaseModel
      */
     public function withInsights(array $insights): self
     {
-        $obj = clone $this;
-        $obj['insights'] = $insights;
+        $self = clone $this;
+        $self['insights'] = $insights;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -308,10 +308,10 @@ final class ContentSubmitResponse implements BaseModel
      */
     public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj['meta'] = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -335,10 +335,10 @@ final class ContentSubmitResponse implements BaseModel
      */
     public function withPolicies(array $policies): self
     {
-        $obj = clone $this;
-        $obj['policies'] = $policies;
+        $self = clone $this;
+        $self['policies'] = $policies;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -351,10 +351,10 @@ final class ContentSubmitResponse implements BaseModel
     public function withRecommendation(
         Recommendation|array $recommendation
     ): self {
-        $obj = clone $this;
-        $obj['recommendation'] = $recommendation;
+        $self = clone $this;
+        $self['recommendation'] = $recommendation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -364,9 +364,9 @@ final class ContentSubmitResponse implements BaseModel
      */
     public function withErrors(array $errors): self
     {
-        $obj = clone $this;
-        $obj['errors'] = $errors;
+        $self = clone $this;
+        $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 }

@@ -81,15 +81,15 @@ final class Evaluation implements BaseModel
         float $severityScore,
         ?bool $unicodeSpoofed = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['flagProbability'] = $flagProbability;
-        $obj['flagged'] = $flagged;
-        $obj['severityScore'] = $severityScore;
+        $self['flagProbability'] = $flagProbability;
+        $self['flagged'] = $flagged;
+        $self['severityScore'] = $severityScore;
 
-        null !== $unicodeSpoofed && $obj['unicodeSpoofed'] = $unicodeSpoofed;
+        null !== $unicodeSpoofed && $self['unicodeSpoofed'] = $unicodeSpoofed;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class Evaluation implements BaseModel
      */
     public function withFlagProbability(float $flagProbability): self
     {
-        $obj = clone $this;
-        $obj['flagProbability'] = $flagProbability;
+        $self = clone $this;
+        $self['flagProbability'] = $flagProbability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,10 +108,10 @@ final class Evaluation implements BaseModel
      */
     public function withFlagged(bool $flagged): self
     {
-        $obj = clone $this;
-        $obj['flagged'] = $flagged;
+        $self = clone $this;
+        $self['flagged'] = $flagged;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,10 +119,10 @@ final class Evaluation implements BaseModel
      */
     public function withSeverityScore(float $severityScore): self
     {
-        $obj = clone $this;
-        $obj['severityScore'] = $severityScore;
+        $self = clone $this;
+        $self['severityScore'] = $severityScore;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,9 +130,9 @@ final class Evaluation implements BaseModel
      */
     public function withUnicodeSpoofed(bool $unicodeSpoofed): self
     {
-        $obj = clone $this;
-        $obj['unicodeSpoofed'] = $unicodeSpoofed;
+        $self = clone $this;
+        $self['unicodeSpoofed'] = $unicodeSpoofed;
 
-        return $obj;
+        return $self;
     }
 }

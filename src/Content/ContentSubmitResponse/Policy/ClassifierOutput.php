@@ -89,16 +89,16 @@ final class ClassifierOutput implements BaseModel
         ?array $flaggedFields = null,
         ?array $labels = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['flagged'] = $flagged;
-        $obj['probability'] = $probability;
+        $self['id'] = $id;
+        $self['flagged'] = $flagged;
+        $self['probability'] = $probability;
 
-        null !== $flaggedFields && $obj['flaggedFields'] = $flaggedFields;
-        null !== $labels && $obj['labels'] = $labels;
+        null !== $flaggedFields && $self['flaggedFields'] = $flaggedFields;
+        null !== $labels && $self['labels'] = $labels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,26 +106,26 @@ final class ClassifierOutput implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withFlagged(bool $flagged): self
     {
-        $obj = clone $this;
-        $obj['flagged'] = $flagged;
+        $self = clone $this;
+        $self['flagged'] = $flagged;
 
-        return $obj;
+        return $self;
     }
 
     public function withProbability(float $probability): self
     {
-        $obj = clone $this;
-        $obj['probability'] = $probability;
+        $self = clone $this;
+        $self['probability'] = $probability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class ClassifierOutput implements BaseModel
      */
     public function withFlaggedFields(array $flaggedFields): self
     {
-        $obj = clone $this;
-        $obj['flaggedFields'] = $flaggedFields;
+        $self = clone $this;
+        $self['flaggedFields'] = $flaggedFields;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,9 +146,9 @@ final class ClassifierOutput implements BaseModel
      */
     public function withLabels(array $labels): self
     {
-        $obj = clone $this;
-        $obj['labels'] = $labels;
+        $self = clone $this;
+        $self['labels'] = $labels;
 
-        return $obj;
+        return $self;
     }
 }

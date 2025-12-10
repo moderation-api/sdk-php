@@ -69,20 +69,20 @@ final class SentimentInsight implements BaseModel
         float $probability,
         Value|string|null $value
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['probability'] = $probability;
-        $obj['value'] = $value;
+        $self['probability'] = $probability;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     public function withProbability(float $probability): self
     {
-        $obj = clone $this;
-        $obj['probability'] = $probability;
+        $self = clone $this;
+        $self['probability'] = $probability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,9 +90,9 @@ final class SentimentInsight implements BaseModel
      */
     public function withValue(Value|string|null $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

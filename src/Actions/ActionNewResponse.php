@@ -189,24 +189,24 @@ final class ActionNewResponse implements BaseModel
         ?string $key = null,
         Type|string|null $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['builtIn'] = $builtIn;
-        $obj['createdAt'] = $createdAt;
-        $obj['filterInQueueIDs'] = $filterInQueueIDs;
-        $obj['freeText'] = $freeText;
-        $obj['name'] = $name;
-        $obj['position'] = $position;
-        $obj['possibleValues'] = $possibleValues;
-        $obj['queueBehaviour'] = $queueBehaviour;
-        $obj['valueRequired'] = $valueRequired;
+        $self['id'] = $id;
+        $self['builtIn'] = $builtIn;
+        $self['createdAt'] = $createdAt;
+        $self['filterInQueueIDs'] = $filterInQueueIDs;
+        $self['freeText'] = $freeText;
+        $self['name'] = $name;
+        $self['position'] = $position;
+        $self['possibleValues'] = $possibleValues;
+        $self['queueBehaviour'] = $queueBehaviour;
+        $self['valueRequired'] = $valueRequired;
 
-        null !== $description && $obj['description'] = $description;
-        null !== $key && $obj['key'] = $key;
-        null !== $type && $obj['type'] = $type;
+        null !== $description && $self['description'] = $description;
+        null !== $key && $self['key'] = $key;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -214,10 +214,10 @@ final class ActionNewResponse implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -225,10 +225,10 @@ final class ActionNewResponse implements BaseModel
      */
     public function withBuiltIn(?bool $builtIn): self
     {
-        $obj = clone $this;
-        $obj['builtIn'] = $builtIn;
+        $self = clone $this;
+        $self['builtIn'] = $builtIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -236,10 +236,10 @@ final class ActionNewResponse implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -249,10 +249,10 @@ final class ActionNewResponse implements BaseModel
      */
     public function withFilterInQueueIDs(array $filterInQueueIDs): self
     {
-        $obj = clone $this;
-        $obj['filterInQueueIDs'] = $filterInQueueIDs;
+        $self = clone $this;
+        $self['filterInQueueIDs'] = $filterInQueueIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -260,10 +260,10 @@ final class ActionNewResponse implements BaseModel
      */
     public function withFreeText(bool $freeText): self
     {
-        $obj = clone $this;
-        $obj['freeText'] = $freeText;
+        $self = clone $this;
+        $self['freeText'] = $freeText;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +271,10 @@ final class ActionNewResponse implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -284,10 +284,10 @@ final class ActionNewResponse implements BaseModel
      */
     public function withPosition(Position|string $position): self
     {
-        $obj = clone $this;
-        $obj['position'] = $position;
+        $self = clone $this;
+        $self['position'] = $position;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -297,10 +297,10 @@ final class ActionNewResponse implements BaseModel
      */
     public function withPossibleValues(array $possibleValues): self
     {
-        $obj = clone $this;
-        $obj['possibleValues'] = $possibleValues;
+        $self = clone $this;
+        $self['possibleValues'] = $possibleValues;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -311,10 +311,10 @@ final class ActionNewResponse implements BaseModel
     public function withQueueBehaviour(
         QueueBehaviour|string $queueBehaviour
     ): self {
-        $obj = clone $this;
-        $obj['queueBehaviour'] = $queueBehaviour;
+        $self = clone $this;
+        $self['queueBehaviour'] = $queueBehaviour;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -322,10 +322,10 @@ final class ActionNewResponse implements BaseModel
      */
     public function withValueRequired(bool $valueRequired): self
     {
-        $obj = clone $this;
-        $obj['valueRequired'] = $valueRequired;
+        $self = clone $this;
+        $self['valueRequired'] = $valueRequired;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -333,10 +333,10 @@ final class ActionNewResponse implements BaseModel
      */
     public function withDescription(?string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -344,10 +344,10 @@ final class ActionNewResponse implements BaseModel
      */
     public function withKey(?string $key): self
     {
-        $obj = clone $this;
-        $obj['key'] = $key;
+        $self = clone $this;
+        $self['key'] = $key;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -357,9 +357,9 @@ final class ActionNewResponse implements BaseModel
      */
     public function withType(Type|string|null $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

@@ -48,11 +48,11 @@ final class PossibleValue implements BaseModel
      */
     public static function with(string $value): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['value'] = $value;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,9 +60,9 @@ final class PossibleValue implements BaseModel
      */
     public function withValue(string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

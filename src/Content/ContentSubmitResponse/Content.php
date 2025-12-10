@@ -82,13 +82,13 @@ final class Content implements BaseModel
         bool $masked,
         string|array|null $modified
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['masked'] = $masked;
-        $obj['modified'] = $modified;
+        $self['id'] = $id;
+        $self['masked'] = $masked;
+        $self['modified'] = $modified;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class Content implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class Content implements BaseModel
      */
     public function withMasked(bool $masked): self
     {
-        $obj = clone $this;
-        $obj['masked'] = $masked;
+        $self = clone $this;
+        $self['masked'] = $masked;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,9 +124,9 @@ final class Content implements BaseModel
      */
     public function withModified(string|array|null $modified): self
     {
-        $obj = clone $this;
-        $obj['modified'] = $modified;
+        $self = clone $this;
+        $self['modified'] = $modified;
 
-        return $obj;
+        return $self;
     }
 }

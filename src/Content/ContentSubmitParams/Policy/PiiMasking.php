@@ -62,11 +62,11 @@ final class PiiMasking implements BaseModel
      */
     public static function with(array $entities): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['entities'] = $entities;
+        $self['entities'] = $entities;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class PiiMasking implements BaseModel
      */
     public function withEntities(array $entities): self
     {
-        $obj = clone $this;
-        $obj['entities'] = $entities;
+        $self = clone $this;
+        $self['entities'] = $entities;
 
-        return $obj;
+        return $self;
     }
 }

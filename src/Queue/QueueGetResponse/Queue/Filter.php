@@ -101,44 +101,44 @@ final class Filter implements BaseModel
         ?array $recommendationActions = null,
         ?bool $showChecked = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $afterDate && $obj['afterDate'] = $afterDate;
-        null !== $authorID && $obj['authorID'] = $authorID;
-        null !== $beforeDate && $obj['beforeDate'] = $beforeDate;
-        null !== $conversationIDs && $obj['conversationIDs'] = $conversationIDs;
-        null !== $filteredActionIDs && $obj['filteredActionIDs'] = $filteredActionIDs;
-        null !== $filteredChannelIDs && $obj['filteredChannelIDs'] = $filteredChannelIDs;
-        null !== $filterLabels && $obj['filterLabels'] = $filterLabels;
-        null !== $labels && $obj['labels'] = $labels;
-        null !== $recommendationActions && $obj['recommendationActions'] = $recommendationActions;
-        null !== $showChecked && $obj['showChecked'] = $showChecked;
+        null !== $afterDate && $self['afterDate'] = $afterDate;
+        null !== $authorID && $self['authorID'] = $authorID;
+        null !== $beforeDate && $self['beforeDate'] = $beforeDate;
+        null !== $conversationIDs && $self['conversationIDs'] = $conversationIDs;
+        null !== $filteredActionIDs && $self['filteredActionIDs'] = $filteredActionIDs;
+        null !== $filteredChannelIDs && $self['filteredChannelIDs'] = $filteredChannelIDs;
+        null !== $filterLabels && $self['filterLabels'] = $filterLabels;
+        null !== $labels && $self['labels'] = $labels;
+        null !== $recommendationActions && $self['recommendationActions'] = $recommendationActions;
+        null !== $showChecked && $self['showChecked'] = $showChecked;
 
-        return $obj;
+        return $self;
     }
 
     public function withAfterDate(string $afterDate): self
     {
-        $obj = clone $this;
-        $obj['afterDate'] = $afterDate;
+        $self = clone $this;
+        $self['afterDate'] = $afterDate;
 
-        return $obj;
+        return $self;
     }
 
     public function withAuthorID(string $authorID): self
     {
-        $obj = clone $this;
-        $obj['authorID'] = $authorID;
+        $self = clone $this;
+        $self['authorID'] = $authorID;
 
-        return $obj;
+        return $self;
     }
 
     public function withBeforeDate(string $beforeDate): self
     {
-        $obj = clone $this;
-        $obj['beforeDate'] = $beforeDate;
+        $self = clone $this;
+        $self['beforeDate'] = $beforeDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +146,10 @@ final class Filter implements BaseModel
      */
     public function withConversationIDs(array $conversationIDs): self
     {
-        $obj = clone $this;
-        $obj['conversationIDs'] = $conversationIDs;
+        $self = clone $this;
+        $self['conversationIDs'] = $conversationIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,10 +157,10 @@ final class Filter implements BaseModel
      */
     public function withFilteredActionIDs(array $filteredActionIDs): self
     {
-        $obj = clone $this;
-        $obj['filteredActionIDs'] = $filteredActionIDs;
+        $self = clone $this;
+        $self['filteredActionIDs'] = $filteredActionIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,10 +168,10 @@ final class Filter implements BaseModel
      */
     public function withFilteredChannelIDs(array $filteredChannelIDs): self
     {
-        $obj = clone $this;
-        $obj['filteredChannelIDs'] = $filteredChannelIDs;
+        $self = clone $this;
+        $self['filteredChannelIDs'] = $filteredChannelIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,10 +184,10 @@ final class Filter implements BaseModel
      */
     public function withFilterLabels(array $filterLabels): self
     {
-        $obj = clone $this;
-        $obj['filterLabels'] = $filterLabels;
+        $self = clone $this;
+        $self['filterLabels'] = $filterLabels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,10 +195,10 @@ final class Filter implements BaseModel
      */
     public function withLabels(array $labels): self
     {
-        $obj = clone $this;
-        $obj['labels'] = $labels;
+        $self = clone $this;
+        $self['labels'] = $labels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,17 +207,17 @@ final class Filter implements BaseModel
     public function withRecommendationActions(
         array $recommendationActions
     ): self {
-        $obj = clone $this;
-        $obj['recommendationActions'] = $recommendationActions;
+        $self = clone $this;
+        $self['recommendationActions'] = $recommendationActions;
 
-        return $obj;
+        return $self;
     }
 
     public function withShowChecked(bool $showChecked): self
     {
-        $obj = clone $this;
-        $obj['showChecked'] = $showChecked;
+        $self = clone $this;
+        $self['showChecked'] = $showChecked;
 
-        return $obj;
+        return $self;
     }
 }
