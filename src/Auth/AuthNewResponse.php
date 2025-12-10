@@ -65,13 +65,13 @@ final class AuthNewResponse implements BaseModel
         string $project,
         string $status
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['message'] = $message;
-        $obj['project'] = $project;
-        $obj['status'] = $status;
+        $self['message'] = $message;
+        $self['project'] = $project;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +79,10 @@ final class AuthNewResponse implements BaseModel
      */
     public function withMessage(string $message): self
     {
-        $obj = clone $this;
-        $obj['message'] = $message;
+        $self = clone $this;
+        $self['message'] = $message;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +90,10 @@ final class AuthNewResponse implements BaseModel
      */
     public function withProject(string $project): self
     {
-        $obj = clone $this;
-        $obj['project'] = $project;
+        $self = clone $this;
+        $self['project'] = $project;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,9 +101,9 @@ final class AuthNewResponse implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

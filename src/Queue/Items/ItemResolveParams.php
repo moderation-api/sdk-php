@@ -61,13 +61,13 @@ final class ItemResolveParams implements BaseModel
      */
     public static function with(string $id, ?string $comment = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
+        $self['id'] = $id;
 
-        null !== $comment && $obj['comment'] = $comment;
+        null !== $comment && $self['comment'] = $comment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class ItemResolveParams implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,9 +86,9 @@ final class ItemResolveParams implements BaseModel
      */
     public function withComment(string $comment): self
     {
-        $obj = clone $this;
-        $obj['comment'] = $comment;
+        $self = clone $this;
+        $self['comment'] = $comment;
 
-        return $obj;
+        return $self;
     }
 }

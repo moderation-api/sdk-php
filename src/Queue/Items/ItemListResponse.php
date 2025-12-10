@@ -79,12 +79,12 @@ final class ItemListResponse implements BaseModel
         array $items,
         Pagination|array $pagination
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['items'] = $items;
-        $obj['pagination'] = $pagination;
+        $self['items'] = $items;
+        $self['pagination'] = $pagination;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class ItemListResponse implements BaseModel
      */
     public function withItems(array $items): self
     {
-        $obj = clone $this;
-        $obj['items'] = $items;
+        $self = clone $this;
+        $self['items'] = $items;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,9 +121,9 @@ final class ItemListResponse implements BaseModel
      */
     public function withPagination(Pagination|array $pagination): self
     {
-        $obj = clone $this;
-        $obj['pagination'] = $pagination;
+        $self = clone $this;
+        $self['pagination'] = $pagination;
 
-        return $obj;
+        return $self;
     }
 }

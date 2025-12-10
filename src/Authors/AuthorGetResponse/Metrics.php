@@ -66,14 +66,14 @@ final class Metrics implements BaseModel
         float $totalContent,
         ?float $averageSentiment = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['flaggedContent'] = $flaggedContent;
-        $obj['totalContent'] = $totalContent;
+        $self['flaggedContent'] = $flaggedContent;
+        $self['totalContent'] = $totalContent;
 
-        null !== $averageSentiment && $obj['averageSentiment'] = $averageSentiment;
+        null !== $averageSentiment && $self['averageSentiment'] = $averageSentiment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class Metrics implements BaseModel
      */
     public function withFlaggedContent(float $flaggedContent): self
     {
-        $obj = clone $this;
-        $obj['flaggedContent'] = $flaggedContent;
+        $self = clone $this;
+        $self['flaggedContent'] = $flaggedContent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class Metrics implements BaseModel
      */
     public function withTotalContent(float $totalContent): self
     {
-        $obj = clone $this;
-        $obj['totalContent'] = $totalContent;
+        $self = clone $this;
+        $self['totalContent'] = $totalContent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,9 +103,9 @@ final class Metrics implements BaseModel
      */
     public function withAverageSentiment(?float $averageSentiment): self
     {
-        $obj = clone $this;
-        $obj['averageSentiment'] = $averageSentiment;
+        $self = clone $this;
+        $self['averageSentiment'] = $averageSentiment;
 
-        return $obj;
+        return $self;
     }
 }

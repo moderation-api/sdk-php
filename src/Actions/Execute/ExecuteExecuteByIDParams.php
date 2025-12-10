@@ -75,14 +75,14 @@ final class ExecuteExecuteByIDParams implements BaseModel
         ?string $queueID = null,
         ?string $value = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $authorIDs && $obj['authorIDs'] = $authorIDs;
-        null !== $contentIDs && $obj['contentIDs'] = $contentIDs;
-        null !== $queueID && $obj['queueID'] = $queueID;
-        null !== $value && $obj['value'] = $value;
+        null !== $authorIDs && $self['authorIDs'] = $authorIDs;
+        null !== $contentIDs && $self['contentIDs'] = $contentIDs;
+        null !== $queueID && $self['queueID'] = $queueID;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class ExecuteExecuteByIDParams implements BaseModel
      */
     public function withAuthorIDs(array $authorIDs): self
     {
-        $obj = clone $this;
-        $obj['authorIDs'] = $authorIDs;
+        $self = clone $this;
+        $self['authorIDs'] = $authorIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class ExecuteExecuteByIDParams implements BaseModel
      */
     public function withContentIDs(array $contentIDs): self
     {
-        $obj = clone $this;
-        $obj['contentIDs'] = $contentIDs;
+        $self = clone $this;
+        $self['contentIDs'] = $contentIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class ExecuteExecuteByIDParams implements BaseModel
      */
     public function withQueueID(string $queueID): self
     {
-        $obj = clone $this;
-        $obj['queueID'] = $queueID;
+        $self = clone $this;
+        $self['queueID'] = $queueID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,9 +127,9 @@ final class ExecuteExecuteByIDParams implements BaseModel
      */
     public function withValue(string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

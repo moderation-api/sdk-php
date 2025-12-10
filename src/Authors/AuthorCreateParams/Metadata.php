@@ -63,14 +63,14 @@ final class Metadata implements BaseModel
         ?bool $isPayingCustomer = null,
         ?bool $phoneVerified = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $emailVerified && $obj['emailVerified'] = $emailVerified;
-        null !== $identityVerified && $obj['identityVerified'] = $identityVerified;
-        null !== $isPayingCustomer && $obj['isPayingCustomer'] = $isPayingCustomer;
-        null !== $phoneVerified && $obj['phoneVerified'] = $phoneVerified;
+        null !== $emailVerified && $self['emailVerified'] = $emailVerified;
+        null !== $identityVerified && $self['identityVerified'] = $identityVerified;
+        null !== $isPayingCustomer && $self['isPayingCustomer'] = $isPayingCustomer;
+        null !== $phoneVerified && $self['phoneVerified'] = $phoneVerified;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class Metadata implements BaseModel
      */
     public function withEmailVerified(?bool $emailVerified): self
     {
-        $obj = clone $this;
-        $obj['emailVerified'] = $emailVerified;
+        $self = clone $this;
+        $self['emailVerified'] = $emailVerified;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class Metadata implements BaseModel
      */
     public function withIdentityVerified(?bool $identityVerified): self
     {
-        $obj = clone $this;
-        $obj['identityVerified'] = $identityVerified;
+        $self = clone $this;
+        $self['identityVerified'] = $identityVerified;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class Metadata implements BaseModel
      */
     public function withIsPayingCustomer(?bool $isPayingCustomer): self
     {
-        $obj = clone $this;
-        $obj['isPayingCustomer'] = $isPayingCustomer;
+        $self = clone $this;
+        $self['isPayingCustomer'] = $isPayingCustomer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,9 +111,9 @@ final class Metadata implements BaseModel
      */
     public function withPhoneVerified(?bool $phoneVerified): self
     {
-        $obj = clone $this;
-        $obj['phoneVerified'] = $phoneVerified;
+        $self = clone $this;
+        $self['phoneVerified'] = $phoneVerified;
 
-        return $obj;
+        return $self;
     }
 }

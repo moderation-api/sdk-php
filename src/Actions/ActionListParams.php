@@ -37,18 +37,18 @@ final class ActionListParams implements BaseModel
      */
     public static function with(?string $queueID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $queueID && $obj['queueID'] = $queueID;
+        null !== $queueID && $self['queueID'] = $queueID;
 
-        return $obj;
+        return $self;
     }
 
     public function withQueueID(string $queueID): self
     {
-        $obj = clone $this;
-        $obj['queueID'] = $queueID;
+        $self = clone $this;
+        $self['queueID'] = $queueID;
 
-        return $obj;
+        return $self;
     }
 }

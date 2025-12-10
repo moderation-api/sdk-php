@@ -155,22 +155,22 @@ final class Item implements BaseModel
         ?string $conversationID = null,
         ?string $language = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['content'] = $content;
-        $obj['flagged'] = $flagged;
-        $obj['labels'] = $labels;
-        $obj['status'] = $status;
-        $obj['timestamp'] = $timestamp;
+        $self['id'] = $id;
+        $self['content'] = $content;
+        $self['flagged'] = $flagged;
+        $self['labels'] = $labels;
+        $self['status'] = $status;
+        $self['timestamp'] = $timestamp;
 
-        null !== $actions && $obj['actions'] = $actions;
-        null !== $authorID && $obj['authorID'] = $authorID;
-        null !== $contentType && $obj['contentType'] = $contentType;
-        null !== $conversationID && $obj['conversationID'] = $conversationID;
-        null !== $language && $obj['language'] = $language;
+        null !== $actions && $self['actions'] = $actions;
+        null !== $authorID && $self['authorID'] = $authorID;
+        null !== $contentType && $self['contentType'] = $contentType;
+        null !== $conversationID && $self['conversationID'] = $conversationID;
+        null !== $language && $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +178,10 @@ final class Item implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,10 +189,10 @@ final class Item implements BaseModel
      */
     public function withContent(string $content): self
     {
-        $obj = clone $this;
-        $obj['content'] = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +200,10 @@ final class Item implements BaseModel
      */
     public function withFlagged(bool $flagged): self
     {
-        $obj = clone $this;
-        $obj['flagged'] = $flagged;
+        $self = clone $this;
+        $self['flagged'] = $flagged;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +211,10 @@ final class Item implements BaseModel
      */
     public function withLabels(array $labels): self
     {
-        $obj = clone $this;
-        $obj['labels'] = $labels;
+        $self = clone $this;
+        $self['labels'] = $labels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -224,10 +224,10 @@ final class Item implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -235,10 +235,10 @@ final class Item implements BaseModel
      */
     public function withTimestamp(float $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,10 +254,10 @@ final class Item implements BaseModel
      */
     public function withActions(array $actions): self
     {
-        $obj = clone $this;
-        $obj['actions'] = $actions;
+        $self = clone $this;
+        $self['actions'] = $actions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,10 +265,10 @@ final class Item implements BaseModel
      */
     public function withAuthorID(string $authorID): self
     {
-        $obj = clone $this;
-        $obj['authorID'] = $authorID;
+        $self = clone $this;
+        $self['authorID'] = $authorID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -276,10 +276,10 @@ final class Item implements BaseModel
      */
     public function withContentType(string $contentType): self
     {
-        $obj = clone $this;
-        $obj['contentType'] = $contentType;
+        $self = clone $this;
+        $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -287,10 +287,10 @@ final class Item implements BaseModel
      */
     public function withConversationID(string $conversationID): self
     {
-        $obj = clone $this;
-        $obj['conversationID'] = $conversationID;
+        $self = clone $this;
+        $self['conversationID'] = $conversationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -298,9 +298,9 @@ final class Item implements BaseModel
      */
     public function withLanguage(string $language): self
     {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 }

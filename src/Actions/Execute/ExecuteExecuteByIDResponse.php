@@ -72,13 +72,13 @@ final class ExecuteExecuteByIDResponse implements BaseModel
         array $ids,
         bool $success
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['actionID'] = $actionID;
-        $obj['ids'] = $ids;
-        $obj['success'] = $success;
+        $self['actionID'] = $actionID;
+        $self['ids'] = $ids;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class ExecuteExecuteByIDResponse implements BaseModel
      */
     public function withActionID(string $actionID): self
     {
-        $obj = clone $this;
-        $obj['actionID'] = $actionID;
+        $self = clone $this;
+        $self['actionID'] = $actionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class ExecuteExecuteByIDResponse implements BaseModel
      */
     public function withIDs(array $ids): self
     {
-        $obj = clone $this;
-        $obj['ids'] = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,9 +110,9 @@ final class ExecuteExecuteByIDResponse implements BaseModel
      */
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 }

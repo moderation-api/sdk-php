@@ -90,16 +90,16 @@ final class AccountListResponse implements BaseModel
         float $textAPIQuota,
         CurrentProject|array|null $currentProject = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['paidPlanName'] = $paidPlanName;
-        $obj['remainingQuota'] = $remainingQuota;
-        $obj['textAPIQuota'] = $textAPIQuota;
+        $self['id'] = $id;
+        $self['paidPlanName'] = $paidPlanName;
+        $self['remainingQuota'] = $remainingQuota;
+        $self['textAPIQuota'] = $textAPIQuota;
 
-        null !== $currentProject && $obj['currentProject'] = $currentProject;
+        null !== $currentProject && $self['currentProject'] = $currentProject;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class AccountListResponse implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class AccountListResponse implements BaseModel
      */
     public function withPaidPlanName(string $paidPlanName): self
     {
-        $obj = clone $this;
-        $obj['paidPlanName'] = $paidPlanName;
+        $self = clone $this;
+        $self['paidPlanName'] = $paidPlanName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,10 +129,10 @@ final class AccountListResponse implements BaseModel
      */
     public function withRemainingQuota(float $remainingQuota): self
     {
-        $obj = clone $this;
-        $obj['remainingQuota'] = $remainingQuota;
+        $self = clone $this;
+        $self['remainingQuota'] = $remainingQuota;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +140,10 @@ final class AccountListResponse implements BaseModel
      */
     public function withTextAPIQuota(float $textAPIQuota): self
     {
-        $obj = clone $this;
-        $obj['textAPIQuota'] = $textAPIQuota;
+        $self = clone $this;
+        $self['textAPIQuota'] = $textAPIQuota;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,9 +152,9 @@ final class AccountListResponse implements BaseModel
     public function withCurrentProject(
         CurrentProject|array $currentProject
     ): self {
-        $obj = clone $this;
-        $obj['currentProject'] = $currentProject;
+        $self = clone $this;
+        $self['currentProject'] = $currentProject;
 
-        return $obj;
+        return $self;
     }
 }

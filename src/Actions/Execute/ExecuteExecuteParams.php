@@ -105,17 +105,17 @@ final class ExecuteExecuteParams implements BaseModel
         ?string $queueID = null,
         ?string $value = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['actionKey'] = $actionKey;
+        $self['actionKey'] = $actionKey;
 
-        null !== $authorIDs && $obj['authorIDs'] = $authorIDs;
-        null !== $contentIDs && $obj['contentIDs'] = $contentIDs;
-        null !== $duration && $obj['duration'] = $duration;
-        null !== $queueID && $obj['queueID'] = $queueID;
-        null !== $value && $obj['value'] = $value;
+        null !== $authorIDs && $self['authorIDs'] = $authorIDs;
+        null !== $contentIDs && $self['contentIDs'] = $contentIDs;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $queueID && $self['queueID'] = $queueID;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class ExecuteExecuteParams implements BaseModel
      */
     public function withActionKey(string $actionKey): self
     {
-        $obj = clone $this;
-        $obj['actionKey'] = $actionKey;
+        $self = clone $this;
+        $self['actionKey'] = $actionKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class ExecuteExecuteParams implements BaseModel
      */
     public function withAuthorIDs(array $authorIDs): self
     {
-        $obj = clone $this;
-        $obj['authorIDs'] = $authorIDs;
+        $self = clone $this;
+        $self['authorIDs'] = $authorIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,10 +149,10 @@ final class ExecuteExecuteParams implements BaseModel
      */
     public function withContentIDs(array $contentIDs): self
     {
-        $obj = clone $this;
-        $obj['contentIDs'] = $contentIDs;
+        $self = clone $this;
+        $self['contentIDs'] = $contentIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,10 +160,10 @@ final class ExecuteExecuteParams implements BaseModel
      */
     public function withDuration(float $duration): self
     {
-        $obj = clone $this;
-        $obj['duration'] = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -171,10 +171,10 @@ final class ExecuteExecuteParams implements BaseModel
      */
     public function withQueueID(string $queueID): self
     {
-        $obj = clone $this;
-        $obj['queueID'] = $queueID;
+        $self = clone $this;
+        $self['queueID'] = $queueID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,9 +182,9 @@ final class ExecuteExecuteParams implements BaseModel
      */
     public function withValue(string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

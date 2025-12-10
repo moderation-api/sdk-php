@@ -63,14 +63,14 @@ final class ItemResolveResponse implements BaseModel
         bool $success,
         ?string $comment = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['resolvedAt'] = $resolvedAt;
-        $obj['success'] = $success;
+        $self['resolvedAt'] = $resolvedAt;
+        $self['success'] = $success;
 
-        null !== $comment && $obj['comment'] = $comment;
+        null !== $comment && $self['comment'] = $comment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,18 +78,18 @@ final class ItemResolveResponse implements BaseModel
      */
     public function withResolvedAt(string $resolvedAt): self
     {
-        $obj = clone $this;
-        $obj['resolvedAt'] = $resolvedAt;
+        $self = clone $this;
+        $self['resolvedAt'] = $resolvedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,9 +97,9 @@ final class ItemResolveResponse implements BaseModel
      */
     public function withComment(string $comment): self
     {
-        $obj = clone $this;
-        $obj['comment'] = $comment;
+        $self = clone $this;
+        $self['comment'] = $comment;
 
-        return $obj;
+        return $self;
     }
 }

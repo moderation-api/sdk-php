@@ -88,32 +88,32 @@ final class EntityMatcherOutput implements BaseModel
         float $probability,
         ?array $flaggedFields = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['flagged'] = $flagged;
-        $obj['matches'] = $matches;
-        $obj['probability'] = $probability;
+        $self['id'] = $id;
+        $self['flagged'] = $flagged;
+        $self['matches'] = $matches;
+        $self['probability'] = $probability;
 
-        null !== $flaggedFields && $obj['flaggedFields'] = $flaggedFields;
+        null !== $flaggedFields && $self['flaggedFields'] = $flaggedFields;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withFlagged(bool $flagged): self
     {
-        $obj = clone $this;
-        $obj['flagged'] = $flagged;
+        $self = clone $this;
+        $self['flagged'] = $flagged;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,18 +123,18 @@ final class EntityMatcherOutput implements BaseModel
      */
     public function withMatches(array $matches): self
     {
-        $obj = clone $this;
-        $obj['matches'] = $matches;
+        $self = clone $this;
+        $self['matches'] = $matches;
 
-        return $obj;
+        return $self;
     }
 
     public function withProbability(float $probability): self
     {
-        $obj = clone $this;
-        $obj['probability'] = $probability;
+        $self = clone $this;
+        $self['probability'] = $probability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,9 +142,9 @@ final class EntityMatcherOutput implements BaseModel
      */
     public function withFlaggedFields(array $flaggedFields): self
     {
-        $obj = clone $this;
-        $obj['flaggedFields'] = $flaggedFields;
+        $self = clone $this;
+        $self['flaggedFields'] = $flaggedFields;
 
-        return $obj;
+        return $self;
     }
 }

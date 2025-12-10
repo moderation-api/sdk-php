@@ -54,12 +54,12 @@ final class TrustLevel implements BaseModel
      */
     public static function with(float $level, bool $manual): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['level'] = $level;
-        $obj['manual'] = $manual;
+        $self['level'] = $level;
+        $self['manual'] = $manual;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class TrustLevel implements BaseModel
      */
     public function withLevel(float $level): self
     {
-        $obj = clone $this;
-        $obj['level'] = $level;
+        $self = clone $this;
+        $self['level'] = $level;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class TrustLevel implements BaseModel
      */
     public function withManual(bool $manual): self
     {
-        $obj = clone $this;
-        $obj['manual'] = $manual;
+        $self = clone $this;
+        $self['manual'] = $manual;
 
-        return $obj;
+        return $self;
     }
 }

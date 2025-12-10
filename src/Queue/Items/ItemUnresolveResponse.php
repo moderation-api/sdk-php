@@ -65,13 +65,13 @@ final class ItemUnresolveResponse implements BaseModel
         bool $success,
         string $unresolvedAt
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['status'] = $status;
-        $obj['success'] = $success;
-        $obj['unresolvedAt'] = $unresolvedAt;
+        $self['status'] = $status;
+        $self['success'] = $success;
+        $self['unresolvedAt'] = $unresolvedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,18 +79,18 @@ final class ItemUnresolveResponse implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,9 +98,9 @@ final class ItemUnresolveResponse implements BaseModel
      */
     public function withUnresolvedAt(string $unresolvedAt): self
     {
-        $obj = clone $this;
-        $obj['unresolvedAt'] = $unresolvedAt;
+        $self = clone $this;
+        $self['unresolvedAt'] = $unresolvedAt;
 
-        return $obj;
+        return $self;
     }
 }

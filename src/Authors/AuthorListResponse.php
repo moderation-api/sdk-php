@@ -86,12 +86,12 @@ final class AuthorListResponse implements BaseModel
         array $authors,
         Pagination|array $pagination
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['authors'] = $authors;
-        $obj['pagination'] = $pagination;
+        $self['authors'] = $authors;
+        $self['pagination'] = $pagination;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class AuthorListResponse implements BaseModel
      */
     public function withAuthors(array $authors): self
     {
-        $obj = clone $this;
-        $obj['authors'] = $authors;
+        $self = clone $this;
+        $self['authors'] = $authors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,9 +132,9 @@ final class AuthorListResponse implements BaseModel
      */
     public function withPagination(Pagination|array $pagination): self
     {
-        $obj = clone $this;
-        $obj['pagination'] = $pagination;
+        $self = clone $this;
+        $self['pagination'] = $pagination;
 
-        return $obj;
+        return $self;
     }
 }

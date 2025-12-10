@@ -199,26 +199,26 @@ final class Author implements BaseModel
         ?string $name = null,
         ?string $profilePicture = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['block'] = $block;
-        $obj['firstSeen'] = $firstSeen;
-        $obj['lastSeen'] = $lastSeen;
-        $obj['metadata'] = $metadata;
-        $obj['metrics'] = $metrics;
-        $obj['riskEvaluation'] = $riskEvaluation;
-        $obj['status'] = $status;
-        $obj['trustLevel'] = $trustLevel;
+        $self['id'] = $id;
+        $self['block'] = $block;
+        $self['firstSeen'] = $firstSeen;
+        $self['lastSeen'] = $lastSeen;
+        $self['metadata'] = $metadata;
+        $self['metrics'] = $metrics;
+        $self['riskEvaluation'] = $riskEvaluation;
+        $self['status'] = $status;
+        $self['trustLevel'] = $trustLevel;
 
-        null !== $email && $obj['email'] = $email;
-        null !== $externalID && $obj['externalID'] = $externalID;
-        null !== $externalLink && $obj['externalLink'] = $externalLink;
-        null !== $lastIncident && $obj['lastIncident'] = $lastIncident;
-        null !== $name && $obj['name'] = $name;
-        null !== $profilePicture && $obj['profilePicture'] = $profilePicture;
+        null !== $email && $self['email'] = $email;
+        null !== $externalID && $self['externalID'] = $externalID;
+        null !== $externalLink && $self['externalLink'] = $externalLink;
+        null !== $lastIncident && $self['lastIncident'] = $lastIncident;
+        null !== $name && $self['name'] = $name;
+        null !== $profilePicture && $self['profilePicture'] = $profilePicture;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -226,10 +226,10 @@ final class Author implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -239,10 +239,10 @@ final class Author implements BaseModel
      */
     public function withBlock(Block|array|null $block): self
     {
-        $obj = clone $this;
-        $obj['block'] = $block;
+        $self = clone $this;
+        $self['block'] = $block;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -250,10 +250,10 @@ final class Author implements BaseModel
      */
     public function withFirstSeen(float $firstSeen): self
     {
-        $obj = clone $this;
-        $obj['firstSeen'] = $firstSeen;
+        $self = clone $this;
+        $self['firstSeen'] = $firstSeen;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -261,10 +261,10 @@ final class Author implements BaseModel
      */
     public function withLastSeen(float $lastSeen): self
     {
-        $obj = clone $this;
-        $obj['lastSeen'] = $lastSeen;
+        $self = clone $this;
+        $self['lastSeen'] = $lastSeen;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -279,10 +279,10 @@ final class Author implements BaseModel
      */
     public function withMetadata(Metadata|array $metadata): self
     {
-        $obj = clone $this;
-        $obj['metadata'] = $metadata;
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -292,10 +292,10 @@ final class Author implements BaseModel
      */
     public function withMetrics(Metrics|array $metrics): self
     {
-        $obj = clone $this;
-        $obj['metrics'] = $metrics;
+        $self = clone $this;
+        $self['metrics'] = $metrics;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -306,10 +306,10 @@ final class Author implements BaseModel
     public function withRiskEvaluation(
         RiskEvaluation|array|null $riskEvaluation
     ): self {
-        $obj = clone $this;
-        $obj['riskEvaluation'] = $riskEvaluation;
+        $self = clone $this;
+        $self['riskEvaluation'] = $riskEvaluation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -319,10 +319,10 @@ final class Author implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -330,10 +330,10 @@ final class Author implements BaseModel
      */
     public function withTrustLevel(TrustLevel|array $trustLevel): self
     {
-        $obj = clone $this;
-        $obj['trustLevel'] = $trustLevel;
+        $self = clone $this;
+        $self['trustLevel'] = $trustLevel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -341,10 +341,10 @@ final class Author implements BaseModel
      */
     public function withEmail(?string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -352,10 +352,10 @@ final class Author implements BaseModel
      */
     public function withExternalID(?string $externalID): self
     {
-        $obj = clone $this;
-        $obj['externalID'] = $externalID;
+        $self = clone $this;
+        $self['externalID'] = $externalID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -363,10 +363,10 @@ final class Author implements BaseModel
      */
     public function withExternalLink(?string $externalLink): self
     {
-        $obj = clone $this;
-        $obj['externalLink'] = $externalLink;
+        $self = clone $this;
+        $self['externalLink'] = $externalLink;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -374,10 +374,10 @@ final class Author implements BaseModel
      */
     public function withLastIncident(?float $lastIncident): self
     {
-        $obj = clone $this;
-        $obj['lastIncident'] = $lastIncident;
+        $self = clone $this;
+        $self['lastIncident'] = $lastIncident;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -385,10 +385,10 @@ final class Author implements BaseModel
      */
     public function withName(?string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -396,9 +396,9 @@ final class Author implements BaseModel
      */
     public function withProfilePicture(?string $profilePicture): self
     {
-        $obj = clone $this;
-        $obj['profilePicture'] = $profilePicture;
+        $self = clone $this;
+        $self['profilePicture'] = $profilePicture;
 
-        return $obj;
+        return $self;
     }
 }

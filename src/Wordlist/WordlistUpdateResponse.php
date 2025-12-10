@@ -118,17 +118,17 @@ final class WordlistUpdateResponse implements BaseModel
         ?string $userID,
         array $words,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['createdAt'] = $createdAt;
-        $obj['name'] = $name;
-        $obj['organizationID'] = $organizationID;
-        $obj['strict'] = $strict;
-        $obj['userID'] = $userID;
-        $obj['words'] = $words;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['name'] = $name;
+        $self['organizationID'] = $organizationID;
+        $self['strict'] = $strict;
+        $self['userID'] = $userID;
+        $self['words'] = $words;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class WordlistUpdateResponse implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class WordlistUpdateResponse implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class WordlistUpdateResponse implements BaseModel
      */
     public function withName(?string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class WordlistUpdateResponse implements BaseModel
      */
     public function withOrganizationID(string $organizationID): self
     {
-        $obj = clone $this;
-        $obj['organizationID'] = $organizationID;
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +180,10 @@ final class WordlistUpdateResponse implements BaseModel
      */
     public function withStrict(bool $strict): self
     {
-        $obj = clone $this;
-        $obj['strict'] = $strict;
+        $self = clone $this;
+        $self['strict'] = $strict;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,10 +191,10 @@ final class WordlistUpdateResponse implements BaseModel
      */
     public function withUserID(?string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -204,9 +204,9 @@ final class WordlistUpdateResponse implements BaseModel
      */
     public function withWords(array $words): self
     {
-        $obj = clone $this;
-        $obj['words'] = $words;
+        $self = clone $this;
+        $self['words'] = $words;
 
-        return $obj;
+        return $self;
     }
 }

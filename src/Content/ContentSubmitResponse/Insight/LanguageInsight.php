@@ -60,27 +60,27 @@ final class LanguageInsight implements BaseModel
      */
     public static function with(float $probability, ?string $value): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['probability'] = $probability;
-        $obj['value'] = $value;
+        $self['probability'] = $probability;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     public function withProbability(float $probability): self
     {
-        $obj = clone $this;
-        $obj['probability'] = $probability;
+        $self = clone $this;
+        $self['probability'] = $probability;
 
-        return $obj;
+        return $self;
     }
 
     public function withValue(?string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

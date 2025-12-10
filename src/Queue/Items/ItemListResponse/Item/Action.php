@@ -84,16 +84,16 @@ final class Action implements BaseModel
         ?string $comment = null,
         ?string $reviewer = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['name'] = $name;
-        $obj['timestamp'] = $timestamp;
+        $self['id'] = $id;
+        $self['name'] = $name;
+        $self['timestamp'] = $timestamp;
 
-        null !== $comment && $obj['comment'] = $comment;
-        null !== $reviewer && $obj['reviewer'] = $reviewer;
+        null !== $comment && $self['comment'] = $comment;
+        null !== $reviewer && $self['reviewer'] = $reviewer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +101,10 @@ final class Action implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class Action implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class Action implements BaseModel
      */
     public function withTimestamp(float $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +134,10 @@ final class Action implements BaseModel
      */
     public function withComment(string $comment): self
     {
-        $obj = clone $this;
-        $obj['comment'] = $comment;
+        $self = clone $this;
+        $self['comment'] = $comment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,9 +145,9 @@ final class Action implements BaseModel
      */
     public function withReviewer(string $reviewer): self
     {
-        $obj = clone $this;
-        $obj['reviewer'] = $reviewer;
+        $self = clone $this;
+        $self['reviewer'] = $reviewer;
 
-        return $obj;
+        return $self;
     }
 }

@@ -109,18 +109,18 @@ final class AuthorUpdateParams implements BaseModel
         ?string $name = null,
         ?string $profilePicture = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $email && $obj['email'] = $email;
-        null !== $externalLink && $obj['externalLink'] = $externalLink;
-        null !== $firstSeen && $obj['firstSeen'] = $firstSeen;
-        null !== $lastSeen && $obj['lastSeen'] = $lastSeen;
-        null !== $manualTrustLevel && $obj['manualTrustLevel'] = $manualTrustLevel;
-        null !== $metadata && $obj['metadata'] = $metadata;
-        null !== $name && $obj['name'] = $name;
-        null !== $profilePicture && $obj['profilePicture'] = $profilePicture;
+        null !== $email && $self['email'] = $email;
+        null !== $externalLink && $self['externalLink'] = $externalLink;
+        null !== $firstSeen && $self['firstSeen'] = $firstSeen;
+        null !== $lastSeen && $self['lastSeen'] = $lastSeen;
+        null !== $manualTrustLevel && $self['manualTrustLevel'] = $manualTrustLevel;
+        null !== $metadata && $self['metadata'] = $metadata;
+        null !== $name && $self['name'] = $name;
+        null !== $profilePicture && $self['profilePicture'] = $profilePicture;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class AuthorUpdateParams implements BaseModel
      */
     public function withEmail(?string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class AuthorUpdateParams implements BaseModel
      */
     public function withExternalLink(?string $externalLink): self
     {
-        $obj = clone $this;
-        $obj['externalLink'] = $externalLink;
+        $self = clone $this;
+        $self['externalLink'] = $externalLink;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class AuthorUpdateParams implements BaseModel
      */
     public function withFirstSeen(float $firstSeen): self
     {
-        $obj = clone $this;
-        $obj['firstSeen'] = $firstSeen;
+        $self = clone $this;
+        $self['firstSeen'] = $firstSeen;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,18 +161,18 @@ final class AuthorUpdateParams implements BaseModel
      */
     public function withLastSeen(float $lastSeen): self
     {
-        $obj = clone $this;
-        $obj['lastSeen'] = $lastSeen;
+        $self = clone $this;
+        $self['lastSeen'] = $lastSeen;
 
-        return $obj;
+        return $self;
     }
 
     public function withManualTrustLevel(?float $manualTrustLevel): self
     {
-        $obj = clone $this;
-        $obj['manualTrustLevel'] = $manualTrustLevel;
+        $self = clone $this;
+        $self['manualTrustLevel'] = $manualTrustLevel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class AuthorUpdateParams implements BaseModel
      */
     public function withMetadata(Metadata|array $metadata): self
     {
-        $obj = clone $this;
-        $obj['metadata'] = $metadata;
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +198,10 @@ final class AuthorUpdateParams implements BaseModel
      */
     public function withName(?string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,9 +209,9 @@ final class AuthorUpdateParams implements BaseModel
      */
     public function withProfilePicture(?string $profilePicture): self
     {
-        $obj = clone $this;
-        $obj['profilePicture'] = $profilePicture;
+        $self = clone $this;
+        $self['profilePicture'] = $profilePicture;
 
-        return $obj;
+        return $self;
     }
 }

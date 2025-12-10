@@ -72,13 +72,13 @@ final class WordlistGetEmbeddingStatusResponse implements BaseModel
         float $remainingWords,
         float $totalWords
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['progress'] = $progress;
-        $obj['remainingWords'] = $remainingWords;
-        $obj['totalWords'] = $totalWords;
+        $self['progress'] = $progress;
+        $self['remainingWords'] = $remainingWords;
+        $self['totalWords'] = $totalWords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class WordlistGetEmbeddingStatusResponse implements BaseModel
      */
     public function withProgress(float $progress): self
     {
-        $obj = clone $this;
-        $obj['progress'] = $progress;
+        $self = clone $this;
+        $self['progress'] = $progress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class WordlistGetEmbeddingStatusResponse implements BaseModel
      */
     public function withRemainingWords(float $remainingWords): self
     {
-        $obj = clone $this;
-        $obj['remainingWords'] = $remainingWords;
+        $self = clone $this;
+        $self['remainingWords'] = $remainingWords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,9 +108,9 @@ final class WordlistGetEmbeddingStatusResponse implements BaseModel
      */
     public function withTotalWords(float $totalWords): self
     {
-        $obj = clone $this;
-        $obj['totalWords'] = $totalWords;
+        $self = clone $this;
+        $self['totalWords'] = $totalWords;
 
-        return $obj;
+        return $self;
     }
 }

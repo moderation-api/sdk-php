@@ -238,20 +238,20 @@ final class ContentSubmitParams implements BaseModel
         MetaType|string|null $metaType = null,
         ?array $policies = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['content'] = $content;
+        $self['content'] = $content;
 
-        null !== $authorID && $obj['authorID'] = $authorID;
-        null !== $channel && $obj['channel'] = $channel;
-        null !== $contentID && $obj['contentID'] = $contentID;
-        null !== $conversationID && $obj['conversationID'] = $conversationID;
-        null !== $doNotStore && $obj['doNotStore'] = $doNotStore;
-        null !== $metadata && $obj['metadata'] = $metadata;
-        null !== $metaType && $obj['metaType'] = $metaType;
-        null !== $policies && $obj['policies'] = $policies;
+        null !== $authorID && $self['authorID'] = $authorID;
+        null !== $channel && $self['channel'] = $channel;
+        null !== $contentID && $self['contentID'] = $contentID;
+        null !== $conversationID && $self['conversationID'] = $conversationID;
+        null !== $doNotStore && $self['doNotStore'] = $doNotStore;
+        null !== $metadata && $self['metadata'] = $metadata;
+        null !== $metaType && $self['metaType'] = $metaType;
+        null !== $policies && $self['policies'] = $policies;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -269,10 +269,10 @@ final class ContentSubmitParams implements BaseModel
     public function withContent(
         Text|array|Image|Video|Audio|Object1 $content
     ): self {
-        $obj = clone $this;
-        $obj['content'] = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -280,10 +280,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withAuthorID(string $authorID): self
     {
-        $obj = clone $this;
-        $obj['authorID'] = $authorID;
+        $self = clone $this;
+        $self['authorID'] = $authorID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -291,10 +291,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withChannel(string $channel): self
     {
-        $obj = clone $this;
-        $obj['channel'] = $channel;
+        $self = clone $this;
+        $self['channel'] = $channel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -302,10 +302,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withContentID(string $contentID): self
     {
-        $obj = clone $this;
-        $obj['contentID'] = $contentID;
+        $self = clone $this;
+        $self['contentID'] = $contentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -313,10 +313,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withConversationID(string $conversationID): self
     {
-        $obj = clone $this;
-        $obj['conversationID'] = $conversationID;
+        $self = clone $this;
+        $self['conversationID'] = $conversationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -324,10 +324,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withDoNotStore(bool $doNotStore): self
     {
-        $obj = clone $this;
-        $obj['doNotStore'] = $doNotStore;
+        $self = clone $this;
+        $self['doNotStore'] = $doNotStore;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -337,10 +337,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withMetadata(array $metadata): self
     {
-        $obj = clone $this;
-        $obj['metadata'] = $metadata;
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -350,10 +350,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withMetaType(MetaType|string $metaType): self
     {
-        $obj = clone $this;
-        $obj['metaType'] = $metaType;
+        $self = clone $this;
+        $self['metaType'] = $metaType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -394,9 +394,9 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withPolicies(array $policies): self
     {
-        $obj = clone $this;
-        $obj['policies'] = $policies;
+        $self = clone $this;
+        $self['policies'] = $policies;
 
-        return $obj;
+        return $self;
     }
 }

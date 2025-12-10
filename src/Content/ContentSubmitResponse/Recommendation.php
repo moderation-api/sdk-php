@@ -67,12 +67,12 @@ final class Recommendation implements BaseModel
      */
     public static function with(Action|string $action, array $reasonCodes): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['action'] = $action;
-        $obj['reasonCodes'] = $reasonCodes;
+        $self['action'] = $action;
+        $self['reasonCodes'] = $reasonCodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +82,10 @@ final class Recommendation implements BaseModel
      */
     public function withAction(Action|string $action): self
     {
-        $obj = clone $this;
-        $obj['action'] = $action;
+        $self = clone $this;
+        $self['action'] = $action;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,9 +95,9 @@ final class Recommendation implements BaseModel
      */
     public function withReasonCodes(array $reasonCodes): self
     {
-        $obj = clone $this;
-        $obj['reasonCodes'] = $reasonCodes;
+        $self = clone $this;
+        $self['reasonCodes'] = $reasonCodes;
 
-        return $obj;
+        return $self;
     }
 }

@@ -174,23 +174,23 @@ final class ActionCreateParams implements BaseModel
         ?bool $valueRequired = null,
         ?array $webhooks = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['name'] = $name;
+        $self['name'] = $name;
 
-        null !== $builtIn && $obj['builtIn'] = $builtIn;
-        null !== $description && $obj['description'] = $description;
-        null !== $filterInQueueIDs && $obj['filterInQueueIDs'] = $filterInQueueIDs;
-        null !== $freeText && $obj['freeText'] = $freeText;
-        null !== $key && $obj['key'] = $key;
-        null !== $position && $obj['position'] = $position;
-        null !== $possibleValues && $obj['possibleValues'] = $possibleValues;
-        null !== $queueBehaviour && $obj['queueBehaviour'] = $queueBehaviour;
-        null !== $type && $obj['type'] = $type;
-        null !== $valueRequired && $obj['valueRequired'] = $valueRequired;
-        null !== $webhooks && $obj['webhooks'] = $webhooks;
+        null !== $builtIn && $self['builtIn'] = $builtIn;
+        null !== $description && $self['description'] = $description;
+        null !== $filterInQueueIDs && $self['filterInQueueIDs'] = $filterInQueueIDs;
+        null !== $freeText && $self['freeText'] = $freeText;
+        null !== $key && $self['key'] = $key;
+        null !== $position && $self['position'] = $position;
+        null !== $possibleValues && $self['possibleValues'] = $possibleValues;
+        null !== $queueBehaviour && $self['queueBehaviour'] = $queueBehaviour;
+        null !== $type && $self['type'] = $type;
+        null !== $valueRequired && $self['valueRequired'] = $valueRequired;
+        null !== $webhooks && $self['webhooks'] = $webhooks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +198,10 @@ final class ActionCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +209,10 @@ final class ActionCreateParams implements BaseModel
      */
     public function withBuiltIn(?bool $builtIn): self
     {
-        $obj = clone $this;
-        $obj['builtIn'] = $builtIn;
+        $self = clone $this;
+        $self['builtIn'] = $builtIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +220,10 @@ final class ActionCreateParams implements BaseModel
      */
     public function withDescription(?string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +233,10 @@ final class ActionCreateParams implements BaseModel
      */
     public function withFilterInQueueIDs(array $filterInQueueIDs): self
     {
-        $obj = clone $this;
-        $obj['filterInQueueIDs'] = $filterInQueueIDs;
+        $self = clone $this;
+        $self['filterInQueueIDs'] = $filterInQueueIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,10 +244,10 @@ final class ActionCreateParams implements BaseModel
      */
     public function withFreeText(bool $freeText): self
     {
-        $obj = clone $this;
-        $obj['freeText'] = $freeText;
+        $self = clone $this;
+        $self['freeText'] = $freeText;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -255,10 +255,10 @@ final class ActionCreateParams implements BaseModel
      */
     public function withKey(?string $key): self
     {
-        $obj = clone $this;
-        $obj['key'] = $key;
+        $self = clone $this;
+        $self['key'] = $key;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -268,10 +268,10 @@ final class ActionCreateParams implements BaseModel
      */
     public function withPosition(Position|string $position): self
     {
-        $obj = clone $this;
-        $obj['position'] = $position;
+        $self = clone $this;
+        $self['position'] = $position;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -281,10 +281,10 @@ final class ActionCreateParams implements BaseModel
      */
     public function withPossibleValues(array $possibleValues): self
     {
-        $obj = clone $this;
-        $obj['possibleValues'] = $possibleValues;
+        $self = clone $this;
+        $self['possibleValues'] = $possibleValues;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -295,10 +295,10 @@ final class ActionCreateParams implements BaseModel
     public function withQueueBehaviour(
         QueueBehaviour|string $queueBehaviour
     ): self {
-        $obj = clone $this;
-        $obj['queueBehaviour'] = $queueBehaviour;
+        $self = clone $this;
+        $self['queueBehaviour'] = $queueBehaviour;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -308,10 +308,10 @@ final class ActionCreateParams implements BaseModel
      */
     public function withType(Type|string|null $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -319,10 +319,10 @@ final class ActionCreateParams implements BaseModel
      */
     public function withValueRequired(bool $valueRequired): self
     {
-        $obj = clone $this;
-        $obj['valueRequired'] = $valueRequired;
+        $self = clone $this;
+        $self['valueRequired'] = $valueRequired;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -334,9 +334,9 @@ final class ActionCreateParams implements BaseModel
      */
     public function withWebhooks(array $webhooks): self
     {
-        $obj = clone $this;
-        $obj['webhooks'] = $webhooks;
+        $self = clone $this;
+        $self['webhooks'] = $webhooks;
 
-        return $obj;
+        return $self;
     }
 }

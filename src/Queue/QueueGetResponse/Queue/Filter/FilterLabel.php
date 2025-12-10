@@ -68,23 +68,23 @@ final class FilterLabel implements BaseModel
         ?float $maxThreshold = null,
         ?float $minThreshold = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['label'] = $label;
-        $obj['type'] = $type;
+        $self['label'] = $label;
+        $self['type'] = $type;
 
-        null !== $maxThreshold && $obj['maxThreshold'] = $maxThreshold;
-        null !== $minThreshold && $obj['minThreshold'] = $minThreshold;
+        null !== $maxThreshold && $self['maxThreshold'] = $maxThreshold;
+        null !== $minThreshold && $self['minThreshold'] = $minThreshold;
 
-        return $obj;
+        return $self;
     }
 
     public function withLabel(string $label): self
     {
-        $obj = clone $this;
-        $obj['label'] = $label;
+        $self = clone $this;
+        $self['label'] = $label;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,25 +92,25 @@ final class FilterLabel implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     public function withMaxThreshold(?float $maxThreshold): self
     {
-        $obj = clone $this;
-        $obj['maxThreshold'] = $maxThreshold;
+        $self = clone $this;
+        $self['maxThreshold'] = $maxThreshold;
 
-        return $obj;
+        return $self;
     }
 
     public function withMinThreshold(?float $minThreshold): self
     {
-        $obj = clone $this;
-        $obj['minThreshold'] = $minThreshold;
+        $self = clone $this;
+        $self['minThreshold'] = $minThreshold;
 
-        return $obj;
+        return $self;
     }
 }

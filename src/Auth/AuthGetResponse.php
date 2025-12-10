@@ -54,12 +54,12 @@ final class AuthGetResponse implements BaseModel
      */
     public static function with(string $message, string $status): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['message'] = $message;
-        $obj['status'] = $status;
+        $self['message'] = $message;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class AuthGetResponse implements BaseModel
      */
     public function withMessage(string $message): self
     {
-        $obj = clone $this;
-        $obj['message'] = $message;
+        $self = clone $this;
+        $self['message'] = $message;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class AuthGetResponse implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }
