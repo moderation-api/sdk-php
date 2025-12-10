@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.3.0 (2025-12-10)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/moderation-api/sdk-php/compare/v0.2.0...v0.3.0)
+
+### ⚠ BREAKING CHANGES
+
+* use camel casing for all class properties
+
+### Features
+
+* add `BaseResponse` class for accessing raw responses ([b70b4c9](https://github.com/moderation-api/sdk-php/commit/b70b4c941e71381dffd8332bbf3331e6e4482ee1))
+* split out services into normal & raw types ([a7e26e6](https://github.com/moderation-api/sdk-php/commit/a7e26e6953f26a9b72075bee096f32fc8ddc1ba5))
+* use camel casing for all class properties ([fc81f4b](https://github.com/moderation-api/sdk-php/commit/fc81f4b7f1afde496947d52394e3c2b50be9478f))
+
+
+### Chores
+
+* ensure constant values are marked as optional in array types ([50679be](https://github.com/moderation-api/sdk-php/commit/50679be728b3629ebc80582aa18deb111280927a))
+* switch from `#[Api(optional: true|false)]` to `#[Required]|#[Optional]` for annotations ([0b40eda](https://github.com/moderation-api/sdk-php/commit/0b40edaeadad1f12f6066b520829c057a05927f3))
+* use `$self = clone $this;` instead of `$obj = clone $this;` ([a8db5b6](https://github.com/moderation-api/sdk-php/commit/a8db5b63c804ddb837662907da5ed6efa0f921fd))
+
 ## 0.2.0 (2025-12-06)
 
 Full Changelog: [v0.1.1...v0.2.0](https://github.com/moderation-api/sdk-php/compare/v0.1.1...v0.2.0)
