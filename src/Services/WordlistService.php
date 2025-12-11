@@ -6,6 +6,7 @@ namespace ModerationAPI\Services;
 
 use ModerationAPI\Client;
 use ModerationAPI\Core\Exceptions\APIException;
+use ModerationAPI\Core\Util;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\WordlistContract;
 use ModerationAPI\Services\Wordlist\WordsService;
@@ -77,15 +78,15 @@ final class WordlistService implements WordlistContract
         ?array $words = null,
         ?RequestOptions $requestOptions = null,
     ): WordlistUpdateResponse {
-        $params = [
-            'description' => $description,
-            'key' => $key,
-            'name' => $name,
-            'strict' => $strict,
-            'words' => $words,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'description' => $description,
+                'key' => $key,
+                'name' => $name,
+                'strict' => $strict,
+                'words' => $words,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
