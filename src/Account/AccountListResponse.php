@@ -5,54 +5,51 @@ declare(strict_types=1);
 namespace ModerationAPI\Account;
 
 use ModerationAPI\Account\AccountListResponse\CurrentProject;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AccountListResponseShape = array{
  *   id: string,
- *   paid_plan_name: string,
- *   remaining_quota: float,
- *   text_api_quota: float,
- *   current_project?: CurrentProject|null,
+ *   paidPlanName: string,
+ *   remainingQuota: float,
+ *   textAPIQuota: float,
+ *   currentProject?: CurrentProject|null,
  * }
  */
-final class AccountListResponse implements BaseModel, ResponseConverter
+final class AccountListResponse implements BaseModel
 {
     /** @use SdkModel<AccountListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * ID of the account.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Name of the paid plan.
      */
-    #[Api]
-    public string $paid_plan_name;
+    #[Required('paid_plan_name')]
+    public string $paidPlanName;
 
     /**
      * Remaining quota.
      */
-    #[Api]
-    public float $remaining_quota;
+    #[Required('remaining_quota')]
+    public float $remainingQuota;
 
     /**
      * Text API quota.
      */
-    #[Api]
-    public float $text_api_quota;
+    #[Required('text_api_quota')]
+    public float $textAPIQuota;
 
-    #[Api(optional: true)]
-    public ?CurrentProject $current_project;
+    #[Optional('current_project')]
+    public ?CurrentProject $currentProject;
 
     /**
      * `new AccountListResponse()` is missing required properties by the API.
@@ -60,7 +57,7 @@ final class AccountListResponse implements BaseModel, ResponseConverter
      * To enforce required parameters use
      * ```
      * AccountListResponse::with(
-     *   id: ..., paid_plan_name: ..., remaining_quota: ..., text_api_quota: ...
+     *   id: ..., paidPlanName: ..., remainingQuota: ..., textAPIQuota: ...
      * )
      * ```
      *
@@ -84,25 +81,25 @@ final class AccountListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CurrentProject|array{id: string, name: string} $current_project
+     * @param CurrentProject|array{id: string, name: string} $currentProject
      */
     public static function with(
         string $id,
-        string $paid_plan_name,
-        float $remaining_quota,
-        float $text_api_quota,
-        CurrentProject|array|null $current_project = null,
+        string $paidPlanName,
+        float $remainingQuota,
+        float $textAPIQuota,
+        CurrentProject|array|null $currentProject = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['paid_plan_name'] = $paid_plan_name;
-        $obj['remaining_quota'] = $remaining_quota;
-        $obj['text_api_quota'] = $text_api_quota;
+        $self['id'] = $id;
+        $self['paidPlanName'] = $paidPlanName;
+        $self['remainingQuota'] = $remainingQuota;
+        $self['textAPIQuota'] = $textAPIQuota;
 
-        null !== $current_project && $obj['current_project'] = $current_project;
+        null !== $currentProject && $self['currentProject'] = $currentProject;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +107,10 @@ final class AccountListResponse implements BaseModel, ResponseConverter
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +118,10 @@ final class AccountListResponse implements BaseModel, ResponseConverter
      */
     public function withPaidPlanName(string $paidPlanName): self
     {
-        $obj = clone $this;
-        $obj['paid_plan_name'] = $paidPlanName;
+        $self = clone $this;
+        $self['paidPlanName'] = $paidPlanName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +129,10 @@ final class AccountListResponse implements BaseModel, ResponseConverter
      */
     public function withRemainingQuota(float $remainingQuota): self
     {
-        $obj = clone $this;
-        $obj['remaining_quota'] = $remainingQuota;
+        $self = clone $this;
+        $self['remainingQuota'] = $remainingQuota;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +140,10 @@ final class AccountListResponse implements BaseModel, ResponseConverter
      */
     public function withTextAPIQuota(float $textAPIQuota): self
     {
-        $obj = clone $this;
-        $obj['text_api_quota'] = $textAPIQuota;
+        $self = clone $this;
+        $self['textAPIQuota'] = $textAPIQuota;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,9 +152,9 @@ final class AccountListResponse implements BaseModel, ResponseConverter
     public function withCurrentProject(
         CurrentProject|array $currentProject
     ): self {
-        $obj = clone $this;
-        $obj['current_project'] = $currentProject;
+        $self = clone $this;
+        $self['currentProject'] = $currentProject;
 
-        return $obj;
+        return $self;
     }
 }

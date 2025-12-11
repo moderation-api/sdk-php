@@ -4,40 +4,36 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Auth;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AuthNewResponseShape = array{
  *   message: string, project: string, status: string
  * }
  */
-final class AuthNewResponse implements BaseModel, ResponseConverter
+final class AuthNewResponse implements BaseModel
 {
     /** @use SdkModel<AuthNewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * Message of the authentication.
      */
-    #[Api]
+    #[Required]
     public string $message;
 
     /**
      * Name of the authenticated project.
      */
-    #[Api]
+    #[Required]
     public string $project;
 
     /**
      * Status of the authentication.
      */
-    #[Api]
+    #[Required]
     public string $status;
 
     /**
@@ -69,13 +65,13 @@ final class AuthNewResponse implements BaseModel, ResponseConverter
         string $project,
         string $status
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['message'] = $message;
-        $obj['project'] = $project;
-        $obj['status'] = $status;
+        $self['message'] = $message;
+        $self['project'] = $project;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +79,10 @@ final class AuthNewResponse implements BaseModel, ResponseConverter
      */
     public function withMessage(string $message): self
     {
-        $obj = clone $this;
-        $obj['message'] = $message;
+        $self = clone $this;
+        $self['message'] = $message;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +90,10 @@ final class AuthNewResponse implements BaseModel, ResponseConverter
      */
     public function withProject(string $project): self
     {
-        $obj = clone $this;
-        $obj['project'] = $project;
+        $self = clone $this;
+        $self['project'] = $project;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,9 +101,9 @@ final class AuthNewResponse implements BaseModel, ResponseConverter
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

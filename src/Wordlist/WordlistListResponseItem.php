@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Wordlist;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -14,7 +14,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   createdAt: string|null,
  *   description: string|null,
  *   name: string|null,
- *   userId: string|null,
+ *   userID: string|null,
  * }
  */
 final class WordlistListResponseItem implements BaseModel
@@ -25,32 +25,32 @@ final class WordlistListResponseItem implements BaseModel
     /**
      * Unique identifier of the wordlist.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * When the wordlist was created.
      */
-    #[Api]
+    #[Required]
     public ?string $createdAt;
 
     /**
      * Description of the wordlist.
      */
-    #[Api]
+    #[Required]
     public ?string $description;
 
     /**
      * Name of the wordlist.
      */
-    #[Api]
+    #[Required]
     public ?string $name;
 
     /**
      * User who created the wordlist.
      */
-    #[Api]
-    public ?string $userId;
+    #[Required('userId')]
+    public ?string $userID;
 
     /**
      * `new WordlistListResponseItem()` is missing required properties by the API.
@@ -58,7 +58,7 @@ final class WordlistListResponseItem implements BaseModel
      * To enforce required parameters use
      * ```
      * WordlistListResponseItem::with(
-     *   id: ..., createdAt: ..., description: ..., name: ..., userId: ...
+     *   id: ..., createdAt: ..., description: ..., name: ..., userID: ...
      * )
      * ```
      *
@@ -88,17 +88,17 @@ final class WordlistListResponseItem implements BaseModel
         ?string $createdAt,
         ?string $description,
         ?string $name,
-        ?string $userId,
+        ?string $userID,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['createdAt'] = $createdAt;
-        $obj['description'] = $description;
-        $obj['name'] = $name;
-        $obj['userId'] = $userId;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['description'] = $description;
+        $self['name'] = $name;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class WordlistListResponseItem implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class WordlistListResponseItem implements BaseModel
      */
     public function withCreatedAt(?string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class WordlistListResponseItem implements BaseModel
      */
     public function withDescription(?string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class WordlistListResponseItem implements BaseModel
      */
     public function withName(?string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,9 +150,9 @@ final class WordlistListResponseItem implements BaseModel
      */
     public function withUserID(?string $userID): self
     {
-        $obj = clone $this;
-        $obj['userId'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

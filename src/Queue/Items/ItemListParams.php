@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\Items;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -18,10 +18,10 @@ use ModerationAPI\Queue\Items\ItemListParams\SortField;
  *
  * @phpstan-type ItemListParamsShape = array{
  *   afterDate?: string,
- *   authorId?: string,
+ *   authorID?: string,
  *   beforeDate?: string,
- *   conversationIds?: string,
- *   filteredActionIds?: string,
+ *   conversationIDs?: string,
+ *   filteredActionIDs?: string,
  *   includeResolved?: string,
  *   labels?: string,
  *   pageNumber?: float,
@@ -36,37 +36,37 @@ final class ItemListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $afterDate;
 
-    #[Api(optional: true)]
-    public ?string $authorId;
+    #[Optional]
+    public ?string $authorID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $beforeDate;
 
-    #[Api(optional: true)]
-    public ?string $conversationIds;
+    #[Optional]
+    public ?string $conversationIDs;
 
-    #[Api(optional: true)]
-    public ?string $filteredActionIds;
+    #[Optional]
+    public ?string $filteredActionIDs;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $includeResolved;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $labels;
 
     /**
      * Page number to fetch.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $pageNumber;
 
     /**
      * Number of items per page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $pageSize;
 
     /**
@@ -74,11 +74,11 @@ final class ItemListParams implements BaseModel
      *
      * @var value-of<SortDirection>|null $sortDirection
      */
-    #[Api(enum: SortDirection::class, optional: true)]
+    #[Optional(enum: SortDirection::class)]
     public ?string $sortDirection;
 
     /** @var value-of<SortField>|null $sortField */
-    #[Api(enum: SortField::class, optional: true)]
+    #[Optional(enum: SortField::class)]
     public ?string $sortField;
 
     public function __construct()
@@ -96,10 +96,10 @@ final class ItemListParams implements BaseModel
      */
     public static function with(
         ?string $afterDate = null,
-        ?string $authorId = null,
+        ?string $authorID = null,
         ?string $beforeDate = null,
-        ?string $conversationIds = null,
-        ?string $filteredActionIds = null,
+        ?string $conversationIDs = null,
+        ?string $filteredActionIDs = null,
         ?string $includeResolved = null,
         ?string $labels = null,
         ?float $pageNumber = null,
@@ -107,77 +107,77 @@ final class ItemListParams implements BaseModel
         SortDirection|string|null $sortDirection = null,
         SortField|string|null $sortField = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $afterDate && $obj['afterDate'] = $afterDate;
-        null !== $authorId && $obj['authorId'] = $authorId;
-        null !== $beforeDate && $obj['beforeDate'] = $beforeDate;
-        null !== $conversationIds && $obj['conversationIds'] = $conversationIds;
-        null !== $filteredActionIds && $obj['filteredActionIds'] = $filteredActionIds;
-        null !== $includeResolved && $obj['includeResolved'] = $includeResolved;
-        null !== $labels && $obj['labels'] = $labels;
-        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
-        null !== $pageSize && $obj['pageSize'] = $pageSize;
-        null !== $sortDirection && $obj['sortDirection'] = $sortDirection;
-        null !== $sortField && $obj['sortField'] = $sortField;
+        null !== $afterDate && $self['afterDate'] = $afterDate;
+        null !== $authorID && $self['authorID'] = $authorID;
+        null !== $beforeDate && $self['beforeDate'] = $beforeDate;
+        null !== $conversationIDs && $self['conversationIDs'] = $conversationIDs;
+        null !== $filteredActionIDs && $self['filteredActionIDs'] = $filteredActionIDs;
+        null !== $includeResolved && $self['includeResolved'] = $includeResolved;
+        null !== $labels && $self['labels'] = $labels;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $sortDirection && $self['sortDirection'] = $sortDirection;
+        null !== $sortField && $self['sortField'] = $sortField;
 
-        return $obj;
+        return $self;
     }
 
     public function withAfterDate(string $afterDate): self
     {
-        $obj = clone $this;
-        $obj['afterDate'] = $afterDate;
+        $self = clone $this;
+        $self['afterDate'] = $afterDate;
 
-        return $obj;
+        return $self;
     }
 
     public function withAuthorID(string $authorID): self
     {
-        $obj = clone $this;
-        $obj['authorId'] = $authorID;
+        $self = clone $this;
+        $self['authorID'] = $authorID;
 
-        return $obj;
+        return $self;
     }
 
     public function withBeforeDate(string $beforeDate): self
     {
-        $obj = clone $this;
-        $obj['beforeDate'] = $beforeDate;
+        $self = clone $this;
+        $self['beforeDate'] = $beforeDate;
 
-        return $obj;
+        return $self;
     }
 
     public function withConversationIDs(string $conversationIDs): self
     {
-        $obj = clone $this;
-        $obj['conversationIds'] = $conversationIDs;
+        $self = clone $this;
+        $self['conversationIDs'] = $conversationIDs;
 
-        return $obj;
+        return $self;
     }
 
     public function withFilteredActionIDs(string $filteredActionIDs): self
     {
-        $obj = clone $this;
-        $obj['filteredActionIds'] = $filteredActionIDs;
+        $self = clone $this;
+        $self['filteredActionIDs'] = $filteredActionIDs;
 
-        return $obj;
+        return $self;
     }
 
     public function withIncludeResolved(string $includeResolved): self
     {
-        $obj = clone $this;
-        $obj['includeResolved'] = $includeResolved;
+        $self = clone $this;
+        $self['includeResolved'] = $includeResolved;
 
-        return $obj;
+        return $self;
     }
 
     public function withLabels(string $labels): self
     {
-        $obj = clone $this;
-        $obj['labels'] = $labels;
+        $self = clone $this;
+        $self['labels'] = $labels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class ItemListParams implements BaseModel
      */
     public function withPageNumber(float $pageNumber): self
     {
-        $obj = clone $this;
-        $obj['pageNumber'] = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class ItemListParams implements BaseModel
      */
     public function withPageSize(float $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +209,10 @@ final class ItemListParams implements BaseModel
      */
     public function withSortDirection(SortDirection|string $sortDirection): self
     {
-        $obj = clone $this;
-        $obj['sortDirection'] = $sortDirection;
+        $self = clone $this;
+        $self['sortDirection'] = $sortDirection;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,9 +220,9 @@ final class ItemListParams implements BaseModel
      */
     public function withSortField(SortField|string $sortField): self
     {
-        $obj = clone $this;
-        $obj['sortField'] = $sortField;
+        $self = clone $this;
+        $self['sortField'] = $sortField;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetStatsResponse\Trends;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class DailyReviewCount implements BaseModel
     /**
      * Number of reviews on this date.
      */
-    #[Api]
+    #[Required]
     public float $count;
 
     /**
      * Date in YYYY-MM-DD format.
      */
-    #[Api]
+    #[Required]
     public string $date;
 
     /**
@@ -54,12 +54,12 @@ final class DailyReviewCount implements BaseModel
      */
     public static function with(float $count, string $date): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['count'] = $count;
-        $obj['date'] = $date;
+        $self['count'] = $count;
+        $self['date'] = $date;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class DailyReviewCount implements BaseModel
      */
     public function withCount(float $count): self
     {
-        $obj = clone $this;
-        $obj['count'] = $count;
+        $self = clone $this;
+        $self['count'] = $count;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class DailyReviewCount implements BaseModel
      */
     public function withDate(string $date): self
     {
-        $obj = clone $this;
-        $obj['date'] = $date;
+        $self = clone $this;
+        $self['date'] = $date;
 
-        return $obj;
+        return $self;
     }
 }

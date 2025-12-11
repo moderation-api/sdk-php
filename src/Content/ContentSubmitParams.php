@@ -35,7 +35,8 @@ use ModerationAPI\Content\ContentSubmitParams\Policy\Toxicity;
 use ModerationAPI\Content\ContentSubmitParams\Policy\ToxicitySevere;
 use ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking;
 use ModerationAPI\Content\ContentSubmitParams\Policy\Violence;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -44,52 +45,52 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @see ModerationAPI\Services\ContentService::submit()
  *
  * @phpstan-type ContentSubmitParamsShape = array{
- *   content: Text|array{text: string, type: 'text'}|Image|array{
- *     type: 'image', url: string
- *   }|Video|array{type: 'video', url: string}|Audio|array{
- *     type: 'audio', url: string
+ *   content: Text|array{text: string, type?: 'text'}|Image|array{
+ *     type?: 'image', url: string
+ *   }|Video|array{type?: 'video', url: string}|Audio|array{
+ *     type?: 'audio', url: string
  *   }|Object1|array{
  *     data: array<string,\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio>,
- *     type: 'object',
+ *     type?: 'object',
  *   },
- *   authorId?: string,
+ *   authorID?: string,
  *   channel?: string,
- *   contentId?: string,
- *   conversationId?: string,
+ *   contentID?: string,
+ *   conversationID?: string,
  *   doNotStore?: bool,
  *   metadata?: array<string,mixed>,
  *   metaType?: MetaType|value-of<MetaType>,
  *   policies?: list<Toxicity|array{
- *     id: 'toxicity', flag: bool
+ *     id?: 'toxicity', flag: bool
  *   }|PersonalInformation|array{
- *     id: 'personal_information', flag: bool
- *   }|ToxicitySevere|array{id: 'toxicity_severe', flag: bool}|Hate|array{
- *     id: 'hate', flag: bool
- *   }|Illicit|array{id: 'illicit', flag: bool}|IllicitDrugs|array{
- *     id: 'illicit_drugs', flag: bool
+ *     id?: 'personal_information', flag: bool
+ *   }|ToxicitySevere|array{id?: 'toxicity_severe', flag: bool}|Hate|array{
+ *     id?: 'hate', flag: bool
+ *   }|Illicit|array{id?: 'illicit', flag: bool}|IllicitDrugs|array{
+ *     id?: 'illicit_drugs', flag: bool
  *   }|IllicitAlcohol|array{
- *     id: 'illicit_alcohol', flag: bool
+ *     id?: 'illicit_alcohol', flag: bool
  *   }|IllicitFirearms|array{
- *     id: 'illicit_firearms', flag: bool
+ *     id?: 'illicit_firearms', flag: bool
  *   }|IllicitTobacco|array{
- *     id: 'illicit_tobacco', flag: bool
- *   }|IllicitGambling|array{id: 'illicit_gambling', flag: bool}|Sexual|array{
- *     id: 'sexual', flag: bool
- *   }|Flirtation|array{id: 'flirtation', flag: bool}|Profanity|array{
- *     id: 'profanity', flag: bool
- *   }|Violence|array{id: 'violence', flag: bool}|SelfHarm|array{
- *     id: 'self_harm', flag: bool
- *   }|Spam|array{id: 'spam', flag: bool}|SelfPromotion|array{
- *     id: 'self_promotion', flag: bool
- *   }|Political|array{id: 'political', flag: bool}|Religion|array{
- *     id: 'religion', flag: bool
- *   }|CodeAbuse|array{id: 'code_abuse', flag: bool}|PiiMasking|array{
- *     id: 'pii', entities: array<string,Entity>
+ *     id?: 'illicit_tobacco', flag: bool
+ *   }|IllicitGambling|array{id?: 'illicit_gambling', flag: bool}|Sexual|array{
+ *     id?: 'sexual', flag: bool
+ *   }|Flirtation|array{id?: 'flirtation', flag: bool}|Profanity|array{
+ *     id?: 'profanity', flag: bool
+ *   }|Violence|array{id?: 'violence', flag: bool}|SelfHarm|array{
+ *     id?: 'self_harm', flag: bool
+ *   }|Spam|array{id?: 'spam', flag: bool}|SelfPromotion|array{
+ *     id?: 'self_promotion', flag: bool
+ *   }|Political|array{id?: 'political', flag: bool}|Religion|array{
+ *     id?: 'religion', flag: bool
+ *   }|CodeAbuse|array{id?: 'code_abuse', flag: bool}|PiiMasking|array{
+ *     id?: 'pii', entities: array<string,Entity>
  *   }|URLMasking|array{
- *     id: 'url',
+ *     id?: 'url',
  *     entities: array<string,\ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity>,
  *   }|Guideline|array{
- *     id: 'guideline', flag: bool, guidelineKey: string, instructions: string
+ *     id?: 'guideline', flag: bool, guidelineKey: string, instructions: string
  *   }>,
  * }
  */
@@ -102,37 +103,37 @@ final class ContentSubmitParams implements BaseModel
     /**
      * The content sent for moderation.
      */
-    #[Api]
+    #[Required]
     public Text|Image|Video|Audio|Object1 $content;
 
     /**
      * The author of the content.
      */
-    #[Api(optional: true)]
-    public ?string $authorId;
+    #[Optional('authorId')]
+    public ?string $authorID;
 
     /**
      * Provide a channel ID or key. Will use the project's default channel if not provided.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $channel;
 
     /**
      * The unique ID of the content in your database.
      */
-    #[Api(optional: true)]
-    public ?string $contentId;
+    #[Optional('contentId')]
+    public ?string $contentID;
 
     /**
      * For example the ID of a chat room or a post.
      */
-    #[Api(optional: true)]
-    public ?string $conversationId;
+    #[Optional('conversationId')]
+    public ?string $conversationID;
 
     /**
      * Do not store the content. The content won't enter the review queue.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $doNotStore;
 
     /**
@@ -140,7 +141,7 @@ final class ContentSubmitParams implements BaseModel
      *
      * @var array<string,mixed>|null $metadata
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $metadata;
 
     /**
@@ -148,7 +149,7 @@ final class ContentSubmitParams implements BaseModel
      *
      * @var value-of<MetaType>|null $metaType
      */
-    #[Api(enum: MetaType::class, optional: true)]
+    #[Optional(enum: MetaType::class)]
     public ?string $metaType;
 
     /**
@@ -156,7 +157,7 @@ final class ContentSubmitParams implements BaseModel
      *
      * @var list<Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Sexual|Flirtation|Profanity|Violence|SelfHarm|Spam|SelfPromotion|Political|Religion|CodeAbuse|PiiMasking|URLMasking|Guideline>|null $policies
      */
-    #[Api(list: Policy::class, optional: true)]
+    #[Optional(list: Policy::class)]
     public ?array $policies;
 
     /**
@@ -183,91 +184,95 @@ final class ContentSubmitParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Text|array{text: string, type: 'text'}|Image|array{
-     *   type: 'image', url: string
-     * }|Video|array{type: 'video', url: string}|Audio|array{
-     *   type: 'audio', url: string
+     * @param Text|array{text: string, type?: 'text'}|Image|array{
+     *   type?: 'image', url: string
+     * }|Video|array{type?: 'video', url: string}|Audio|array{
+     *   type?: 'audio', url: string
      * }|Object1|array{
      *   data: array<string,Object1\Data\Text|Object1\Data\Image|Object1\Data\Video|Object1\Data\Audio>,
-     *   type: 'object',
+     *   type?: 'object',
      * } $content
      * @param array<string,mixed> $metadata
      * @param MetaType|value-of<MetaType> $metaType
      * @param list<Toxicity|array{
-     *   id: 'toxicity', flag: bool
+     *   id?: 'toxicity', flag: bool
      * }|PersonalInformation|array{
-     *   id: 'personal_information', flag: bool
-     * }|ToxicitySevere|array{id: 'toxicity_severe', flag: bool}|Hate|array{
-     *   id: 'hate', flag: bool
-     * }|Illicit|array{id: 'illicit', flag: bool}|IllicitDrugs|array{
-     *   id: 'illicit_drugs', flag: bool
-     * }|IllicitAlcohol|array{id: 'illicit_alcohol', flag: bool}|IllicitFirearms|array{
-     *   id: 'illicit_firearms', flag: bool
-     * }|IllicitTobacco|array{id: 'illicit_tobacco', flag: bool}|IllicitGambling|array{
-     *   id: 'illicit_gambling', flag: bool
-     * }|Sexual|array{id: 'sexual', flag: bool}|Flirtation|array{
-     *   id: 'flirtation', flag: bool
-     * }|Profanity|array{id: 'profanity', flag: bool}|Violence|array{
-     *   id: 'violence', flag: bool
-     * }|SelfHarm|array{id: 'self_harm', flag: bool}|Spam|array{
-     *   id: 'spam', flag: bool
-     * }|SelfPromotion|array{id: 'self_promotion', flag: bool}|Political|array{
-     *   id: 'political', flag: bool
-     * }|Religion|array{id: 'religion', flag: bool}|CodeAbuse|array{
-     *   id: 'code_abuse', flag: bool
-     * }|PiiMasking|array{id: 'pii', entities: array<string,Entity>}|URLMasking|array{
-     *   id: 'url',
+     *   id?: 'personal_information', flag: bool
+     * }|ToxicitySevere|array{id?: 'toxicity_severe', flag: bool}|Hate|array{
+     *   id?: 'hate', flag: bool
+     * }|Illicit|array{id?: 'illicit', flag: bool}|IllicitDrugs|array{
+     *   id?: 'illicit_drugs', flag: bool
+     * }|IllicitAlcohol|array{
+     *   id?: 'illicit_alcohol', flag: bool
+     * }|IllicitFirearms|array{
+     *   id?: 'illicit_firearms', flag: bool
+     * }|IllicitTobacco|array{
+     *   id?: 'illicit_tobacco', flag: bool
+     * }|IllicitGambling|array{id?: 'illicit_gambling', flag: bool}|Sexual|array{
+     *   id?: 'sexual', flag: bool
+     * }|Flirtation|array{id?: 'flirtation', flag: bool}|Profanity|array{
+     *   id?: 'profanity', flag: bool
+     * }|Violence|array{id?: 'violence', flag: bool}|SelfHarm|array{
+     *   id?: 'self_harm', flag: bool
+     * }|Spam|array{id?: 'spam', flag: bool}|SelfPromotion|array{
+     *   id?: 'self_promotion', flag: bool
+     * }|Political|array{id?: 'political', flag: bool}|Religion|array{
+     *   id?: 'religion', flag: bool
+     * }|CodeAbuse|array{id?: 'code_abuse', flag: bool}|PiiMasking|array{
+     *   id?: 'pii', entities: array<string,Entity>
+     * }|URLMasking|array{
+     *   id?: 'url',
      *   entities: array<string,URLMasking\Entity>,
      * }|Guideline|array{
-     *   id: 'guideline', flag: bool, guidelineKey: string, instructions: string
+     *   id?: 'guideline', flag: bool, guidelineKey: string, instructions: string
      * }> $policies
      */
     public static function with(
         Text|array|Image|Video|Audio|Object1 $content,
-        ?string $authorId = null,
+        ?string $authorID = null,
         ?string $channel = null,
-        ?string $contentId = null,
-        ?string $conversationId = null,
+        ?string $contentID = null,
+        ?string $conversationID = null,
         ?bool $doNotStore = null,
         ?array $metadata = null,
         MetaType|string|null $metaType = null,
         ?array $policies = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['content'] = $content;
+        $self['content'] = $content;
 
-        null !== $authorId && $obj['authorId'] = $authorId;
-        null !== $channel && $obj['channel'] = $channel;
-        null !== $contentId && $obj['contentId'] = $contentId;
-        null !== $conversationId && $obj['conversationId'] = $conversationId;
-        null !== $doNotStore && $obj['doNotStore'] = $doNotStore;
-        null !== $metadata && $obj['metadata'] = $metadata;
-        null !== $metaType && $obj['metaType'] = $metaType;
-        null !== $policies && $obj['policies'] = $policies;
+        null !== $authorID && $self['authorID'] = $authorID;
+        null !== $channel && $self['channel'] = $channel;
+        null !== $contentID && $self['contentID'] = $contentID;
+        null !== $conversationID && $self['conversationID'] = $conversationID;
+        null !== $doNotStore && $self['doNotStore'] = $doNotStore;
+        null !== $metadata && $self['metadata'] = $metadata;
+        null !== $metaType && $self['metaType'] = $metaType;
+        null !== $policies && $self['policies'] = $policies;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The content sent for moderation.
      *
-     * @param Text|array{text: string, type: 'text'}|Image|array{
-     *   type: 'image', url: string
-     * }|Video|array{type: 'video', url: string}|Audio|array{
-     *   type: 'audio', url: string
+     * @param Text|array{text: string, type?: 'text'}|Image|array{
+     *   type?: 'image', url: string
+     * }|Video|array{type?: 'video', url: string}|Audio|array{
+     *   type?: 'audio', url: string
      * }|Object1|array{
      *   data: array<string,Object1\Data\Text|Object1\Data\Image|Object1\Data\Video|Object1\Data\Audio>,
-     *   type: 'object',
+     *   type?: 'object',
      * } $content
      */
     public function withContent(
         Text|array|Image|Video|Audio|Object1 $content
     ): self {
-        $obj = clone $this;
-        $obj['content'] = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -275,10 +280,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withAuthorID(string $authorID): self
     {
-        $obj = clone $this;
-        $obj['authorId'] = $authorID;
+        $self = clone $this;
+        $self['authorID'] = $authorID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -286,10 +291,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withChannel(string $channel): self
     {
-        $obj = clone $this;
-        $obj['channel'] = $channel;
+        $self = clone $this;
+        $self['channel'] = $channel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -297,10 +302,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withContentID(string $contentID): self
     {
-        $obj = clone $this;
-        $obj['contentId'] = $contentID;
+        $self = clone $this;
+        $self['contentID'] = $contentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -308,10 +313,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withConversationID(string $conversationID): self
     {
-        $obj = clone $this;
-        $obj['conversationId'] = $conversationID;
+        $self = clone $this;
+        $self['conversationID'] = $conversationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -319,10 +324,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withDoNotStore(bool $doNotStore): self
     {
-        $obj = clone $this;
-        $obj['doNotStore'] = $doNotStore;
+        $self = clone $this;
+        $self['doNotStore'] = $doNotStore;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -332,10 +337,10 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withMetadata(array $metadata): self
     {
-        $obj = clone $this;
-        $obj['metadata'] = $metadata;
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -345,49 +350,53 @@ final class ContentSubmitParams implements BaseModel
      */
     public function withMetaType(MetaType|string $metaType): self
     {
-        $obj = clone $this;
-        $obj['metaType'] = $metaType;
+        $self = clone $this;
+        $self['metaType'] = $metaType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * (Enterprise) override the channel policies for this moderation request only.
      *
      * @param list<Toxicity|array{
-     *   id: 'toxicity', flag: bool
+     *   id?: 'toxicity', flag: bool
      * }|PersonalInformation|array{
-     *   id: 'personal_information', flag: bool
-     * }|ToxicitySevere|array{id: 'toxicity_severe', flag: bool}|Hate|array{
-     *   id: 'hate', flag: bool
-     * }|Illicit|array{id: 'illicit', flag: bool}|IllicitDrugs|array{
-     *   id: 'illicit_drugs', flag: bool
-     * }|IllicitAlcohol|array{id: 'illicit_alcohol', flag: bool}|IllicitFirearms|array{
-     *   id: 'illicit_firearms', flag: bool
-     * }|IllicitTobacco|array{id: 'illicit_tobacco', flag: bool}|IllicitGambling|array{
-     *   id: 'illicit_gambling', flag: bool
-     * }|Sexual|array{id: 'sexual', flag: bool}|Flirtation|array{
-     *   id: 'flirtation', flag: bool
-     * }|Profanity|array{id: 'profanity', flag: bool}|Violence|array{
-     *   id: 'violence', flag: bool
-     * }|SelfHarm|array{id: 'self_harm', flag: bool}|Spam|array{
-     *   id: 'spam', flag: bool
-     * }|SelfPromotion|array{id: 'self_promotion', flag: bool}|Political|array{
-     *   id: 'political', flag: bool
-     * }|Religion|array{id: 'religion', flag: bool}|CodeAbuse|array{
-     *   id: 'code_abuse', flag: bool
-     * }|PiiMasking|array{id: 'pii', entities: array<string,Entity>}|URLMasking|array{
-     *   id: 'url',
+     *   id?: 'personal_information', flag: bool
+     * }|ToxicitySevere|array{id?: 'toxicity_severe', flag: bool}|Hate|array{
+     *   id?: 'hate', flag: bool
+     * }|Illicit|array{id?: 'illicit', flag: bool}|IllicitDrugs|array{
+     *   id?: 'illicit_drugs', flag: bool
+     * }|IllicitAlcohol|array{
+     *   id?: 'illicit_alcohol', flag: bool
+     * }|IllicitFirearms|array{
+     *   id?: 'illicit_firearms', flag: bool
+     * }|IllicitTobacco|array{
+     *   id?: 'illicit_tobacco', flag: bool
+     * }|IllicitGambling|array{id?: 'illicit_gambling', flag: bool}|Sexual|array{
+     *   id?: 'sexual', flag: bool
+     * }|Flirtation|array{id?: 'flirtation', flag: bool}|Profanity|array{
+     *   id?: 'profanity', flag: bool
+     * }|Violence|array{id?: 'violence', flag: bool}|SelfHarm|array{
+     *   id?: 'self_harm', flag: bool
+     * }|Spam|array{id?: 'spam', flag: bool}|SelfPromotion|array{
+     *   id?: 'self_promotion', flag: bool
+     * }|Political|array{id?: 'political', flag: bool}|Religion|array{
+     *   id?: 'religion', flag: bool
+     * }|CodeAbuse|array{id?: 'code_abuse', flag: bool}|PiiMasking|array{
+     *   id?: 'pii', entities: array<string,Entity>
+     * }|URLMasking|array{
+     *   id?: 'url',
      *   entities: array<string,URLMasking\Entity>,
      * }|Guideline|array{
-     *   id: 'guideline', flag: bool, guidelineKey: string, instructions: string
+     *   id?: 'guideline', flag: bool, guidelineKey: string, instructions: string
      * }> $policies
      */
     public function withPolicies(array $policies): self
     {
-        $obj = clone $this;
-        $obj['policies'] = $policies;
+        $self = clone $this;
+        $self['policies'] = $policies;
 
-        return $obj;
+        return $self;
     }
 }

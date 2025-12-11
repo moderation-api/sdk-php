@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\Items\ItemListResponse\Item;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -25,31 +26,31 @@ final class Action implements BaseModel
     /**
      * Action ID.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Action name.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Unix timestamp of when the action was taken.
      */
-    #[Api]
+    #[Required]
     public float $timestamp;
 
     /**
      * Action comment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $comment;
 
     /**
      * Moderator userID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $reviewer;
 
     /**
@@ -83,16 +84,16 @@ final class Action implements BaseModel
         ?string $comment = null,
         ?string $reviewer = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['name'] = $name;
-        $obj['timestamp'] = $timestamp;
+        $self['id'] = $id;
+        $self['name'] = $name;
+        $self['timestamp'] = $timestamp;
 
-        null !== $comment && $obj['comment'] = $comment;
-        null !== $reviewer && $obj['reviewer'] = $reviewer;
+        null !== $comment && $self['comment'] = $comment;
+        null !== $reviewer && $self['reviewer'] = $reviewer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +101,10 @@ final class Action implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +112,10 @@ final class Action implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +123,10 @@ final class Action implements BaseModel
      */
     public function withTimestamp(float $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +134,10 @@ final class Action implements BaseModel
      */
     public function withComment(string $comment): self
     {
-        $obj = clone $this;
-        $obj['comment'] = $comment;
+        $self = clone $this;
+        $self['comment'] = $comment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,9 +145,9 @@ final class Action implements BaseModel
      */
     public function withReviewer(string $reviewer): self
     {
-        $obj = clone $this;
-        $obj['reviewer'] = $reviewer;
+        $self = clone $this;
+        $self['reviewer'] = $reviewer;
 
-        return $obj;
+        return $self;
     }
 }

@@ -28,11 +28,10 @@ use ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput\Match
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation;
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation\Action;
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation\ReasonCode;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ContentSubmitResponseShape = array{
@@ -46,29 +45,27 @@ use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
  *   errors?: list<Error>|null,
  * }
  */
-final class ContentSubmitResponse implements BaseModel, ResponseConverter
+final class ContentSubmitResponse implements BaseModel
 {
     /** @use SdkModel<ContentSubmitResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * The author of the content if your account has authors enabled. Requires you to send authorId when submitting content.
      */
-    #[Api]
+    #[Required]
     public ?Author $author;
 
     /**
      * Potentially modified content.
      */
-    #[Api]
+    #[Required]
     public Content $content;
 
     /**
      * The evaluation of the content after running the channel policies.
      */
-    #[Api]
+    #[Required]
     public Evaluation $evaluation;
 
     /**
@@ -76,13 +73,13 @@ final class ContentSubmitResponse implements BaseModel, ResponseConverter
      *
      * @var list<SentimentInsight|LanguageInsight> $insights
      */
-    #[Api(list: Insight::class)]
+    #[Required(list: Insight::class)]
     public array $insights;
 
     /**
      * Metadata about the moderation request.
      */
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**
@@ -90,13 +87,13 @@ final class ContentSubmitResponse implements BaseModel, ResponseConverter
      *
      * @var list<ClassifierOutput|EntityMatcherOutput> $policies
      */
-    #[Api(list: Policy::class)]
+    #[Required(list: Policy::class)]
     public array $policies;
 
     /**
      * The recommendation for the content based on the evaluation.
      */
-    #[Api]
+    #[Required]
     public Recommendation $recommendation;
 
     /**
@@ -104,7 +101,7 @@ final class ContentSubmitResponse implements BaseModel, ResponseConverter
      *
      * @var list<Error>|null $errors
      */
-    #[Api(list: Error::class, optional: true)]
+    #[Optional(list: Error::class)]
     public ?array $errors;
 
     /**
@@ -150,8 +147,8 @@ final class ContentSubmitResponse implements BaseModel, ResponseConverter
      *   id: string,
      *   block: Block|null,
      *   status: value-of<Status>,
-     *   trust_level: TrustLevel,
-     *   external_id?: string|null,
+     *   trustLevel: TrustLevel,
+     *   externalID?: string|null,
      * }|null $author
      * @param Content|array{
      *   id: string,
@@ -159,43 +156,43 @@ final class ContentSubmitResponse implements BaseModel, ResponseConverter
      *   modified: string|array<string,mixed>|array<string,Text|Image|Video|Audio>|null,
      * } $content
      * @param Evaluation|array{
-     *   flag_probability: float,
+     *   flagProbability: float,
      *   flagged: bool,
-     *   severity_score: float,
-     *   unicode_spoofed?: bool|null,
+     *   severityScore: float,
+     *   unicodeSpoofed?: bool|null,
      * } $evaluation
      * @param list<SentimentInsight|array{
-     *   id: 'sentiment',
+     *   id?: 'sentiment',
      *   probability: float,
-     *   type: 'insight',
+     *   type?: 'insight',
      *   value: value-of<Value>|null,
      * }|LanguageInsight|array{
-     *   id: 'language', probability: float, type: 'insight', value: string|null
+     *   id?: 'language', probability: float, type?: 'insight', value: string|null
      * }> $insights
      * @param Meta|array{
-     *   channel_key: string,
+     *   channelKey: string,
      *   status: value-of<Meta\Status>,
      *   timestamp: float,
      *   usage: float,
-     *   processing_time?: string|null,
+     *   processingTime?: string|null,
      * } $meta
      * @param list<ClassifierOutput|array{
      *   id: string,
      *   flagged: bool,
      *   probability: float,
-     *   type: 'classifier',
-     *   flagged_fields?: list<string>|null,
+     *   type?: 'classifier',
+     *   flaggedFields?: list<string>|null,
      *   labels?: list<Label>|null,
      * }|EntityMatcherOutput|array{
      *   id: string,
      *   flagged: bool,
      *   matches: list<Match1>,
      *   probability: float,
-     *   type: 'entity_matcher',
-     *   flagged_fields?: list<string>|null,
+     *   type?: 'entity_matcher',
+     *   flaggedFields?: list<string>|null,
      * }> $policies
      * @param Recommendation|array{
-     *   action: value-of<Action>, reason_codes: list<value-of<ReasonCode>>
+     *   action: value-of<Action>, reasonCodes: list<value-of<ReasonCode>>
      * } $recommendation
      * @param list<Error|array{id: string, message: string}> $errors
      */
@@ -209,19 +206,19 @@ final class ContentSubmitResponse implements BaseModel, ResponseConverter
         Recommendation|array $recommendation,
         ?array $errors = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['author'] = $author;
-        $obj['content'] = $content;
-        $obj['evaluation'] = $evaluation;
-        $obj['insights'] = $insights;
-        $obj['meta'] = $meta;
-        $obj['policies'] = $policies;
-        $obj['recommendation'] = $recommendation;
+        $self['author'] = $author;
+        $self['content'] = $content;
+        $self['evaluation'] = $evaluation;
+        $self['insights'] = $insights;
+        $self['meta'] = $meta;
+        $self['policies'] = $policies;
+        $self['recommendation'] = $recommendation;
 
-        null !== $errors && $obj['errors'] = $errors;
+        null !== $errors && $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -231,16 +228,16 @@ final class ContentSubmitResponse implements BaseModel, ResponseConverter
      *   id: string,
      *   block: Block|null,
      *   status: value-of<Status>,
-     *   trust_level: TrustLevel,
-     *   external_id?: string|null,
+     *   trustLevel: TrustLevel,
+     *   externalID?: string|null,
      * }|null $author
      */
     public function withAuthor(Author|array|null $author): self
     {
-        $obj = clone $this;
-        $obj['author'] = $author;
+        $self = clone $this;
+        $self['author'] = $author;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,67 +251,67 @@ final class ContentSubmitResponse implements BaseModel, ResponseConverter
      */
     public function withContent(Content|array $content): self
     {
-        $obj = clone $this;
-        $obj['content'] = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The evaluation of the content after running the channel policies.
      *
      * @param Evaluation|array{
-     *   flag_probability: float,
+     *   flagProbability: float,
      *   flagged: bool,
-     *   severity_score: float,
-     *   unicode_spoofed?: bool|null,
+     *   severityScore: float,
+     *   unicodeSpoofed?: bool|null,
      * } $evaluation
      */
     public function withEvaluation(Evaluation|array $evaluation): self
     {
-        $obj = clone $this;
-        $obj['evaluation'] = $evaluation;
+        $self = clone $this;
+        $self['evaluation'] = $evaluation;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Results of all insights enabled in the channel.
      *
      * @param list<SentimentInsight|array{
-     *   id: 'sentiment',
+     *   id?: 'sentiment',
      *   probability: float,
-     *   type: 'insight',
+     *   type?: 'insight',
      *   value: value-of<Value>|null,
      * }|LanguageInsight|array{
-     *   id: 'language', probability: float, type: 'insight', value: string|null
+     *   id?: 'language', probability: float, type?: 'insight', value: string|null
      * }> $insights
      */
     public function withInsights(array $insights): self
     {
-        $obj = clone $this;
-        $obj['insights'] = $insights;
+        $self = clone $this;
+        $self['insights'] = $insights;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Metadata about the moderation request.
      *
      * @param Meta|array{
-     *   channel_key: string,
+     *   channelKey: string,
      *   status: value-of<Meta\Status>,
      *   timestamp: float,
      *   usage: float,
-     *   processing_time?: string|null,
+     *   processingTime?: string|null,
      * } $meta
      */
     public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj['meta'] = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -324,40 +321,40 @@ final class ContentSubmitResponse implements BaseModel, ResponseConverter
      *   id: string,
      *   flagged: bool,
      *   probability: float,
-     *   type: 'classifier',
-     *   flagged_fields?: list<string>|null,
+     *   type?: 'classifier',
+     *   flaggedFields?: list<string>|null,
      *   labels?: list<Label>|null,
      * }|EntityMatcherOutput|array{
      *   id: string,
      *   flagged: bool,
      *   matches: list<Match1>,
      *   probability: float,
-     *   type: 'entity_matcher',
-     *   flagged_fields?: list<string>|null,
+     *   type?: 'entity_matcher',
+     *   flaggedFields?: list<string>|null,
      * }> $policies
      */
     public function withPolicies(array $policies): self
     {
-        $obj = clone $this;
-        $obj['policies'] = $policies;
+        $self = clone $this;
+        $self['policies'] = $policies;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The recommendation for the content based on the evaluation.
      *
      * @param Recommendation|array{
-     *   action: value-of<Action>, reason_codes: list<value-of<ReasonCode>>
+     *   action: value-of<Action>, reasonCodes: list<value-of<ReasonCode>>
      * } $recommendation
      */
     public function withRecommendation(
         Recommendation|array $recommendation
     ): self {
-        $obj = clone $this;
-        $obj['recommendation'] = $recommendation;
+        $self = clone $this;
+        $self['recommendation'] = $recommendation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -367,9 +364,9 @@ final class ContentSubmitResponse implements BaseModel, ResponseConverter
      */
     public function withErrors(array $errors): self
     {
-        $obj = clone $this;
-        $obj['errors'] = $errors;
+        $self = clone $this;
+        $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetStatsResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\QueueGetStatsResponse\Trends\DailyReviewCount;
@@ -22,11 +22,11 @@ final class Trends implements BaseModel
     use SdkModel;
 
     /** @var list<DailyReviewCount> $dailyReviewCounts */
-    #[Api(list: DailyReviewCount::class)]
+    #[Required(list: DailyReviewCount::class)]
     public array $dailyReviewCounts;
 
     /** @var list<FlaggedContentTrend> $flaggedContentTrends */
-    #[Api(list: FlaggedContentTrend::class)]
+    #[Required(list: FlaggedContentTrend::class)]
     public array $flaggedContentTrends;
 
     /**
@@ -64,12 +64,12 @@ final class Trends implements BaseModel
         array $dailyReviewCounts,
         array $flaggedContentTrends
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['dailyReviewCounts'] = $dailyReviewCounts;
-        $obj['flaggedContentTrends'] = $flaggedContentTrends;
+        $self['dailyReviewCounts'] = $dailyReviewCounts;
+        $self['flaggedContentTrends'] = $flaggedContentTrends;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +79,10 @@ final class Trends implements BaseModel
      */
     public function withDailyReviewCounts(array $dailyReviewCounts): self
     {
-        $obj = clone $this;
-        $obj['dailyReviewCounts'] = $dailyReviewCounts;
+        $self = clone $this;
+        $self['dailyReviewCounts'] = $dailyReviewCounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,9 +92,9 @@ final class Trends implements BaseModel
      */
     public function withFlaggedContentTrends(array $flaggedContentTrends): self
     {
-        $obj = clone $this;
-        $obj['flaggedContentTrends'] = $flaggedContentTrends;
+        $self = clone $this;
+        $self['flaggedContentTrends'] = $flaggedContentTrends;
 
-        return $obj;
+        return $self;
     }
 }

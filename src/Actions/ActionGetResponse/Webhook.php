@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions\ActionGetResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -14,7 +15,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   name: string,
  *   url: string,
  *   description?: string|null,
- *   moderationActionId?: string|null,
+ *   moderationActionID?: string|null,
  * }
  */
 final class Webhook implements BaseModel
@@ -25,32 +26,32 @@ final class Webhook implements BaseModel
     /**
      * The ID of the webhook.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The webhook's name, used to identify it in the dashboard.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The webhook's URL. We'll call this URL when the event occurs.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**
      * The webhook's description.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $description;
 
     /**
      * The ID of the moderation action to trigger the webhook on. Only used for moderation action webhooks.
      */
-    #[Api(nullable: true, optional: true)]
-    public ?string $moderationActionId;
+    #[Optional('moderationActionId', nullable: true)]
+    public ?string $moderationActionID;
 
     /**
      * `new Webhook()` is missing required properties by the API.
@@ -81,18 +82,18 @@ final class Webhook implements BaseModel
         string $name,
         string $url,
         ?string $description = null,
-        ?string $moderationActionId = null,
+        ?string $moderationActionID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['name'] = $name;
-        $obj['url'] = $url;
+        $self['id'] = $id;
+        $self['name'] = $name;
+        $self['url'] = $url;
 
-        null !== $description && $obj['description'] = $description;
-        null !== $moderationActionId && $obj['moderationActionId'] = $moderationActionId;
+        null !== $description && $self['description'] = $description;
+        null !== $moderationActionID && $self['moderationActionID'] = $moderationActionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +101,10 @@ final class Webhook implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +112,10 @@ final class Webhook implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +123,10 @@ final class Webhook implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +134,10 @@ final class Webhook implements BaseModel
      */
     public function withDescription(?string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,9 +145,9 @@ final class Webhook implements BaseModel
      */
     public function withModerationActionID(?string $moderationActionID): self
     {
-        $obj = clone $this;
-        $obj['moderationActionId'] = $moderationActionID;
+        $self = clone $this;
+        $self['moderationActionID'] = $moderationActionID;
 
-        return $obj;
+        return $self;
     }
 }

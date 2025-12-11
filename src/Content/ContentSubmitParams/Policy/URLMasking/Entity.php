@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking;
 
 use ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity\ID;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -24,19 +25,19 @@ final class Entity implements BaseModel
     use SdkModel;
 
     /** @var value-of<ID> $id */
-    #[Api(enum: ID::class)]
+    #[Required(enum: ID::class)]
     public string $id;
 
-    #[Api]
+    #[Required]
     public bool $enable;
 
-    #[Api]
+    #[Required]
     public bool $flag;
 
-    #[Api]
+    #[Required]
     public bool $shouldMask;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mask;
 
     /**
@@ -72,16 +73,16 @@ final class Entity implements BaseModel
         bool $shouldMask,
         ?string $mask = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['enable'] = $enable;
-        $obj['flag'] = $flag;
-        $obj['shouldMask'] = $shouldMask;
+        $self['id'] = $id;
+        $self['enable'] = $enable;
+        $self['flag'] = $flag;
+        $self['shouldMask'] = $shouldMask;
 
-        null !== $mask && $obj['mask'] = $mask;
+        null !== $mask && $self['mask'] = $mask;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,41 +90,41 @@ final class Entity implements BaseModel
      */
     public function withID(ID|string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withEnable(bool $enable): self
     {
-        $obj = clone $this;
-        $obj['enable'] = $enable;
+        $self = clone $this;
+        $self['enable'] = $enable;
 
-        return $obj;
+        return $self;
     }
 
     public function withFlag(bool $flag): self
     {
-        $obj = clone $this;
-        $obj['flag'] = $flag;
+        $self = clone $this;
+        $self['flag'] = $flag;
 
-        return $obj;
+        return $self;
     }
 
     public function withShouldMask(bool $shouldMask): self
     {
-        $obj = clone $this;
-        $obj['shouldMask'] = $shouldMask;
+        $self = clone $this;
+        $self['shouldMask'] = $shouldMask;
 
-        return $obj;
+        return $self;
     }
 
     public function withMask(string $mask): self
     {
-        $obj = clone $this;
-        $obj['mask'] = $mask;
+        $self = clone $this;
+        $self['mask'] = $mask;
 
-        return $obj;
+        return $self;
     }
 }

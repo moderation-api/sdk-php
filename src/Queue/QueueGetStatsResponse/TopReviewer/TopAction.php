@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetStatsResponse\TopReviewer;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TopActionShape = array{
- *   actionId: string, actionName: string, count: float
+ *   actionID: string, actionName: string, count: float
  * }
  */
 final class TopAction implements BaseModel
@@ -21,19 +21,19 @@ final class TopAction implements BaseModel
     /**
      * Most used action by this reviewer.
      */
-    #[Api]
-    public string $actionId;
+    #[Required('actionId')]
+    public string $actionID;
 
     /**
      * Name of the most used action.
      */
-    #[Api]
+    #[Required]
     public string $actionName;
 
     /**
      * Number of times this action was used.
      */
-    #[Api]
+    #[Required]
     public float $count;
 
     /**
@@ -41,7 +41,7 @@ final class TopAction implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * TopAction::with(actionId: ..., actionName: ..., count: ...)
+     * TopAction::with(actionID: ..., actionName: ..., count: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -61,17 +61,17 @@ final class TopAction implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $actionId,
+        string $actionID,
         string $actionName,
         float $count
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['actionId'] = $actionId;
-        $obj['actionName'] = $actionName;
-        $obj['count'] = $count;
+        $self['actionID'] = $actionID;
+        $self['actionName'] = $actionName;
+        $self['count'] = $count;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +79,10 @@ final class TopAction implements BaseModel
      */
     public function withActionID(string $actionID): self
     {
-        $obj = clone $this;
-        $obj['actionId'] = $actionID;
+        $self = clone $this;
+        $self['actionID'] = $actionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +90,10 @@ final class TopAction implements BaseModel
      */
     public function withActionName(string $actionName): self
     {
-        $obj = clone $this;
-        $obj['actionName'] = $actionName;
+        $self = clone $this;
+        $self['actionName'] = $actionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,9 +101,9 @@ final class TopAction implements BaseModel
      */
     public function withCount(float $count): self
     {
-        $obj = clone $this;
-        $obj['count'] = $count;
+        $self = clone $this;
+        $self['count'] = $count;
 
-        return $obj;
+        return $self;
     }
 }

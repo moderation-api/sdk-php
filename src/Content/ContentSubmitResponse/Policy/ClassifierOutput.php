@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitResponse\Policy;
 
 use ModerationAPI\Content\ContentSubmitResponse\Policy\ClassifierOutput\Label;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -16,8 +17,8 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   id: string,
  *   flagged: bool,
  *   probability: float,
- *   type: 'classifier',
- *   flagged_fields?: list<string>|null,
+ *   type?: 'classifier',
+ *   flaggedFields?: list<string>|null,
  *   labels?: list<Label>|null,
  * }
  */
@@ -27,31 +28,31 @@ final class ClassifierOutput implements BaseModel
     use SdkModel;
 
     /** @var 'classifier' $type */
-    #[Api]
+    #[Required]
     public string $type = 'classifier';
 
     /**
      * The unique identifier for the classifier output.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public bool $flagged;
 
-    #[Api]
+    #[Required]
     public float $probability;
 
     /**
      * The keys of the flagged fields if submitting an object.
      *
-     * @var list<string>|null $flagged_fields
+     * @var list<string>|null $flaggedFields
      */
-    #[Api(list: 'string', optional: true)]
-    public ?array $flagged_fields;
+    #[Optional('flagged_fields', list: 'string')]
+    public ?array $flaggedFields;
 
     /** @var list<Label>|null $labels */
-    #[Api(list: Label::class, optional: true)]
+    #[Optional(list: Label::class)]
     public ?array $labels;
 
     /**
@@ -78,26 +79,26 @@ final class ClassifierOutput implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $flagged_fields
+     * @param list<string> $flaggedFields
      * @param list<Label|array{id: string, flagged: bool, probability: float}> $labels
      */
     public static function with(
         string $id,
         bool $flagged,
         float $probability,
-        ?array $flagged_fields = null,
+        ?array $flaggedFields = null,
         ?array $labels = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['flagged'] = $flagged;
-        $obj['probability'] = $probability;
+        $self['id'] = $id;
+        $self['flagged'] = $flagged;
+        $self['probability'] = $probability;
 
-        null !== $flagged_fields && $obj['flagged_fields'] = $flagged_fields;
-        null !== $labels && $obj['labels'] = $labels;
+        null !== $flaggedFields && $self['flaggedFields'] = $flaggedFields;
+        null !== $labels && $self['labels'] = $labels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,26 +106,26 @@ final class ClassifierOutput implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withFlagged(bool $flagged): self
     {
-        $obj = clone $this;
-        $obj['flagged'] = $flagged;
+        $self = clone $this;
+        $self['flagged'] = $flagged;
 
-        return $obj;
+        return $self;
     }
 
     public function withProbability(float $probability): self
     {
-        $obj = clone $this;
-        $obj['probability'] = $probability;
+        $self = clone $this;
+        $self['probability'] = $probability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +135,10 @@ final class ClassifierOutput implements BaseModel
      */
     public function withFlaggedFields(array $flaggedFields): self
     {
-        $obj = clone $this;
-        $obj['flagged_fields'] = $flaggedFields;
+        $self = clone $this;
+        $self['flaggedFields'] = $flaggedFields;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,9 +146,9 @@ final class ClassifierOutput implements BaseModel
      */
     public function withLabels(array $labels): self
     {
-        $obj = clone $this;
-        $obj['labels'] = $labels;
+        $self = clone $this;
+        $self['labels'] = $labels;
 
-        return $obj;
+        return $self;
     }
 }

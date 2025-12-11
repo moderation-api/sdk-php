@@ -4,23 +4,19 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Authors;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AuthorDeleteResponseShape = array{success: bool}
  */
-final class AuthorDeleteResponse implements BaseModel, ResponseConverter
+final class AuthorDeleteResponse implements BaseModel
 {
     /** @use SdkModel<AuthorDeleteResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**
@@ -49,18 +45,18 @@ final class AuthorDeleteResponse implements BaseModel, ResponseConverter
      */
     public static function with(bool $success): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['success'] = $success;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 }

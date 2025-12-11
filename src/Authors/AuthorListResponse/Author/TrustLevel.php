@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Authors\AuthorListResponse\Author;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class TrustLevel implements BaseModel
     /**
      * Author trust level (-1, 0, 1, 2, 3, or 4).
      */
-    #[Api]
+    #[Required]
     public float $level;
 
     /**
      * True if the trust level was set manually by a moderator.
      */
-    #[Api]
+    #[Required]
     public bool $manual;
 
     /**
@@ -54,12 +54,12 @@ final class TrustLevel implements BaseModel
      */
     public static function with(float $level, bool $manual): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['level'] = $level;
-        $obj['manual'] = $manual;
+        $self['level'] = $level;
+        $self['manual'] = $manual;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class TrustLevel implements BaseModel
      */
     public function withLevel(float $level): self
     {
-        $obj = clone $this;
-        $obj['level'] = $level;
+        $self = clone $this;
+        $self['level'] = $level;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class TrustLevel implements BaseModel
      */
     public function withManual(bool $manual): self
     {
-        $obj = clone $this;
-        $obj['manual'] = $manual;
+        $self = clone $this;
+        $self['manual'] = $manual;
 
-        return $obj;
+        return $self;
     }
 }

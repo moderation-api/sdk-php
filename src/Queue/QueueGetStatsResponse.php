@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 use ModerationAPI\Queue\QueueGetStatsResponse\ActionStat;
 use ModerationAPI\Queue\QueueGetStatsResponse\ReviewStats;
 use ModerationAPI\Queue\QueueGetStatsResponse\TopReviewer;
@@ -25,18 +23,16 @@ use ModerationAPI\Queue\QueueGetStatsResponse\Trends\FlaggedContentTrend;
  *   trends: Trends,
  * }
  */
-final class QueueGetStatsResponse implements BaseModel, ResponseConverter
+final class QueueGetStatsResponse implements BaseModel
 {
     /** @use SdkModel<QueueGetStatsResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<ActionStat> $actionStats */
-    #[Api(list: ActionStat::class)]
+    #[Required(list: ActionStat::class)]
     public array $actionStats;
 
-    #[Api]
+    #[Required]
     public ReviewStats $reviewStats;
 
     /**
@@ -44,10 +40,10 @@ final class QueueGetStatsResponse implements BaseModel, ResponseConverter
      *
      * @var list<TopReviewer> $topReviewers
      */
-    #[Api(list: TopReviewer::class)]
+    #[Required(list: TopReviewer::class)]
     public array $topReviewers;
 
-    #[Api]
+    #[Required]
     public Trends $trends;
 
     /**
@@ -81,7 +77,7 @@ final class QueueGetStatsResponse implements BaseModel, ResponseConverter
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<ActionStat|array{
-     *   actionId: string, actionName: string, count: float, percentageOfTotal: float
+     *   actionID: string, actionName: string, count: float, percentageOfTotal: float
      * }> $actionStats
      * @param ReviewStats|array{
      *   averageTimeToReview: float, totalPending: float, totalReviewed: float
@@ -91,7 +87,7 @@ final class QueueGetStatsResponse implements BaseModel, ResponseConverter
      *   name: string,
      *   reviewCount: float,
      *   topActions: list<TopAction>,
-     *   userId: string,
+     *   userID: string,
      *   accuracyScore?: float|null,
      * }> $topReviewers
      * @param Trends|array{
@@ -105,27 +101,27 @@ final class QueueGetStatsResponse implements BaseModel, ResponseConverter
         array $topReviewers,
         Trends|array $trends,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['actionStats'] = $actionStats;
-        $obj['reviewStats'] = $reviewStats;
-        $obj['topReviewers'] = $topReviewers;
-        $obj['trends'] = $trends;
+        $self['actionStats'] = $actionStats;
+        $self['reviewStats'] = $reviewStats;
+        $self['topReviewers'] = $topReviewers;
+        $self['trends'] = $trends;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * @param list<ActionStat|array{
-     *   actionId: string, actionName: string, count: float, percentageOfTotal: float
+     *   actionID: string, actionName: string, count: float, percentageOfTotal: float
      * }> $actionStats
      */
     public function withActionStats(array $actionStats): self
     {
-        $obj = clone $this;
-        $obj['actionStats'] = $actionStats;
+        $self = clone $this;
+        $self['actionStats'] = $actionStats;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +131,10 @@ final class QueueGetStatsResponse implements BaseModel, ResponseConverter
      */
     public function withReviewStats(ReviewStats|array $reviewStats): self
     {
-        $obj = clone $this;
-        $obj['reviewStats'] = $reviewStats;
+        $self = clone $this;
+        $self['reviewStats'] = $reviewStats;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,16 +145,16 @@ final class QueueGetStatsResponse implements BaseModel, ResponseConverter
      *   name: string,
      *   reviewCount: float,
      *   topActions: list<TopAction>,
-     *   userId: string,
+     *   userID: string,
      *   accuracyScore?: float|null,
      * }> $topReviewers
      */
     public function withTopReviewers(array $topReviewers): self
     {
-        $obj = clone $this;
-        $obj['topReviewers'] = $topReviewers;
+        $self = clone $this;
+        $self['topReviewers'] = $topReviewers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,9 +165,9 @@ final class QueueGetStatsResponse implements BaseModel, ResponseConverter
      */
     public function withTrends(Trends|array $trends): self
     {
-        $obj = clone $this;
-        $obj['trends'] = $trends;
+        $self = clone $this;
+        $self['trends'] = $trends;
 
-        return $obj;
+        return $self;
     }
 }

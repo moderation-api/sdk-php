@@ -4,28 +4,24 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions\Execute;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Execution result.
  *
  * @phpstan-type ExecuteExecuteResponseShape = array{success: bool}
  */
-final class ExecuteExecuteResponse implements BaseModel, ResponseConverter
+final class ExecuteExecuteResponse implements BaseModel
 {
     /** @use SdkModel<ExecuteExecuteResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * Whether the action was executed successfully.
      */
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**
@@ -54,11 +50,11 @@ final class ExecuteExecuteResponse implements BaseModel, ResponseConverter
      */
     public static function with(bool $success): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['success'] = $success;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +62,9 @@ final class ExecuteExecuteResponse implements BaseModel, ResponseConverter
      */
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 }

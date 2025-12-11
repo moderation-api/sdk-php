@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type GuidelineShape = array{
- *   id: 'guideline', flag: bool, guidelineKey: string, instructions: string
+ *   id?: 'guideline', flag: bool, guidelineKey: string, instructions: string
  * }
  */
 final class Guideline implements BaseModel
@@ -19,16 +19,16 @@ final class Guideline implements BaseModel
     use SdkModel;
 
     /** @var 'guideline' $id */
-    #[Api]
+    #[Required]
     public string $id = 'guideline';
 
-    #[Api]
+    #[Required]
     public bool $flag;
 
-    #[Api]
+    #[Required]
     public string $guidelineKey;
 
-    #[Api]
+    #[Required]
     public string $instructions;
 
     /**
@@ -60,36 +60,36 @@ final class Guideline implements BaseModel
         string $guidelineKey,
         string $instructions
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['flag'] = $flag;
-        $obj['guidelineKey'] = $guidelineKey;
-        $obj['instructions'] = $instructions;
+        $self['flag'] = $flag;
+        $self['guidelineKey'] = $guidelineKey;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     public function withFlag(bool $flag): self
     {
-        $obj = clone $this;
-        $obj['flag'] = $flag;
+        $self = clone $this;
+        $self['flag'] = $flag;
 
-        return $obj;
+        return $self;
     }
 
     public function withGuidelineKey(string $guidelineKey): self
     {
-        $obj = clone $this;
-        $obj['guidelineKey'] = $guidelineKey;
+        $self = clone $this;
+        $self['guidelineKey'] = $guidelineKey;
 
-        return $obj;
+        return $self;
     }
 
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj['instructions'] = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 }

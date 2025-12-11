@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -14,7 +14,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @see ModerationAPI\Services\ActionsService::list()
  *
- * @phpstan-type ActionListParamsShape = array{queueId?: string}
+ * @phpstan-type ActionListParamsShape = array{queueID?: string}
  */
 final class ActionListParams implements BaseModel
 {
@@ -22,8 +22,8 @@ final class ActionListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
-    public ?string $queueId;
+    #[Optional]
+    public ?string $queueID;
 
     public function __construct()
     {
@@ -35,20 +35,20 @@ final class ActionListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $queueId = null): self
+    public static function with(?string $queueID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $queueId && $obj['queueId'] = $queueId;
+        null !== $queueID && $self['queueID'] = $queueID;
 
-        return $obj;
+        return $self;
     }
 
     public function withQueueID(string $queueID): self
     {
-        $obj = clone $this;
-        $obj['queueId'] = $queueID;
+        $self = clone $this;
+        $self['queueID'] = $queueID;
 
-        return $obj;
+        return $self;
     }
 }

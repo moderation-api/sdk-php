@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Wordlist\Words;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class WordAddParams implements BaseModel
      *
      * @var list<string> $words
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $words;
 
     /**
@@ -58,11 +58,11 @@ final class WordAddParams implements BaseModel
      */
     public static function with(array $words): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['words'] = $words;
+        $self['words'] = $words;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,9 +72,9 @@ final class WordAddParams implements BaseModel
      */
     public function withWords(array $words): self
     {
-        $obj = clone $this;
-        $obj['words'] = $words;
+        $self = clone $this;
+        $self['words'] = $words;
 
-        return $obj;
+        return $self;
     }
 }

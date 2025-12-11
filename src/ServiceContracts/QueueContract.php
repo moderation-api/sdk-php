@@ -6,7 +6,6 @@ namespace ModerationAPI\ServiceContracts;
 
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\Queue\QueueGetResponse;
-use ModerationAPI\Queue\QueueGetStatsParams;
 use ModerationAPI\Queue\QueueGetStatsResponse;
 use ModerationAPI\RequestOptions;
 
@@ -14,6 +13,8 @@ interface QueueContract
 {
     /**
      * @api
+     *
+     * @param string $id The queue ID
      *
      * @throws APIException
      */
@@ -25,13 +26,14 @@ interface QueueContract
     /**
      * @api
      *
-     * @param array<mixed>|QueueGetStatsParams $params
+     * @param string $id The queue ID
+     * @param string $withinDays Number of days to analyze statistics for
      *
      * @throws APIException
      */
     public function getStats(
         string $id,
-        array|QueueGetStatsParams $params,
+        string $withinDays = '30',
         ?RequestOptions $requestOptions = null,
     ): QueueGetStatsResponse;
 }

@@ -4,32 +4,28 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionDeleteResponseShape = array{id: string, deleted: bool}
  */
-final class ActionDeleteResponse implements BaseModel, ResponseConverter
+final class ActionDeleteResponse implements BaseModel
 {
     /** @use SdkModel<ActionDeleteResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * The ID of the action.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Whether the action was deleted.
      */
-    #[Api]
+    #[Required]
     public bool $deleted;
 
     /**
@@ -58,12 +54,12 @@ final class ActionDeleteResponse implements BaseModel, ResponseConverter
      */
     public static function with(string $id, bool $deleted): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['deleted'] = $deleted;
+        $self['id'] = $id;
+        $self['deleted'] = $deleted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,10 +67,10 @@ final class ActionDeleteResponse implements BaseModel, ResponseConverter
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,9 +78,9 @@ final class ActionDeleteResponse implements BaseModel, ResponseConverter
      */
     public function withDeleted(bool $deleted): self
     {
-        $obj = clone $this;
-        $obj['deleted'] = $deleted;
+        $self = clone $this;
+        $self['deleted'] = $deleted;
 
-        return $obj;
+        return $self;
     }
 }

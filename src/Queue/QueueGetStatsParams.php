@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class QueueGetStatsParams implements BaseModel
     /**
      * Number of days to analyze statistics for.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $withinDays;
 
     public function __construct()
@@ -40,11 +40,11 @@ final class QueueGetStatsParams implements BaseModel
      */
     public static function with(?string $withinDays = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $withinDays && $obj['withinDays'] = $withinDays;
+        null !== $withinDays && $self['withinDays'] = $withinDays;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class QueueGetStatsParams implements BaseModel
      */
     public function withWithinDays(string $withinDays): self
     {
-        $obj = clone $this;
-        $obj['withinDays'] = $withinDays;
+        $self = clone $this;
+        $self['withinDays'] = $withinDays;
 
-        return $obj;
+        return $self;
     }
 }

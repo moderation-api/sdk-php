@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type IllicitFirearmsShape = array{id: 'illicit_firearms', flag: bool}
+ * @phpstan-type IllicitFirearmsShape = array{id?: 'illicit_firearms', flag: bool}
  */
 final class IllicitFirearms implements BaseModel
 {
@@ -17,10 +17,10 @@ final class IllicitFirearms implements BaseModel
     use SdkModel;
 
     /** @var 'illicit_firearms' $id */
-    #[Api]
+    #[Required]
     public string $id = 'illicit_firearms';
 
-    #[Api]
+    #[Required]
     public bool $flag;
 
     /**
@@ -49,18 +49,18 @@ final class IllicitFirearms implements BaseModel
      */
     public static function with(bool $flag): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['flag'] = $flag;
+        $self['flag'] = $flag;
 
-        return $obj;
+        return $self;
     }
 
     public function withFlag(bool $flag): self
     {
-        $obj = clone $this;
-        $obj['flag'] = $flag;
+        $self = clone $this;
+        $self['flag'] = $flag;
 
-        return $obj;
+        return $self;
     }
 }

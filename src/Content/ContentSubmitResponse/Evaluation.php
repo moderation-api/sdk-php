@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -12,10 +13,10 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * The evaluation of the content after running the channel policies.
  *
  * @phpstan-type EvaluationShape = array{
- *   flag_probability: float,
+ *   flagProbability: float,
  *   flagged: bool,
- *   severity_score: float,
- *   unicode_spoofed?: bool|null,
+ *   severityScore: float,
+ *   unicodeSpoofed?: bool|null,
  * }
  */
 final class Evaluation implements BaseModel
@@ -26,33 +27,33 @@ final class Evaluation implements BaseModel
     /**
      * The probability that the content should be flagged.
      */
-    #[Api]
-    public float $flag_probability;
+    #[Required('flag_probability')]
+    public float $flagProbability;
 
     /**
      * Whether the content was flagged by any policy.
      */
-    #[Api]
+    #[Required]
     public bool $flagged;
 
     /**
      * The severity score of the content. A higher score indicates more severe content.
      */
-    #[Api]
-    public float $severity_score;
+    #[Required('severity_score')]
+    public float $severityScore;
 
     /**
      * Whether the content was flagged for Unicode spoofing.
      */
-    #[Api(optional: true)]
-    public ?bool $unicode_spoofed;
+    #[Optional('unicode_spoofed')]
+    public ?bool $unicodeSpoofed;
 
     /**
      * `new Evaluation()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Evaluation::with(flag_probability: ..., flagged: ..., severity_score: ...)
+     * Evaluation::with(flagProbability: ..., flagged: ..., severityScore: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -75,20 +76,20 @@ final class Evaluation implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        float $flag_probability,
+        float $flagProbability,
         bool $flagged,
-        float $severity_score,
-        ?bool $unicode_spoofed = null,
+        float $severityScore,
+        ?bool $unicodeSpoofed = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['flag_probability'] = $flag_probability;
-        $obj['flagged'] = $flagged;
-        $obj['severity_score'] = $severity_score;
+        $self['flagProbability'] = $flagProbability;
+        $self['flagged'] = $flagged;
+        $self['severityScore'] = $severityScore;
 
-        null !== $unicode_spoofed && $obj['unicode_spoofed'] = $unicode_spoofed;
+        null !== $unicodeSpoofed && $self['unicodeSpoofed'] = $unicodeSpoofed;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +97,10 @@ final class Evaluation implements BaseModel
      */
     public function withFlagProbability(float $flagProbability): self
     {
-        $obj = clone $this;
-        $obj['flag_probability'] = $flagProbability;
+        $self = clone $this;
+        $self['flagProbability'] = $flagProbability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +108,10 @@ final class Evaluation implements BaseModel
      */
     public function withFlagged(bool $flagged): self
     {
-        $obj = clone $this;
-        $obj['flagged'] = $flagged;
+        $self = clone $this;
+        $self['flagged'] = $flagged;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +119,10 @@ final class Evaluation implements BaseModel
      */
     public function withSeverityScore(float $severityScore): self
     {
-        $obj = clone $this;
-        $obj['severity_score'] = $severityScore;
+        $self = clone $this;
+        $self['severityScore'] = $severityScore;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +130,9 @@ final class Evaluation implements BaseModel
      */
     public function withUnicodeSpoofed(bool $unicodeSpoofed): self
     {
-        $obj = clone $this;
-        $obj['unicode_spoofed'] = $unicodeSpoofed;
+        $self = clone $this;
+        $self['unicodeSpoofed'] = $unicodeSpoofed;
 
-        return $obj;
+        return $self;
     }
 }

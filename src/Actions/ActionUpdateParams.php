@@ -9,7 +9,7 @@ use ModerationAPI\Actions\ActionUpdateParams\PossibleValue;
 use ModerationAPI\Actions\ActionUpdateParams\QueueBehaviour;
 use ModerationAPI\Actions\ActionUpdateParams\Type;
 use ModerationAPI\Actions\ActionUpdateParams\Webhook;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -22,7 +22,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @phpstan-type ActionUpdateParamsShape = array{
  *   builtIn?: bool|null,
  *   description?: string|null,
- *   filterInQueueIds?: list<string>,
+ *   filterInQueueIDs?: list<string>,
  *   freeText?: bool,
  *   key?: string|null,
  *   name?: string,
@@ -45,39 +45,39 @@ final class ActionUpdateParams implements BaseModel
     /**
      * Whether the action is a built-in action or a custom one.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?bool $builtIn;
 
     /**
      * The description of the action.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $description;
 
     /**
      * The IDs of the queues the action is available in.
      *
-     * @var list<string>|null $filterInQueueIds
+     * @var list<string>|null $filterInQueueIDs
      */
-    #[Api(list: 'string', optional: true)]
-    public ?array $filterInQueueIds;
+    #[Optional('filterInQueueIds', list: 'string')]
+    public ?array $filterInQueueIDs;
 
     /**
      * Whether the action allows any text to be entered as a value or if it must be one of the possible values.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $freeText;
 
     /**
      * User defined key of the action.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $key;
 
     /**
      * The name of the action.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -85,7 +85,7 @@ final class ActionUpdateParams implements BaseModel
      *
      * @var value-of<Position>|null $position
      */
-    #[Api(enum: Position::class, optional: true)]
+    #[Optional(enum: Position::class)]
     public ?string $position;
 
     /**
@@ -93,7 +93,7 @@ final class ActionUpdateParams implements BaseModel
      *
      * @var list<PossibleValue>|null $possibleValues
      */
-    #[Api(list: PossibleValue::class, optional: true)]
+    #[Optional(list: PossibleValue::class)]
     public ?array $possibleValues;
 
     /**
@@ -101,7 +101,7 @@ final class ActionUpdateParams implements BaseModel
      *
      * @var value-of<QueueBehaviour>|null $queueBehaviour
      */
-    #[Api(enum: QueueBehaviour::class, optional: true)]
+    #[Optional(enum: QueueBehaviour::class)]
     public ?string $queueBehaviour;
 
     /**
@@ -109,13 +109,13 @@ final class ActionUpdateParams implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, nullable: true, optional: true)]
+    #[Optional(enum: Type::class, nullable: true)]
     public ?string $type;
 
     /**
      * Whether the action requires a value to be executed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $valueRequired;
 
     /**
@@ -123,7 +123,7 @@ final class ActionUpdateParams implements BaseModel
      *
      * @var list<Webhook>|null $webhooks
      */
-    #[Api(list: Webhook::class, optional: true)]
+    #[Optional(list: Webhook::class)]
     public ?array $webhooks;
 
     public function __construct()
@@ -136,7 +136,7 @@ final class ActionUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $filterInQueueIds
+     * @param list<string> $filterInQueueIDs
      * @param Position|value-of<Position> $position
      * @param list<PossibleValue|array{value: string}> $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour
@@ -148,7 +148,7 @@ final class ActionUpdateParams implements BaseModel
     public static function with(
         ?bool $builtIn = null,
         ?string $description = null,
-        ?array $filterInQueueIds = null,
+        ?array $filterInQueueIDs = null,
         ?bool $freeText = null,
         ?string $key = null,
         ?string $name = null,
@@ -159,22 +159,22 @@ final class ActionUpdateParams implements BaseModel
         ?bool $valueRequired = null,
         ?array $webhooks = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $builtIn && $obj['builtIn'] = $builtIn;
-        null !== $description && $obj['description'] = $description;
-        null !== $filterInQueueIds && $obj['filterInQueueIds'] = $filterInQueueIds;
-        null !== $freeText && $obj['freeText'] = $freeText;
-        null !== $key && $obj['key'] = $key;
-        null !== $name && $obj['name'] = $name;
-        null !== $position && $obj['position'] = $position;
-        null !== $possibleValues && $obj['possibleValues'] = $possibleValues;
-        null !== $queueBehaviour && $obj['queueBehaviour'] = $queueBehaviour;
-        null !== $type && $obj['type'] = $type;
-        null !== $valueRequired && $obj['valueRequired'] = $valueRequired;
-        null !== $webhooks && $obj['webhooks'] = $webhooks;
+        null !== $builtIn && $self['builtIn'] = $builtIn;
+        null !== $description && $self['description'] = $description;
+        null !== $filterInQueueIDs && $self['filterInQueueIDs'] = $filterInQueueIDs;
+        null !== $freeText && $self['freeText'] = $freeText;
+        null !== $key && $self['key'] = $key;
+        null !== $name && $self['name'] = $name;
+        null !== $position && $self['position'] = $position;
+        null !== $possibleValues && $self['possibleValues'] = $possibleValues;
+        null !== $queueBehaviour && $self['queueBehaviour'] = $queueBehaviour;
+        null !== $type && $self['type'] = $type;
+        null !== $valueRequired && $self['valueRequired'] = $valueRequired;
+        null !== $webhooks && $self['webhooks'] = $webhooks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,10 +182,10 @@ final class ActionUpdateParams implements BaseModel
      */
     public function withBuiltIn(?bool $builtIn): self
     {
-        $obj = clone $this;
-        $obj['builtIn'] = $builtIn;
+        $self = clone $this;
+        $self['builtIn'] = $builtIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -193,10 +193,10 @@ final class ActionUpdateParams implements BaseModel
      */
     public function withDescription(?string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,10 +206,10 @@ final class ActionUpdateParams implements BaseModel
      */
     public function withFilterInQueueIDs(array $filterInQueueIDs): self
     {
-        $obj = clone $this;
-        $obj['filterInQueueIds'] = $filterInQueueIDs;
+        $self = clone $this;
+        $self['filterInQueueIDs'] = $filterInQueueIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,10 +217,10 @@ final class ActionUpdateParams implements BaseModel
      */
     public function withFreeText(bool $freeText): self
     {
-        $obj = clone $this;
-        $obj['freeText'] = $freeText;
+        $self = clone $this;
+        $self['freeText'] = $freeText;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -228,10 +228,10 @@ final class ActionUpdateParams implements BaseModel
      */
     public function withKey(?string $key): self
     {
-        $obj = clone $this;
-        $obj['key'] = $key;
+        $self = clone $this;
+        $self['key'] = $key;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -239,10 +239,10 @@ final class ActionUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -252,10 +252,10 @@ final class ActionUpdateParams implements BaseModel
      */
     public function withPosition(Position|string $position): self
     {
-        $obj = clone $this;
-        $obj['position'] = $position;
+        $self = clone $this;
+        $self['position'] = $position;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,10 +265,10 @@ final class ActionUpdateParams implements BaseModel
      */
     public function withPossibleValues(array $possibleValues): self
     {
-        $obj = clone $this;
-        $obj['possibleValues'] = $possibleValues;
+        $self = clone $this;
+        $self['possibleValues'] = $possibleValues;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -279,10 +279,10 @@ final class ActionUpdateParams implements BaseModel
     public function withQueueBehaviour(
         QueueBehaviour|string $queueBehaviour
     ): self {
-        $obj = clone $this;
-        $obj['queueBehaviour'] = $queueBehaviour;
+        $self = clone $this;
+        $self['queueBehaviour'] = $queueBehaviour;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -292,10 +292,10 @@ final class ActionUpdateParams implements BaseModel
      */
     public function withType(Type|string|null $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -303,10 +303,10 @@ final class ActionUpdateParams implements BaseModel
      */
     public function withValueRequired(bool $valueRequired): self
     {
-        $obj = clone $this;
-        $obj['valueRequired'] = $valueRequired;
+        $self = clone $this;
+        $self['valueRequired'] = $valueRequired;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -318,9 +318,9 @@ final class ActionUpdateParams implements BaseModel
      */
     public function withWebhooks(array $webhooks): self
     {
-        $obj = clone $this;
-        $obj['webhooks'] = $webhooks;
+        $self = clone $this;
+        $self['webhooks'] = $webhooks;
 
-        return $obj;
+        return $self;
     }
 }

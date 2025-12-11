@@ -4,25 +4,21 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 use ModerationAPI\Queue\QueueGetResponse\Queue;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter;
 
 /**
  * @phpstan-type QueueGetResponseShape = array{queue: Queue}
  */
-final class QueueGetResponse implements BaseModel, ResponseConverter
+final class QueueGetResponse implements BaseModel
 {
     /** @use SdkModel<QueueGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public Queue $queue;
 
     /**
@@ -61,11 +57,11 @@ final class QueueGetResponse implements BaseModel, ResponseConverter
      */
     public static function with(Queue|array $queue): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['queue'] = $queue;
+        $self['queue'] = $queue;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,9 +77,9 @@ final class QueueGetResponse implements BaseModel, ResponseConverter
      */
     public function withQueue(Queue|array $queue): self
     {
-        $obj = clone $this;
-        $obj['queue'] = $queue;
+        $self = clone $this;
+        $self['queue'] = $queue;
 
-        return $obj;
+        return $self;
     }
 }

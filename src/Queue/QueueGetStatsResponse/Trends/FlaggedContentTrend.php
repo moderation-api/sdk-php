@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetStatsResponse\Trends;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class FlaggedContentTrend implements BaseModel
     /**
      * Content flag/label.
      */
-    #[Api]
+    #[Required]
     public string $label;
 
     /**
      * Trend indicator (-1 to 1) showing if this type of flagged content is increasing or decreasing.
      */
-    #[Api]
+    #[Required]
     public float $trend;
 
     /**
@@ -54,12 +54,12 @@ final class FlaggedContentTrend implements BaseModel
      */
     public static function with(string $label, float $trend): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['label'] = $label;
-        $obj['trend'] = $trend;
+        $self['label'] = $label;
+        $self['trend'] = $trend;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class FlaggedContentTrend implements BaseModel
      */
     public function withLabel(string $label): self
     {
-        $obj = clone $this;
-        $obj['label'] = $label;
+        $self = clone $this;
+        $self['label'] = $label;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class FlaggedContentTrend implements BaseModel
      */
     public function withTrend(float $trend): self
     {
-        $obj = clone $this;
-        $obj['trend'] = $trend;
+        $self = clone $this;
+        $self['trend'] = $trend;
 
-        return $obj;
+        return $self;
     }
 }

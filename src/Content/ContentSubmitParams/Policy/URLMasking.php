@@ -6,12 +6,14 @@ namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
 use ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity;
 use ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity\ID;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type URLMaskingShape = array{id: 'url', entities: array<string,Entity>}
+ * @phpstan-type URLMaskingShape = array{
+ *   id?: 'url', entities: array<string,Entity>
+ * }
  */
 final class URLMasking implements BaseModel
 {
@@ -19,11 +21,11 @@ final class URLMasking implements BaseModel
     use SdkModel;
 
     /** @var 'url' $id */
-    #[Api]
+    #[Required]
     public string $id = 'url';
 
     /** @var array<string,Entity> $entities */
-    #[Api(map: Entity::class)]
+    #[Required(map: Entity::class)]
     public array $entities;
 
     /**
@@ -60,11 +62,11 @@ final class URLMasking implements BaseModel
      */
     public static function with(array $entities): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['entities'] = $entities;
+        $self['entities'] = $entities;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +80,9 @@ final class URLMasking implements BaseModel
      */
     public function withEntities(array $entities): self
     {
-        $obj = clone $this;
-        $obj['entities'] = $entities;
+        $self = clone $this;
+        $self['entities'] = $entities;
 
-        return $obj;
+        return $self;
     }
 }

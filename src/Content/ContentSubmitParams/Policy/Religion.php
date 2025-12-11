@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ReligionShape = array{id: 'religion', flag: bool}
+ * @phpstan-type ReligionShape = array{id?: 'religion', flag: bool}
  */
 final class Religion implements BaseModel
 {
@@ -17,10 +17,10 @@ final class Religion implements BaseModel
     use SdkModel;
 
     /** @var 'religion' $id */
-    #[Api]
+    #[Required]
     public string $id = 'religion';
 
-    #[Api]
+    #[Required]
     public bool $flag;
 
     /**
@@ -49,18 +49,18 @@ final class Religion implements BaseModel
      */
     public static function with(bool $flag): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['flag'] = $flag;
+        $self['flag'] = $flag;
 
-        return $obj;
+        return $self;
     }
 
     public function withFlag(bool $flag): self
     {
-        $obj = clone $this;
-        $obj['flag'] = $flag;
+        $self = clone $this;
+        $self['flag'] = $flag;
 
-        return $obj;
+        return $self;
     }
 }

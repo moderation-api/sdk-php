@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\Items\ItemListResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\Items\ItemListResponse\Item\Action;
@@ -20,9 +21,9 @@ use ModerationAPI\Queue\Items\ItemListResponse\Item\Status;
  *   status: value-of<Status>,
  *   timestamp: float,
  *   actions?: list<Action>|null,
- *   authorId?: string|null,
+ *   authorID?: string|null,
  *   contentType?: string|null,
- *   conversationId?: string|null,
+ *   conversationID?: string|null,
  *   language?: string|null,
  * }
  */
@@ -34,23 +35,23 @@ final class Item implements BaseModel
     /**
      * Content ID.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The content to be moderated.
      */
-    #[Api]
+    #[Required]
     public string $content;
 
     /**
      * Whether the item is flagged by any label.
      */
-    #[Api]
+    #[Required]
     public bool $flagged;
 
     /** @var list<Label> $labels */
-    #[Api(list: Label::class)]
+    #[Required(list: Label::class)]
     public array $labels;
 
     /**
@@ -58,13 +59,13 @@ final class Item implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
      * Unix timestamp of when the item was created.
      */
-    #[Api]
+    #[Required]
     public float $timestamp;
 
     /**
@@ -72,31 +73,31 @@ final class Item implements BaseModel
      *
      * @var list<Action>|null $actions
      */
-    #[Api(list: Action::class, optional: true)]
+    #[Optional(list: Action::class)]
     public ?array $actions;
 
     /**
      * Author ID.
      */
-    #[Api(optional: true)]
-    public ?string $authorId;
+    #[Optional('authorId')]
+    public ?string $authorID;
 
     /**
      * Type of the content object.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contentType;
 
     /**
      * Conversation ID.
      */
-    #[Api(optional: true)]
-    public ?string $conversationId;
+    #[Optional('conversationId')]
+    public ?string $conversationID;
 
     /**
      * Content language.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $language;
 
     /**
@@ -149,27 +150,27 @@ final class Item implements BaseModel
         Status|string $status,
         float $timestamp,
         ?array $actions = null,
-        ?string $authorId = null,
+        ?string $authorID = null,
         ?string $contentType = null,
-        ?string $conversationId = null,
+        ?string $conversationID = null,
         ?string $language = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['content'] = $content;
-        $obj['flagged'] = $flagged;
-        $obj['labels'] = $labels;
-        $obj['status'] = $status;
-        $obj['timestamp'] = $timestamp;
+        $self['id'] = $id;
+        $self['content'] = $content;
+        $self['flagged'] = $flagged;
+        $self['labels'] = $labels;
+        $self['status'] = $status;
+        $self['timestamp'] = $timestamp;
 
-        null !== $actions && $obj['actions'] = $actions;
-        null !== $authorId && $obj['authorId'] = $authorId;
-        null !== $contentType && $obj['contentType'] = $contentType;
-        null !== $conversationId && $obj['conversationId'] = $conversationId;
-        null !== $language && $obj['language'] = $language;
+        null !== $actions && $self['actions'] = $actions;
+        null !== $authorID && $self['authorID'] = $authorID;
+        null !== $contentType && $self['contentType'] = $contentType;
+        null !== $conversationID && $self['conversationID'] = $conversationID;
+        null !== $language && $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +178,10 @@ final class Item implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +189,10 @@ final class Item implements BaseModel
      */
     public function withContent(string $content): self
     {
-        $obj = clone $this;
-        $obj['content'] = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +200,10 @@ final class Item implements BaseModel
      */
     public function withFlagged(bool $flagged): self
     {
-        $obj = clone $this;
-        $obj['flagged'] = $flagged;
+        $self = clone $this;
+        $self['flagged'] = $flagged;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +211,10 @@ final class Item implements BaseModel
      */
     public function withLabels(array $labels): self
     {
-        $obj = clone $this;
-        $obj['labels'] = $labels;
+        $self = clone $this;
+        $self['labels'] = $labels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -223,10 +224,10 @@ final class Item implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +235,10 @@ final class Item implements BaseModel
      */
     public function withTimestamp(float $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -253,10 +254,10 @@ final class Item implements BaseModel
      */
     public function withActions(array $actions): self
     {
-        $obj = clone $this;
-        $obj['actions'] = $actions;
+        $self = clone $this;
+        $self['actions'] = $actions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -264,10 +265,10 @@ final class Item implements BaseModel
      */
     public function withAuthorID(string $authorID): self
     {
-        $obj = clone $this;
-        $obj['authorId'] = $authorID;
+        $self = clone $this;
+        $self['authorID'] = $authorID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -275,10 +276,10 @@ final class Item implements BaseModel
      */
     public function withContentType(string $contentType): self
     {
-        $obj = clone $this;
-        $obj['contentType'] = $contentType;
+        $self = clone $this;
+        $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -286,10 +287,10 @@ final class Item implements BaseModel
      */
     public function withConversationID(string $conversationID): self
     {
-        $obj = clone $this;
-        $obj['conversationId'] = $conversationID;
+        $self = clone $this;
+        $self['conversationID'] = $conversationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -297,9 +298,9 @@ final class Item implements BaseModel
      */
     public function withLanguage(string $language): self
     {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 }

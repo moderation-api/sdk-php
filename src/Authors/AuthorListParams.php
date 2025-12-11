@@ -6,7 +6,7 @@ namespace ModerationAPI\Authors;
 
 use ModerationAPI\Authors\AuthorListParams\SortBy;
 use ModerationAPI\Authors\AuthorListParams\SortDirection;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -32,29 +32,29 @@ final class AuthorListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contentTypes;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lastActiveDate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $memberSinceDate;
 
     /**
      * Page number to fetch.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $pageNumber;
 
     /**
      * Number of authors per page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $pageSize;
 
     /** @var value-of<SortBy>|null $sortBy */
-    #[Api(enum: SortBy::class, optional: true)]
+    #[Optional(enum: SortBy::class)]
     public ?string $sortBy;
 
     /**
@@ -62,7 +62,7 @@ final class AuthorListParams implements BaseModel
      *
      * @var value-of<SortDirection>|null $sortDirection
      */
-    #[Api(enum: SortDirection::class, optional: true)]
+    #[Optional(enum: SortDirection::class)]
     public ?string $sortDirection;
 
     public function __construct()
@@ -87,41 +87,41 @@ final class AuthorListParams implements BaseModel
         SortBy|string|null $sortBy = null,
         SortDirection|string|null $sortDirection = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contentTypes && $obj['contentTypes'] = $contentTypes;
-        null !== $lastActiveDate && $obj['lastActiveDate'] = $lastActiveDate;
-        null !== $memberSinceDate && $obj['memberSinceDate'] = $memberSinceDate;
-        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
-        null !== $pageSize && $obj['pageSize'] = $pageSize;
-        null !== $sortBy && $obj['sortBy'] = $sortBy;
-        null !== $sortDirection && $obj['sortDirection'] = $sortDirection;
+        null !== $contentTypes && $self['contentTypes'] = $contentTypes;
+        null !== $lastActiveDate && $self['lastActiveDate'] = $lastActiveDate;
+        null !== $memberSinceDate && $self['memberSinceDate'] = $memberSinceDate;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $sortBy && $self['sortBy'] = $sortBy;
+        null !== $sortDirection && $self['sortDirection'] = $sortDirection;
 
-        return $obj;
+        return $self;
     }
 
     public function withContentTypes(string $contentTypes): self
     {
-        $obj = clone $this;
-        $obj['contentTypes'] = $contentTypes;
+        $self = clone $this;
+        $self['contentTypes'] = $contentTypes;
 
-        return $obj;
+        return $self;
     }
 
     public function withLastActiveDate(string $lastActiveDate): self
     {
-        $obj = clone $this;
-        $obj['lastActiveDate'] = $lastActiveDate;
+        $self = clone $this;
+        $self['lastActiveDate'] = $lastActiveDate;
 
-        return $obj;
+        return $self;
     }
 
     public function withMemberSinceDate(string $memberSinceDate): self
     {
-        $obj = clone $this;
-        $obj['memberSinceDate'] = $memberSinceDate;
+        $self = clone $this;
+        $self['memberSinceDate'] = $memberSinceDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,10 +129,10 @@ final class AuthorListParams implements BaseModel
      */
     public function withPageNumber(float $pageNumber): self
     {
-        $obj = clone $this;
-        $obj['pageNumber'] = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +140,10 @@ final class AuthorListParams implements BaseModel
      */
     public function withPageSize(float $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class AuthorListParams implements BaseModel
      */
     public function withSortBy(SortBy|string $sortBy): self
     {
-        $obj = clone $this;
-        $obj['sortBy'] = $sortBy;
+        $self = clone $this;
+        $self['sortBy'] = $sortBy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,9 +164,9 @@ final class AuthorListParams implements BaseModel
      */
     public function withSortDirection(SortDirection|string $sortDirection): self
     {
-        $obj = clone $this;
-        $obj['sortDirection'] = $sortDirection;
+        $self = clone $this;
+        $self['sortDirection'] = $sortDirection;
 
-        return $obj;
+        return $self;
     }
 }

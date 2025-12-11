@@ -4,37 +4,34 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\Items;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ItemResolveResponseShape = array{
  *   resolvedAt: string, success: bool, comment?: string|null
  * }
  */
-final class ItemResolveResponse implements BaseModel, ResponseConverter
+final class ItemResolveResponse implements BaseModel
 {
     /** @use SdkModel<ItemResolveResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * Timestamp when the item was resolved.
      */
-    #[Api]
+    #[Required]
     public string $resolvedAt;
 
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**
      * Optional comment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $comment;
 
     /**
@@ -66,14 +63,14 @@ final class ItemResolveResponse implements BaseModel, ResponseConverter
         bool $success,
         ?string $comment = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['resolvedAt'] = $resolvedAt;
-        $obj['success'] = $success;
+        $self['resolvedAt'] = $resolvedAt;
+        $self['success'] = $success;
 
-        null !== $comment && $obj['comment'] = $comment;
+        null !== $comment && $self['comment'] = $comment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,18 +78,18 @@ final class ItemResolveResponse implements BaseModel, ResponseConverter
      */
     public function withResolvedAt(string $resolvedAt): self
     {
-        $obj = clone $this;
-        $obj['resolvedAt'] = $resolvedAt;
+        $self = clone $this;
+        $self['resolvedAt'] = $resolvedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,9 +97,9 @@ final class ItemResolveResponse implements BaseModel, ResponseConverter
      */
     public function withComment(string $comment): self
     {
-        $obj = clone $this;
-        $obj['comment'] = $comment;
+        $self = clone $this;
+        $self['comment'] = $comment;
 
-        return $obj;
+        return $self;
     }
 }

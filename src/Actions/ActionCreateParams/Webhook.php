@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions\ActionCreateParams;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,25 +22,25 @@ final class Webhook implements BaseModel
     /**
      * The webhook's name, used to identify it in the dashboard.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The webhook's URL. We'll call this URL when the event occurs.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**
      * ID of an existing webhook or undefined if this is a new webhook.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The webhook's description.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $description;
 
     /**
@@ -72,15 +73,15 @@ final class Webhook implements BaseModel
         ?string $id = null,
         ?string $description = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['name'] = $name;
-        $obj['url'] = $url;
+        $self['name'] = $name;
+        $self['url'] = $url;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $description && $obj['description'] = $description;
+        null !== $id && $self['id'] = $id;
+        null !== $description && $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +89,10 @@ final class Webhook implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +100,10 @@ final class Webhook implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +111,10 @@ final class Webhook implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,9 +122,9 @@ final class Webhook implements BaseModel
      */
     public function withDescription(?string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 }

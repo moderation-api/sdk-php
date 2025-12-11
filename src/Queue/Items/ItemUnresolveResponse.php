@@ -4,37 +4,33 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\Items;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ItemUnresolveResponseShape = array{
  *   status: string, success: bool, unresolvedAt: string
  * }
  */
-final class ItemUnresolveResponse implements BaseModel, ResponseConverter
+final class ItemUnresolveResponse implements BaseModel
 {
     /** @use SdkModel<ItemUnresolveResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * New status of the item.
      */
-    #[Api]
+    #[Required]
     public string $status;
 
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**
      * Timestamp when the item was unresolved.
      */
-    #[Api]
+    #[Required]
     public string $unresolvedAt;
 
     /**
@@ -69,13 +65,13 @@ final class ItemUnresolveResponse implements BaseModel, ResponseConverter
         bool $success,
         string $unresolvedAt
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['status'] = $status;
-        $obj['success'] = $success;
-        $obj['unresolvedAt'] = $unresolvedAt;
+        $self['status'] = $status;
+        $self['success'] = $success;
+        $self['unresolvedAt'] = $unresolvedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,18 +79,18 @@ final class ItemUnresolveResponse implements BaseModel, ResponseConverter
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,9 +98,9 @@ final class ItemUnresolveResponse implements BaseModel, ResponseConverter
      */
     public function withUnresolvedAt(string $unresolvedAt): self
     {
-        $obj = clone $this;
-        $obj['unresolvedAt'] = $unresolvedAt;
+        $self = clone $this;
+        $self['unresolvedAt'] = $unresolvedAt;
 
-        return $obj;
+        return $self;
     }
 }

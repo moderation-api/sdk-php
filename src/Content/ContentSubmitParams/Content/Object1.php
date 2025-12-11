@@ -9,7 +9,7 @@ use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio;
 use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image;
 use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text;
 use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -18,7 +18,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @phpstan-type Object1Shape = array{
  *   data: array<string,\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio>,
- *   type: 'object',
+ *   type?: 'object',
  * }
  */
 final class Object1 implements BaseModel
@@ -27,7 +27,7 @@ final class Object1 implements BaseModel
     use SdkModel;
 
     /** @var 'object' $type */
-    #[Api]
+    #[Required]
     public string $type = 'object';
 
     /**
@@ -35,7 +35,7 @@ final class Object1 implements BaseModel
      *
      * @var array<string,Text|Image|Video|Audio> $data
      */
-    #[Api(map: Data::class)]
+    #[Required(map: Data::class)]
     public array $data;
 
     /**
@@ -63,42 +63,42 @@ final class Object1 implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param array<string,Text|array{
-     *   text: string, type: 'text'
+     *   text: string, type?: 'text'
      * }|Image|array{
-     *   type: 'image', url: string
+     *   type?: 'image', url: string
      * }|Video|array{
-     *   type: 'video', url: string
+     *   type?: 'video', url: string
      * }|Audio|array{
-     *   type: 'audio', url: string
+     *   type?: 'audio', url: string
      * }> $data
      */
     public static function with(array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['data'] = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Values in the object. Can be mixed content types.
      *
      * @param array<string,Text|array{
-     *   text: string, type: 'text'
+     *   text: string, type?: 'text'
      * }|Image|array{
-     *   type: 'image', url: string
+     *   type?: 'image', url: string
      * }|Video|array{
-     *   type: 'video', url: string
+     *   type?: 'video', url: string
      * }|Audio|array{
-     *   type: 'audio', url: string
+     *   type?: 'audio', url: string
      * }> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj['data'] = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

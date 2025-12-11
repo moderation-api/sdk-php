@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitResponse\Policy;
 
 use ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput\Match1;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -17,8 +18,8 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   flagged: bool,
  *   matches: list<Match1>,
  *   probability: float,
- *   type: 'entity_matcher',
- *   flagged_fields?: list<string>|null,
+ *   type?: 'entity_matcher',
+ *   flaggedFields?: list<string>|null,
  * }
  */
 final class EntityMatcherOutput implements BaseModel
@@ -27,25 +28,25 @@ final class EntityMatcherOutput implements BaseModel
     use SdkModel;
 
     /** @var 'entity_matcher' $type */
-    #[Api]
+    #[Required]
     public string $type = 'entity_matcher';
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public bool $flagged;
 
     /** @var list<Match1> $matches */
-    #[Api(list: Match1::class)]
+    #[Required(list: Match1::class)]
     public array $matches;
 
-    #[Api]
+    #[Required]
     public float $probability;
 
-    /** @var list<string>|null $flagged_fields */
-    #[Api(list: 'string', optional: true)]
-    public ?array $flagged_fields;
+    /** @var list<string>|null $flaggedFields */
+    #[Optional('flagged_fields', list: 'string')]
+    public ?array $flaggedFields;
 
     /**
      * `new EntityMatcherOutput()` is missing required properties by the API.
@@ -78,41 +79,41 @@ final class EntityMatcherOutput implements BaseModel
      * @param list<Match1|array{
      *   match: string, probability: float, span: list<int>
      * }> $matches
-     * @param list<string> $flagged_fields
+     * @param list<string> $flaggedFields
      */
     public static function with(
         string $id,
         bool $flagged,
         array $matches,
         float $probability,
-        ?array $flagged_fields = null,
+        ?array $flaggedFields = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['flagged'] = $flagged;
-        $obj['matches'] = $matches;
-        $obj['probability'] = $probability;
+        $self['id'] = $id;
+        $self['flagged'] = $flagged;
+        $self['matches'] = $matches;
+        $self['probability'] = $probability;
 
-        null !== $flagged_fields && $obj['flagged_fields'] = $flagged_fields;
+        null !== $flaggedFields && $self['flaggedFields'] = $flaggedFields;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withFlagged(bool $flagged): self
     {
-        $obj = clone $this;
-        $obj['flagged'] = $flagged;
+        $self = clone $this;
+        $self['flagged'] = $flagged;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,18 +123,18 @@ final class EntityMatcherOutput implements BaseModel
      */
     public function withMatches(array $matches): self
     {
-        $obj = clone $this;
-        $obj['matches'] = $matches;
+        $self = clone $this;
+        $self['matches'] = $matches;
 
-        return $obj;
+        return $self;
     }
 
     public function withProbability(float $probability): self
     {
-        $obj = clone $this;
-        $obj['probability'] = $probability;
+        $self = clone $this;
+        $self['probability'] = $probability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,9 +142,9 @@ final class EntityMatcherOutput implements BaseModel
      */
     public function withFlaggedFields(array $flaggedFields): self
     {
-        $obj = clone $this;
-        $obj['flagged_fields'] = $flaggedFields;
+        $self = clone $this;
+        $self['flaggedFields'] = $flaggedFields;
 
-        return $obj;
+        return $self;
     }
 }

@@ -14,9 +14,17 @@ use ModerationAPI\ServiceContracts\AuthContract;
 final class AuthService implements AuthContract
 {
     /**
+     * @api
+     */
+    public AuthRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AuthRawService($client);
+    }
 
     /**
      * @deprecated
@@ -28,13 +36,10 @@ final class AuthService implements AuthContract
     public function create(
         ?RequestOptions $requestOptions = null
     ): AuthNewResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'post',
-            path: 'auth',
-            options: $requestOptions,
-            convert: AuthNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -47,12 +52,9 @@ final class AuthService implements AuthContract
     public function retrieve(
         ?RequestOptions $requestOptions = null
     ): AuthGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'get',
-            path: 'auth',
-            options: $requestOptions,
-            convert: AuthGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

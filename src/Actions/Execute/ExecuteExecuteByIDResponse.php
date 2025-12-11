@@ -4,42 +4,38 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions\Execute;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ExecuteExecuteByIDResponseShape = array{
- *   actionId: string, ids: list<string>, success: bool
+ *   actionID: string, ids: list<string>, success: bool
  * }
  */
-final class ExecuteExecuteByIDResponse implements BaseModel, ResponseConverter
+final class ExecuteExecuteByIDResponse implements BaseModel
 {
     /** @use SdkModel<ExecuteExecuteByIDResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * The ID of the action.
      */
-    #[Api]
-    public string $actionId;
+    #[Required('actionId')]
+    public string $actionID;
 
     /**
      * The IDs of the content items.
      *
      * @var list<string> $ids
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $ids;
 
     /**
      * Action executed successfully.
      */
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**
@@ -47,7 +43,7 @@ final class ExecuteExecuteByIDResponse implements BaseModel, ResponseConverter
      *
      * To enforce required parameters use
      * ```
-     * ExecuteExecuteByIDResponse::with(actionId: ..., ids: ..., success: ...)
+     * ExecuteExecuteByIDResponse::with(actionID: ..., ids: ..., success: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -72,17 +68,17 @@ final class ExecuteExecuteByIDResponse implements BaseModel, ResponseConverter
      * @param list<string> $ids
      */
     public static function with(
-        string $actionId,
+        string $actionID,
         array $ids,
         bool $success
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['actionId'] = $actionId;
-        $obj['ids'] = $ids;
-        $obj['success'] = $success;
+        $self['actionID'] = $actionID;
+        $self['ids'] = $ids;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +86,10 @@ final class ExecuteExecuteByIDResponse implements BaseModel, ResponseConverter
      */
     public function withActionID(string $actionID): self
     {
-        $obj = clone $this;
-        $obj['actionId'] = $actionID;
+        $self = clone $this;
+        $self['actionID'] = $actionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +99,10 @@ final class ExecuteExecuteByIDResponse implements BaseModel, ResponseConverter
      */
     public function withIDs(array $ids): self
     {
-        $obj = clone $this;
-        $obj['ids'] = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,9 +110,9 @@ final class ExecuteExecuteByIDResponse implements BaseModel, ResponseConverter
      */
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 }

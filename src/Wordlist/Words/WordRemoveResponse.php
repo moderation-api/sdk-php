@@ -4,28 +4,24 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Wordlist\Words;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type WordRemoveResponseShape = array{
  *   removedCount: float, removedWords: list<string>, totalCount: float
  * }
  */
-final class WordRemoveResponse implements BaseModel, ResponseConverter
+final class WordRemoveResponse implements BaseModel
 {
     /** @use SdkModel<WordRemoveResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * Number of words removed.
      */
-    #[Api]
+    #[Required]
     public float $removedCount;
 
     /**
@@ -33,13 +29,13 @@ final class WordRemoveResponse implements BaseModel, ResponseConverter
      *
      * @var list<string> $removedWords
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $removedWords;
 
     /**
      * Total number of words in wordlist.
      */
-    #[Api]
+    #[Required]
     public float $totalCount;
 
     /**
@@ -76,13 +72,13 @@ final class WordRemoveResponse implements BaseModel, ResponseConverter
         array $removedWords,
         float $totalCount
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['removedCount'] = $removedCount;
-        $obj['removedWords'] = $removedWords;
-        $obj['totalCount'] = $totalCount;
+        $self['removedCount'] = $removedCount;
+        $self['removedWords'] = $removedWords;
+        $self['totalCount'] = $totalCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +86,10 @@ final class WordRemoveResponse implements BaseModel, ResponseConverter
      */
     public function withRemovedCount(float $removedCount): self
     {
-        $obj = clone $this;
-        $obj['removedCount'] = $removedCount;
+        $self = clone $this;
+        $self['removedCount'] = $removedCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +99,10 @@ final class WordRemoveResponse implements BaseModel, ResponseConverter
      */
     public function withRemovedWords(array $removedWords): self
     {
-        $obj = clone $this;
-        $obj['removedWords'] = $removedWords;
+        $self = clone $this;
+        $self['removedWords'] = $removedWords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,9 +110,9 @@ final class WordRemoveResponse implements BaseModel, ResponseConverter
      */
     public function withTotalCount(float $totalCount): self
     {
-        $obj = clone $this;
-        $obj['totalCount'] = $totalCount;
+        $self = clone $this;
+        $self['totalCount'] = $totalCount;
 
-        return $obj;
+        return $self;
     }
 }

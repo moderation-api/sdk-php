@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetStatsResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -21,19 +21,19 @@ final class ReviewStats implements BaseModel
     /**
      * Average time in milliseconds to review an item.
      */
-    #[Api]
+    #[Required]
     public float $averageTimeToReview;
 
     /**
      * Total number of items pending review.
      */
-    #[Api]
+    #[Required]
     public float $totalPending;
 
     /**
      * Total number of items reviewed.
      */
-    #[Api]
+    #[Required]
     public float $totalReviewed;
 
     /**
@@ -70,13 +70,13 @@ final class ReviewStats implements BaseModel
         float $totalPending,
         float $totalReviewed
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['averageTimeToReview'] = $averageTimeToReview;
-        $obj['totalPending'] = $totalPending;
-        $obj['totalReviewed'] = $totalReviewed;
+        $self['averageTimeToReview'] = $averageTimeToReview;
+        $self['totalPending'] = $totalPending;
+        $self['totalReviewed'] = $totalReviewed;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +84,10 @@ final class ReviewStats implements BaseModel
      */
     public function withAverageTimeToReview(float $averageTimeToReview): self
     {
-        $obj = clone $this;
-        $obj['averageTimeToReview'] = $averageTimeToReview;
+        $self = clone $this;
+        $self['averageTimeToReview'] = $averageTimeToReview;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class ReviewStats implements BaseModel
      */
     public function withTotalPending(float $totalPending): self
     {
-        $obj = clone $this;
-        $obj['totalPending'] = $totalPending;
+        $self = clone $this;
+        $self['totalPending'] = $totalPending;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class ReviewStats implements BaseModel
      */
     public function withTotalReviewed(float $totalReviewed): self
     {
-        $obj = clone $this;
-        $obj['totalReviewed'] = $totalReviewed;
+        $self = clone $this;
+        $self['totalReviewed'] = $totalReviewed;
 
-        return $obj;
+        return $self;
     }
 }

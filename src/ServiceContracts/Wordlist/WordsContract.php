@@ -6,9 +6,7 @@ namespace ModerationAPI\ServiceContracts\Wordlist;
 
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
-use ModerationAPI\Wordlist\Words\WordAddParams;
 use ModerationAPI\Wordlist\Words\WordAddResponse;
-use ModerationAPI\Wordlist\Words\WordRemoveParams;
 use ModerationAPI\Wordlist\Words\WordRemoveResponse;
 
 interface WordsContract
@@ -16,26 +14,28 @@ interface WordsContract
     /**
      * @api
      *
-     * @param array<mixed>|WordAddParams $params
+     * @param string $id ID of the wordlist to add words to
+     * @param list<string> $words Array of words to add to the wordlist. Duplicate words will be ignored.
      *
      * @throws APIException
      */
     public function add(
         string $id,
-        array|WordAddParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $words,
+        ?RequestOptions $requestOptions = null
     ): WordAddResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|WordRemoveParams $params
+     * @param string $id ID of the wordlist to remove words from
+     * @param list<string> $words Array of words to remove from the wordlist
      *
      * @throws APIException
      */
     public function remove(
         string $id,
-        array|WordRemoveParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $words,
+        ?RequestOptions $requestOptions = null
     ): WordRemoveResponse;
 }

@@ -9,7 +9,8 @@ use ModerationAPI\Actions\ActionListResponseItem\PossibleValue;
 use ModerationAPI\Actions\ActionListResponseItem\QueueBehaviour;
 use ModerationAPI\Actions\ActionListResponseItem\Type;
 use ModerationAPI\Actions\ActionListResponseItem\Webhook;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -18,7 +19,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   id: string,
  *   builtIn: bool|null,
  *   createdAt: string,
- *   filterInQueueIds: list<string>,
+ *   filterInQueueIDs: list<string>,
  *   freeText: bool,
  *   name: string,
  *   position: value-of<Position>,
@@ -39,39 +40,39 @@ final class ActionListResponseItem implements BaseModel
     /**
      * The ID of the action.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Whether the action is a built-in action or a custom one.
      */
-    #[Api]
+    #[Required]
     public ?bool $builtIn;
 
     /**
      * The date the action was created.
      */
-    #[Api]
+    #[Required]
     public string $createdAt;
 
     /**
      * The IDs of the queues the action is available in.
      *
-     * @var list<string> $filterInQueueIds
+     * @var list<string> $filterInQueueIDs
      */
-    #[Api(list: 'string')]
-    public array $filterInQueueIds;
+    #[Required('filterInQueueIds', list: 'string')]
+    public array $filterInQueueIDs;
 
     /**
      * Whether the action allows any text to be entered as a value or if it must be one of the possible values.
      */
-    #[Api]
+    #[Required]
     public bool $freeText;
 
     /**
      * The name of the action.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -79,7 +80,7 @@ final class ActionListResponseItem implements BaseModel
      *
      * @var value-of<Position> $position
      */
-    #[Api(enum: Position::class)]
+    #[Required(enum: Position::class)]
     public string $position;
 
     /**
@@ -87,7 +88,7 @@ final class ActionListResponseItem implements BaseModel
      *
      * @var list<PossibleValue> $possibleValues
      */
-    #[Api(list: PossibleValue::class)]
+    #[Required(list: PossibleValue::class)]
     public array $possibleValues;
 
     /**
@@ -95,13 +96,13 @@ final class ActionListResponseItem implements BaseModel
      *
      * @var value-of<QueueBehaviour> $queueBehaviour
      */
-    #[Api(enum: QueueBehaviour::class)]
+    #[Required(enum: QueueBehaviour::class)]
     public string $queueBehaviour;
 
     /**
      * Whether the action requires a value to be executed.
      */
-    #[Api]
+    #[Required]
     public bool $valueRequired;
 
     /**
@@ -109,19 +110,19 @@ final class ActionListResponseItem implements BaseModel
      *
      * @var list<Webhook> $webhooks
      */
-    #[Api(list: Webhook::class)]
+    #[Required(list: Webhook::class)]
     public array $webhooks;
 
     /**
      * The description of the action.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $description;
 
     /**
      * User defined key of the action.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $key;
 
     /**
@@ -129,7 +130,7 @@ final class ActionListResponseItem implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, nullable: true, optional: true)]
+    #[Optional(enum: Type::class, nullable: true)]
     public ?string $type;
 
     /**
@@ -141,7 +142,7 @@ final class ActionListResponseItem implements BaseModel
      *   id: ...,
      *   builtIn: ...,
      *   createdAt: ...,
-     *   filterInQueueIds: ...,
+     *   filterInQueueIDs: ...,
      *   freeText: ...,
      *   name: ...,
      *   position: ...,
@@ -179,7 +180,7 @@ final class ActionListResponseItem implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $filterInQueueIds
+     * @param list<string> $filterInQueueIDs
      * @param Position|value-of<Position> $position
      * @param list<PossibleValue|array{value: string}> $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour
@@ -188,7 +189,7 @@ final class ActionListResponseItem implements BaseModel
      *   name: string,
      *   url: string,
      *   description?: string|null,
-     *   moderationActionId?: string|null,
+     *   moderationActionID?: string|null,
      * }> $webhooks
      * @param Type|value-of<Type>|null $type
      */
@@ -197,7 +198,7 @@ final class ActionListResponseItem implements BaseModel
         string $createdAt,
         string $name,
         ?bool $builtIn = false,
-        array $filterInQueueIds = [],
+        array $filterInQueueIDs = [],
         bool $freeText = false,
         Position|string $position = 'ALL_QUEUES',
         array $possibleValues = [],
@@ -208,25 +209,25 @@ final class ActionListResponseItem implements BaseModel
         ?string $key = null,
         Type|string|null $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['builtIn'] = $builtIn;
-        $obj['createdAt'] = $createdAt;
-        $obj['filterInQueueIds'] = $filterInQueueIds;
-        $obj['freeText'] = $freeText;
-        $obj['name'] = $name;
-        $obj['position'] = $position;
-        $obj['possibleValues'] = $possibleValues;
-        $obj['queueBehaviour'] = $queueBehaviour;
-        $obj['valueRequired'] = $valueRequired;
-        $obj['webhooks'] = $webhooks;
+        $self['id'] = $id;
+        $self['builtIn'] = $builtIn;
+        $self['createdAt'] = $createdAt;
+        $self['filterInQueueIDs'] = $filterInQueueIDs;
+        $self['freeText'] = $freeText;
+        $self['name'] = $name;
+        $self['position'] = $position;
+        $self['possibleValues'] = $possibleValues;
+        $self['queueBehaviour'] = $queueBehaviour;
+        $self['valueRequired'] = $valueRequired;
+        $self['webhooks'] = $webhooks;
 
-        null !== $description && $obj['description'] = $description;
-        null !== $key && $obj['key'] = $key;
-        null !== $type && $obj['type'] = $type;
+        null !== $description && $self['description'] = $description;
+        null !== $key && $self['key'] = $key;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +235,10 @@ final class ActionListResponseItem implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,10 +246,10 @@ final class ActionListResponseItem implements BaseModel
      */
     public function withBuiltIn(?bool $builtIn): self
     {
-        $obj = clone $this;
-        $obj['builtIn'] = $builtIn;
+        $self = clone $this;
+        $self['builtIn'] = $builtIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -256,10 +257,10 @@ final class ActionListResponseItem implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -269,10 +270,10 @@ final class ActionListResponseItem implements BaseModel
      */
     public function withFilterInQueueIDs(array $filterInQueueIDs): self
     {
-        $obj = clone $this;
-        $obj['filterInQueueIds'] = $filterInQueueIDs;
+        $self = clone $this;
+        $self['filterInQueueIDs'] = $filterInQueueIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -280,10 +281,10 @@ final class ActionListResponseItem implements BaseModel
      */
     public function withFreeText(bool $freeText): self
     {
-        $obj = clone $this;
-        $obj['freeText'] = $freeText;
+        $self = clone $this;
+        $self['freeText'] = $freeText;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -291,10 +292,10 @@ final class ActionListResponseItem implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -304,10 +305,10 @@ final class ActionListResponseItem implements BaseModel
      */
     public function withPosition(Position|string $position): self
     {
-        $obj = clone $this;
-        $obj['position'] = $position;
+        $self = clone $this;
+        $self['position'] = $position;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -317,10 +318,10 @@ final class ActionListResponseItem implements BaseModel
      */
     public function withPossibleValues(array $possibleValues): self
     {
-        $obj = clone $this;
-        $obj['possibleValues'] = $possibleValues;
+        $self = clone $this;
+        $self['possibleValues'] = $possibleValues;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -331,10 +332,10 @@ final class ActionListResponseItem implements BaseModel
     public function withQueueBehaviour(
         QueueBehaviour|string $queueBehaviour
     ): self {
-        $obj = clone $this;
-        $obj['queueBehaviour'] = $queueBehaviour;
+        $self = clone $this;
+        $self['queueBehaviour'] = $queueBehaviour;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -342,10 +343,10 @@ final class ActionListResponseItem implements BaseModel
      */
     public function withValueRequired(bool $valueRequired): self
     {
-        $obj = clone $this;
-        $obj['valueRequired'] = $valueRequired;
+        $self = clone $this;
+        $self['valueRequired'] = $valueRequired;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -356,15 +357,15 @@ final class ActionListResponseItem implements BaseModel
      *   name: string,
      *   url: string,
      *   description?: string|null,
-     *   moderationActionId?: string|null,
+     *   moderationActionID?: string|null,
      * }> $webhooks
      */
     public function withWebhooks(array $webhooks): self
     {
-        $obj = clone $this;
-        $obj['webhooks'] = $webhooks;
+        $self = clone $this;
+        $self['webhooks'] = $webhooks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -372,10 +373,10 @@ final class ActionListResponseItem implements BaseModel
      */
     public function withDescription(?string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -383,10 +384,10 @@ final class ActionListResponseItem implements BaseModel
      */
     public function withKey(?string $key): self
     {
-        $obj = clone $this;
-        $obj['key'] = $key;
+        $self = clone $this;
+        $self['key'] = $key;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -396,9 +397,9 @@ final class ActionListResponseItem implements BaseModel
      */
     public function withType(Type|string|null $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

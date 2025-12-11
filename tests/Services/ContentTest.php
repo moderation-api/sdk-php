@@ -34,9 +34,9 @@ final class ContentTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->content->submit([
-            'content' => ['text' => 'x', 'type' => 'text'],
-        ]);
+        $result = $this->client->content->submit(
+            content: ['text' => 'x', 'type' => 'text']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ContentSubmitResponse::class, $result);
@@ -49,17 +49,17 @@ final class ContentTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->content->submit([
-            'content' => ['text' => 'x', 'type' => 'text'],
-            'authorId' => 'authorId',
-            'channel' => 'channel',
-            'contentId' => 'contentId',
-            'conversationId' => 'conversationId',
-            'doNotStore' => true,
-            'metadata' => ['foo' => 'bar'],
-            'metaType' => 'profile',
-            'policies' => [['id' => 'toxicity', 'flag' => true]],
-        ]);
+        $result = $this->client->content->submit(
+            content: ['text' => 'x', 'type' => 'text'],
+            authorID: 'authorId',
+            channel: 'channel',
+            contentID: 'contentId',
+            conversationID: 'conversationId',
+            doNotStore: true,
+            metadata: ['foo' => 'bar'],
+            metaType: 'profile',
+            policies: [['id' => 'toxicity', 'flag' => true]],
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ContentSubmitResponse::class, $result);

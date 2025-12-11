@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * Text.
  *
- * @phpstan-type TextShape = array{text: string, type: 'text'}
+ * @phpstan-type TextShape = array{text: string, type?: 'text'}
  */
 final class Text implements BaseModel
 {
@@ -19,13 +19,13 @@ final class Text implements BaseModel
     use SdkModel;
 
     /** @var 'text' $type */
-    #[Api]
+    #[Required]
     public string $type = 'text';
 
     /**
      * The content text.
      */
-    #[Api]
+    #[Required]
     public string $text;
 
     /**
@@ -54,11 +54,11 @@ final class Text implements BaseModel
      */
     public static function with(string $text): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['text'] = $text;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class Text implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 }

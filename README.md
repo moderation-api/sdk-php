@@ -18,7 +18,7 @@ The REST API documentation can be found on [docs.moderationapi.com](https://docs
 <!-- x-release-please-start-version -->
 
 ```
-composer require "moderation-api/sdk-php 0.2.0"
+composer require "moderation-api/sdk-php 0.3.0"
 ```
 
 <!-- x-release-please-end -->
@@ -35,9 +35,9 @@ use ModerationAPI\Client;
 
 $client = new Client(secretKey: getenv('MODAPI_SECRET_KEY') ?: 'My Secret Key');
 
-$response = $client->content->submit([
-  'content' => ['text' => 'x', 'type' => 'text']
-]);
+$response = $client->content->submit(
+  content: ['text' => 'x', 'type' => 'text']
+);
 
 var_dump($response->recommendation);
 ```
@@ -59,13 +59,13 @@ When the library is unable to connect to the API, or if the API returns a non-su
 use ModerationAPI\Core\Exceptions\APIConnectionException;
 
 try {
-  $response = $client->content->submit([
-    'content' => ['text' => 'x', 'type' => 'text']
-  ]);
+  $response = $client->content->submit(
+    content: ['text' => 'x', 'type' => 'text']
+  );
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
-} catch (RateLimitError $_) {
+} catch (RateLimitError $e) {
   echo "A 429 status code was received; we should back off a bit.", PHP_EOL;
 } catch (APIStatusError $e) {
   echo "Another non-200-range status code was received", PHP_EOL;
@@ -108,8 +108,8 @@ $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
 $result = $client->content->submit(
-  ['content' => ['text' => 'x', 'type' => 'text']],
-  RequestOptions::with(maxRetries: 5),
+  content: ['text' => 'x', 'type' => 'text'],
+  requestOptions: RequestOptions::with(maxRetries: 5),
 );
 ```
 
@@ -129,8 +129,8 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 use ModerationAPI\RequestOptions;
 
 $response = $client->content->submit(
-  ['content' => ['text' => 'x', 'type' => 'text']],
-  RequestOptions::with(
+  content: ['text' => 'x', 'type' => 'text'],
+  requestOptions: RequestOptions::with(
     extraQueryParams: ['my_query_parameter' => 'value'],
     extraBodyParams: ['my_body_parameter' => 'value'],
     extraHeaders: ['my-header' => 'value'],

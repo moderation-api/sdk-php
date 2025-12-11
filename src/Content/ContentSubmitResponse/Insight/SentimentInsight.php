@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitResponse\Insight;
 
 use ModerationAPI\Content\ContentSubmitResponse\Insight\SentimentInsight\Value;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -13,9 +13,9 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * Sentiment insight.
  *
  * @phpstan-type SentimentInsightShape = array{
- *   id: 'sentiment',
+ *   id?: 'sentiment',
  *   probability: float,
- *   type: 'insight',
+ *   type?: 'insight',
  *   value: value-of<Value>|null,
  * }
  */
@@ -25,18 +25,18 @@ final class SentimentInsight implements BaseModel
     use SdkModel;
 
     /** @var 'sentiment' $id */
-    #[Api]
+    #[Required]
     public string $id = 'sentiment';
 
     /** @var 'insight' $type */
-    #[Api]
+    #[Required]
     public string $type = 'insight';
 
-    #[Api]
+    #[Required]
     public float $probability;
 
     /** @var value-of<Value>|null $value */
-    #[Api(enum: Value::class)]
+    #[Required(enum: Value::class)]
     public ?string $value;
 
     /**
@@ -69,20 +69,20 @@ final class SentimentInsight implements BaseModel
         float $probability,
         Value|string|null $value
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['probability'] = $probability;
-        $obj['value'] = $value;
+        $self['probability'] = $probability;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     public function withProbability(float $probability): self
     {
-        $obj = clone $this;
-        $obj['probability'] = $probability;
+        $self = clone $this;
+        $self['probability'] = $probability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,9 +90,9 @@ final class SentimentInsight implements BaseModel
      */
     public function withValue(Value|string|null $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

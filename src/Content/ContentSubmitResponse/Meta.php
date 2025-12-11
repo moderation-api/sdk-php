@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitResponse;
 
 use ModerationAPI\Content\ContentSubmitResponse\Meta\Status;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -13,11 +14,11 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * Metadata about the moderation request.
  *
  * @phpstan-type MetaShape = array{
- *   channel_key: string,
+ *   channelKey: string,
  *   status: value-of<Status>,
  *   timestamp: float,
  *   usage: float,
- *   processing_time?: string|null,
+ *   processingTime?: string|null,
  * }
  */
 final class Meta implements BaseModel
@@ -28,28 +29,28 @@ final class Meta implements BaseModel
     /**
      * The unique key of the channel where the content was handled. Either the channel provided by you or automatically routed.
      */
-    #[Api]
-    public string $channel_key;
+    #[Required('channel_key')]
+    public string $channelKey;
 
     /** @var value-of<Status> $status */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
-    #[Api]
+    #[Required]
     public float $timestamp;
 
-    #[Api]
+    #[Required]
     public float $usage;
 
-    #[Api(optional: true)]
-    public ?string $processing_time;
+    #[Optional('processing_time')]
+    public ?string $processingTime;
 
     /**
      * `new Meta()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Meta::with(channel_key: ..., status: ..., timestamp: ..., usage: ...)
+     * Meta::with(channelKey: ..., status: ..., timestamp: ..., usage: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -75,22 +76,22 @@ final class Meta implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        string $channel_key,
+        string $channelKey,
         Status|string $status,
         float $timestamp,
         float $usage,
-        ?string $processing_time = null,
+        ?string $processingTime = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['channel_key'] = $channel_key;
-        $obj['status'] = $status;
-        $obj['timestamp'] = $timestamp;
-        $obj['usage'] = $usage;
+        $self['channelKey'] = $channelKey;
+        $self['status'] = $status;
+        $self['timestamp'] = $timestamp;
+        $self['usage'] = $usage;
 
-        null !== $processing_time && $obj['processing_time'] = $processing_time;
+        null !== $processingTime && $self['processingTime'] = $processingTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +99,10 @@ final class Meta implements BaseModel
      */
     public function withChannelKey(string $channelKey): self
     {
-        $obj = clone $this;
-        $obj['channel_key'] = $channelKey;
+        $self = clone $this;
+        $self['channelKey'] = $channelKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,33 +110,33 @@ final class Meta implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withTimestamp(float $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     public function withUsage(float $usage): self
     {
-        $obj = clone $this;
-        $obj['usage'] = $usage;
+        $self = clone $this;
+        $self['usage'] = $usage;
 
-        return $obj;
+        return $self;
     }
 
     public function withProcessingTime(string $processingTime): self
     {
-        $obj = clone $this;
-        $obj['processing_time'] = $processingTime;
+        $self = clone $this;
+        $self['processingTime'] = $processingTime;
 
-        return $obj;
+        return $self;
     }
 }

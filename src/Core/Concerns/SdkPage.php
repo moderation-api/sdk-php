@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Core\Concerns;
 
 use ModerationAPI\Client;
+use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Conversion\Contracts\Converter;
 use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
 use ModerationAPI\Core\Exceptions\APIStatusException;
@@ -14,21 +15,12 @@ use ModerationAPI\RequestOptions;
  * @internal
  *
  * @template Item
- *
- * @phpstan-import-type normalized_request from \ModerationAPI\Core\BaseClient
  */
 trait SdkPage
 {
     private Converter|ConverterSource|string $convert;
 
     private Client $client;
-
-    /**
-     * normalized_request $request.
-     */
-    private array $request;
-
-    private RequestOptions $options;
 
     /**
      * @return list<Item>
@@ -61,7 +53,11 @@ trait SdkPage
         [$req, $opts] = $next;
 
         // @phpstan-ignore-next-line argument.type
-        return $this->client->request(...$req, convert: $this->convert, page: $this::class, options: $opts);
+        /** @var BaseResponse<static> */
+        $response = $this->client->request(...$req, convert: $this->convert, page: $this::class, options: $opts);
+
+        // @phpstan-ignore-next-line return.type
+        return $response->parse();
     }
 
     /**

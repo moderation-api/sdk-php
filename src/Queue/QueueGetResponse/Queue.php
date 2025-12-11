@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\QueueGetResponse;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter;
@@ -27,25 +27,25 @@ final class Queue implements BaseModel
     /** @use SdkModel<QueueShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public string $description;
 
-    #[Api]
+    #[Required]
     public Filter $filter;
 
-    #[Api]
+    #[Required]
     public string $name;
 
-    #[Api]
+    #[Required]
     public float $resolvedItemsCount;
 
-    #[Api]
+    #[Required]
     public float $totalItemsCount;
 
-    #[Api]
+    #[Required]
     public float $unresolvedItemsCount;
 
     /**
@@ -91,9 +91,9 @@ final class Queue implements BaseModel
      *   afterDate?: string|null,
      *   authorID?: string|null,
      *   beforeDate?: string|null,
-     *   conversationIds?: list<string|null>|null,
-     *   filteredActionIds?: list<string>|null,
-     *   filteredChannelIds?: list<string>|null,
+     *   conversationIDs?: list<string|null>|null,
+     *   filteredActionIDs?: list<string>|null,
+     *   filteredChannelIDs?: list<string>|null,
      *   filterLabels?: list<FilterLabel>|null,
      *   labels?: list<string>|null,
      *   recommendationActions?: list<value-of<RecommendationAction>>|null,
@@ -109,33 +109,33 @@ final class Queue implements BaseModel
         float $totalItemsCount,
         float $unresolvedItemsCount,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['description'] = $description;
-        $obj['filter'] = $filter;
-        $obj['name'] = $name;
-        $obj['resolvedItemsCount'] = $resolvedItemsCount;
-        $obj['totalItemsCount'] = $totalItemsCount;
-        $obj['unresolvedItemsCount'] = $unresolvedItemsCount;
+        $self['id'] = $id;
+        $self['description'] = $description;
+        $self['filter'] = $filter;
+        $self['name'] = $name;
+        $self['resolvedItemsCount'] = $resolvedItemsCount;
+        $self['totalItemsCount'] = $totalItemsCount;
+        $self['unresolvedItemsCount'] = $unresolvedItemsCount;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,9 +143,9 @@ final class Queue implements BaseModel
      *   afterDate?: string|null,
      *   authorID?: string|null,
      *   beforeDate?: string|null,
-     *   conversationIds?: list<string|null>|null,
-     *   filteredActionIds?: list<string>|null,
-     *   filteredChannelIds?: list<string>|null,
+     *   conversationIDs?: list<string|null>|null,
+     *   filteredActionIDs?: list<string>|null,
+     *   filteredChannelIDs?: list<string>|null,
      *   filterLabels?: list<FilterLabel>|null,
      *   labels?: list<string>|null,
      *   recommendationActions?: list<value-of<RecommendationAction>>|null,
@@ -154,41 +154,41 @@ final class Queue implements BaseModel
      */
     public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj['filter'] = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withResolvedItemsCount(float $resolvedItemsCount): self
     {
-        $obj = clone $this;
-        $obj['resolvedItemsCount'] = $resolvedItemsCount;
+        $self = clone $this;
+        $self['resolvedItemsCount'] = $resolvedItemsCount;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalItemsCount(float $totalItemsCount): self
     {
-        $obj = clone $this;
-        $obj['totalItemsCount'] = $totalItemsCount;
+        $self = clone $this;
+        $self['totalItemsCount'] = $totalItemsCount;
 
-        return $obj;
+        return $self;
     }
 
     public function withUnresolvedItemsCount(float $unresolvedItemsCount): self
     {
-        $obj = clone $this;
-        $obj['unresolvedItemsCount'] = $unresolvedItemsCount;
+        $self = clone $this;
+        $self['unresolvedItemsCount'] = $unresolvedItemsCount;
 
-        return $obj;
+        return $self;
     }
 }

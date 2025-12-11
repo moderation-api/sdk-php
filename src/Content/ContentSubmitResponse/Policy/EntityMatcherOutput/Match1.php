@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -18,14 +18,14 @@ final class Match1 implements BaseModel
     /** @use SdkModel<Match1Shape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $match;
 
-    #[Api]
+    #[Required]
     public float $probability;
 
     /** @var list<int> $span */
-    #[Api(list: 'int')]
+    #[Required(list: 'int')]
     public array $span;
 
     /**
@@ -59,29 +59,29 @@ final class Match1 implements BaseModel
         float $probability,
         array $span
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['match'] = $match;
-        $obj['probability'] = $probability;
-        $obj['span'] = $span;
+        $self['match'] = $match;
+        $self['probability'] = $probability;
+        $self['span'] = $span;
 
-        return $obj;
+        return $self;
     }
 
     public function withMatch(string $match): self
     {
-        $obj = clone $this;
-        $obj['match'] = $match;
+        $self = clone $this;
+        $self['match'] = $match;
 
-        return $obj;
+        return $self;
     }
 
     public function withProbability(float $probability): self
     {
-        $obj = clone $this;
-        $obj['probability'] = $probability;
+        $self = clone $this;
+        $self['probability'] = $probability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class Match1 implements BaseModel
      */
     public function withSpan(array $span): self
     {
-        $obj = clone $this;
-        $obj['span'] = $span;
+        $self = clone $this;
+        $self['span'] = $span;
 
-        return $obj;
+        return $self;
     }
 }

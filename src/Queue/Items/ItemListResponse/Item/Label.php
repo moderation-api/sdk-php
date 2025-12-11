@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Queue\Items\ItemListResponse\Item;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,19 +19,19 @@ final class Label implements BaseModel
     /**
      * Whether this label caused a flag.
      */
-    #[Api]
+    #[Required]
     public bool $flagged;
 
     /**
      * Label name.
      */
-    #[Api]
+    #[Required]
     public string $label;
 
     /**
      * Confidence score of the label.
      */
-    #[Api]
+    #[Required]
     public float $score;
 
     /**
@@ -63,13 +63,13 @@ final class Label implements BaseModel
         string $label,
         float $score
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['flagged'] = $flagged;
-        $obj['label'] = $label;
-        $obj['score'] = $score;
+        $self['flagged'] = $flagged;
+        $self['label'] = $label;
+        $self['score'] = $score;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,10 +77,10 @@ final class Label implements BaseModel
      */
     public function withFlagged(bool $flagged): self
     {
-        $obj = clone $this;
-        $obj['flagged'] = $flagged;
+        $self = clone $this;
+        $self['flagged'] = $flagged;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +88,10 @@ final class Label implements BaseModel
      */
     public function withLabel(string $label): self
     {
-        $obj = clone $this;
-        $obj['label'] = $label;
+        $self = clone $this;
+        $self['label'] = $label;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,9 +99,9 @@ final class Label implements BaseModel
      */
     public function withScore(float $score): self
     {
-        $obj = clone $this;
-        $obj['score'] = $score;
+        $self = clone $this;
+        $self['score'] = $score;
 
-        return $obj;
+        return $self;
     }
 }

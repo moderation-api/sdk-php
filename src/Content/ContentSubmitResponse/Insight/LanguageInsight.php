@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitResponse\Insight;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -12,7 +12,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * Language insight.
  *
  * @phpstan-type LanguageInsightShape = array{
- *   id: 'language', probability: float, type: 'insight', value: string|null
+ *   id?: 'language', probability: float, type?: 'insight', value: string|null
  * }
  */
 final class LanguageInsight implements BaseModel
@@ -21,17 +21,17 @@ final class LanguageInsight implements BaseModel
     use SdkModel;
 
     /** @var 'language' $id */
-    #[Api]
+    #[Required]
     public string $id = 'language';
 
     /** @var 'insight' $type */
-    #[Api]
+    #[Required]
     public string $type = 'insight';
 
-    #[Api]
+    #[Required]
     public float $probability;
 
-    #[Api]
+    #[Required]
     public ?string $value;
 
     /**
@@ -60,27 +60,27 @@ final class LanguageInsight implements BaseModel
      */
     public static function with(float $probability, ?string $value): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['probability'] = $probability;
-        $obj['value'] = $value;
+        $self['probability'] = $probability;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     public function withProbability(float $probability): self
     {
-        $obj = clone $this;
-        $obj['probability'] = $probability;
+        $self = clone $this;
+        $self['probability'] = $probability;
 
-        return $obj;
+        return $self;
     }
 
     public function withValue(?string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

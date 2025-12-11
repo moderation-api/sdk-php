@@ -4,32 +4,28 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Auth;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AuthGetResponseShape = array{message: string, status: string}
  */
-final class AuthGetResponse implements BaseModel, ResponseConverter
+final class AuthGetResponse implements BaseModel
 {
     /** @use SdkModel<AuthGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * Message of the authentication.
      */
-    #[Api]
+    #[Required]
     public string $message;
 
     /**
      * Status of the authentication.
      */
-    #[Api]
+    #[Required]
     public string $status;
 
     /**
@@ -58,12 +54,12 @@ final class AuthGetResponse implements BaseModel, ResponseConverter
      */
     public static function with(string $message, string $status): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['message'] = $message;
-        $obj['status'] = $status;
+        $self['message'] = $message;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,10 +67,10 @@ final class AuthGetResponse implements BaseModel, ResponseConverter
      */
     public function withMessage(string $message): self
     {
-        $obj = clone $this;
-        $obj['message'] = $message;
+        $self = clone $this;
+        $self['message'] = $message;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,9 +78,9 @@ final class AuthGetResponse implements BaseModel, ResponseConverter
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

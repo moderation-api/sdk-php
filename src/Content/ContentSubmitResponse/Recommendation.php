@@ -6,7 +6,7 @@ namespace ModerationAPI\Content\ContentSubmitResponse;
 
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation\Action;
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation\ReasonCode;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -14,7 +14,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * The recommendation for the content based on the evaluation.
  *
  * @phpstan-type RecommendationShape = array{
- *   action: value-of<Action>, reason_codes: list<value-of<ReasonCode>>
+ *   action: value-of<Action>, reasonCodes: list<value-of<ReasonCode>>
  * }
  */
 final class Recommendation implements BaseModel
@@ -27,23 +27,23 @@ final class Recommendation implements BaseModel
      *
      * @var value-of<Action> $action
      */
-    #[Api(enum: Action::class)]
+    #[Required(enum: Action::class)]
     public string $action;
 
     /**
      * The reason code for the recommendation. Can be used to display a reason to the user.
      *
-     * @var list<value-of<ReasonCode>> $reason_codes
+     * @var list<value-of<ReasonCode>> $reasonCodes
      */
-    #[Api(list: ReasonCode::class)]
-    public array $reason_codes;
+    #[Required('reason_codes', list: ReasonCode::class)]
+    public array $reasonCodes;
 
     /**
      * `new Recommendation()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Recommendation::with(action: ..., reason_codes: ...)
+     * Recommendation::with(action: ..., reasonCodes: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -63,18 +63,16 @@ final class Recommendation implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Action|value-of<Action> $action
-     * @param list<ReasonCode|value-of<ReasonCode>> $reason_codes
+     * @param list<ReasonCode|value-of<ReasonCode>> $reasonCodes
      */
-    public static function with(
-        Action|string $action,
-        array $reason_codes
-    ): self {
-        $obj = new self;
+    public static function with(Action|string $action, array $reasonCodes): self
+    {
+        $self = new self;
 
-        $obj['action'] = $action;
-        $obj['reason_codes'] = $reason_codes;
+        $self['action'] = $action;
+        $self['reasonCodes'] = $reasonCodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +82,10 @@ final class Recommendation implements BaseModel
      */
     public function withAction(Action|string $action): self
     {
-        $obj = clone $this;
-        $obj['action'] = $action;
+        $self = clone $this;
+        $self['action'] = $action;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,9 +95,9 @@ final class Recommendation implements BaseModel
      */
     public function withReasonCodes(array $reasonCodes): self
     {
-        $obj = clone $this;
-        $obj['reason_codes'] = $reasonCodes;
+        $self = clone $this;
+        $self['reasonCodes'] = $reasonCodes;
 
-        return $obj;
+        return $self;
     }
 }

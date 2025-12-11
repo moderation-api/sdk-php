@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PersonalInformationShape = array{
- *   id: 'personal_information', flag: bool
+ *   id?: 'personal_information', flag: bool
  * }
  */
 final class PersonalInformation implements BaseModel
@@ -19,10 +19,10 @@ final class PersonalInformation implements BaseModel
     use SdkModel;
 
     /** @var 'personal_information' $id */
-    #[Api]
+    #[Required]
     public string $id = 'personal_information';
 
-    #[Api]
+    #[Required]
     public bool $flag;
 
     /**
@@ -51,18 +51,18 @@ final class PersonalInformation implements BaseModel
      */
     public static function with(bool $flag): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['flag'] = $flag;
+        $self['flag'] = $flag;
 
-        return $obj;
+        return $self;
     }
 
     public function withFlag(bool $flag): self
     {
-        $obj = clone $this;
-        $obj['flag'] = $flag;
+        $self = clone $this;
+        $self['flag'] = $flag;
 
-        return $obj;
+        return $self;
     }
 }

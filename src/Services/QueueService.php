@@ -7,7 +7,6 @@ namespace ModerationAPI\Services;
 use ModerationAPI\Client;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\Queue\QueueGetResponse;
-use ModerationAPI\Queue\QueueGetStatsParams;
 use ModerationAPI\Queue\QueueGetStatsResponse;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\QueueContract;
@@ -18,6 +17,11 @@ final class QueueService implements QueueContract
     /**
      * @api
      */
+    public QueueRawService $raw;
+
+    /**
+     * @api
+     */
     public ItemsService $items;
 
     /**
@@ -25,6 +29,7 @@ final class QueueService implements QueueContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new QueueRawService($client);
         $this->items = new ItemsService($client);
     }
 
@@ -33,19 +38,18 @@ final class QueueService implements QueueContract
      *
      * Get a queue
      *
+     * @param string $id The queue ID
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): QueueGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'get',
-            path: ['queue/%1$s', $id],
-            options: $requestOptions,
-            convert: QueueGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -53,27 +57,23 @@ final class QueueService implements QueueContract
      *
      * Get detailed statistics about a moderation queue including review times, action counts, and trends
      *
-     * @param array{withinDays?: string}|QueueGetStatsParams $params
+     * @param string $id The queue ID
+     * @param string $withinDays Number of days to analyze statistics for
      *
      * @throws APIException
      */
     public function getStats(
         string $id,
-        array|QueueGetStatsParams $params,
+        string $withinDays = '30',
         ?RequestOptions $requestOptions = null,
     ): QueueGetStatsResponse {
-        [$parsed, $options] = QueueGetStatsParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['withinDays' => $withinDays];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'get',
-            path: ['queue/%1$s/stats', $id],
-            query: $parsed,
-            options: $options,
-            convert: QueueGetStatsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getStats($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

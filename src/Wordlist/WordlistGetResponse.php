@@ -4,72 +4,68 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Wordlist;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type WordlistGetResponseShape = array{
  *   id: string,
  *   createdAt: string,
  *   name: string|null,
- *   organizationId: string,
+ *   organizationID: string,
  *   strict: bool,
- *   userId: string|null,
+ *   userID: string|null,
  *   words: list<string>,
  * }
  */
-final class WordlistGetResponse implements BaseModel, ResponseConverter
+final class WordlistGetResponse implements BaseModel
 {
     /** @use SdkModel<WordlistGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * ID of the wordlist.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Creation date of the wordlist.
      */
-    #[Api]
+    #[Required]
     public string $createdAt;
 
     /**
      * Name of the wordlist.
      */
-    #[Api]
+    #[Required]
     public ?string $name;
 
     /**
      * ID of the organization.
      */
-    #[Api]
-    public string $organizationId;
+    #[Required('organizationId')]
+    public string $organizationID;
 
     /**
      * Strict mode.
      */
-    #[Api]
+    #[Required]
     public bool $strict;
 
     /**
      * ID of the user.
      */
-    #[Api]
-    public ?string $userId;
+    #[Required('userId')]
+    public ?string $userID;
 
     /**
      * Words in the wordlist.
      *
      * @var list<string> $words
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $words;
 
     /**
@@ -81,9 +77,9 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
      *   id: ...,
      *   createdAt: ...,
      *   name: ...,
-     *   organizationId: ...,
+     *   organizationID: ...,
      *   strict: ...,
-     *   userId: ...,
+     *   userID: ...,
      *   words: ...,
      * )
      * ```
@@ -117,22 +113,22 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
         string $id,
         string $createdAt,
         ?string $name,
-        string $organizationId,
+        string $organizationID,
         bool $strict,
-        ?string $userId,
+        ?string $userID,
         array $words,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['createdAt'] = $createdAt;
-        $obj['name'] = $name;
-        $obj['organizationId'] = $organizationId;
-        $obj['strict'] = $strict;
-        $obj['userId'] = $userId;
-        $obj['words'] = $words;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['name'] = $name;
+        $self['organizationID'] = $organizationID;
+        $self['strict'] = $strict;
+        $self['userID'] = $userID;
+        $self['words'] = $words;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +136,10 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +147,10 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,10 +158,10 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
      */
     public function withName(?string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -173,10 +169,10 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
      */
     public function withOrganizationID(string $organizationID): self
     {
-        $obj = clone $this;
-        $obj['organizationId'] = $organizationID;
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,10 +180,10 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
      */
     public function withStrict(bool $strict): self
     {
-        $obj = clone $this;
-        $obj['strict'] = $strict;
+        $self = clone $this;
+        $self['strict'] = $strict;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,10 +191,10 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
      */
     public function withUserID(?string $userID): self
     {
-        $obj = clone $this;
-        $obj['userId'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,9 +204,9 @@ final class WordlistGetResponse implements BaseModel, ResponseConverter
      */
     public function withWords(array $words): self
     {
-        $obj = clone $this;
-        $obj['words'] = $words;
+        $self = clone $this;
+        $self['words'] = $words;
 
-        return $obj;
+        return $self;
     }
 }

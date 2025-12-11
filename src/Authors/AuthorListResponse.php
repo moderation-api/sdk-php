@@ -12,29 +12,25 @@ use ModerationAPI\Authors\AuthorListResponse\Author\RiskEvaluation;
 use ModerationAPI\Authors\AuthorListResponse\Author\Status;
 use ModerationAPI\Authors\AuthorListResponse\Author\TrustLevel;
 use ModerationAPI\Authors\AuthorListResponse\Pagination;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AuthorListResponseShape = array{
  *   authors: list<Author>, pagination: Pagination
  * }
  */
-final class AuthorListResponse implements BaseModel, ResponseConverter
+final class AuthorListResponse implements BaseModel
 {
     /** @use SdkModel<AuthorListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Author> $authors */
-    #[Api(list: Author::class)]
+    #[Required(list: Author::class)]
     public array $authors;
 
-    #[Api]
+    #[Required]
     public Pagination $pagination;
 
     /**
@@ -64,19 +60,19 @@ final class AuthorListResponse implements BaseModel, ResponseConverter
      * @param list<Author|array{
      *   id: string,
      *   block: Block|null,
-     *   first_seen: float,
-     *   last_seen: float,
+     *   firstSeen: float,
+     *   lastSeen: float,
      *   metadata: Metadata,
      *   metrics: Metrics,
-     *   risk_evaluation: RiskEvaluation|null,
+     *   riskEvaluation: RiskEvaluation|null,
      *   status: value-of<Status>,
-     *   trust_level: TrustLevel,
+     *   trustLevel: TrustLevel,
      *   email?: string|null,
-     *   external_id?: string|null,
-     *   external_link?: string|null,
-     *   last_incident?: float|null,
+     *   externalID?: string|null,
+     *   externalLink?: string|null,
+     *   lastIncident?: float|null,
      *   name?: string|null,
-     *   profile_picture?: string|null,
+     *   profilePicture?: string|null,
      * }> $authors
      * @param Pagination|array{
      *   hasNextPage: bool,
@@ -90,39 +86,39 @@ final class AuthorListResponse implements BaseModel, ResponseConverter
         array $authors,
         Pagination|array $pagination
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['authors'] = $authors;
-        $obj['pagination'] = $pagination;
+        $self['authors'] = $authors;
+        $self['pagination'] = $pagination;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * @param list<Author|array{
      *   id: string,
      *   block: Block|null,
-     *   first_seen: float,
-     *   last_seen: float,
+     *   firstSeen: float,
+     *   lastSeen: float,
      *   metadata: Metadata,
      *   metrics: Metrics,
-     *   risk_evaluation: RiskEvaluation|null,
+     *   riskEvaluation: RiskEvaluation|null,
      *   status: value-of<Status>,
-     *   trust_level: TrustLevel,
+     *   trustLevel: TrustLevel,
      *   email?: string|null,
-     *   external_id?: string|null,
-     *   external_link?: string|null,
-     *   last_incident?: float|null,
+     *   externalID?: string|null,
+     *   externalLink?: string|null,
+     *   lastIncident?: float|null,
      *   name?: string|null,
-     *   profile_picture?: string|null,
+     *   profilePicture?: string|null,
      * }> $authors
      */
     public function withAuthors(array $authors): self
     {
-        $obj = clone $this;
-        $obj['authors'] = $authors;
+        $self = clone $this;
+        $self['authors'] = $authors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,9 +132,9 @@ final class AuthorListResponse implements BaseModel, ResponseConverter
      */
     public function withPagination(Pagination|array $pagination): self
     {
-        $obj = clone $this;
-        $obj['pagination'] = $pagination;
+        $self = clone $this;
+        $self['pagination'] = $pagination;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Actions\ActionCreateParams;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class PossibleValue implements BaseModel
     /**
      * The value of the action.
      */
-    #[Api]
+    #[Required]
     public string $value;
 
     /**
@@ -48,11 +48,11 @@ final class PossibleValue implements BaseModel
      */
     public static function with(string $value): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['value'] = $value;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,9 +60,9 @@ final class PossibleValue implements BaseModel
      */
     public function withValue(string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

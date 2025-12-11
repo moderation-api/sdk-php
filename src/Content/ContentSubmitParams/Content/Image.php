@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Content;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * Image.
  *
- * @phpstan-type ImageShape = array{type: 'image', url: string}
+ * @phpstan-type ImageShape = array{type?: 'image', url: string}
  */
 final class Image implements BaseModel
 {
@@ -19,13 +19,13 @@ final class Image implements BaseModel
     use SdkModel;
 
     /** @var 'image' $type */
-    #[Api]
+    #[Required]
     public string $type = 'image';
 
     /**
      * A public URL of the image content.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**
@@ -54,11 +54,11 @@ final class Image implements BaseModel
      */
     public static function with(string $url): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['url'] = $url;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class Image implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

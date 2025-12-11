@@ -9,13 +9,14 @@ use ModerationAPI\RequestOptions;
 use ModerationAPI\Wordlist\WordlistGetEmbeddingStatusResponse;
 use ModerationAPI\Wordlist\WordlistGetResponse;
 use ModerationAPI\Wordlist\WordlistListResponseItem;
-use ModerationAPI\Wordlist\WordlistUpdateParams;
 use ModerationAPI\Wordlist\WordlistUpdateResponse;
 
 interface WordlistContract
 {
     /**
      * @api
+     *
+     * @param string $id ID of the wordlist to get
      *
      * @throws APIException
      */
@@ -27,13 +28,22 @@ interface WordlistContract
     /**
      * @api
      *
-     * @param array<mixed>|WordlistUpdateParams $params
+     * @param string $id ID of the wordlist to update
+     * @param string $description New description for the wordlist
+     * @param string $key New key for the wordlist
+     * @param string $name New name for the wordlist
+     * @param bool $strict Deprecated. Now using threshold in project settings.
+     * @param list<string> $words New words for the wordlist. Replace the existing words with these new ones. Duplicate words will be ignored.
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|WordlistUpdateParams $params,
+        ?string $description = null,
+        ?string $key = null,
+        ?string $name = null,
+        ?bool $strict = null,
+        ?array $words = null,
         ?RequestOptions $requestOptions = null,
     ): WordlistUpdateResponse;
 
@@ -48,6 +58,8 @@ interface WordlistContract
 
     /**
      * @api
+     *
+     * @param string $id ID of the wordlist to check embedding status for
      *
      * @throws APIException
      */

@@ -4,28 +4,24 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Wordlist\Words;
 
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
-use ModerationAPI\Core\Concerns\SdkResponse;
 use ModerationAPI\Core\Contracts\BaseModel;
-use ModerationAPI\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type WordAddResponseShape = array{
  *   addedCount: float, addedWords: list<string>, totalCount: float
  * }
  */
-final class WordAddResponse implements BaseModel, ResponseConverter
+final class WordAddResponse implements BaseModel
 {
     /** @use SdkModel<WordAddResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * Number of words added.
      */
-    #[Api]
+    #[Required]
     public float $addedCount;
 
     /**
@@ -33,13 +29,13 @@ final class WordAddResponse implements BaseModel, ResponseConverter
      *
      * @var list<string> $addedWords
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $addedWords;
 
     /**
      * Total number of words in wordlist.
      */
-    #[Api]
+    #[Required]
     public float $totalCount;
 
     /**
@@ -76,13 +72,13 @@ final class WordAddResponse implements BaseModel, ResponseConverter
         array $addedWords,
         float $totalCount
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['addedCount'] = $addedCount;
-        $obj['addedWords'] = $addedWords;
-        $obj['totalCount'] = $totalCount;
+        $self['addedCount'] = $addedCount;
+        $self['addedWords'] = $addedWords;
+        $self['totalCount'] = $totalCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +86,10 @@ final class WordAddResponse implements BaseModel, ResponseConverter
      */
     public function withAddedCount(float $addedCount): self
     {
-        $obj = clone $this;
-        $obj['addedCount'] = $addedCount;
+        $self = clone $this;
+        $self['addedCount'] = $addedCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +99,10 @@ final class WordAddResponse implements BaseModel, ResponseConverter
      */
     public function withAddedWords(array $addedWords): self
     {
-        $obj = clone $this;
-        $obj['addedWords'] = $addedWords;
+        $self = clone $this;
+        $self['addedWords'] = $addedWords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,9 +110,9 @@ final class WordAddResponse implements BaseModel, ResponseConverter
      */
     public function withTotalCount(float $totalCount): self
     {
-        $obj = clone $this;
-        $obj['totalCount'] = $totalCount;
+        $self = clone $this;
+        $self['totalCount'] = $totalCount;
 
-        return $obj;
+        return $self;
     }
 }

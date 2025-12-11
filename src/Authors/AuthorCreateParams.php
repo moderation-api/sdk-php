@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace ModerationAPI\Authors;
 
 use ModerationAPI\Authors\AuthorCreateParams\Metadata;
-use ModerationAPI\Core\Attributes\Api;
+use ModerationAPI\Core\Attributes\Optional;
+use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -16,20 +17,20 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @see ModerationAPI\Services\AuthorsService::create()
  *
  * @phpstan-type AuthorCreateParamsShape = array{
- *   external_id: string,
+ *   externalID: string,
  *   email?: string|null,
- *   external_link?: string|null,
- *   first_seen?: float,
- *   last_seen?: float,
- *   manual_trust_level?: float|null,
+ *   externalLink?: string|null,
+ *   firstSeen?: float,
+ *   lastSeen?: float,
+ *   manualTrustLevel?: float|null,
  *   metadata?: Metadata|array{
- *     email_verified?: bool|null,
- *     identity_verified?: bool|null,
- *     is_paying_customer?: bool|null,
- *     phone_verified?: bool|null,
+ *     emailVerified?: bool|null,
+ *     identityVerified?: bool|null,
+ *     isPayingCustomer?: bool|null,
+ *     phoneVerified?: bool|null,
  *   },
  *   name?: string|null,
- *   profile_picture?: string|null,
+ *   profilePicture?: string|null,
  * }
  */
 final class AuthorCreateParams implements BaseModel
@@ -41,60 +42,60 @@ final class AuthorCreateParams implements BaseModel
     /**
      * External ID of the user, typically the ID of the author in your database.
      */
-    #[Api]
-    public string $external_id;
+    #[Required('external_id')]
+    public string $externalID;
 
     /**
      * Author email address.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $email;
 
     /**
      * URL of the author's external profile.
      */
-    #[Api(nullable: true, optional: true)]
-    public ?string $external_link;
+    #[Optional('external_link', nullable: true)]
+    public ?string $externalLink;
 
     /**
      * Timestamp when author first appeared.
      */
-    #[Api(optional: true)]
-    public ?float $first_seen;
+    #[Optional('first_seen')]
+    public ?float $firstSeen;
 
     /**
      * Timestamp of last activity.
      */
-    #[Api(optional: true)]
-    public ?float $last_seen;
+    #[Optional('last_seen')]
+    public ?float $lastSeen;
 
-    #[Api(nullable: true, optional: true)]
-    public ?float $manual_trust_level;
+    #[Optional('manual_trust_level', nullable: true)]
+    public ?float $manualTrustLevel;
 
     /**
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Metadata $metadata;
 
     /**
      * Author name or identifier.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $name;
 
     /**
      * URL of the author's profile picture.
      */
-    #[Api(nullable: true, optional: true)]
-    public ?string $profile_picture;
+    #[Optional('profile_picture', nullable: true)]
+    public ?string $profilePicture;
 
     /**
      * `new AuthorCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AuthorCreateParams::with(external_id: ...)
+     * AuthorCreateParams::with(externalID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -114,37 +115,37 @@ final class AuthorCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Metadata|array{
-     *   email_verified?: bool|null,
-     *   identity_verified?: bool|null,
-     *   is_paying_customer?: bool|null,
-     *   phone_verified?: bool|null,
+     *   emailVerified?: bool|null,
+     *   identityVerified?: bool|null,
+     *   isPayingCustomer?: bool|null,
+     *   phoneVerified?: bool|null,
      * } $metadata
      */
     public static function with(
-        string $external_id,
+        string $externalID,
         ?string $email = null,
-        ?string $external_link = null,
-        ?float $first_seen = null,
-        ?float $last_seen = null,
-        ?float $manual_trust_level = null,
+        ?string $externalLink = null,
+        ?float $firstSeen = null,
+        ?float $lastSeen = null,
+        ?float $manualTrustLevel = null,
         Metadata|array|null $metadata = null,
         ?string $name = null,
-        ?string $profile_picture = null,
+        ?string $profilePicture = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['external_id'] = $external_id;
+        $self['externalID'] = $externalID;
 
-        null !== $email && $obj['email'] = $email;
-        null !== $external_link && $obj['external_link'] = $external_link;
-        null !== $first_seen && $obj['first_seen'] = $first_seen;
-        null !== $last_seen && $obj['last_seen'] = $last_seen;
-        null !== $manual_trust_level && $obj['manual_trust_level'] = $manual_trust_level;
-        null !== $metadata && $obj['metadata'] = $metadata;
-        null !== $name && $obj['name'] = $name;
-        null !== $profile_picture && $obj['profile_picture'] = $profile_picture;
+        null !== $email && $self['email'] = $email;
+        null !== $externalLink && $self['externalLink'] = $externalLink;
+        null !== $firstSeen && $self['firstSeen'] = $firstSeen;
+        null !== $lastSeen && $self['lastSeen'] = $lastSeen;
+        null !== $manualTrustLevel && $self['manualTrustLevel'] = $manualTrustLevel;
+        null !== $metadata && $self['metadata'] = $metadata;
+        null !== $name && $self['name'] = $name;
+        null !== $profilePicture && $self['profilePicture'] = $profilePicture;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +153,10 @@ final class AuthorCreateParams implements BaseModel
      */
     public function withExternalID(string $externalID): self
     {
-        $obj = clone $this;
-        $obj['external_id'] = $externalID;
+        $self = clone $this;
+        $self['externalID'] = $externalID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +164,10 @@ final class AuthorCreateParams implements BaseModel
      */
     public function withEmail(?string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +175,10 @@ final class AuthorCreateParams implements BaseModel
      */
     public function withExternalLink(?string $externalLink): self
     {
-        $obj = clone $this;
-        $obj['external_link'] = $externalLink;
+        $self = clone $this;
+        $self['externalLink'] = $externalLink;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +186,10 @@ final class AuthorCreateParams implements BaseModel
      */
     public function withFirstSeen(float $firstSeen): self
     {
-        $obj = clone $this;
-        $obj['first_seen'] = $firstSeen;
+        $self = clone $this;
+        $self['firstSeen'] = $firstSeen;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,36 +197,36 @@ final class AuthorCreateParams implements BaseModel
      */
     public function withLastSeen(float $lastSeen): self
     {
-        $obj = clone $this;
-        $obj['last_seen'] = $lastSeen;
+        $self = clone $this;
+        $self['lastSeen'] = $lastSeen;
 
-        return $obj;
+        return $self;
     }
 
     public function withManualTrustLevel(?float $manualTrustLevel): self
     {
-        $obj = clone $this;
-        $obj['manual_trust_level'] = $manualTrustLevel;
+        $self = clone $this;
+        $self['manualTrustLevel'] = $manualTrustLevel;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
      *
      * @param Metadata|array{
-     *   email_verified?: bool|null,
-     *   identity_verified?: bool|null,
-     *   is_paying_customer?: bool|null,
-     *   phone_verified?: bool|null,
+     *   emailVerified?: bool|null,
+     *   identityVerified?: bool|null,
+     *   isPayingCustomer?: bool|null,
+     *   phoneVerified?: bool|null,
      * } $metadata
      */
     public function withMetadata(Metadata|array $metadata): self
     {
-        $obj = clone $this;
-        $obj['metadata'] = $metadata;
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +234,10 @@ final class AuthorCreateParams implements BaseModel
      */
     public function withName(?string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,9 +245,9 @@ final class AuthorCreateParams implements BaseModel
      */
     public function withProfilePicture(?string $profilePicture): self
     {
-        $obj = clone $this;
-        $obj['profile_picture'] = $profilePicture;
+        $self = clone $this;
+        $self['profilePicture'] = $profilePicture;
 
-        return $obj;
+        return $self;
     }
 }
