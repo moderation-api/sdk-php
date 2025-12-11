@@ -13,6 +13,7 @@ use ModerationAPI\Authors\AuthorNewResponse;
 use ModerationAPI\Authors\AuthorUpdateResponse;
 use ModerationAPI\Client;
 use ModerationAPI\Core\Exceptions\APIException;
+use ModerationAPI\Core\Util;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\AuthorsContract;
 
@@ -64,19 +65,19 @@ final class AuthorsService implements AuthorsContract
         ?string $profilePicture = null,
         ?RequestOptions $requestOptions = null,
     ): AuthorNewResponse {
-        $params = [
-            'externalID' => $externalID,
-            'email' => $email,
-            'externalLink' => $externalLink,
-            'firstSeen' => $firstSeen,
-            'lastSeen' => $lastSeen,
-            'manualTrustLevel' => $manualTrustLevel,
-            'metadata' => $metadata,
-            'name' => $name,
-            'profilePicture' => $profilePicture,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'externalID' => $externalID,
+                'email' => $email,
+                'externalLink' => $externalLink,
+                'firstSeen' => $firstSeen,
+                'lastSeen' => $lastSeen,
+                'manualTrustLevel' => $manualTrustLevel,
+                'metadata' => $metadata,
+                'name' => $name,
+                'profilePicture' => $profilePicture,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -136,18 +137,18 @@ final class AuthorsService implements AuthorsContract
         ?string $profilePicture = null,
         ?RequestOptions $requestOptions = null,
     ): AuthorUpdateResponse {
-        $params = [
-            'email' => $email,
-            'externalLink' => $externalLink,
-            'firstSeen' => $firstSeen,
-            'lastSeen' => $lastSeen,
-            'manualTrustLevel' => $manualTrustLevel,
-            'metadata' => $metadata,
-            'name' => $name,
-            'profilePicture' => $profilePicture,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'email' => $email,
+                'externalLink' => $externalLink,
+                'firstSeen' => $firstSeen,
+                'lastSeen' => $lastSeen,
+                'manualTrustLevel' => $manualTrustLevel,
+                'metadata' => $metadata,
+                'name' => $name,
+                'profilePicture' => $profilePicture,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -177,17 +178,17 @@ final class AuthorsService implements AuthorsContract
         string|SortDirection $sortDirection = 'desc',
         ?RequestOptions $requestOptions = null,
     ): AuthorListResponse {
-        $params = [
-            'contentTypes' => $contentTypes,
-            'lastActiveDate' => $lastActiveDate,
-            'memberSinceDate' => $memberSinceDate,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-            'sortBy' => $sortBy,
-            'sortDirection' => $sortDirection,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'contentTypes' => $contentTypes,
+                'lastActiveDate' => $lastActiveDate,
+                'memberSinceDate' => $memberSinceDate,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'sortBy' => $sortBy,
+                'sortDirection' => $sortDirection,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

@@ -8,6 +8,7 @@ use ModerationAPI\Actions\Execute\ExecuteExecuteByIDResponse;
 use ModerationAPI\Actions\Execute\ExecuteExecuteResponse;
 use ModerationAPI\Client;
 use ModerationAPI\Core\Exceptions\APIException;
+use ModerationAPI\Core\Util;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\Actions\ExecuteContract;
 
@@ -49,16 +50,16 @@ final class ExecuteService implements ExecuteContract
         ?string $value = null,
         ?RequestOptions $requestOptions = null,
     ): ExecuteExecuteResponse {
-        $params = [
-            'actionKey' => $actionKey,
-            'authorIDs' => $authorIDs,
-            'contentIDs' => $contentIDs,
-            'duration' => $duration,
-            'queueID' => $queueID,
-            'value' => $value,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'actionKey' => $actionKey,
+                'authorIDs' => $authorIDs,
+                'contentIDs' => $contentIDs,
+                'duration' => $duration,
+                'queueID' => $queueID,
+                'value' => $value,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->execute(params: $params, requestOptions: $requestOptions);
@@ -89,14 +90,14 @@ final class ExecuteService implements ExecuteContract
         ?string $value = null,
         ?RequestOptions $requestOptions = null,
     ): ExecuteExecuteByIDResponse {
-        $params = [
-            'authorIDs' => $authorIDs,
-            'contentIDs' => $contentIDs,
-            'queueID' => $queueID,
-            'value' => $value,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'authorIDs' => $authorIDs,
+                'contentIDs' => $contentIDs,
+                'queueID' => $queueID,
+                'value' => $value,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->executeByID($actionID, params: $params, requestOptions: $requestOptions);

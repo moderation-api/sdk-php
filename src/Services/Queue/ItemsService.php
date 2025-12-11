@@ -6,6 +6,7 @@ namespace ModerationAPI\Services\Queue;
 
 use ModerationAPI\Client;
 use ModerationAPI\Core\Exceptions\APIException;
+use ModerationAPI\Core\Util;
 use ModerationAPI\Queue\Items\ItemListParams\SortDirection;
 use ModerationAPI\Queue\Items\ItemListParams\SortField;
 use ModerationAPI\Queue\Items\ItemListResponse;
@@ -57,21 +58,21 @@ final class ItemsService implements ItemsContract
         string|SortField|null $sortField = null,
         ?RequestOptions $requestOptions = null,
     ): ItemListResponse {
-        $params = [
-            'afterDate' => $afterDate,
-            'authorID' => $authorID,
-            'beforeDate' => $beforeDate,
-            'conversationIDs' => $conversationIDs,
-            'filteredActionIDs' => $filteredActionIDs,
-            'includeResolved' => $includeResolved,
-            'labels' => $labels,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-            'sortDirection' => $sortDirection,
-            'sortField' => $sortField,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'afterDate' => $afterDate,
+                'authorID' => $authorID,
+                'beforeDate' => $beforeDate,
+                'conversationIDs' => $conversationIDs,
+                'filteredActionIDs' => $filteredActionIDs,
+                'includeResolved' => $includeResolved,
+                'labels' => $labels,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'sortDirection' => $sortDirection,
+                'sortField' => $sortField,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);
@@ -96,9 +97,7 @@ final class ItemsService implements ItemsContract
         ?string $comment = null,
         ?RequestOptions $requestOptions = null,
     ): ItemResolveResponse {
-        $params = ['id' => $id, 'comment' => $comment];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['id' => $id, 'comment' => $comment]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->resolve($itemID, params: $params, requestOptions: $requestOptions);
@@ -123,9 +122,7 @@ final class ItemsService implements ItemsContract
         ?string $comment = null,
         ?RequestOptions $requestOptions = null,
     ): ItemUnresolveResponse {
-        $params = ['id' => $id, 'comment' => $comment];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['id' => $id, 'comment' => $comment]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->unresolve($itemID, params: $params, requestOptions: $requestOptions);

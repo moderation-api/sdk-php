@@ -14,6 +14,7 @@ use ModerationAPI\Actions\ActionNewResponse;
 use ModerationAPI\Actions\ActionUpdateResponse;
 use ModerationAPI\Client;
 use ModerationAPI\Core\Exceptions\APIException;
+use ModerationAPI\Core\Util;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\ActionsContract;
 use ModerationAPI\Services\Actions\ExecuteService;
@@ -78,22 +79,22 @@ final class ActionsService implements ActionsContract
         array $webhooks = [],
         ?RequestOptions $requestOptions = null,
     ): ActionNewResponse {
-        $params = [
-            'name' => $name,
-            'builtIn' => $builtIn,
-            'description' => $description,
-            'filterInQueueIDs' => $filterInQueueIDs,
-            'freeText' => $freeText,
-            'key' => $key,
-            'position' => $position,
-            'possibleValues' => $possibleValues,
-            'queueBehaviour' => $queueBehaviour,
-            'type' => $type,
-            'valueRequired' => $valueRequired,
-            'webhooks' => $webhooks,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'name' => $name,
+                'builtIn' => $builtIn,
+                'description' => $description,
+                'filterInQueueIDs' => $filterInQueueIDs,
+                'freeText' => $freeText,
+                'key' => $key,
+                'position' => $position,
+                'possibleValues' => $possibleValues,
+                'queueBehaviour' => $queueBehaviour,
+                'type' => $type,
+                'valueRequired' => $valueRequired,
+                'webhooks' => $webhooks,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -161,22 +162,22 @@ final class ActionsService implements ActionsContract
         array $webhooks = [],
         ?RequestOptions $requestOptions = null,
     ): ActionUpdateResponse {
-        $params = [
-            'builtIn' => $builtIn,
-            'description' => $description,
-            'filterInQueueIDs' => $filterInQueueIDs,
-            'freeText' => $freeText,
-            'key' => $key,
-            'name' => $name,
-            'position' => $position,
-            'possibleValues' => $possibleValues,
-            'queueBehaviour' => $queueBehaviour,
-            'type' => $type,
-            'valueRequired' => $valueRequired,
-            'webhooks' => $webhooks,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'builtIn' => $builtIn,
+                'description' => $description,
+                'filterInQueueIDs' => $filterInQueueIDs,
+                'freeText' => $freeText,
+                'key' => $key,
+                'name' => $name,
+                'position' => $position,
+                'possibleValues' => $possibleValues,
+                'queueBehaviour' => $queueBehaviour,
+                'type' => $type,
+                'valueRequired' => $valueRequired,
+                'webhooks' => $webhooks,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -197,9 +198,7 @@ final class ActionsService implements ActionsContract
         ?string $queueID = null,
         ?RequestOptions $requestOptions = null
     ): array {
-        $params = ['queueID' => $queueID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['queueID' => $queueID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
