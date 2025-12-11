@@ -8,6 +8,7 @@ use ModerationAPI\Client;
 use ModerationAPI\Content\ContentSubmitParams\MetaType;
 use ModerationAPI\Content\ContentSubmitResponse;
 use ModerationAPI\Core\Exceptions\APIException;
+use ModerationAPI\Core\Util;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\ContentContract;
 
@@ -53,19 +54,19 @@ final class ContentService implements ContentContract
         ?array $policies = null,
         ?RequestOptions $requestOptions = null,
     ): ContentSubmitResponse {
-        $params = [
-            'content' => $content,
-            'authorID' => $authorID,
-            'channel' => $channel,
-            'contentID' => $contentID,
-            'conversationID' => $conversationID,
-            'doNotStore' => $doNotStore,
-            'metadata' => $metadata,
-            'metaType' => $metaType,
-            'policies' => $policies,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'content' => $content,
+                'authorID' => $authorID,
+                'channel' => $channel,
+                'contentID' => $contentID,
+                'conversationID' => $conversationID,
+                'doNotStore' => $doNotStore,
+                'metadata' => $metadata,
+                'metaType' => $metaType,
+                'policies' => $policies,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->submit(params: $params, requestOptions: $requestOptions);

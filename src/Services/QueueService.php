@@ -6,6 +6,7 @@ namespace ModerationAPI\Services;
 
 use ModerationAPI\Client;
 use ModerationAPI\Core\Exceptions\APIException;
+use ModerationAPI\Core\Util;
 use ModerationAPI\Queue\QueueGetResponse;
 use ModerationAPI\Queue\QueueGetStatsResponse;
 use ModerationAPI\RequestOptions;
@@ -67,9 +68,7 @@ final class QueueService implements QueueContract
         string $withinDays = '30',
         ?RequestOptions $requestOptions = null,
     ): QueueGetStatsResponse {
-        $params = ['withinDays' => $withinDays];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['withinDays' => $withinDays]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getStats($id, params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace ModerationAPI\Services\Wordlist;
 
 use ModerationAPI\Client;
 use ModerationAPI\Core\Exceptions\APIException;
+use ModerationAPI\Core\Util;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\Wordlist\WordsContract;
 use ModerationAPI\Wordlist\Words\WordAddResponse;
@@ -41,7 +42,7 @@ final class WordsService implements WordsContract
         array $words,
         ?RequestOptions $requestOptions = null
     ): WordAddResponse {
-        $params = ['words' => $words];
+        $params = Util::removeNulls(['words' => $words]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->add($id, params: $params, requestOptions: $requestOptions);
@@ -64,7 +65,7 @@ final class WordsService implements WordsContract
         array $words,
         ?RequestOptions $requestOptions = null
     ): WordRemoveResponse {
-        $params = ['words' => $words];
+        $params = Util::removeNulls(['words' => $words]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->remove($id, params: $params, requestOptions: $requestOptions);
