@@ -106,7 +106,7 @@ final class ItemsRawService implements ItemsRawContract
         return $this->client->request(
             method: 'post',
             path: ['queue/%1$s/items/%2$s/resolve', $id, $itemID],
-            body: (object) array_diff_key($parsed, ['id']),
+            body: (object) array_diff_key($parsed, array_flip(['id'])),
             options: $options,
             convert: ItemResolveResponse::class,
         );
@@ -140,7 +140,7 @@ final class ItemsRawService implements ItemsRawContract
         return $this->client->request(
             method: 'post',
             path: ['queue/%1$s/items/%2$s/unresolve', $id, $itemID],
-            body: (object) array_diff_key($parsed, ['id']),
+            body: (object) array_diff_key($parsed, array_flip(['id'])),
             options: $options,
             convert: ItemUnresolveResponse::class,
         );
