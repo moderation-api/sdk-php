@@ -2,44 +2,44 @@
 
 declare(strict_types=1);
 
-namespace ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data;
+namespace ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data;
 
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * Video.
+ * Audio.
  *
- * @phpstan-type VideoShape = array{type?: 'video', url: string}
+ * @phpstan-type AudioShape = array{type?: 'audio', url: string}
  */
-final class Video implements BaseModel
+final class Audio implements BaseModel
 {
-    /** @use SdkModel<VideoShape> */
+    /** @use SdkModel<AudioShape> */
     use SdkModel;
 
-    /** @var 'video' $type */
+    /** @var 'audio' $type */
     #[Required]
-    public string $type = 'video';
+    public string $type = 'audio';
 
     /**
-     * A public URL of the video content.
+     * The URL of the audio content.
      */
     #[Required]
     public string $url;
 
     /**
-     * `new Video()` is missing required properties by the API.
+     * `new Audio()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Video::with(url: ...)
+     * Audio::with(url: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Video)->withURL(...)
+     * (new Audio)->withURL(...)
      * ```
      */
     public function __construct()
@@ -62,7 +62,7 @@ final class Video implements BaseModel
     }
 
     /**
-     * A public URL of the video content.
+     * The URL of the audio content.
      */
     public function withURL(string $url): self
     {

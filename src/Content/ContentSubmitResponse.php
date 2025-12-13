@@ -24,7 +24,7 @@ use ModerationAPI\Content\ContentSubmitResponse\Policy;
 use ModerationAPI\Content\ContentSubmitResponse\Policy\ClassifierOutput;
 use ModerationAPI\Content\ContentSubmitResponse\Policy\ClassifierOutput\Label;
 use ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput;
-use ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput\Match1;
+use ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput\Match_;
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation;
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation\Action;
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation\ReasonCode;
@@ -186,7 +186,7 @@ final class ContentSubmitResponse implements BaseModel
      * }|EntityMatcherOutput|array{
      *   id: string,
      *   flagged: bool,
-     *   matches: list<Match1>,
+     *   matches: list<Match_>,
      *   probability: float,
      *   type?: 'entity_matcher',
      *   flaggedFields?: list<string>|null,
@@ -327,7 +327,7 @@ final class ContentSubmitResponse implements BaseModel
      * }|EntityMatcherOutput|array{
      *   id: string,
      *   flagged: bool,
-     *   matches: list<Match1>,
+     *   matches: list<Match_>,
      *   probability: float,
      *   type?: 'entity_matcher',
      *   flaggedFields?: list<string>|null,

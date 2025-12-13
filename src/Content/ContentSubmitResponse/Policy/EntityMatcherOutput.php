@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitResponse\Policy;
 
-use ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput\Match1;
+use ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput\Match_;
 use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
@@ -16,7 +16,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @phpstan-type EntityMatcherOutputShape = array{
  *   id: string,
  *   flagged: bool,
- *   matches: list<Match1>,
+ *   matches: list<Match_>,
  *   probability: float,
  *   type?: 'entity_matcher',
  *   flaggedFields?: list<string>|null,
@@ -37,8 +37,8 @@ final class EntityMatcherOutput implements BaseModel
     #[Required]
     public bool $flagged;
 
-    /** @var list<Match1> $matches */
-    #[Required(list: Match1::class)]
+    /** @var list<Match_> $matches */
+    #[Required(list: Match_::class)]
     public array $matches;
 
     #[Required]
@@ -76,7 +76,7 @@ final class EntityMatcherOutput implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Match1|array{
+     * @param list<Match_|array{
      *   match: string, probability: float, span: list<int>
      * }> $matches
      * @param list<string> $flaggedFields
@@ -117,7 +117,7 @@ final class EntityMatcherOutput implements BaseModel
     }
 
     /**
-     * @param list<Match1|array{
+     * @param list<Match_|array{
      *   match: string, probability: float, span: list<int>
      * }> $matches
      */

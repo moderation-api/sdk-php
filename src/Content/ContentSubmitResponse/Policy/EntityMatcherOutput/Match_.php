@@ -9,13 +9,13 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type Match1Shape = array{
+ * @phpstan-type MatchShape = array{
  *   match: string, probability: float, span: list<int>
  * }
  */
-final class Match1 implements BaseModel
+final class Match_ implements BaseModel
 {
-    /** @use SdkModel<Match1Shape> */
+    /** @use SdkModel<MatchShape> */
     use SdkModel;
 
     #[Required]
@@ -29,17 +29,17 @@ final class Match1 implements BaseModel
     public array $span;
 
     /**
-     * `new Match1()` is missing required properties by the API.
+     * `new Match_()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Match1::with(match: ..., probability: ..., span: ...)
+     * Match_::with(match: ..., probability: ..., span: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Match1)->withMatch(...)->withProbability(...)->withSpan(...)
+     * (new Match_)->withMatch(...)->withProbability(...)->withSpan(...)
      * ```
      */
     public function __construct()
