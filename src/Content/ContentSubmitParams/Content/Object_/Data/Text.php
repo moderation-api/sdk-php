@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data;
+namespace ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data;
 
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;

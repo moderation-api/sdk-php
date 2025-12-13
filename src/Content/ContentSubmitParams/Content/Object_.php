@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Content;
 
-use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data;
-use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio;
-use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image;
-use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text;
-use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Audio;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Image;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Text;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Video;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -16,14 +16,14 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * Object.
  *
- * @phpstan-type Object1Shape = array{
- *   data: array<string,\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio>,
+ * @phpstan-type ObjectShape = array{
+ *   data: array<string,\ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Text|\ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Image|\ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Video|\ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Audio>,
  *   type?: 'object',
  * }
  */
-final class Object1 implements BaseModel
+final class Object_ implements BaseModel
 {
-    /** @use SdkModel<Object1Shape> */
+    /** @use SdkModel<ObjectShape> */
     use SdkModel;
 
     /** @var 'object' $type */
@@ -39,17 +39,17 @@ final class Object1 implements BaseModel
     public array $data;
 
     /**
-     * `new Object1()` is missing required properties by the API.
+     * `new Object_()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Object1::with(data: ...)
+     * Object_::with(data: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Object1)->withData(...)
+     * (new Object_)->withData(...)
      * ```
      */
     public function __construct()

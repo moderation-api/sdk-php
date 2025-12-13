@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ModerationAPI\Content\ContentSubmitParams\Content\Object1;
+namespace ModerationAPI\Content\ContentSubmitParams\Content\Object_;
 
-use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio;
-use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image;
-use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text;
-use ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Audio;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Image;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Text;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Video;
 use ModerationAPI\Core\Concerns\SdkUnion;
 use ModerationAPI\Core\Conversion\Contracts\Converter;
 use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
