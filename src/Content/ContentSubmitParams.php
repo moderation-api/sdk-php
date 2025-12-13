@@ -6,7 +6,7 @@ namespace ModerationAPI\Content;
 
 use ModerationAPI\Content\ContentSubmitParams\Content\Audio;
 use ModerationAPI\Content\ContentSubmitParams\Content\Image;
-use ModerationAPI\Content\ContentSubmitParams\Content\Object1;
+use ModerationAPI\Content\ContentSubmitParams\Content\Object_;
 use ModerationAPI\Content\ContentSubmitParams\Content\Text;
 use ModerationAPI\Content\ContentSubmitParams\Content\Video;
 use ModerationAPI\Content\ContentSubmitParams\MetaType;
@@ -49,8 +49,8 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *     type?: 'image', url: string
  *   }|Video|array{type?: 'video', url: string}|Audio|array{
  *     type?: 'audio', url: string
- *   }|Object1|array{
- *     data: array<string,\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Text|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Image|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Video|\ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data\Audio>,
+ *   }|Object_|array{
+ *     data: array<string,\ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Text|\ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Image|\ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Video|\ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Audio>,
  *     type?: 'object',
  *   },
  *   authorID?: string,
@@ -104,7 +104,7 @@ final class ContentSubmitParams implements BaseModel
      * The content sent for moderation.
      */
     #[Required]
-    public Text|Image|Video|Audio|Object1 $content;
+    public Text|Image|Video|Audio|Object_ $content;
 
     /**
      * The author of the content.
@@ -188,8 +188,8 @@ final class ContentSubmitParams implements BaseModel
      *   type?: 'image', url: string
      * }|Video|array{type?: 'video', url: string}|Audio|array{
      *   type?: 'audio', url: string
-     * }|Object1|array{
-     *   data: array<string,Object1\Data\Text|Object1\Data\Image|Object1\Data\Video|Object1\Data\Audio>,
+     * }|Object_|array{
+     *   data: array<string,Object_\Data\Text|Object_\Data\Image|Object_\Data\Video|Object_\Data\Audio>,
      *   type?: 'object',
      * } $content
      * @param array<string,mixed> $metadata
@@ -228,7 +228,7 @@ final class ContentSubmitParams implements BaseModel
      * }> $policies
      */
     public static function with(
-        Text|array|Image|Video|Audio|Object1 $content,
+        Text|array|Image|Video|Audio|Object_ $content,
         ?string $authorID = null,
         ?string $channel = null,
         ?string $contentID = null,
@@ -261,13 +261,13 @@ final class ContentSubmitParams implements BaseModel
      *   type?: 'image', url: string
      * }|Video|array{type?: 'video', url: string}|Audio|array{
      *   type?: 'audio', url: string
-     * }|Object1|array{
-     *   data: array<string,Object1\Data\Text|Object1\Data\Image|Object1\Data\Video|Object1\Data\Audio>,
+     * }|Object_|array{
+     *   data: array<string,Object_\Data\Text|Object_\Data\Image|Object_\Data\Video|Object_\Data\Audio>,
      *   type?: 'object',
      * } $content
      */
     public function withContent(
-        Text|array|Image|Video|Audio|Object1 $content
+        Text|array|Image|Video|Audio|Object_ $content
     ): self {
         $self = clone $this;
         $self['content'] = $content;

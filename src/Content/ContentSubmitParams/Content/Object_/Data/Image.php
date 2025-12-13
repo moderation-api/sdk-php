@@ -2,44 +2,44 @@
 
 declare(strict_types=1);
 
-namespace ModerationAPI\Content\ContentSubmitParams\Content\Object1\Data;
+namespace ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data;
 
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * Audio.
+ * Image.
  *
- * @phpstan-type AudioShape = array{type?: 'audio', url: string}
+ * @phpstan-type ImageShape = array{type?: 'image', url: string}
  */
-final class Audio implements BaseModel
+final class Image implements BaseModel
 {
-    /** @use SdkModel<AudioShape> */
+    /** @use SdkModel<ImageShape> */
     use SdkModel;
 
-    /** @var 'audio' $type */
+    /** @var 'image' $type */
     #[Required]
-    public string $type = 'audio';
+    public string $type = 'image';
 
     /**
-     * The URL of the audio content.
+     * A public URL of the image content.
      */
     #[Required]
     public string $url;
 
     /**
-     * `new Audio()` is missing required properties by the API.
+     * `new Image()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Audio::with(url: ...)
+     * Image::with(url: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Audio)->withURL(...)
+     * (new Image)->withURL(...)
      * ```
      */
     public function __construct()
@@ -62,7 +62,7 @@ final class Audio implements BaseModel
     }
 
     /**
-     * The URL of the audio content.
+     * A public URL of the image content.
      */
     public function withURL(string $url): self
     {
