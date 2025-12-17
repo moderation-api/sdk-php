@@ -15,7 +15,7 @@ interface ContentRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ContentSubmitParams $params
+     * @param array<string,mixed>|ContentSubmitParams $params
      *
      * @return BaseResponse<ContentSubmitResponse>
      *

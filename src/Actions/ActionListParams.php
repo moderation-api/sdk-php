@@ -14,7 +14,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @see ModerationAPI\Services\ActionsService::list()
  *
- * @phpstan-type ActionListParamsShape = array{queueID?: string}
+ * @phpstan-type ActionListParamsShape = array{queueID?: string|null}
  */
 final class ActionListParams implements BaseModel
 {

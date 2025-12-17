@@ -11,9 +11,12 @@ use ModerationAPI\Queue\QueueGetStatsResponse\Trends\DailyReviewCount;
 use ModerationAPI\Queue\QueueGetStatsResponse\Trends\FlaggedContentTrend;
 
 /**
+ * @phpstan-import-type DailyReviewCountShape from \ModerationAPI\Queue\QueueGetStatsResponse\Trends\DailyReviewCount
+ * @phpstan-import-type FlaggedContentTrendShape from \ModerationAPI\Queue\QueueGetStatsResponse\Trends\FlaggedContentTrend
+ *
  * @phpstan-type TrendsShape = array{
- *   dailyReviewCounts: list<DailyReviewCount>,
- *   flaggedContentTrends: list<FlaggedContentTrend>,
+ *   dailyReviewCounts: list<DailyReviewCountShape>,
+ *   flaggedContentTrends: list<FlaggedContentTrendShape>,
  * }
  */
 final class Trends implements BaseModel
@@ -53,12 +56,8 @@ final class Trends implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DailyReviewCount|array{
-     *   count: float, date: string
-     * }> $dailyReviewCounts
-     * @param list<FlaggedContentTrend|array{
-     *   label: string, trend: float
-     * }> $flaggedContentTrends
+     * @param list<DailyReviewCountShape> $dailyReviewCounts
+     * @param list<FlaggedContentTrendShape> $flaggedContentTrends
      */
     public static function with(
         array $dailyReviewCounts,
@@ -73,9 +72,7 @@ final class Trends implements BaseModel
     }
 
     /**
-     * @param list<DailyReviewCount|array{
-     *   count: float, date: string
-     * }> $dailyReviewCounts
+     * @param list<DailyReviewCountShape> $dailyReviewCounts
      */
     public function withDailyReviewCounts(array $dailyReviewCounts): self
     {
@@ -86,9 +83,7 @@ final class Trends implements BaseModel
     }
 
     /**
-     * @param list<FlaggedContentTrend|array{
-     *   label: string, trend: float
-     * }> $flaggedContentTrends
+     * @param list<FlaggedContentTrendShape> $flaggedContentTrends
      */
     public function withFlaggedContentTrends(array $flaggedContentTrends): self
     {

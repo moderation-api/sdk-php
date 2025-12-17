@@ -13,13 +13,15 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * Classifier policy.
  *
+ * @phpstan-import-type LabelShape from \ModerationAPI\Content\ContentSubmitResponse\Policy\ClassifierOutput\Label
+ *
  * @phpstan-type ClassifierOutputShape = array{
  *   id: string,
  *   flagged: bool,
  *   probability: float,
- *   type?: 'classifier',
+ *   type: 'classifier',
  *   flaggedFields?: list<string>|null,
- *   labels?: list<Label>|null,
+ *   labels?: list<LabelShape>|null,
  * }
  */
 final class ClassifierOutput implements BaseModel
@@ -80,7 +82,7 @@ final class ClassifierOutput implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $flaggedFields
-     * @param list<Label|array{id: string, flagged: bool, probability: float}> $labels
+     * @param list<LabelShape> $labels
      */
     public static function with(
         string $id,
@@ -142,7 +144,7 @@ final class ClassifierOutput implements BaseModel
     }
 
     /**
-     * @param list<Label|array{id: string, flagged: bool, probability: float}> $labels
+     * @param list<LabelShape> $labels
      */
     public function withLabels(array $labels): self
     {

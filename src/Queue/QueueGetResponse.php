@@ -8,10 +8,11 @@ use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\QueueGetResponse\Queue;
-use ModerationAPI\Queue\QueueGetResponse\Queue\Filter;
 
 /**
- * @phpstan-type QueueGetResponseShape = array{queue: Queue}
+ * @phpstan-import-type QueueShape from \ModerationAPI\Queue\QueueGetResponse\Queue
+ *
+ * @phpstan-type QueueGetResponseShape = array{queue: Queue|QueueShape}
  */
 final class QueueGetResponse implements BaseModel
 {
@@ -45,15 +46,7 @@ final class QueueGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Queue|array{
-     *   id: string,
-     *   description: string,
-     *   filter: Filter,
-     *   name: string,
-     *   resolvedItemsCount: float,
-     *   totalItemsCount: float,
-     *   unresolvedItemsCount: float,
-     * } $queue
+     * @param QueueShape $queue
      */
     public static function with(Queue|array $queue): self
     {
@@ -65,15 +58,7 @@ final class QueueGetResponse implements BaseModel
     }
 
     /**
-     * @param Queue|array{
-     *   id: string,
-     *   description: string,
-     *   filter: Filter,
-     *   name: string,
-     *   resolvedItemsCount: float,
-     *   totalItemsCount: float,
-     *   unresolvedItemsCount: float,
-     * } $queue
+     * @param QueueShape $queue
      */
     public function withQueue(Queue|array $queue): self
     {

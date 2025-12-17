@@ -9,7 +9,7 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type IllicitShape = array{id?: 'illicit', flag: bool}
+ * @phpstan-type IllicitShape = array{id: 'illicit', flag: bool}
  */
 final class Illicit implements BaseModel
 {

@@ -33,7 +33,7 @@ interface WordlistRawContract
      * @api
      *
      * @param string $id ID of the wordlist to update
-     * @param array<mixed>|WordlistUpdateParams $params
+     * @param array<string,mixed>|WordlistUpdateParams $params
      *
      * @return BaseResponse<WordlistUpdateResponse>
      *

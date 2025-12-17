@@ -15,11 +15,14 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * The author of the content if your account has authors enabled. Requires you to send authorId when submitting content.
  *
+ * @phpstan-import-type BlockShape from \ModerationAPI\Content\ContentSubmitResponse\Author\Block
+ * @phpstan-import-type TrustLevelShape from \ModerationAPI\Content\ContentSubmitResponse\Author\TrustLevel
+ *
  * @phpstan-type AuthorShape = array{
  *   id: string,
- *   block: Block|null,
- *   status: value-of<Status>,
- *   trustLevel: TrustLevel,
+ *   block: null|Block|BlockShape,
+ *   status: Status|value-of<Status>,
+ *   trustLevel: TrustLevel|TrustLevelShape,
  *   externalID?: string|null,
  * }
  */
@@ -81,9 +84,9 @@ final class Author implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Block|array{reason?: string|null, until?: float|null}|null $block
+     * @param BlockShape|null $block
      * @param Status|value-of<Status> $status
-     * @param TrustLevel|array{level: float, manual: bool} $trustLevel
+     * @param TrustLevelShape $trustLevel
      */
     public static function with(
         string $id,
@@ -118,7 +121,7 @@ final class Author implements BaseModel
     /**
      * Block or suspension details, if applicable. Null if the author is enabled.
      *
-     * @param Block|array{reason?: string|null, until?: float|null}|null $block
+     * @param BlockShape|null $block
      */
     public function withBlock(Block|array|null $block): self
     {
@@ -142,7 +145,7 @@ final class Author implements BaseModel
     }
 
     /**
-     * @param TrustLevel|array{level: float, manual: bool} $trustLevel
+     * @param TrustLevelShape $trustLevel
      */
     public function withTrustLevel(TrustLevel|array $trustLevel): self
     {

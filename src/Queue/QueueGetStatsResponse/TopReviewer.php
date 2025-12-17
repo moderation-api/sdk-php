@@ -11,11 +11,13 @@ use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\QueueGetStatsResponse\TopReviewer\TopAction;
 
 /**
+ * @phpstan-import-type TopActionShape from \ModerationAPI\Queue\QueueGetStatsResponse\TopReviewer\TopAction
+ *
  * @phpstan-type TopReviewerShape = array{
  *   averageTimePerReview: float,
  *   name: string,
  *   reviewCount: float,
- *   topActions: list<TopAction>,
+ *   topActions: list<TopActionShape>,
  *   userID: string,
  *   accuracyScore?: float|null,
  * }
@@ -98,9 +100,7 @@ final class TopReviewer implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TopAction|array{
-     *   actionID: string, actionName: string, count: float
-     * }> $topActions
+     * @param list<TopActionShape> $topActions
      */
     public static function with(
         float $averageTimePerReview,
@@ -159,9 +159,7 @@ final class TopReviewer implements BaseModel
     /**
      * Most common actions taken by this reviewer.
      *
-     * @param list<TopAction|array{
-     *   actionID: string, actionName: string, count: float
-     * }> $topActions
+     * @param list<TopActionShape> $topActions
      */
     public function withTopActions(array $topActions): self
     {

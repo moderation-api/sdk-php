@@ -20,7 +20,7 @@ interface ItemsRawContract
      * @api
      *
      * @param string $id The queue ID
-     * @param array<mixed>|ItemListParams $params
+     * @param array<string,mixed>|ItemListParams $params
      *
      * @return BaseResponse<ItemListResponse>
      *
@@ -36,7 +36,7 @@ interface ItemsRawContract
      * @api
      *
      * @param string $itemID Path param: The item ID to resolve
-     * @param array<mixed>|ItemResolveParams $params
+     * @param array<string,mixed>|ItemResolveParams $params
      *
      * @return BaseResponse<ItemResolveResponse>
      *
@@ -52,7 +52,7 @@ interface ItemsRawContract
      * @api
      *
      * @param string $itemID Path param: The item ID to unresolve
-     * @param array<mixed>|ItemUnresolveParams $params
+     * @param array<string,mixed>|ItemUnresolveParams $params
      *
      * @return BaseResponse<ItemUnresolveResponse>
      *

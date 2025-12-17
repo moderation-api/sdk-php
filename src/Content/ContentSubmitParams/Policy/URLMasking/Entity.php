@@ -12,7 +12,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type EntityShape = array{
- *   id: value-of<ID>,
+ *   id: ID|value-of<ID>,
  *   enable: bool,
  *   flag: bool,
  *   shouldMask: bool,

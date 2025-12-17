@@ -15,11 +15,11 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @see ModerationAPI\Services\WordlistService::update()
  *
  * @phpstan-type WordlistUpdateParamsShape = array{
- *   description?: string,
- *   key?: string,
- *   name?: string,
- *   strict?: bool,
- *   words?: list<string>,
+ *   description?: string|null,
+ *   key?: string|null,
+ *   name?: string|null,
+ *   strict?: bool|null,
+ *   words?: list<string>|null,
  * }
  */
 final class WordlistUpdateParams implements BaseModel

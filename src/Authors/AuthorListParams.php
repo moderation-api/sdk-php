@@ -17,13 +17,13 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @see ModerationAPI\Services\AuthorsService::list()
  *
  * @phpstan-type AuthorListParamsShape = array{
- *   contentTypes?: string,
- *   lastActiveDate?: string,
- *   memberSinceDate?: string,
- *   pageNumber?: float,
- *   pageSize?: float,
- *   sortBy?: SortBy|value-of<SortBy>,
- *   sortDirection?: SortDirection|value-of<SortDirection>,
+ *   contentTypes?: string|null,
+ *   lastActiveDate?: string|null,
+ *   memberSinceDate?: string|null,
+ *   pageNumber?: float|null,
+ *   pageSize?: float|null,
+ *   sortBy?: null|SortBy|value-of<SortBy>,
+ *   sortDirection?: null|SortDirection|value-of<SortDirection>,
  * }
  */
 final class AuthorListParams implements BaseModel

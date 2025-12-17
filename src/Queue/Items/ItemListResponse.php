@@ -8,14 +8,14 @@ use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\Items\ItemListResponse\Item;
-use ModerationAPI\Queue\Items\ItemListResponse\Item\Action;
-use ModerationAPI\Queue\Items\ItemListResponse\Item\Label;
-use ModerationAPI\Queue\Items\ItemListResponse\Item\Status;
 use ModerationAPI\Queue\Items\ItemListResponse\Pagination;
 
 /**
+ * @phpstan-import-type ItemShape from \ModerationAPI\Queue\Items\ItemListResponse\Item
+ * @phpstan-import-type PaginationShape from \ModerationAPI\Queue\Items\ItemListResponse\Pagination
+ *
  * @phpstan-type ItemListResponseShape = array{
- *   items: list<Item>, pagination: Pagination
+ *   items: list<ItemShape>, pagination: Pagination|PaginationShape
  * }
  */
 final class ItemListResponse implements BaseModel
@@ -54,26 +54,8 @@ final class ItemListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Item|array{
-     *   id: string,
-     *   content: string,
-     *   flagged: bool,
-     *   labels: list<Label>,
-     *   status: value-of<Status>,
-     *   timestamp: float,
-     *   actions?: list<Action>|null,
-     *   authorID?: string|null,
-     *   contentType?: string|null,
-     *   conversationID?: string|null,
-     *   language?: string|null,
-     * }> $items
-     * @param Pagination|array{
-     *   currentPage: float,
-     *   hasNextPage: bool,
-     *   hasPreviousPage: bool,
-     *   totalItems: float,
-     *   totalPages: float,
-     * } $pagination
+     * @param list<ItemShape> $items
+     * @param PaginationShape $pagination
      */
     public static function with(
         array $items,
@@ -88,19 +70,7 @@ final class ItemListResponse implements BaseModel
     }
 
     /**
-     * @param list<Item|array{
-     *   id: string,
-     *   content: string,
-     *   flagged: bool,
-     *   labels: list<Label>,
-     *   status: value-of<Status>,
-     *   timestamp: float,
-     *   actions?: list<Action>|null,
-     *   authorID?: string|null,
-     *   contentType?: string|null,
-     *   conversationID?: string|null,
-     *   language?: string|null,
-     * }> $items
+     * @param list<ItemShape> $items
      */
     public function withItems(array $items): self
     {
@@ -111,13 +81,7 @@ final class ItemListResponse implements BaseModel
     }
 
     /**
-     * @param Pagination|array{
-     *   currentPage: float,
-     *   hasNextPage: bool,
-     *   hasPreviousPage: bool,
-     *   totalItems: float,
-     *   totalPages: float,
-     * } $pagination
+     * @param PaginationShape $pagination
      */
     public function withPagination(Pagination|array $pagination): self
     {

@@ -9,10 +9,11 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Core\Conversion\ListOf;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\FilterLabel;
-use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\FilterLabel\Type;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\RecommendationAction;
 
 /**
+ * @phpstan-import-type FilterLabelShape from \ModerationAPI\Queue\QueueGetResponse\Queue\Filter\FilterLabel
+ *
  * @phpstan-type FilterShape = array{
  *   afterDate?: string|null,
  *   authorID?: string|null,
@@ -20,9 +21,9 @@ use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\RecommendationAction;
  *   conversationIDs?: list<string|null>|null,
  *   filteredActionIDs?: list<string>|null,
  *   filteredChannelIDs?: list<string>|null,
- *   filterLabels?: list<FilterLabel>|null,
+ *   filterLabels?: list<FilterLabelShape>|null,
  *   labels?: list<string>|null,
- *   recommendationActions?: list<value-of<RecommendationAction>>|null,
+ *   recommendationActions?: list<RecommendationAction|value-of<RecommendationAction>>|null,
  *   showChecked?: bool|null,
  * }
  */
@@ -80,12 +81,7 @@ final class Filter implements BaseModel
      * @param list<string|null> $conversationIDs
      * @param list<string> $filteredActionIDs
      * @param list<string> $filteredChannelIDs
-     * @param list<FilterLabel|array{
-     *   label: string,
-     *   type: value-of<Type>,
-     *   maxThreshold?: float|null,
-     *   minThreshold?: float|null,
-     * }> $filterLabels
+     * @param list<FilterLabelShape> $filterLabels
      * @param list<string> $labels
      * @param list<RecommendationAction|value-of<RecommendationAction>> $recommendationActions
      */
@@ -175,12 +171,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param list<FilterLabel|array{
-     *   label: string,
-     *   type: value-of<Type>,
-     *   maxThreshold?: float|null,
-     *   minThreshold?: float|null,
-     * }> $filterLabels
+     * @param list<FilterLabelShape> $filterLabels
      */
     public function withFilterLabels(array $filterLabels): self
     {

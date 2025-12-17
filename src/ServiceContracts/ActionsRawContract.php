@@ -21,7 +21,7 @@ interface ActionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ActionCreateParams $params
+     * @param array<string,mixed>|ActionCreateParams $params
      *
      * @return BaseResponse<ActionNewResponse>
      *
@@ -50,7 +50,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id the ID of the action to update
-     * @param array<mixed>|ActionUpdateParams $params
+     * @param array<string,mixed>|ActionUpdateParams $params
      *
      * @return BaseResponse<ActionUpdateResponse>
      *
@@ -65,7 +65,7 @@ interface ActionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ActionListParams $params
+     * @param array<string,mixed>|ActionListParams $params
      *
      * @return BaseResponse<list<ActionListResponseItem>>
      *

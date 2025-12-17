@@ -16,16 +16,22 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type BlockShape from \ModerationAPI\Authors\AuthorListResponse\Author\Block
+ * @phpstan-import-type MetadataShape from \ModerationAPI\Authors\AuthorListResponse\Author\Metadata
+ * @phpstan-import-type MetricsShape from \ModerationAPI\Authors\AuthorListResponse\Author\Metrics
+ * @phpstan-import-type RiskEvaluationShape from \ModerationAPI\Authors\AuthorListResponse\Author\RiskEvaluation
+ * @phpstan-import-type TrustLevelShape from \ModerationAPI\Authors\AuthorListResponse\Author\TrustLevel
+ *
  * @phpstan-type AuthorShape = array{
  *   id: string,
- *   block: Block|null,
+ *   block: null|Block|BlockShape,
  *   firstSeen: float,
  *   lastSeen: float,
- *   metadata: Metadata,
- *   metrics: Metrics,
- *   riskEvaluation: RiskEvaluation|null,
- *   status: value-of<Status>,
- *   trustLevel: TrustLevel,
+ *   metadata: Metadata|MetadataShape,
+ *   metrics: Metrics|MetricsShape,
+ *   riskEvaluation: null|RiskEvaluation|RiskEvaluationShape,
+ *   status: Status|value-of<Status>,
+ *   trustLevel: TrustLevel|TrustLevelShape,
  *   email?: string|null,
  *   externalID?: string|null,
  *   externalLink?: string|null,
@@ -168,19 +174,12 @@ final class Author implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Block|array{reason?: string|null, until?: float|null}|null $block
-     * @param Metadata|array{
-     *   emailVerified?: bool|null,
-     *   identityVerified?: bool|null,
-     *   isPayingCustomer?: bool|null,
-     *   phoneVerified?: bool|null,
-     * } $metadata
-     * @param Metrics|array{
-     *   flaggedContent: float, totalContent: float, averageSentiment?: float|null
-     * } $metrics
-     * @param RiskEvaluation|array{riskLevel?: float|null}|null $riskEvaluation
+     * @param BlockShape|null $block
+     * @param MetadataShape $metadata
+     * @param MetricsShape $metrics
+     * @param RiskEvaluationShape|null $riskEvaluation
      * @param Status|value-of<Status> $status
-     * @param TrustLevel|array{level: float, manual: bool} $trustLevel
+     * @param TrustLevelShape $trustLevel
      */
     public static function with(
         string $id,
@@ -235,7 +234,7 @@ final class Author implements BaseModel
     /**
      * Block or suspension details, if applicable. Null if the author is enabled.
      *
-     * @param Block|array{reason?: string|null, until?: float|null}|null $block
+     * @param BlockShape|null $block
      */
     public function withBlock(Block|array|null $block): self
     {
@@ -270,12 +269,7 @@ final class Author implements BaseModel
     /**
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
      *
-     * @param Metadata|array{
-     *   emailVerified?: bool|null,
-     *   identityVerified?: bool|null,
-     *   isPayingCustomer?: bool|null,
-     *   phoneVerified?: bool|null,
-     * } $metadata
+     * @param MetadataShape $metadata
      */
     public function withMetadata(Metadata|array $metadata): self
     {
@@ -286,9 +280,7 @@ final class Author implements BaseModel
     }
 
     /**
-     * @param Metrics|array{
-     *   flaggedContent: float, totalContent: float, averageSentiment?: float|null
-     * } $metrics
+     * @param MetricsShape $metrics
      */
     public function withMetrics(Metrics|array $metrics): self
     {
@@ -301,7 +293,7 @@ final class Author implements BaseModel
     /**
      * Risk assessment details, if available.
      *
-     * @param RiskEvaluation|array{riskLevel?: float|null}|null $riskEvaluation
+     * @param RiskEvaluationShape|null $riskEvaluation
      */
     public function withRiskEvaluation(
         RiskEvaluation|array|null $riskEvaluation
@@ -326,7 +318,7 @@ final class Author implements BaseModel
     }
 
     /**
-     * @param TrustLevel|array{level: float, manual: bool} $trustLevel
+     * @param TrustLevelShape $trustLevel
      */
     public function withTrustLevel(TrustLevel|array $trustLevel): self
     {

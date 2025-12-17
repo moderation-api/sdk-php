@@ -12,6 +12,11 @@ use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * Sentiment insight.
+ *
+ * @phpstan-import-type SentimentInsightShape from \ModerationAPI\Content\ContentSubmitResponse\Insight\SentimentInsight
+ * @phpstan-import-type LanguageInsightShape from \ModerationAPI\Content\ContentSubmitResponse\Insight\LanguageInsight
+ *
+ * @phpstan-type InsightShape = SentimentInsightShape|LanguageInsightShape
  */
 final class Insight implements ConverterSource
 {

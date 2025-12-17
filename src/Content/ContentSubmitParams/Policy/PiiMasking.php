@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
 use ModerationAPI\Content\ContentSubmitParams\Policy\PiiMasking\Entity;
-use ModerationAPI\Content\ContentSubmitParams\Policy\PiiMasking\Entity\ID;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type EntityShape from \ModerationAPI\Content\ContentSubmitParams\Policy\PiiMasking\Entity
+ *
  * @phpstan-type PiiMaskingShape = array{
- *   id?: 'pii', entities: array<string,Entity>
+ *   id: 'pii', entities: array<string,EntityShape>
  * }
  */
 final class PiiMasking implements BaseModel
@@ -52,13 +53,7 @@ final class PiiMasking implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,Entity|array{
-     *   id: value-of<ID>,
-     *   enable: bool,
-     *   flag: bool,
-     *   shouldMask: bool,
-     *   mask?: string|null,
-     * }> $entities
+     * @param array<string,EntityShape> $entities
      */
     public static function with(array $entities): self
     {
@@ -70,13 +65,7 @@ final class PiiMasking implements BaseModel
     }
 
     /**
-     * @param array<string,Entity|array{
-     *   id: value-of<ID>,
-     *   enable: bool,
-     *   flag: bool,
-     *   shouldMask: bool,
-     *   mask?: string|null,
-     * }> $entities
+     * @param array<string,EntityShape> $entities
      */
     public function withEntities(array $entities): self
     {
