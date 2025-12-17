@@ -14,7 +14,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @see ModerationAPI\Services\QueueService::getStats()
  *
- * @phpstan-type QueueGetStatsParamsShape = array{withinDays?: string}
+ * @phpstan-type QueueGetStatsParamsShape = array{withinDays?: string|null}
  */
 final class QueueGetStatsParams implements BaseModel
 {

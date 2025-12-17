@@ -14,7 +14,8 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * The recommendation for the content based on the evaluation.
  *
  * @phpstan-type RecommendationShape = array{
- *   action: value-of<Action>, reasonCodes: list<value-of<ReasonCode>>
+ *   action: Action|value-of<Action>,
+ *   reasonCodes: list<ReasonCode|value-of<ReasonCode>>,
  * }
  */
 final class Recommendation implements BaseModel

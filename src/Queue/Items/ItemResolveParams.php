@@ -15,7 +15,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @see ModerationAPI\Services\Queue\ItemsService::resolve()
  *
- * @phpstan-type ItemResolveParamsShape = array{id: string, comment?: string}
+ * @phpstan-type ItemResolveParamsShape = array{id: string, comment?: string|null}
  */
 final class ItemResolveParams implements BaseModel
 {

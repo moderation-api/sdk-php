@@ -16,10 +16,10 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * Potentially modified content.
  *
+ * @phpstan-import-type ModifiedShape from \ModerationAPI\Content\ContentSubmitResponse\Content\Modified
+ *
  * @phpstan-type ContentShape = array{
- *   id: string,
- *   masked: bool,
- *   modified: string|null|array<string,mixed>|array<string,Text|Image|Video|Audio>,
+ *   id: string, masked: bool, modified: ModifiedShape|null
  * }
  */
 final class Content implements BaseModel
@@ -71,11 +71,7 @@ final class Content implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|array<string,mixed>|array<string,Text|array{
-     *   text: string, type?: 'text'
-     * }|Image|array{type?: 'image', url: string}|Video|array{
-     *   type?: 'video', url: string
-     * }|Audio|array{type?: 'audio', url: string}>|null $modified
+     * @param ModifiedShape|null $modified
      */
     public static function with(
         string $id,
@@ -116,11 +112,7 @@ final class Content implements BaseModel
     /**
      * The modified content, if any.
      *
-     * @param string|array<string,mixed>|array<string,Text|array{
-     *   text: string, type?: 'text'
-     * }|Image|array{type?: 'image', url: string}|Video|array{
-     *   type?: 'video', url: string
-     * }|Audio|array{type?: 'audio', url: string}>|null $modified
+     * @param ModifiedShape|null $modified
      */
     public function withModified(string|array|null $modified): self
     {

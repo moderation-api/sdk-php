@@ -17,17 +17,17 @@ use ModerationAPI\Queue\Items\ItemListParams\SortField;
  * @see ModerationAPI\Services\Queue\ItemsService::list()
  *
  * @phpstan-type ItemListParamsShape = array{
- *   afterDate?: string,
- *   authorID?: string,
- *   beforeDate?: string,
- *   conversationIDs?: string,
- *   filteredActionIDs?: string,
- *   includeResolved?: string,
- *   labels?: string,
- *   pageNumber?: float,
- *   pageSize?: float,
- *   sortDirection?: SortDirection|value-of<SortDirection>,
- *   sortField?: SortField|value-of<SortField>,
+ *   afterDate?: string|null,
+ *   authorID?: string|null,
+ *   beforeDate?: string|null,
+ *   conversationIDs?: string|null,
+ *   filteredActionIDs?: string|null,
+ *   includeResolved?: string|null,
+ *   labels?: string|null,
+ *   pageNumber?: float|null,
+ *   pageSize?: float|null,
+ *   sortDirection?: null|SortDirection|value-of<SortDirection>,
+ *   sortField?: null|SortField|value-of<SortField>,
  * }
  */
 final class ItemListParams implements BaseModel

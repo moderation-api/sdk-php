@@ -13,12 +13,14 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * Entity matcher policy.
  *
+ * @phpstan-import-type MatchShape from \ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput\Match_
+ *
  * @phpstan-type EntityMatcherOutputShape = array{
  *   id: string,
  *   flagged: bool,
- *   matches: list<Match_>,
+ *   matches: list<MatchShape>,
  *   probability: float,
- *   type?: 'entity_matcher',
+ *   type: 'entity_matcher',
  *   flaggedFields?: list<string>|null,
  * }
  */
@@ -76,9 +78,7 @@ final class EntityMatcherOutput implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Match_|array{
-     *   match: string, probability: float, span: list<int>
-     * }> $matches
+     * @param list<MatchShape> $matches
      * @param list<string> $flaggedFields
      */
     public static function with(
@@ -117,9 +117,7 @@ final class EntityMatcherOutput implements BaseModel
     }
 
     /**
-     * @param list<Match_|array{
-     *   match: string, probability: float, span: list<int>
-     * }> $matches
+     * @param list<MatchShape> $matches
      */
     public function withMatches(array $matches): self
     {

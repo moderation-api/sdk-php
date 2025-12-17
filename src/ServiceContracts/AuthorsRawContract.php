@@ -21,7 +21,7 @@ interface AuthorsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AuthorCreateParams $params
+     * @param array<string,mixed>|AuthorCreateParams $params
      *
      * @return BaseResponse<AuthorNewResponse>
      *
@@ -50,7 +50,7 @@ interface AuthorsRawContract
      * @api
      *
      * @param string $id either external ID or the ID assigned by moderation API
-     * @param array<mixed>|AuthorUpdateParams $params
+     * @param array<string,mixed>|AuthorUpdateParams $params
      *
      * @return BaseResponse<AuthorUpdateResponse>
      *
@@ -65,7 +65,7 @@ interface AuthorsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AuthorListParams $params
+     * @param array<string,mixed>|AuthorListParams $params
      *
      * @return BaseResponse<AuthorListResponse>
      *

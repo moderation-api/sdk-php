@@ -13,14 +13,17 @@ use ModerationAPI\Queue\Items\ItemListResponse\Item\Label;
 use ModerationAPI\Queue\Items\ItemListResponse\Item\Status;
 
 /**
+ * @phpstan-import-type LabelShape from \ModerationAPI\Queue\Items\ItemListResponse\Item\Label
+ * @phpstan-import-type ActionShape from \ModerationAPI\Queue\Items\ItemListResponse\Item\Action
+ *
  * @phpstan-type ItemShape = array{
  *   id: string,
  *   content: string,
  *   flagged: bool,
- *   labels: list<Label>,
- *   status: value-of<Status>,
+ *   labels: list<LabelShape>,
+ *   status: Status|value-of<Status>,
  *   timestamp: float,
- *   actions?: list<Action>|null,
+ *   actions?: list<ActionShape>|null,
  *   authorID?: string|null,
  *   contentType?: string|null,
  *   conversationID?: string|null,
@@ -132,15 +135,9 @@ final class Item implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Label|array{flagged: bool, label: string, score: float}> $labels
+     * @param list<LabelShape> $labels
      * @param Status|value-of<Status> $status
-     * @param list<Action|array{
-     *   id: string,
-     *   name: string,
-     *   timestamp: float,
-     *   comment?: string|null,
-     *   reviewer?: string|null,
-     * }> $actions
+     * @param list<ActionShape> $actions
      */
     public static function with(
         string $id,
@@ -207,7 +204,7 @@ final class Item implements BaseModel
     }
 
     /**
-     * @param list<Label|array{flagged: bool, label: string, score: float}> $labels
+     * @param list<LabelShape> $labels
      */
     public function withLabels(array $labels): self
     {
@@ -244,13 +241,7 @@ final class Item implements BaseModel
     /**
      * Action IDs taken on this item.
      *
-     * @param list<Action|array{
-     *   id: string,
-     *   name: string,
-     *   timestamp: float,
-     *   comment?: string|null,
-     *   reviewer?: string|null,
-     * }> $actions
+     * @param list<ActionShape> $actions
      */
     public function withActions(array $actions): self
     {

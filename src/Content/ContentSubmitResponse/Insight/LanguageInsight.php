@@ -12,7 +12,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * Language insight.
  *
  * @phpstan-type LanguageInsightShape = array{
- *   id?: 'language', probability: float, type?: 'insight', value: string|null
+ *   id: 'language', probability: float, type: 'insight', value: string|null
  * }
  */
 final class LanguageInsight implements BaseModel

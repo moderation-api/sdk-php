@@ -19,21 +19,22 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @see ModerationAPI\Services\ActionsService::update()
  *
+ * @phpstan-import-type PossibleValueShape from \ModerationAPI\Actions\ActionUpdateParams\PossibleValue
+ * @phpstan-import-type WebhookShape from \ModerationAPI\Actions\ActionUpdateParams\Webhook
+ *
  * @phpstan-type ActionUpdateParamsShape = array{
  *   builtIn?: bool|null,
  *   description?: string|null,
- *   filterInQueueIDs?: list<string>,
- *   freeText?: bool,
+ *   filterInQueueIDs?: list<string>|null,
+ *   freeText?: bool|null,
  *   key?: string|null,
- *   name?: string,
- *   position?: Position|value-of<Position>,
- *   possibleValues?: list<PossibleValue|array{value: string}>,
- *   queueBehaviour?: QueueBehaviour|value-of<QueueBehaviour>,
+ *   name?: string|null,
+ *   position?: null|Position|value-of<Position>,
+ *   possibleValues?: list<PossibleValueShape>|null,
+ *   queueBehaviour?: null|QueueBehaviour|value-of<QueueBehaviour>,
  *   type?: null|Type|value-of<Type>,
- *   valueRequired?: bool,
- *   webhooks?: list<Webhook|array{
- *     name: string, url: string, id?: string|null, description?: string|null
- *   }>,
+ *   valueRequired?: bool|null,
+ *   webhooks?: list<WebhookShape>|null,
  * }
  */
 final class ActionUpdateParams implements BaseModel
@@ -138,12 +139,10 @@ final class ActionUpdateParams implements BaseModel
      *
      * @param list<string> $filterInQueueIDs
      * @param Position|value-of<Position> $position
-     * @param list<PossibleValue|array{value: string}> $possibleValues
+     * @param list<PossibleValueShape> $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour
      * @param Type|value-of<Type>|null $type
-     * @param list<Webhook|array{
-     *   name: string, url: string, id?: string|null, description?: string|null
-     * }> $webhooks
+     * @param list<WebhookShape> $webhooks
      */
     public static function with(
         ?bool $builtIn = null,
@@ -261,7 +260,7 @@ final class ActionUpdateParams implements BaseModel
     /**
      * The possible values of the action. The user will be prompted to select one of these values when executing the action.
      *
-     * @param list<PossibleValue|array{value: string}> $possibleValues
+     * @param list<PossibleValueShape> $possibleValues
      */
     public function withPossibleValues(array $possibleValues): self
     {
@@ -312,9 +311,7 @@ final class ActionUpdateParams implements BaseModel
     /**
      * The action's webhooks.
      *
-     * @param list<Webhook|array{
-     *   name: string, url: string, id?: string|null, description?: string|null
-     * }> $webhooks
+     * @param list<WebhookShape> $webhooks
      */
     public function withWebhooks(array $webhooks): self
     {

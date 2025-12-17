@@ -15,18 +15,15 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @see ModerationAPI\Services\AuthorsService::update()
  *
+ * @phpstan-import-type MetadataShape from \ModerationAPI\Authors\AuthorUpdateParams\Metadata
+ *
  * @phpstan-type AuthorUpdateParamsShape = array{
  *   email?: string|null,
  *   externalLink?: string|null,
- *   firstSeen?: float,
- *   lastSeen?: float,
+ *   firstSeen?: float|null,
+ *   lastSeen?: float|null,
  *   manualTrustLevel?: float|null,
- *   metadata?: Metadata|array{
- *     emailVerified?: bool|null,
- *     identityVerified?: bool|null,
- *     isPayingCustomer?: bool|null,
- *     phoneVerified?: bool|null,
- *   },
+ *   metadata?: MetadataShape|null,
  *   name?: string|null,
  *   profilePicture?: string|null,
  * }
@@ -92,12 +89,7 @@ final class AuthorUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Metadata|array{
-     *   emailVerified?: bool|null,
-     *   identityVerified?: bool|null,
-     *   isPayingCustomer?: bool|null,
-     *   phoneVerified?: bool|null,
-     * } $metadata
+     * @param MetadataShape $metadata
      */
     public static function with(
         ?string $email = null,
@@ -178,12 +170,7 @@ final class AuthorUpdateParams implements BaseModel
     /**
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
      *
-     * @param Metadata|array{
-     *   emailVerified?: bool|null,
-     *   identityVerified?: bool|null,
-     *   isPayingCustomer?: bool|null,
-     *   phoneVerified?: bool|null,
-     * } $metadata
+     * @param MetadataShape $metadata
      */
     public function withMetadata(Metadata|array $metadata): self
     {

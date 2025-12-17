@@ -9,7 +9,7 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type SexualShape = array{id?: 'sexual', flag: bool}
+ * @phpstan-type SexualShape = array{id: 'sexual', flag: bool}
  */
 final class Sexual implements BaseModel
 {

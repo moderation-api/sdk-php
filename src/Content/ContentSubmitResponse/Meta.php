@@ -15,7 +15,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @phpstan-type MetaShape = array{
  *   channelKey: string,
- *   status: value-of<Status>,
+ *   status: Status|value-of<Status>,
  *   timestamp: float,
  *   usage: float,
  *   processingTime?: string|null,

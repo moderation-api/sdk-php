@@ -15,7 +15,9 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @see ModerationAPI\Services\Queue\ItemsService::unresolve()
  *
- * @phpstan-type ItemUnresolveParamsShape = array{id: string, comment?: string}
+ * @phpstan-type ItemUnresolveParamsShape = array{
+ *   id: string, comment?: string|null
+ * }
  */
 final class ItemUnresolveParams implements BaseModel
 {

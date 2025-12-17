@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
 use ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity;
-use ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity\ID;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type EntityShape from \ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity
+ *
  * @phpstan-type URLMaskingShape = array{
- *   id?: 'url', entities: array<string,Entity>
+ *   id: 'url', entities: array<string,EntityShape>
  * }
  */
 final class URLMasking implements BaseModel
@@ -52,13 +53,7 @@ final class URLMasking implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,Entity|array{
-     *   id: value-of<ID>,
-     *   enable: bool,
-     *   flag: bool,
-     *   shouldMask: bool,
-     *   mask?: string|null,
-     * }> $entities
+     * @param array<string,EntityShape> $entities
      */
     public static function with(array $entities): self
     {
@@ -70,13 +65,7 @@ final class URLMasking implements BaseModel
     }
 
     /**
-     * @param array<string,Entity|array{
-     *   id: value-of<ID>,
-     *   enable: bool,
-     *   flag: bool,
-     *   shouldMask: bool,
-     *   mask?: string|null,
-     * }> $entities
+     * @param array<string,EntityShape> $entities
      */
     public function withEntities(array $entities): self
     {

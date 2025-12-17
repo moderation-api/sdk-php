@@ -15,6 +15,14 @@ use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * The content sent for moderation.
+ *
+ * @phpstan-import-type TextShape from \ModerationAPI\Content\ContentSubmitParams\Content\Text
+ * @phpstan-import-type ImageShape from \ModerationAPI\Content\ContentSubmitParams\Content\Image
+ * @phpstan-import-type VideoShape from \ModerationAPI\Content\ContentSubmitParams\Content\Video
+ * @phpstan-import-type AudioShape from \ModerationAPI\Content\ContentSubmitParams\Content\Audio
+ * @phpstan-import-type ObjectShape from \ModerationAPI\Content\ContentSubmitParams\Content\Object_
+ *
+ * @phpstan-type ContentShape = TextShape|ImageShape|VideoShape|AudioShape|ObjectShape
  */
 final class Content implements ConverterSource
 {

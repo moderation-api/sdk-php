@@ -16,10 +16,9 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * Object.
  *
- * @phpstan-type ObjectShape = array{
- *   data: array<string,\ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Text|\ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Image|\ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Video|\ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Audio>,
- *   type?: 'object',
- * }
+ * @phpstan-import-type DataShape from \ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data
+ *
+ * @phpstan-type ObjectShape = array{data: array<string,DataShape>, type: 'object'}
  */
 final class Object_ implements BaseModel
 {
@@ -62,15 +61,7 @@ final class Object_ implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,Text|array{
-     *   text: string, type?: 'text'
-     * }|Image|array{
-     *   type?: 'image', url: string
-     * }|Video|array{
-     *   type?: 'video', url: string
-     * }|Audio|array{
-     *   type?: 'audio', url: string
-     * }> $data
+     * @param array<string,DataShape> $data
      */
     public static function with(array $data): self
     {
@@ -84,15 +75,7 @@ final class Object_ implements BaseModel
     /**
      * Values in the object. Can be mixed content types.
      *
-     * @param array<string,Text|array{
-     *   text: string, type?: 'text'
-     * }|Image|array{
-     *   type?: 'image', url: string
-     * }|Video|array{
-     *   type?: 'video', url: string
-     * }|Audio|array{
-     *   type?: 'audio', url: string
-     * }> $data
+     * @param array<string,DataShape> $data
      */
     public function withData(array $data): self
     {

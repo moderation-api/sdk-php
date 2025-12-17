@@ -17,11 +17,11 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @phpstan-type ExecuteExecuteParamsShape = array{
  *   actionKey: string,
- *   authorIDs?: list<string>,
- *   contentIDs?: list<string>,
- *   duration?: float,
- *   queueID?: string,
- *   value?: string,
+ *   authorIDs?: list<string>|null,
+ *   contentIDs?: list<string>|null,
+ *   duration?: float|null,
+ *   queueID?: string|null,
+ *   value?: string|null,
  * }
  */
 final class ExecuteExecuteParams implements BaseModel

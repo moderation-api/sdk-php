@@ -5,20 +5,17 @@ declare(strict_types=1);
 namespace ModerationAPI\Authors;
 
 use ModerationAPI\Authors\AuthorListResponse\Author;
-use ModerationAPI\Authors\AuthorListResponse\Author\Block;
-use ModerationAPI\Authors\AuthorListResponse\Author\Metadata;
-use ModerationAPI\Authors\AuthorListResponse\Author\Metrics;
-use ModerationAPI\Authors\AuthorListResponse\Author\RiskEvaluation;
-use ModerationAPI\Authors\AuthorListResponse\Author\Status;
-use ModerationAPI\Authors\AuthorListResponse\Author\TrustLevel;
 use ModerationAPI\Authors\AuthorListResponse\Pagination;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AuthorShape from \ModerationAPI\Authors\AuthorListResponse\Author
+ * @phpstan-import-type PaginationShape from \ModerationAPI\Authors\AuthorListResponse\Pagination
+ *
  * @phpstan-type AuthorListResponseShape = array{
- *   authors: list<Author>, pagination: Pagination
+ *   authors: list<AuthorShape>, pagination: Pagination|PaginationShape
  * }
  */
 final class AuthorListResponse implements BaseModel
@@ -57,30 +54,8 @@ final class AuthorListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Author|array{
-     *   id: string,
-     *   block: Block|null,
-     *   firstSeen: float,
-     *   lastSeen: float,
-     *   metadata: Metadata,
-     *   metrics: Metrics,
-     *   riskEvaluation: RiskEvaluation|null,
-     *   status: value-of<Status>,
-     *   trustLevel: TrustLevel,
-     *   email?: string|null,
-     *   externalID?: string|null,
-     *   externalLink?: string|null,
-     *   lastIncident?: float|null,
-     *   name?: string|null,
-     *   profilePicture?: string|null,
-     * }> $authors
-     * @param Pagination|array{
-     *   hasNextPage: bool,
-     *   hasPreviousPage: bool,
-     *   pageNumber: float,
-     *   pageSize: float,
-     *   total: float,
-     * } $pagination
+     * @param list<AuthorShape> $authors
+     * @param PaginationShape $pagination
      */
     public static function with(
         array $authors,
@@ -95,23 +70,7 @@ final class AuthorListResponse implements BaseModel
     }
 
     /**
-     * @param list<Author|array{
-     *   id: string,
-     *   block: Block|null,
-     *   firstSeen: float,
-     *   lastSeen: float,
-     *   metadata: Metadata,
-     *   metrics: Metrics,
-     *   riskEvaluation: RiskEvaluation|null,
-     *   status: value-of<Status>,
-     *   trustLevel: TrustLevel,
-     *   email?: string|null,
-     *   externalID?: string|null,
-     *   externalLink?: string|null,
-     *   lastIncident?: float|null,
-     *   name?: string|null,
-     *   profilePicture?: string|null,
-     * }> $authors
+     * @param list<AuthorShape> $authors
      */
     public function withAuthors(array $authors): self
     {
@@ -122,13 +81,7 @@ final class AuthorListResponse implements BaseModel
     }
 
     /**
-     * @param Pagination|array{
-     *   hasNextPage: bool,
-     *   hasPreviousPage: bool,
-     *   pageNumber: float,
-     *   pageSize: float,
-     *   total: float,
-     * } $pagination
+     * @param PaginationShape $pagination
      */
     public function withPagination(Pagination|array $pagination): self
     {

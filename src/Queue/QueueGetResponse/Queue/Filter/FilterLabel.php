@@ -13,7 +13,7 @@ use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\FilterLabel\Type;
 /**
  * @phpstan-type FilterLabelShape = array{
  *   label: string,
- *   type: value-of<Type>,
+ *   type: Type|value-of<Type>,
  *   maxThreshold?: float|null,
  *   minThreshold?: float|null,
  * }
