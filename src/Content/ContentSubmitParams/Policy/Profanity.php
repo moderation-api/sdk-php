@@ -9,7 +9,7 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ProfanityShape = array{id?: 'profanity', flag: bool}
+ * @phpstan-type ProfanityShape = array{id: 'profanity', flag: bool}
  */
 final class Profanity implements BaseModel
 {

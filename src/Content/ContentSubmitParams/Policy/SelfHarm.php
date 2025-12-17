@@ -9,7 +9,7 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type SelfHarmShape = array{id?: 'self_harm', flag: bool}
+ * @phpstan-type SelfHarmShape = array{id: 'self_harm', flag: bool}
  */
 final class SelfHarm implements BaseModel
 {

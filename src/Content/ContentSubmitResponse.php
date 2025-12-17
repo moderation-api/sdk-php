@@ -5,44 +5,41 @@ declare(strict_types=1);
 namespace ModerationAPI\Content;
 
 use ModerationAPI\Content\ContentSubmitResponse\Author;
-use ModerationAPI\Content\ContentSubmitResponse\Author\Block;
-use ModerationAPI\Content\ContentSubmitResponse\Author\Status;
-use ModerationAPI\Content\ContentSubmitResponse\Author\TrustLevel;
 use ModerationAPI\Content\ContentSubmitResponse\Content;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Audio;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Image;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Text;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Video;
 use ModerationAPI\Content\ContentSubmitResponse\Error;
 use ModerationAPI\Content\ContentSubmitResponse\Evaluation;
 use ModerationAPI\Content\ContentSubmitResponse\Insight;
 use ModerationAPI\Content\ContentSubmitResponse\Insight\LanguageInsight;
 use ModerationAPI\Content\ContentSubmitResponse\Insight\SentimentInsight;
-use ModerationAPI\Content\ContentSubmitResponse\Insight\SentimentInsight\Value;
 use ModerationAPI\Content\ContentSubmitResponse\Meta;
 use ModerationAPI\Content\ContentSubmitResponse\Policy;
 use ModerationAPI\Content\ContentSubmitResponse\Policy\ClassifierOutput;
-use ModerationAPI\Content\ContentSubmitResponse\Policy\ClassifierOutput\Label;
 use ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput;
-use ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput\Match_;
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation;
-use ModerationAPI\Content\ContentSubmitResponse\Recommendation\Action;
-use ModerationAPI\Content\ContentSubmitResponse\Recommendation\ReasonCode;
 use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AuthorShape from \ModerationAPI\Content\ContentSubmitResponse\Author
+ * @phpstan-import-type ContentShape from \ModerationAPI\Content\ContentSubmitResponse\Content
+ * @phpstan-import-type EvaluationShape from \ModerationAPI\Content\ContentSubmitResponse\Evaluation
+ * @phpstan-import-type InsightShape from \ModerationAPI\Content\ContentSubmitResponse\Insight
+ * @phpstan-import-type MetaShape from \ModerationAPI\Content\ContentSubmitResponse\Meta
+ * @phpstan-import-type PolicyShape from \ModerationAPI\Content\ContentSubmitResponse\Policy
+ * @phpstan-import-type RecommendationShape from \ModerationAPI\Content\ContentSubmitResponse\Recommendation
+ * @phpstan-import-type ErrorShape from \ModerationAPI\Content\ContentSubmitResponse\Error
+ *
  * @phpstan-type ContentSubmitResponseShape = array{
- *   author: Author|null,
- *   content: Content,
- *   evaluation: Evaluation,
- *   insights: list<SentimentInsight|LanguageInsight>,
- *   meta: Meta,
- *   policies: list<ClassifierOutput|EntityMatcherOutput>,
- *   recommendation: Recommendation,
- *   errors?: list<Error>|null,
+ *   author: null|Author|AuthorShape,
+ *   content: Content|ContentShape,
+ *   evaluation: Evaluation|EvaluationShape,
+ *   insights: list<InsightShape>,
+ *   meta: Meta|MetaShape,
+ *   policies: list<PolicyShape>,
+ *   recommendation: Recommendation|RecommendationShape,
+ *   errors?: list<ErrorShape>|null,
  * }
  */
 final class ContentSubmitResponse implements BaseModel
@@ -143,58 +140,14 @@ final class ContentSubmitResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Author|array{
-     *   id: string,
-     *   block: Block|null,
-     *   status: value-of<Status>,
-     *   trustLevel: TrustLevel,
-     *   externalID?: string|null,
-     * }|null $author
-     * @param Content|array{
-     *   id: string,
-     *   masked: bool,
-     *   modified: string|array<string,mixed>|array<string,Text|Image|Video|Audio>|null,
-     * } $content
-     * @param Evaluation|array{
-     *   flagProbability: float,
-     *   flagged: bool,
-     *   severityScore: float,
-     *   unicodeSpoofed?: bool|null,
-     * } $evaluation
-     * @param list<SentimentInsight|array{
-     *   id?: 'sentiment',
-     *   probability: float,
-     *   type?: 'insight',
-     *   value: value-of<Value>|null,
-     * }|LanguageInsight|array{
-     *   id?: 'language', probability: float, type?: 'insight', value: string|null
-     * }> $insights
-     * @param Meta|array{
-     *   channelKey: string,
-     *   status: value-of<Meta\Status>,
-     *   timestamp: float,
-     *   usage: float,
-     *   processingTime?: string|null,
-     * } $meta
-     * @param list<ClassifierOutput|array{
-     *   id: string,
-     *   flagged: bool,
-     *   probability: float,
-     *   type?: 'classifier',
-     *   flaggedFields?: list<string>|null,
-     *   labels?: list<Label>|null,
-     * }|EntityMatcherOutput|array{
-     *   id: string,
-     *   flagged: bool,
-     *   matches: list<Match_>,
-     *   probability: float,
-     *   type?: 'entity_matcher',
-     *   flaggedFields?: list<string>|null,
-     * }> $policies
-     * @param Recommendation|array{
-     *   action: value-of<Action>, reasonCodes: list<value-of<ReasonCode>>
-     * } $recommendation
-     * @param list<Error|array{id: string, message: string}> $errors
+     * @param AuthorShape|null $author
+     * @param ContentShape $content
+     * @param EvaluationShape $evaluation
+     * @param list<InsightShape> $insights
+     * @param MetaShape $meta
+     * @param list<PolicyShape> $policies
+     * @param RecommendationShape $recommendation
+     * @param list<ErrorShape> $errors
      */
     public static function with(
         Author|array|null $author,
@@ -224,13 +177,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * The author of the content if your account has authors enabled. Requires you to send authorId when submitting content.
      *
-     * @param Author|array{
-     *   id: string,
-     *   block: Block|null,
-     *   status: value-of<Status>,
-     *   trustLevel: TrustLevel,
-     *   externalID?: string|null,
-     * }|null $author
+     * @param AuthorShape|null $author
      */
     public function withAuthor(Author|array|null $author): self
     {
@@ -243,11 +190,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * Potentially modified content.
      *
-     * @param Content|array{
-     *   id: string,
-     *   masked: bool,
-     *   modified: string|array<string,mixed>|array<string,Text|Image|Video|Audio>|null,
-     * } $content
+     * @param ContentShape $content
      */
     public function withContent(Content|array $content): self
     {
@@ -260,12 +203,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * The evaluation of the content after running the channel policies.
      *
-     * @param Evaluation|array{
-     *   flagProbability: float,
-     *   flagged: bool,
-     *   severityScore: float,
-     *   unicodeSpoofed?: bool|null,
-     * } $evaluation
+     * @param EvaluationShape $evaluation
      */
     public function withEvaluation(Evaluation|array $evaluation): self
     {
@@ -278,14 +216,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * Results of all insights enabled in the channel.
      *
-     * @param list<SentimentInsight|array{
-     *   id?: 'sentiment',
-     *   probability: float,
-     *   type?: 'insight',
-     *   value: value-of<Value>|null,
-     * }|LanguageInsight|array{
-     *   id?: 'language', probability: float, type?: 'insight', value: string|null
-     * }> $insights
+     * @param list<InsightShape> $insights
      */
     public function withInsights(array $insights): self
     {
@@ -298,13 +229,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * Metadata about the moderation request.
      *
-     * @param Meta|array{
-     *   channelKey: string,
-     *   status: value-of<Meta\Status>,
-     *   timestamp: float,
-     *   usage: float,
-     *   processingTime?: string|null,
-     * } $meta
+     * @param MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {
@@ -317,21 +242,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * Results of all policies in the channel. Sorted by highest probability.
      *
-     * @param list<ClassifierOutput|array{
-     *   id: string,
-     *   flagged: bool,
-     *   probability: float,
-     *   type?: 'classifier',
-     *   flaggedFields?: list<string>|null,
-     *   labels?: list<Label>|null,
-     * }|EntityMatcherOutput|array{
-     *   id: string,
-     *   flagged: bool,
-     *   matches: list<Match_>,
-     *   probability: float,
-     *   type?: 'entity_matcher',
-     *   flaggedFields?: list<string>|null,
-     * }> $policies
+     * @param list<PolicyShape> $policies
      */
     public function withPolicies(array $policies): self
     {
@@ -344,9 +255,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * The recommendation for the content based on the evaluation.
      *
-     * @param Recommendation|array{
-     *   action: value-of<Action>, reasonCodes: list<value-of<ReasonCode>>
-     * } $recommendation
+     * @param RecommendationShape $recommendation
      */
     public function withRecommendation(
         Recommendation|array $recommendation
@@ -360,7 +269,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * Policies that had errors.
      *
-     * @param list<Error|array{id: string, message: string}> $errors
+     * @param list<ErrorShape> $errors
      */
     public function withErrors(array $errors): self
     {

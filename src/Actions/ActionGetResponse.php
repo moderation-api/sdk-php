@@ -15,6 +15,9 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type PossibleValueShape from \ModerationAPI\Actions\ActionGetResponse\PossibleValue
+ * @phpstan-import-type WebhookShape from \ModerationAPI\Actions\ActionGetResponse\Webhook
+ *
  * @phpstan-type ActionGetResponseShape = array{
  *   id: string,
  *   builtIn: bool|null,
@@ -22,14 +25,14 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   filterInQueueIDs: list<string>,
  *   freeText: bool,
  *   name: string,
- *   position: value-of<Position>,
- *   possibleValues: list<PossibleValue>,
- *   queueBehaviour: value-of<QueueBehaviour>,
+ *   position: Position|value-of<Position>,
+ *   possibleValues: list<PossibleValueShape>,
+ *   queueBehaviour: QueueBehaviour|value-of<QueueBehaviour>,
  *   valueRequired: bool,
- *   webhooks: list<Webhook>,
+ *   webhooks: list<WebhookShape>,
  *   description?: string|null,
  *   key?: string|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  * }
  */
 final class ActionGetResponse implements BaseModel
@@ -182,15 +185,9 @@ final class ActionGetResponse implements BaseModel
      *
      * @param list<string> $filterInQueueIDs
      * @param Position|value-of<Position> $position
-     * @param list<PossibleValue|array{value: string}> $possibleValues
+     * @param list<PossibleValueShape> $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour
-     * @param list<Webhook|array{
-     *   id: string,
-     *   name: string,
-     *   url: string,
-     *   description?: string|null,
-     *   moderationActionID?: string|null,
-     * }> $webhooks
+     * @param list<WebhookShape> $webhooks
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
@@ -314,7 +311,7 @@ final class ActionGetResponse implements BaseModel
     /**
      * The possible values of the action. The user will be prompted to select one of these values when executing the action.
      *
-     * @param list<PossibleValue|array{value: string}> $possibleValues
+     * @param list<PossibleValueShape> $possibleValues
      */
     public function withPossibleValues(array $possibleValues): self
     {
@@ -352,13 +349,7 @@ final class ActionGetResponse implements BaseModel
     /**
      * The action's webhooks.
      *
-     * @param list<Webhook|array{
-     *   id: string,
-     *   name: string,
-     *   url: string,
-     *   description?: string|null,
-     *   moderationActionID?: string|null,
-     * }> $webhooks
+     * @param list<WebhookShape> $webhooks
      */
     public function withWebhooks(array $webhooks): self
     {

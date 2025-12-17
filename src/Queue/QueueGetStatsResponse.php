@@ -10,17 +10,19 @@ use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\QueueGetStatsResponse\ActionStat;
 use ModerationAPI\Queue\QueueGetStatsResponse\ReviewStats;
 use ModerationAPI\Queue\QueueGetStatsResponse\TopReviewer;
-use ModerationAPI\Queue\QueueGetStatsResponse\TopReviewer\TopAction;
 use ModerationAPI\Queue\QueueGetStatsResponse\Trends;
-use ModerationAPI\Queue\QueueGetStatsResponse\Trends\DailyReviewCount;
-use ModerationAPI\Queue\QueueGetStatsResponse\Trends\FlaggedContentTrend;
 
 /**
+ * @phpstan-import-type ActionStatShape from \ModerationAPI\Queue\QueueGetStatsResponse\ActionStat
+ * @phpstan-import-type ReviewStatsShape from \ModerationAPI\Queue\QueueGetStatsResponse\ReviewStats
+ * @phpstan-import-type TopReviewerShape from \ModerationAPI\Queue\QueueGetStatsResponse\TopReviewer
+ * @phpstan-import-type TrendsShape from \ModerationAPI\Queue\QueueGetStatsResponse\Trends
+ *
  * @phpstan-type QueueGetStatsResponseShape = array{
- *   actionStats: list<ActionStat>,
- *   reviewStats: ReviewStats,
- *   topReviewers: list<TopReviewer>,
- *   trends: Trends,
+ *   actionStats: list<ActionStatShape>,
+ *   reviewStats: ReviewStats|ReviewStatsShape,
+ *   topReviewers: list<TopReviewerShape>,
+ *   trends: Trends|TrendsShape,
  * }
  */
 final class QueueGetStatsResponse implements BaseModel
@@ -76,24 +78,10 @@ final class QueueGetStatsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActionStat|array{
-     *   actionID: string, actionName: string, count: float, percentageOfTotal: float
-     * }> $actionStats
-     * @param ReviewStats|array{
-     *   averageTimeToReview: float, totalPending: float, totalReviewed: float
-     * } $reviewStats
-     * @param list<TopReviewer|array{
-     *   averageTimePerReview: float,
-     *   name: string,
-     *   reviewCount: float,
-     *   topActions: list<TopAction>,
-     *   userID: string,
-     *   accuracyScore?: float|null,
-     * }> $topReviewers
-     * @param Trends|array{
-     *   dailyReviewCounts: list<DailyReviewCount>,
-     *   flaggedContentTrends: list<FlaggedContentTrend>,
-     * } $trends
+     * @param list<ActionStatShape> $actionStats
+     * @param ReviewStatsShape $reviewStats
+     * @param list<TopReviewerShape> $topReviewers
+     * @param TrendsShape $trends
      */
     public static function with(
         array $actionStats,
@@ -112,9 +100,7 @@ final class QueueGetStatsResponse implements BaseModel
     }
 
     /**
-     * @param list<ActionStat|array{
-     *   actionID: string, actionName: string, count: float, percentageOfTotal: float
-     * }> $actionStats
+     * @param list<ActionStatShape> $actionStats
      */
     public function withActionStats(array $actionStats): self
     {
@@ -125,9 +111,7 @@ final class QueueGetStatsResponse implements BaseModel
     }
 
     /**
-     * @param ReviewStats|array{
-     *   averageTimeToReview: float, totalPending: float, totalReviewed: float
-     * } $reviewStats
+     * @param ReviewStatsShape $reviewStats
      */
     public function withReviewStats(ReviewStats|array $reviewStats): self
     {
@@ -140,14 +124,7 @@ final class QueueGetStatsResponse implements BaseModel
     /**
      * List of top reviewers and their statistics.
      *
-     * @param list<TopReviewer|array{
-     *   averageTimePerReview: float,
-     *   name: string,
-     *   reviewCount: float,
-     *   topActions: list<TopAction>,
-     *   userID: string,
-     *   accuracyScore?: float|null,
-     * }> $topReviewers
+     * @param list<TopReviewerShape> $topReviewers
      */
     public function withTopReviewers(array $topReviewers): self
     {
@@ -158,10 +135,7 @@ final class QueueGetStatsResponse implements BaseModel
     }
 
     /**
-     * @param Trends|array{
-     *   dailyReviewCounts: list<DailyReviewCount>,
-     *   flaggedContentTrends: list<FlaggedContentTrend>,
-     * } $trends
+     * @param TrendsShape $trends
      */
     public function withTrends(Trends|array $trends): self
     {

@@ -17,7 +17,7 @@ interface ExecuteRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ExecuteExecuteParams $params
+     * @param array<string,mixed>|ExecuteExecuteParams $params
      *
      * @return BaseResponse<ExecuteExecuteResponse>
      *
@@ -34,7 +34,7 @@ interface ExecuteRawContract
      * @api
      *
      * @param string $actionID the ID or key of the action to execute
-     * @param array<mixed>|ExecuteExecuteByIDParams $params
+     * @param array<string,mixed>|ExecuteExecuteByIDParams $params
      *
      * @return BaseResponse<ExecuteExecuteByIDResponse>
      *

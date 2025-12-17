@@ -16,10 +16,10 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @see ModerationAPI\Services\Actions\ExecuteService::executeByID()
  *
  * @phpstan-type ExecuteExecuteByIDParamsShape = array{
- *   authorIDs?: list<string>,
- *   contentIDs?: list<string>,
- *   queueID?: string,
- *   value?: string,
+ *   authorIDs?: list<string>|null,
+ *   contentIDs?: list<string>|null,
+ *   queueID?: string|null,
+ *   value?: string|null,
  * }
  */
 final class ExecuteExecuteByIDParams implements BaseModel

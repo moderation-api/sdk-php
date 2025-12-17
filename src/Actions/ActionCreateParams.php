@@ -20,21 +20,22 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @see ModerationAPI\Services\ActionsService::create()
  *
+ * @phpstan-import-type PossibleValueShape from \ModerationAPI\Actions\ActionCreateParams\PossibleValue
+ * @phpstan-import-type WebhookShape from \ModerationAPI\Actions\ActionCreateParams\Webhook
+ *
  * @phpstan-type ActionCreateParamsShape = array{
  *   name: string,
  *   builtIn?: bool|null,
  *   description?: string|null,
- *   filterInQueueIDs?: list<string>,
- *   freeText?: bool,
+ *   filterInQueueIDs?: list<string>|null,
+ *   freeText?: bool|null,
  *   key?: string|null,
- *   position?: Position|value-of<Position>,
- *   possibleValues?: list<PossibleValue|array{value: string}>,
- *   queueBehaviour?: QueueBehaviour|value-of<QueueBehaviour>,
+ *   position?: null|Position|value-of<Position>,
+ *   possibleValues?: list<PossibleValueShape>|null,
+ *   queueBehaviour?: null|QueueBehaviour|value-of<QueueBehaviour>,
  *   type?: null|Type|value-of<Type>,
- *   valueRequired?: bool,
- *   webhooks?: list<Webhook|array{
- *     name: string, url: string, id?: string|null, description?: string|null
- *   }>,
+ *   valueRequired?: bool|null,
+ *   webhooks?: list<WebhookShape>|null,
  * }
  */
 final class ActionCreateParams implements BaseModel
@@ -153,12 +154,10 @@ final class ActionCreateParams implements BaseModel
      *
      * @param list<string> $filterInQueueIDs
      * @param Position|value-of<Position> $position
-     * @param list<PossibleValue|array{value: string}> $possibleValues
+     * @param list<PossibleValueShape> $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour
      * @param Type|value-of<Type>|null $type
-     * @param list<Webhook|array{
-     *   name: string, url: string, id?: string|null, description?: string|null
-     * }> $webhooks
+     * @param list<WebhookShape> $webhooks
      */
     public static function with(
         string $name,
@@ -277,7 +276,7 @@ final class ActionCreateParams implements BaseModel
     /**
      * The possible values of the action. The user will be prompted to select one of these values when executing the action.
      *
-     * @param list<PossibleValue|array{value: string}> $possibleValues
+     * @param list<PossibleValueShape> $possibleValues
      */
     public function withPossibleValues(array $possibleValues): self
     {
@@ -328,9 +327,7 @@ final class ActionCreateParams implements BaseModel
     /**
      * The action's webhooks.
      *
-     * @param list<Webhook|array{
-     *   name: string, url: string, id?: string|null, description?: string|null
-     * }> $webhooks
+     * @param list<WebhookShape> $webhooks
      */
     public function withWebhooks(array $webhooks): self
     {

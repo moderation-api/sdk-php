@@ -9,7 +9,7 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type SpamShape = array{id?: 'spam', flag: bool}
+ * @phpstan-type SpamShape = array{id: 'spam', flag: bool}
  */
 final class Spam implements BaseModel
 {

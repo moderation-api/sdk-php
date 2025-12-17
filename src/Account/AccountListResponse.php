@@ -11,12 +11,14 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type CurrentProjectShape from \ModerationAPI\Account\AccountListResponse\CurrentProject
+ *
  * @phpstan-type AccountListResponseShape = array{
  *   id: string,
  *   paidPlanName: string,
  *   remainingQuota: float,
  *   textAPIQuota: float,
- *   currentProject?: CurrentProject|null,
+ *   currentProject?: null|CurrentProject|CurrentProjectShape,
  * }
  */
 final class AccountListResponse implements BaseModel
@@ -81,7 +83,7 @@ final class AccountListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CurrentProject|array{id: string, name: string} $currentProject
+     * @param CurrentProjectShape $currentProject
      */
     public static function with(
         string $id,
@@ -147,7 +149,7 @@ final class AccountListResponse implements BaseModel
     }
 
     /**
-     * @param CurrentProject|array{id: string, name: string} $currentProject
+     * @param CurrentProjectShape $currentProject
      */
     public function withCurrentProject(
         CurrentProject|array $currentProject

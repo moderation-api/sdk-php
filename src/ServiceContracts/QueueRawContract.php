@@ -31,7 +31,7 @@ interface QueueRawContract
      * @api
      *
      * @param string $id The queue ID
-     * @param array<mixed>|QueueGetStatsParams $params
+     * @param array<string,mixed>|QueueGetStatsParams $params
      *
      * @return BaseResponse<QueueGetStatsResponse>
      *

@@ -8,14 +8,14 @@ use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter;
-use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\FilterLabel;
-use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\RecommendationAction;
 
 /**
+ * @phpstan-import-type FilterShape from \ModerationAPI\Queue\QueueGetResponse\Queue\Filter
+ *
  * @phpstan-type QueueShape = array{
  *   id: string,
  *   description: string,
- *   filter: Filter,
+ *   filter: Filter|FilterShape,
  *   name: string,
  *   resolvedItemsCount: float,
  *   totalItemsCount: float,
@@ -87,18 +87,7 @@ final class Queue implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   afterDate?: string|null,
-     *   authorID?: string|null,
-     *   beforeDate?: string|null,
-     *   conversationIDs?: list<string|null>|null,
-     *   filteredActionIDs?: list<string>|null,
-     *   filteredChannelIDs?: list<string>|null,
-     *   filterLabels?: list<FilterLabel>|null,
-     *   labels?: list<string>|null,
-     *   recommendationActions?: list<value-of<RecommendationAction>>|null,
-     *   showChecked?: bool|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public static function with(
         string $id,
@@ -139,18 +128,7 @@ final class Queue implements BaseModel
     }
 
     /**
-     * @param Filter|array{
-     *   afterDate?: string|null,
-     *   authorID?: string|null,
-     *   beforeDate?: string|null,
-     *   conversationIDs?: list<string|null>|null,
-     *   filteredActionIDs?: list<string>|null,
-     *   filteredChannelIDs?: list<string>|null,
-     *   filterLabels?: list<FilterLabel>|null,
-     *   labels?: list<string>|null,
-     *   recommendationActions?: list<value-of<RecommendationAction>>|null,
-     *   showChecked?: bool|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

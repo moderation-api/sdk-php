@@ -18,7 +18,7 @@ interface WordsRawContract
      * @api
      *
      * @param string $id ID of the wordlist to add words to
-     * @param array<mixed>|WordAddParams $params
+     * @param array<string,mixed>|WordAddParams $params
      *
      * @return BaseResponse<WordAddResponse>
      *
@@ -34,7 +34,7 @@ interface WordsRawContract
      * @api
      *
      * @param string $id ID of the wordlist to remove words from
-     * @param array<mixed>|WordRemoveParams $params
+     * @param array<string,mixed>|WordRemoveParams $params
      *
      * @return BaseResponse<WordRemoveResponse>
      *

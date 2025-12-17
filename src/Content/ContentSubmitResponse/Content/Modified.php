@@ -12,6 +12,10 @@ use ModerationAPI\Core\Conversion\MapOf;
 
 /**
  * The modified content, if any.
+ *
+ * @phpstan-import-type ModifiedNestedObjectContentShape from \ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent
+ *
+ * @phpstan-type ModifiedShape = string|array<string,mixed>|array<string,ModifiedNestedObjectContentShape>
  */
 final class Modified implements ConverterSource
 {

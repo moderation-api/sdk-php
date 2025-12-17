@@ -14,6 +14,13 @@ use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * Text.
+ *
+ * @phpstan-import-type TextShape from \ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Text
+ * @phpstan-import-type ImageShape from \ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Image
+ * @phpstan-import-type VideoShape from \ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Video
+ * @phpstan-import-type AudioShape from \ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Audio
+ *
+ * @phpstan-type ModifiedNestedObjectContentShape = TextShape|ImageShape|VideoShape|AudioShape
  */
 final class ModifiedNestedObjectContent implements ConverterSource
 {
