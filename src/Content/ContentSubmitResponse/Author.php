@@ -84,9 +84,9 @@ final class Author implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BlockShape|null $block
+     * @param Block|BlockShape|null $block
      * @param Status|value-of<Status> $status
-     * @param TrustLevelShape $trustLevel
+     * @param TrustLevel|TrustLevelShape $trustLevel
      */
     public static function with(
         string $id,
@@ -121,7 +121,7 @@ final class Author implements BaseModel
     /**
      * Block or suspension details, if applicable. Null if the author is enabled.
      *
-     * @param BlockShape|null $block
+     * @param Block|BlockShape|null $block
      */
     public function withBlock(Block|array|null $block): self
     {
@@ -145,7 +145,7 @@ final class Author implements BaseModel
     }
 
     /**
-     * @param TrustLevelShape $trustLevel
+     * @param TrustLevel|TrustLevelShape $trustLevel
      */
     public function withTrustLevel(TrustLevel|array $trustLevel): self
     {

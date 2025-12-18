@@ -94,8 +94,8 @@ final class ExecuteExecuteParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $authorIDs
-     * @param list<string> $contentIDs
+     * @param list<string>|null $authorIDs
+     * @param list<string>|null $contentIDs
      */
     public static function with(
         string $actionKey,

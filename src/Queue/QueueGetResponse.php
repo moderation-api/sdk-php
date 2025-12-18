@@ -46,7 +46,7 @@ final class QueueGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param QueueShape $queue
+     * @param Queue|QueueShape $queue
      */
     public static function with(Queue|array $queue): self
     {
@@ -58,7 +58,7 @@ final class QueueGetResponse implements BaseModel
     }
 
     /**
-     * @param QueueShape $queue
+     * @param Queue|QueueShape $queue
      */
     public function withQueue(Queue|array $queue): self
     {

@@ -91,8 +91,8 @@ final class ItemListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SortDirection|value-of<SortDirection> $sortDirection
-     * @param SortField|value-of<SortField> $sortField
+     * @param SortDirection|value-of<SortDirection>|null $sortDirection
+     * @param SortField|value-of<SortField>|null $sortField
      */
     public static function with(
         ?string $afterDate = null,

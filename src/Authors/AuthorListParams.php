@@ -75,8 +75,8 @@ final class AuthorListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SortBy|value-of<SortBy> $sortBy
-     * @param SortDirection|value-of<SortDirection> $sortDirection
+     * @param SortBy|value-of<SortBy>|null $sortBy
+     * @param SortDirection|value-of<SortDirection>|null $sortDirection
      */
     public static function with(
         ?string $contentTypes = null,

@@ -78,12 +78,12 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string|null> $conversationIDs
-     * @param list<string> $filteredActionIDs
-     * @param list<string> $filteredChannelIDs
-     * @param list<FilterLabelShape> $filterLabels
-     * @param list<string> $labels
-     * @param list<RecommendationAction|value-of<RecommendationAction>> $recommendationActions
+     * @param list<string|null>|null $conversationIDs
+     * @param list<string>|null $filteredActionIDs
+     * @param list<string>|null $filteredChannelIDs
+     * @param list<FilterLabelShape>|null $filterLabels
+     * @param list<string>|null $labels
+     * @param list<RecommendationAction|value-of<RecommendationAction>>|null $recommendationActions
      */
     public static function with(
         ?string $afterDate = null,
