@@ -81,8 +81,8 @@ final class ClassifierOutput implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $flaggedFields
-     * @param list<LabelShape> $labels
+     * @param list<string>|null $flaggedFields
+     * @param list<LabelShape>|null $labels
      */
     public static function with(
         string $id,

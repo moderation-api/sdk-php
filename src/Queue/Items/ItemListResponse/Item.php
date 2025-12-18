@@ -137,7 +137,7 @@ final class Item implements BaseModel
      *
      * @param list<LabelShape> $labels
      * @param Status|value-of<Status> $status
-     * @param list<ActionShape> $actions
+     * @param list<ActionShape>|null $actions
      */
     public static function with(
         string $id,

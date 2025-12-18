@@ -55,7 +55,7 @@ final class AuthorListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<AuthorShape> $authors
-     * @param PaginationShape $pagination
+     * @param Pagination|PaginationShape $pagination
      */
     public static function with(
         array $authors,
@@ -81,7 +81,7 @@ final class AuthorListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationShape $pagination
+     * @param Pagination|PaginationShape $pagination
      */
     public function withPagination(Pagination|array $pagination): self
     {
