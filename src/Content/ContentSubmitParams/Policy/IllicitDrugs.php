@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type IllicitDrugsShape = array{id: 'illicit_drugs', flag: bool}
+ * @phpstan-type IllicitDrugsShape = array{
+ *   id: 'illicit_drugs', flag: bool, threshold?: float|null
+ * }
  */
 final class IllicitDrugs implements BaseModel
 {
@@ -22,6 +25,9 @@ final class IllicitDrugs implements BaseModel
 
     #[Required]
     public bool $flag;
+
+    #[Optional]
+    public ?float $threshold;
 
     /**
      * `new IllicitDrugs()` is missing required properties by the API.
@@ -47,11 +53,13 @@ final class IllicitDrugs implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(bool $flag): self
+    public static function with(bool $flag, ?float $threshold = null): self
     {
         $self = new self;
 
         $self['flag'] = $flag;
+
+        null !== $threshold && $self['threshold'] = $threshold;
 
         return $self;
     }
@@ -60,6 +68,14 @@ final class IllicitDrugs implements BaseModel
     {
         $self = clone $this;
         $self['flag'] = $flag;
+
+        return $self;
+    }
+
+    public function withThreshold(float $threshold): self
+    {
+        $self = clone $this;
+        $self['threshold'] = $threshold;
 
         return $self;
     }
