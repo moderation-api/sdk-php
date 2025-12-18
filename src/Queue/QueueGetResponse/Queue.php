@@ -87,7 +87,7 @@ final class Queue implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public static function with(
         string $id,
@@ -128,7 +128,7 @@ final class Queue implements BaseModel
     }
 
     /**
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

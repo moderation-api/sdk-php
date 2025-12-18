@@ -79,9 +79,9 @@ final class QueueGetStatsResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<ActionStatShape> $actionStats
-     * @param ReviewStatsShape $reviewStats
+     * @param ReviewStats|ReviewStatsShape $reviewStats
      * @param list<TopReviewerShape> $topReviewers
-     * @param TrendsShape $trends
+     * @param Trends|TrendsShape $trends
      */
     public static function with(
         array $actionStats,
@@ -111,7 +111,7 @@ final class QueueGetStatsResponse implements BaseModel
     }
 
     /**
-     * @param ReviewStatsShape $reviewStats
+     * @param ReviewStats|ReviewStatsShape $reviewStats
      */
     public function withReviewStats(ReviewStats|array $reviewStats): self
     {
@@ -135,7 +135,7 @@ final class QueueGetStatsResponse implements BaseModel
     }
 
     /**
-     * @param TrendsShape $trends
+     * @param Trends|TrendsShape $trends
      */
     public function withTrends(Trends|array $trends): self
     {

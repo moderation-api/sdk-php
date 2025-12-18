@@ -137,12 +137,12 @@ final class ActionUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $filterInQueueIDs
-     * @param Position|value-of<Position> $position
-     * @param list<PossibleValueShape> $possibleValues
-     * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour
+     * @param list<string>|null $filterInQueueIDs
+     * @param Position|value-of<Position>|null $position
+     * @param list<PossibleValueShape>|null $possibleValues
+     * @param QueueBehaviour|value-of<QueueBehaviour>|null $queueBehaviour
      * @param Type|value-of<Type>|null $type
-     * @param list<WebhookShape> $webhooks
+     * @param list<WebhookShape>|null $webhooks
      */
     public static function with(
         ?bool $builtIn = null,

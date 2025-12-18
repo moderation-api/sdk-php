@@ -79,7 +79,7 @@ final class EntityMatcherOutput implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<MatchShape> $matches
-     * @param list<string> $flaggedFields
+     * @param list<string>|null $flaggedFields
      */
     public static function with(
         string $id,

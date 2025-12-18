@@ -140,14 +140,14 @@ final class ContentSubmitResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AuthorShape|null $author
-     * @param ContentShape $content
-     * @param EvaluationShape $evaluation
+     * @param Author|AuthorShape|null $author
+     * @param Content|ContentShape $content
+     * @param Evaluation|EvaluationShape $evaluation
      * @param list<InsightShape> $insights
-     * @param MetaShape $meta
+     * @param Meta|MetaShape $meta
      * @param list<PolicyShape> $policies
-     * @param RecommendationShape $recommendation
-     * @param list<ErrorShape> $errors
+     * @param Recommendation|RecommendationShape $recommendation
+     * @param list<ErrorShape>|null $errors
      */
     public static function with(
         Author|array|null $author,
@@ -177,7 +177,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * The author of the content if your account has authors enabled. Requires you to send authorId when submitting content.
      *
-     * @param AuthorShape|null $author
+     * @param Author|AuthorShape|null $author
      */
     public function withAuthor(Author|array|null $author): self
     {
@@ -190,7 +190,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * Potentially modified content.
      *
-     * @param ContentShape $content
+     * @param Content|ContentShape $content
      */
     public function withContent(Content|array $content): self
     {
@@ -203,7 +203,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * The evaluation of the content after running the channel policies.
      *
-     * @param EvaluationShape $evaluation
+     * @param Evaluation|EvaluationShape $evaluation
      */
     public function withEvaluation(Evaluation|array $evaluation): self
     {
@@ -229,7 +229,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * Metadata about the moderation request.
      *
-     * @param MetaShape $meta
+     * @param Meta|MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {
@@ -255,7 +255,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * The recommendation for the content based on the evaluation.
      *
-     * @param RecommendationShape $recommendation
+     * @param Recommendation|RecommendationShape $recommendation
      */
     public function withRecommendation(
         Recommendation|array $recommendation

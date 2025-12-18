@@ -83,7 +83,7 @@ final class AccountListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CurrentProjectShape $currentProject
+     * @param CurrentProject|CurrentProjectShape|null $currentProject
      */
     public static function with(
         string $id,
@@ -149,7 +149,7 @@ final class AccountListResponse implements BaseModel
     }
 
     /**
-     * @param CurrentProjectShape $currentProject
+     * @param CurrentProject|CurrentProjectShape $currentProject
      */
     public function withCurrentProject(
         CurrentProject|array $currentProject

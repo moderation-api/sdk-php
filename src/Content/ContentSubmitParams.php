@@ -149,9 +149,9 @@ final class ContentSubmitParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ContentShape $content
-     * @param array<string,mixed> $metadata
-     * @param MetaType|value-of<MetaType> $metaType
-     * @param list<PolicyShape> $policies
+     * @param array<string,mixed>|null $metadata
+     * @param MetaType|value-of<MetaType>|null $metaType
+     * @param list<PolicyShape>|null $policies
      */
     public static function with(
         Text|array|Image|Video|Audio|Object_ $content,

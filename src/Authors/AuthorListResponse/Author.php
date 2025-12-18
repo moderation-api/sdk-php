@@ -174,12 +174,12 @@ final class Author implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BlockShape|null $block
-     * @param MetadataShape $metadata
-     * @param MetricsShape $metrics
-     * @param RiskEvaluationShape|null $riskEvaluation
+     * @param Block|BlockShape|null $block
+     * @param Metadata|MetadataShape $metadata
+     * @param Metrics|MetricsShape $metrics
+     * @param RiskEvaluation|RiskEvaluationShape|null $riskEvaluation
      * @param Status|value-of<Status> $status
-     * @param TrustLevelShape $trustLevel
+     * @param TrustLevel|TrustLevelShape $trustLevel
      */
     public static function with(
         string $id,
@@ -234,7 +234,7 @@ final class Author implements BaseModel
     /**
      * Block or suspension details, if applicable. Null if the author is enabled.
      *
-     * @param BlockShape|null $block
+     * @param Block|BlockShape|null $block
      */
     public function withBlock(Block|array|null $block): self
     {
@@ -269,7 +269,7 @@ final class Author implements BaseModel
     /**
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
      *
-     * @param MetadataShape $metadata
+     * @param Metadata|MetadataShape $metadata
      */
     public function withMetadata(Metadata|array $metadata): self
     {
@@ -280,7 +280,7 @@ final class Author implements BaseModel
     }
 
     /**
-     * @param MetricsShape $metrics
+     * @param Metrics|MetricsShape $metrics
      */
     public function withMetrics(Metrics|array $metrics): self
     {
@@ -293,7 +293,7 @@ final class Author implements BaseModel
     /**
      * Risk assessment details, if available.
      *
-     * @param RiskEvaluationShape|null $riskEvaluation
+     * @param RiskEvaluation|RiskEvaluationShape|null $riskEvaluation
      */
     public function withRiskEvaluation(
         RiskEvaluation|array|null $riskEvaluation
@@ -318,7 +318,7 @@ final class Author implements BaseModel
     }
 
     /**
-     * @param TrustLevelShape $trustLevel
+     * @param TrustLevel|TrustLevelShape $trustLevel
      */
     public function withTrustLevel(TrustLevel|array $trustLevel): self
     {

@@ -23,7 +23,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   firstSeen?: float|null,
  *   lastSeen?: float|null,
  *   manualTrustLevel?: float|null,
- *   metadata?: MetadataShape|null,
+ *   metadata?: null|Metadata|MetadataShape,
  *   name?: string|null,
  *   profilePicture?: string|null,
  * }
@@ -89,7 +89,7 @@ final class AuthorUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MetadataShape $metadata
+     * @param Metadata|MetadataShape|null $metadata
      */
     public static function with(
         ?string $email = null,
@@ -170,7 +170,7 @@ final class AuthorUpdateParams implements BaseModel
     /**
      * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
      *
-     * @param MetadataShape $metadata
+     * @param Metadata|MetadataShape $metadata
      */
     public function withMetadata(Metadata|array $metadata): self
     {

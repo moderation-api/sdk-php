@@ -55,7 +55,7 @@ final class ItemListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<ItemShape> $items
-     * @param PaginationShape $pagination
+     * @param Pagination|PaginationShape $pagination
      */
     public static function with(
         array $items,
@@ -81,7 +81,7 @@ final class ItemListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationShape $pagination
+     * @param Pagination|PaginationShape $pagination
      */
     public function withPagination(Pagination|array $pagination): self
     {
