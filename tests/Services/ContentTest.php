@@ -58,7 +58,7 @@ final class ContentTest extends TestCase
             doNotStore: true,
             metadata: ['foo' => 'bar'],
             metaType: 'profile',
-            policies: [['id' => 'toxicity', 'flag' => true]],
+            policies: [['id' => 'toxicity', 'flag' => true, 'threshold' => 0]],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

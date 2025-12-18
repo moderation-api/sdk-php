@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams\Policy;
 
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type GuidelineShape = array{
- *   id: 'guideline', flag: bool, guidelineKey: string, instructions: string
+ *   id: 'guideline',
+ *   flag: bool,
+ *   guidelineKey: string,
+ *   instructions: string,
+ *   threshold?: float|null,
  * }
  */
 final class Guideline implements BaseModel
@@ -30,6 +35,9 @@ final class Guideline implements BaseModel
 
     #[Required]
     public string $instructions;
+
+    #[Optional]
+    public ?float $threshold;
 
     /**
      * `new Guideline()` is missing required properties by the API.
@@ -58,13 +66,16 @@ final class Guideline implements BaseModel
     public static function with(
         bool $flag,
         string $guidelineKey,
-        string $instructions
+        string $instructions,
+        ?float $threshold = null,
     ): self {
         $self = new self;
 
         $self['flag'] = $flag;
         $self['guidelineKey'] = $guidelineKey;
         $self['instructions'] = $instructions;
+
+        null !== $threshold && $self['threshold'] = $threshold;
 
         return $self;
     }
@@ -89,6 +100,14 @@ final class Guideline implements BaseModel
     {
         $self = clone $this;
         $self['instructions'] = $instructions;
+
+        return $self;
+    }
+
+    public function withThreshold(float $threshold): self
+    {
+        $self = clone $this;
+        $self['threshold'] = $threshold;
 
         return $self;
     }
