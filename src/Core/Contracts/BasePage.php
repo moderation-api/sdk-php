@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace ModerationAPI\Core\Contracts;
 
 /**
- * @internal
+ * @phpstan-import-type NormalizedRequest from \ModerationAPI\Core\BaseClient
  *
- * @phpstan-import-type normalized_request from \ModerationAPI\Core\BaseClient
+ * @internal
  *
  * @template Item
  *
