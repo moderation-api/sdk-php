@@ -12,6 +12,8 @@ use ModerationAPI\Core\Exceptions\APIStatusException;
 use ModerationAPI\RequestOptions;
 
 /**
+ * @phpstan-import-type NormalizedRequest from \ModerationAPI\Core\BaseClient
+ *
  * @internal
  *
  * @template Item
@@ -94,7 +96,7 @@ trait SdkPage
     /**
      * @internal
      *
-     * @return array{normalized_request, RequestOptions}
+     * @return array{NormalizedRequest, RequestOptions}
      */
     abstract protected function nextRequest(): ?array;
 }
