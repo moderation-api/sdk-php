@@ -17,8 +17,8 @@ use ModerationAPI\Services\QueueService;
 use ModerationAPI\Services\WordlistService;
 
 /**
- * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
  * @phpstan-import-type NormalizedRequest from \ModerationAPI\Core\BaseClient
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
  */
 class Client extends BaseClient
 {
@@ -59,19 +59,28 @@ class Client extends BaseClient
      */
     public WordlistService $wordlist;
 
-    public function __construct(?string $secretKey = null, ?string $baseUrl = null)
-    {
+    /**
+     * @param RequestOpts|null $requestOptions
+     */
+    public function __construct(
+        ?string $secretKey = null,
+        ?string $baseUrl = null,
+        RequestOptions|array|null $requestOptions = null,
+    ) {
         $this->secretKey = (string) ($secretKey ?? getenv('MODAPI_SECRET_KEY'));
 
         $baseUrl ??= getenv(
             'MODERATION_API_BASE_URL'
         ) ?: 'https://api.moderationapi.com/v1';
 
-        $options = RequestOptions::with(
-            uriFactory: Psr17FactoryDiscovery::findUriFactory(),
-            streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
-            requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
-            transporter: Psr18ClientDiscovery::find(),
+        $options = RequestOptions::parse(
+            RequestOptions::with(
+                uriFactory: Psr17FactoryDiscovery::findUriFactory(),
+                streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
+                requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
+                transporter: Psr18ClientDiscovery::find(),
+            ),
+            $requestOptions,
         );
 
         parent::__construct(
