@@ -10,12 +10,16 @@ use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 interface ContentRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ContentSubmitParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ContentSubmitResponse>
      *
@@ -23,6 +27,6 @@ interface ContentRawContract
      */
     public function submit(
         array|ContentSubmitParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

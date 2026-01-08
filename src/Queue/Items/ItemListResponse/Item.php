@@ -20,10 +20,10 @@ use ModerationAPI\Queue\Items\ItemListResponse\Item\Status;
  *   id: string,
  *   content: string,
  *   flagged: bool,
- *   labels: list<LabelShape>,
+ *   labels: list<Label|LabelShape>,
  *   status: Status|value-of<Status>,
  *   timestamp: float,
- *   actions?: list<ActionShape>|null,
+ *   actions?: list<Action|ActionShape>|null,
  *   authorID?: string|null,
  *   contentType?: string|null,
  *   conversationID?: string|null,
@@ -135,9 +135,9 @@ final class Item implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LabelShape> $labels
+     * @param list<Label|LabelShape> $labels
      * @param Status|value-of<Status> $status
-     * @param list<ActionShape>|null $actions
+     * @param list<Action|ActionShape>|null $actions
      */
     public static function with(
         string $id,
@@ -204,7 +204,7 @@ final class Item implements BaseModel
     }
 
     /**
-     * @param list<LabelShape> $labels
+     * @param list<Label|LabelShape> $labels
      */
     public function withLabels(array $labels): self
     {
@@ -241,7 +241,7 @@ final class Item implements BaseModel
     /**
      * Action IDs taken on this item.
      *
-     * @param list<ActionShape> $actions
+     * @param list<Action|ActionShape> $actions
      */
     public function withActions(array $actions): self
     {

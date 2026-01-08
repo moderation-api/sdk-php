@@ -19,9 +19,9 @@ use ModerationAPI\Queue\QueueGetStatsResponse\Trends;
  * @phpstan-import-type TrendsShape from \ModerationAPI\Queue\QueueGetStatsResponse\Trends
  *
  * @phpstan-type QueueGetStatsResponseShape = array{
- *   actionStats: list<ActionStatShape>,
+ *   actionStats: list<ActionStat|ActionStatShape>,
  *   reviewStats: ReviewStats|ReviewStatsShape,
- *   topReviewers: list<TopReviewerShape>,
+ *   topReviewers: list<TopReviewer|TopReviewerShape>,
  *   trends: Trends|TrendsShape,
  * }
  */
@@ -78,9 +78,9 @@ final class QueueGetStatsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActionStatShape> $actionStats
+     * @param list<ActionStat|ActionStatShape> $actionStats
      * @param ReviewStats|ReviewStatsShape $reviewStats
-     * @param list<TopReviewerShape> $topReviewers
+     * @param list<TopReviewer|TopReviewerShape> $topReviewers
      * @param Trends|TrendsShape $trends
      */
     public static function with(
@@ -100,7 +100,7 @@ final class QueueGetStatsResponse implements BaseModel
     }
 
     /**
-     * @param list<ActionStatShape> $actionStats
+     * @param list<ActionStat|ActionStatShape> $actionStats
      */
     public function withActionStats(array $actionStats): self
     {
@@ -124,7 +124,7 @@ final class QueueGetStatsResponse implements BaseModel
     /**
      * List of top reviewers and their statistics.
      *
-     * @param list<TopReviewerShape> $topReviewers
+     * @param list<TopReviewer|TopReviewerShape> $topReviewers
      */
     public function withTopReviewers(array $topReviewers): self
     {

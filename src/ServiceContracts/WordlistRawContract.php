@@ -13,12 +13,16 @@ use ModerationAPI\Wordlist\WordlistListResponseItem;
 use ModerationAPI\Wordlist\WordlistUpdateParams;
 use ModerationAPI\Wordlist\WordlistUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 interface WordlistRawContract
 {
     /**
      * @api
      *
      * @param string $id ID of the wordlist to get
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WordlistGetResponse>
      *
@@ -26,7 +30,7 @@ interface WordlistRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -34,6 +38,7 @@ interface WordlistRawContract
      *
      * @param string $id ID of the wordlist to update
      * @param array<string,mixed>|WordlistUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WordlistUpdateResponse>
      *
@@ -42,22 +47,27 @@ interface WordlistRawContract
     public function update(
         string $id,
         array|WordlistUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<list<WordlistListResponseItem>>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse;
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id ID of the wordlist to check embedding status for
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WordlistGetEmbeddingStatusResponse>
      *
@@ -65,6 +75,6 @@ interface WordlistRawContract
      */
     public function getEmbeddingStatus(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

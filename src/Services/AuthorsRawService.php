@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Services;
 
 use ModerationAPI\Authors\AuthorCreateParams;
+use ModerationAPI\Authors\AuthorCreateParams\Metadata;
 use ModerationAPI\Authors\AuthorDeleteResponse;
 use ModerationAPI\Authors\AuthorGetResponse;
 use ModerationAPI\Authors\AuthorListParams;
@@ -20,6 +21,11 @@ use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\AuthorsRawContract;
 
+/**
+ * @phpstan-import-type MetadataShape from \ModerationAPI\Authors\AuthorCreateParams\Metadata
+ * @phpstan-import-type MetadataShape from \ModerationAPI\Authors\AuthorUpdateParams\Metadata as MetadataShape1
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 final class AuthorsRawService implements AuthorsRawContract
 {
     // @phpstan-ignore-next-line
@@ -40,15 +46,11 @@ final class AuthorsRawService implements AuthorsRawContract
      *   firstSeen?: float,
      *   lastSeen?: float,
      *   manualTrustLevel?: float|null,
-     *   metadata?: array{
-     *     emailVerified?: bool|null,
-     *     identityVerified?: bool|null,
-     *     isPayingCustomer?: bool|null,
-     *     phoneVerified?: bool|null,
-     *   },
+     *   metadata?: Metadata|MetadataShape,
      *   name?: string|null,
      *   profilePicture?: string|null,
      * }|AuthorCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthorNewResponse>
      *
@@ -56,7 +58,7 @@ final class AuthorsRawService implements AuthorsRawContract
      */
     public function create(
         array|AuthorCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AuthorCreateParams::parseRequest(
             $params,
@@ -79,6 +81,7 @@ final class AuthorsRawService implements AuthorsRawContract
      * Get detailed information about a specific author including historical data and analysis
      *
      * @param string $id either external ID or the ID assigned by moderation API
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthorGetResponse>
      *
@@ -86,7 +89,7 @@ final class AuthorsRawService implements AuthorsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -109,15 +112,11 @@ final class AuthorsRawService implements AuthorsRawContract
      *   firstSeen?: float,
      *   lastSeen?: float,
      *   manualTrustLevel?: float|null,
-     *   metadata?: array{
-     *     emailVerified?: bool|null,
-     *     identityVerified?: bool|null,
-     *     isPayingCustomer?: bool|null,
-     *     phoneVerified?: bool|null,
-     *   },
+     *   metadata?: AuthorUpdateParams\Metadata|MetadataShape1,
      *   name?: string|null,
      *   profilePicture?: string|null,
      * }|AuthorUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthorUpdateResponse>
      *
@@ -126,7 +125,7 @@ final class AuthorsRawService implements AuthorsRawContract
     public function update(
         string $id,
         array|AuthorUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AuthorUpdateParams::parseRequest(
             $params,
@@ -155,8 +154,9 @@ final class AuthorsRawService implements AuthorsRawContract
      *   pageNumber?: float,
      *   pageSize?: float,
      *   sortBy?: value-of<SortBy>,
-     *   sortDirection?: 'asc'|'desc'|SortDirection,
+     *   sortDirection?: SortDirection|value-of<SortDirection>,
      * }|AuthorListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthorListResponse>
      *
@@ -164,7 +164,7 @@ final class AuthorsRawService implements AuthorsRawContract
      */
     public function list(
         array|AuthorListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AuthorListParams::parseRequest(
             $params,
@@ -186,13 +186,15 @@ final class AuthorsRawService implements AuthorsRawContract
      *
      * Delete a specific author
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AuthorDeleteResponse>
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

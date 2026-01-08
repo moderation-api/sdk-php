@@ -22,7 +22,8 @@ use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type AudioShape from \ModerationAPI\Content\ContentSubmitParams\Content\Audio
  * @phpstan-import-type ObjectShape from \ModerationAPI\Content\ContentSubmitParams\Content\Object_
  *
- * @phpstan-type ContentShape = TextShape|ImageShape|VideoShape|AudioShape|ObjectShape
+ * @phpstan-type ContentVariants = Text|Image|Video|Audio|Object_
+ * @phpstan-type ContentShape = ContentVariants|TextShape|ImageShape|VideoShape|AudioShape|ObjectShape
  */
 final class Content implements ConverterSource
 {

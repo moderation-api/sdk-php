@@ -12,6 +12,9 @@ use ModerationAPI\Wordlist\Words\WordAddResponse;
 use ModerationAPI\Wordlist\Words\WordRemoveParams;
 use ModerationAPI\Wordlist\Words\WordRemoveResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 interface WordsRawContract
 {
     /**
@@ -19,6 +22,7 @@ interface WordsRawContract
      *
      * @param string $id ID of the wordlist to add words to
      * @param array<string,mixed>|WordAddParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WordAddResponse>
      *
@@ -27,7 +31,7 @@ interface WordsRawContract
     public function add(
         string $id,
         array|WordAddParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -35,6 +39,7 @@ interface WordsRawContract
      *
      * @param string $id ID of the wordlist to remove words from
      * @param array<string,mixed>|WordRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WordRemoveResponse>
      *
@@ -43,6 +48,6 @@ interface WordsRawContract
     public function remove(
         string $id,
         array|WordRemoveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

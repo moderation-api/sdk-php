@@ -15,7 +15,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @phpstan-import-type PaginationShape from \ModerationAPI\Authors\AuthorListResponse\Pagination
  *
  * @phpstan-type AuthorListResponseShape = array{
- *   authors: list<AuthorShape>, pagination: Pagination|PaginationShape
+ *   authors: list<Author|AuthorShape>, pagination: Pagination|PaginationShape
  * }
  */
 final class AuthorListResponse implements BaseModel
@@ -54,7 +54,7 @@ final class AuthorListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AuthorShape> $authors
+     * @param list<Author|AuthorShape> $authors
      * @param Pagination|PaginationShape $pagination
      */
     public static function with(
@@ -70,7 +70,7 @@ final class AuthorListResponse implements BaseModel
     }
 
     /**
-     * @param list<AuthorShape> $authors
+     * @param list<Author|AuthorShape> $authors
      */
     public function withAuthors(array $authors): self
     {

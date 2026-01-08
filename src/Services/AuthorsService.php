@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Services;
 
+use ModerationAPI\Authors\AuthorCreateParams\Metadata;
 use ModerationAPI\Authors\AuthorDeleteResponse;
 use ModerationAPI\Authors\AuthorGetResponse;
 use ModerationAPI\Authors\AuthorListParams\SortBy;
@@ -17,6 +18,11 @@ use ModerationAPI\Core\Util;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\AuthorsContract;
 
+/**
+ * @phpstan-import-type MetadataShape from \ModerationAPI\Authors\AuthorCreateParams\Metadata
+ * @phpstan-import-type MetadataShape from \ModerationAPI\Authors\AuthorUpdateParams\Metadata as MetadataShape1
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 final class AuthorsService implements AuthorsContract
 {
     /**
@@ -42,14 +48,10 @@ final class AuthorsService implements AuthorsContract
      * @param string|null $externalLink URL of the author's external profile
      * @param float $firstSeen Timestamp when author first appeared
      * @param float $lastSeen Timestamp of last activity
-     * @param array{
-     *   emailVerified?: bool|null,
-     *   identityVerified?: bool|null,
-     *   isPayingCustomer?: bool|null,
-     *   phoneVerified?: bool|null,
-     * } $metadata Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
+     * @param Metadata|MetadataShape $metadata Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
      * @param string|null $name Author name or identifier
      * @param string|null $profilePicture URL of the author's profile picture
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -60,10 +62,10 @@ final class AuthorsService implements AuthorsContract
         ?float $firstSeen = null,
         ?float $lastSeen = null,
         ?float $manualTrustLevel = null,
-        ?array $metadata = null,
+        Metadata|array|null $metadata = null,
         ?string $name = null,
         ?string $profilePicture = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AuthorNewResponse {
         $params = Util::removeNulls(
             [
@@ -91,12 +93,13 @@ final class AuthorsService implements AuthorsContract
      * Get detailed information about a specific author including historical data and analysis
      *
      * @param string $id either external ID or the ID assigned by moderation API
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AuthorGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -114,14 +117,10 @@ final class AuthorsService implements AuthorsContract
      * @param string|null $externalLink URL of the author's external profile
      * @param float $firstSeen Timestamp when author first appeared
      * @param float $lastSeen Timestamp of last activity
-     * @param array{
-     *   emailVerified?: bool|null,
-     *   identityVerified?: bool|null,
-     *   isPayingCustomer?: bool|null,
-     *   phoneVerified?: bool|null,
-     * } $metadata Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
+     * @param \ModerationAPI\Authors\AuthorUpdateParams\Metadata|MetadataShape1 $metadata Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
      * @param string|null $name Author name or identifier
      * @param string|null $profilePicture URL of the author's profile picture
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -132,10 +131,10 @@ final class AuthorsService implements AuthorsContract
         ?float $firstSeen = null,
         ?float $lastSeen = null,
         ?float $manualTrustLevel = null,
-        ?array $metadata = null,
+        \ModerationAPI\Authors\AuthorUpdateParams\Metadata|array|null $metadata = null,
         ?string $name = null,
         ?string $profilePicture = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AuthorUpdateResponse {
         $params = Util::removeNulls(
             [
@@ -163,8 +162,9 @@ final class AuthorsService implements AuthorsContract
      *
      * @param float $pageNumber Page number to fetch
      * @param float $pageSize Number of authors per page
-     * @param 'trustLevel'|'violationCount'|'reportCount'|'memberSince'|'lastActive'|'contentCount'|'flaggedContentRatio'|'averageSentiment'|SortBy $sortBy
-     * @param 'asc'|'desc'|SortDirection $sortDirection Sort direction
+     * @param SortBy|value-of<SortBy> $sortBy
+     * @param SortDirection|value-of<SortDirection> $sortDirection Sort direction
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -174,9 +174,9 @@ final class AuthorsService implements AuthorsContract
         ?string $memberSinceDate = null,
         float $pageNumber = 1,
         float $pageSize = 20,
-        string|SortBy|null $sortBy = null,
-        string|SortDirection $sortDirection = 'desc',
-        ?RequestOptions $requestOptions = null,
+        SortBy|string|null $sortBy = null,
+        SortDirection|string $sortDirection = 'desc',
+        RequestOptions|array|null $requestOptions = null,
     ): AuthorListResponse {
         $params = Util::removeNulls(
             [
@@ -201,11 +201,13 @@ final class AuthorsService implements AuthorsContract
      *
      * Delete a specific author
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AuthorDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

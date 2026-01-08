@@ -26,10 +26,10 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   freeText: bool,
  *   name: string,
  *   position: Position|value-of<Position>,
- *   possibleValues: list<PossibleValueShape>,
+ *   possibleValues: list<PossibleValue|PossibleValueShape>,
  *   queueBehaviour: QueueBehaviour|value-of<QueueBehaviour>,
  *   valueRequired: bool,
- *   webhooks: list<WebhookShape>,
+ *   webhooks: list<Webhook|WebhookShape>,
  *   description?: string|null,
  *   key?: string|null,
  *   type?: null|Type|value-of<Type>,
@@ -185,9 +185,9 @@ final class ActionListResponseItem implements BaseModel
      *
      * @param list<string> $filterInQueueIDs
      * @param Position|value-of<Position> $position
-     * @param list<PossibleValueShape> $possibleValues
+     * @param list<PossibleValue|PossibleValueShape> $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour
-     * @param list<WebhookShape> $webhooks
+     * @param list<Webhook|WebhookShape> $webhooks
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
@@ -311,7 +311,7 @@ final class ActionListResponseItem implements BaseModel
     /**
      * The possible values of the action. The user will be prompted to select one of these values when executing the action.
      *
-     * @param list<PossibleValueShape> $possibleValues
+     * @param list<PossibleValue|PossibleValueShape> $possibleValues
      */
     public function withPossibleValues(array $possibleValues): self
     {
@@ -349,7 +349,7 @@ final class ActionListResponseItem implements BaseModel
     /**
      * The action's webhooks.
      *
-     * @param list<WebhookShape> $webhooks
+     * @param list<Webhook|WebhookShape> $webhooks
      */
     public function withWebhooks(array $webhooks): self
     {

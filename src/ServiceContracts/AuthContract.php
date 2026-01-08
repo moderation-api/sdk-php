@@ -9,6 +9,9 @@ use ModerationAPI\Auth\AuthNewResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 interface AuthContract
 {
     /**
@@ -16,10 +19,12 @@ interface AuthContract
      *
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function create(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AuthNewResponse;
 
     /**
@@ -27,9 +32,11 @@ interface AuthContract
      *
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AuthGetResponse;
 }

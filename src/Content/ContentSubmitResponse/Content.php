@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitResponse;
 
 use ModerationAPI\Content\ContentSubmitResponse\Content\Modified;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Audio;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Image;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Text;
-use ModerationAPI\Content\ContentSubmitResponse\Content\Modified\ModifiedNestedObjectContent\Video;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -16,6 +12,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * Potentially modified content.
  *
+ * @phpstan-import-type ModifiedVariants from \ModerationAPI\Content\ContentSubmitResponse\Content\Modified
  * @phpstan-import-type ModifiedShape from \ModerationAPI\Content\ContentSubmitResponse\Content\Modified
  *
  * @phpstan-type ContentShape = array{
@@ -42,7 +39,7 @@ final class Content implements BaseModel
     /**
      * The modified content, if any.
      *
-     * @var string|array<string,mixed>|array<string,Text|Image|Video|Audio>|null $modified
+     * @var ModifiedVariants|null $modified
      */
     #[Required(union: Modified::class)]
     public string|array|null $modified;

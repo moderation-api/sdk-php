@@ -11,29 +11,6 @@ use ModerationAPI\Content\ContentSubmitParams\Content\Text;
 use ModerationAPI\Content\ContentSubmitParams\Content\Video;
 use ModerationAPI\Content\ContentSubmitParams\MetaType;
 use ModerationAPI\Content\ContentSubmitParams\Policy;
-use ModerationAPI\Content\ContentSubmitParams\Policy\CodeAbuse;
-use ModerationAPI\Content\ContentSubmitParams\Policy\Flirtation;
-use ModerationAPI\Content\ContentSubmitParams\Policy\Guideline;
-use ModerationAPI\Content\ContentSubmitParams\Policy\Hate;
-use ModerationAPI\Content\ContentSubmitParams\Policy\Illicit;
-use ModerationAPI\Content\ContentSubmitParams\Policy\IllicitAlcohol;
-use ModerationAPI\Content\ContentSubmitParams\Policy\IllicitDrugs;
-use ModerationAPI\Content\ContentSubmitParams\Policy\IllicitFirearms;
-use ModerationAPI\Content\ContentSubmitParams\Policy\IllicitGambling;
-use ModerationAPI\Content\ContentSubmitParams\Policy\IllicitTobacco;
-use ModerationAPI\Content\ContentSubmitParams\Policy\PersonalInformation;
-use ModerationAPI\Content\ContentSubmitParams\Policy\PiiMasking;
-use ModerationAPI\Content\ContentSubmitParams\Policy\Political;
-use ModerationAPI\Content\ContentSubmitParams\Policy\Profanity;
-use ModerationAPI\Content\ContentSubmitParams\Policy\Religion;
-use ModerationAPI\Content\ContentSubmitParams\Policy\SelfHarm;
-use ModerationAPI\Content\ContentSubmitParams\Policy\SelfPromotion;
-use ModerationAPI\Content\ContentSubmitParams\Policy\Sexual;
-use ModerationAPI\Content\ContentSubmitParams\Policy\Spam;
-use ModerationAPI\Content\ContentSubmitParams\Policy\Toxicity;
-use ModerationAPI\Content\ContentSubmitParams\Policy\ToxicitySevere;
-use ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking;
-use ModerationAPI\Content\ContentSubmitParams\Policy\Violence;
 use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
@@ -43,6 +20,8 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * @see ModerationAPI\Services\ContentService::submit()
  *
+ * @phpstan-import-type ContentVariants from \ModerationAPI\Content\ContentSubmitParams\Content
+ * @phpstan-import-type PolicyVariants from \ModerationAPI\Content\ContentSubmitParams\Policy
  * @phpstan-import-type ContentShape from \ModerationAPI\Content\ContentSubmitParams\Content
  * @phpstan-import-type PolicyShape from \ModerationAPI\Content\ContentSubmitParams\Policy
  *
@@ -66,6 +45,8 @@ final class ContentSubmitParams implements BaseModel
 
     /**
      * The content sent for moderation.
+     *
+     * @var ContentVariants $content
      */
     #[Required]
     public Text|Image|Video|Audio|Object_ $content;
@@ -119,7 +100,7 @@ final class ContentSubmitParams implements BaseModel
     /**
      * (Enterprise) override the channel policies for this moderation request only.
      *
-     * @var list<Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Sexual|Flirtation|Profanity|Violence|SelfHarm|Spam|SelfPromotion|Political|Religion|CodeAbuse|PiiMasking|URLMasking|Guideline>|null $policies
+     * @var list<PolicyVariants>|null $policies
      */
     #[Optional(list: Policy::class)]
     public ?array $policies;

@@ -14,6 +14,9 @@ use ModerationAPI\Wordlist\Words\WordAddResponse;
 use ModerationAPI\Wordlist\Words\WordRemoveParams;
 use ModerationAPI\Wordlist\Words\WordRemoveResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 final class WordsRawService implements WordsRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +32,7 @@ final class WordsRawService implements WordsRawContract
      *
      * @param string $id ID of the wordlist to add words to
      * @param array{words: list<string>}|WordAddParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WordAddResponse>
      *
@@ -37,7 +41,7 @@ final class WordsRawService implements WordsRawContract
     public function add(
         string $id,
         array|WordAddParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WordAddParams::parseRequest(
             $params,
@@ -61,6 +65,7 @@ final class WordsRawService implements WordsRawContract
      *
      * @param string $id ID of the wordlist to remove words from
      * @param array{words: list<string>}|WordRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WordRemoveResponse>
      *
@@ -69,7 +74,7 @@ final class WordsRawService implements WordsRawContract
     public function remove(
         string $id,
         array|WordRemoveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WordRemoveParams::parseRequest(
             $params,

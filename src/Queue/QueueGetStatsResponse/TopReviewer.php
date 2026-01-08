@@ -17,7 +17,7 @@ use ModerationAPI\Queue\QueueGetStatsResponse\TopReviewer\TopAction;
  *   averageTimePerReview: float,
  *   name: string,
  *   reviewCount: float,
- *   topActions: list<TopActionShape>,
+ *   topActions: list<TopAction|TopActionShape>,
  *   userID: string,
  *   accuracyScore?: float|null,
  * }
@@ -100,7 +100,7 @@ final class TopReviewer implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TopActionShape> $topActions
+     * @param list<TopAction|TopActionShape> $topActions
      */
     public static function with(
         float $averageTimePerReview,
@@ -159,7 +159,7 @@ final class TopReviewer implements BaseModel
     /**
      * Most common actions taken by this reviewer.
      *
-     * @param list<TopActionShape> $topActions
+     * @param list<TopAction|TopActionShape> $topActions
      */
     public function withTopActions(array $topActions): self
     {

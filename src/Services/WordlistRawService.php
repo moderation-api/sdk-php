@@ -16,6 +16,9 @@ use ModerationAPI\Wordlist\WordlistListResponseItem;
 use ModerationAPI\Wordlist\WordlistUpdateParams;
 use ModerationAPI\Wordlist\WordlistUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 final class WordlistRawService implements WordlistRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +33,7 @@ final class WordlistRawService implements WordlistRawContract
      * Get a specific wordlist by ID
      *
      * @param string $id ID of the wordlist to get
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WordlistGetResponse>
      *
@@ -37,7 +41,7 @@ final class WordlistRawService implements WordlistRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -61,6 +65,7 @@ final class WordlistRawService implements WordlistRawContract
      *   strict?: bool,
      *   words?: list<string>,
      * }|WordlistUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WordlistUpdateResponse>
      *
@@ -69,7 +74,7 @@ final class WordlistRawService implements WordlistRawContract
     public function update(
         string $id,
         array|WordlistUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WordlistUpdateParams::parseRequest(
             $params,
@@ -91,12 +96,15 @@ final class WordlistRawService implements WordlistRawContract
      *
      * List all wordlists for the authenticated organization
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<list<WordlistListResponseItem>>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
@@ -112,6 +120,7 @@ final class WordlistRawService implements WordlistRawContract
      * Get the current embedding progress status for a wordlist
      *
      * @param string $id ID of the wordlist to check embedding status for
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WordlistGetEmbeddingStatusResponse>
      *
@@ -119,7 +128,7 @@ final class WordlistRawService implements WordlistRawContract
      */
     public function getEmbeddingStatus(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
