@@ -12,6 +12,9 @@ use ModerationAPI\Queue\Items\ItemResolveResponse;
 use ModerationAPI\Queue\Items\ItemUnresolveResponse;
 use ModerationAPI\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 interface ItemsContract
 {
     /**
@@ -20,8 +23,9 @@ interface ItemsContract
      * @param string $id The queue ID
      * @param float $pageNumber Page number to fetch
      * @param float $pageSize Number of items per page
-     * @param 'asc'|'desc'|SortDirection $sortDirection Sort direction
-     * @param 'createdAt'|'severity'|'reviewedAt'|SortField $sortField
+     * @param SortDirection|value-of<SortDirection> $sortDirection Sort direction
+     * @param SortField|value-of<SortField> $sortField
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -36,9 +40,9 @@ interface ItemsContract
         ?string $labels = null,
         float $pageNumber = 1,
         float $pageSize = 20,
-        string|SortDirection $sortDirection = 'desc',
-        string|SortField|null $sortField = null,
-        ?RequestOptions $requestOptions = null,
+        SortDirection|string $sortDirection = 'desc',
+        SortField|string|null $sortField = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ItemListResponse;
 
     /**
@@ -47,6 +51,7 @@ interface ItemsContract
      * @param string $itemID Path param: The item ID to resolve
      * @param string $id Path param: The queue ID
      * @param string $comment Body param: Optional comment
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -54,7 +59,7 @@ interface ItemsContract
         string $itemID,
         string $id,
         ?string $comment = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ItemResolveResponse;
 
     /**
@@ -63,6 +68,7 @@ interface ItemsContract
      * @param string $itemID Path param: The item ID to unresolve
      * @param string $id Path param: The queue ID
      * @param string $comment Body param: Optional reason for unresolving the item
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -70,6 +76,6 @@ interface ItemsContract
         string $itemID,
         string $id,
         ?string $comment = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ItemUnresolveResponse;
 }

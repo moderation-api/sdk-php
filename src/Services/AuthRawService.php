@@ -12,6 +12,9 @@ use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\AuthRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 final class AuthRawService implements AuthRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,12 +28,15 @@ final class AuthRawService implements AuthRawContract
      *
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AuthNewResponse>
      *
      * @throws APIException
      */
-    public function create(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function create(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
@@ -45,12 +51,14 @@ final class AuthRawService implements AuthRawContract
      *
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AuthGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

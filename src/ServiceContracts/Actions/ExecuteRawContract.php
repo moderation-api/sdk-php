@@ -12,12 +12,16 @@ use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 interface ExecuteRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ExecuteExecuteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExecuteExecuteResponse>
      *
@@ -25,7 +29,7 @@ interface ExecuteRawContract
      */
     public function execute(
         array|ExecuteExecuteParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -35,6 +39,7 @@ interface ExecuteRawContract
      *
      * @param string $actionID the ID or key of the action to execute
      * @param array<string,mixed>|ExecuteExecuteByIDParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExecuteExecuteByIDResponse>
      *
@@ -43,6 +48,6 @@ interface ExecuteRawContract
     public function executeByID(
         string $actionID,
         array|ExecuteExecuteByIDParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -16,12 +16,16 @@ use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 interface AuthorsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|AuthorCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthorNewResponse>
      *
@@ -29,13 +33,14 @@ interface AuthorsRawContract
      */
     public function create(
         array|AuthorCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id either external ID or the ID assigned by moderation API
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthorGetResponse>
      *
@@ -43,7 +48,7 @@ interface AuthorsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -51,6 +56,7 @@ interface AuthorsRawContract
      *
      * @param string $id either external ID or the ID assigned by moderation API
      * @param array<string,mixed>|AuthorUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthorUpdateResponse>
      *
@@ -59,13 +65,14 @@ interface AuthorsRawContract
     public function update(
         string $id,
         array|AuthorUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AuthorListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthorListResponse>
      *
@@ -73,11 +80,13 @@ interface AuthorsRawContract
      */
     public function list(
         array|AuthorListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthorDeleteResponse>
      *
@@ -85,6 +94,6 @@ interface AuthorsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

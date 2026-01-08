@@ -14,6 +14,9 @@ use ModerationAPI\Queue\Items\ItemUnresolveParams;
 use ModerationAPI\Queue\Items\ItemUnresolveResponse;
 use ModerationAPI\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 interface ItemsRawContract
 {
     /**
@@ -21,6 +24,7 @@ interface ItemsRawContract
      *
      * @param string $id The queue ID
      * @param array<string,mixed>|ItemListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ItemListResponse>
      *
@@ -29,7 +33,7 @@ interface ItemsRawContract
     public function list(
         string $id,
         array|ItemListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -37,6 +41,7 @@ interface ItemsRawContract
      *
      * @param string $itemID Path param: The item ID to resolve
      * @param array<string,mixed>|ItemResolveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ItemResolveResponse>
      *
@@ -45,7 +50,7 @@ interface ItemsRawContract
     public function resolve(
         string $itemID,
         array|ItemResolveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -53,6 +58,7 @@ interface ItemsRawContract
      *
      * @param string $itemID Path param: The item ID to unresolve
      * @param array<string,mixed>|ItemUnresolveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ItemUnresolveResponse>
      *
@@ -61,6 +67,6 @@ interface ItemsRawContract
     public function unresolve(
         string $itemID,
         array|ItemUnresolveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

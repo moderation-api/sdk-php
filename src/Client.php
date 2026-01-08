@@ -17,8 +17,8 @@ use ModerationAPI\Services\QueueService;
 use ModerationAPI\Services\WordlistService;
 
 /**
- * @phpstan-import-type NormalizedRequest from \ModerationAPI\Core\BaseClient
  * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ * @phpstan-import-type NormalizedRequest from \ModerationAPI\Core\BaseClient
  */
 class Client extends BaseClient
 {

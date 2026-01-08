@@ -15,7 +15,7 @@ use ModerationAPI\Queue\Items\ItemListResponse\Pagination;
  * @phpstan-import-type PaginationShape from \ModerationAPI\Queue\Items\ItemListResponse\Pagination
  *
  * @phpstan-type ItemListResponseShape = array{
- *   items: list<ItemShape>, pagination: Pagination|PaginationShape
+ *   items: list<Item|ItemShape>, pagination: Pagination|PaginationShape
  * }
  */
 final class ItemListResponse implements BaseModel
@@ -54,7 +54,7 @@ final class ItemListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ItemShape> $items
+     * @param list<Item|ItemShape> $items
      * @param Pagination|PaginationShape $pagination
      */
     public static function with(
@@ -70,7 +70,7 @@ final class ItemListResponse implements BaseModel
     }
 
     /**
-     * @param list<ItemShape> $items
+     * @param list<Item|ItemShape> $items
      */
     public function withItems(array $items): self
     {

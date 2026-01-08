@@ -21,7 +21,7 @@ use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\RecommendationAction;
  *   conversationIDs?: list<string|null>|null,
  *   filteredActionIDs?: list<string>|null,
  *   filteredChannelIDs?: list<string>|null,
- *   filterLabels?: list<FilterLabelShape>|null,
+ *   filterLabels?: list<FilterLabel|FilterLabelShape>|null,
  *   labels?: list<string>|null,
  *   recommendationActions?: list<RecommendationAction|value-of<RecommendationAction>>|null,
  *   showChecked?: bool|null,
@@ -81,7 +81,7 @@ final class Filter implements BaseModel
      * @param list<string|null>|null $conversationIDs
      * @param list<string>|null $filteredActionIDs
      * @param list<string>|null $filteredChannelIDs
-     * @param list<FilterLabelShape>|null $filterLabels
+     * @param list<FilterLabel|FilterLabelShape>|null $filterLabels
      * @param list<string>|null $labels
      * @param list<RecommendationAction|value-of<RecommendationAction>>|null $recommendationActions
      */
@@ -171,7 +171,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param list<FilterLabelShape> $filterLabels
+     * @param list<FilterLabel|FilterLabelShape> $filterLabels
      */
     public function withFilterLabels(array $filterLabels): self
     {

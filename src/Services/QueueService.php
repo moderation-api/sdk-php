@@ -13,6 +13,9 @@ use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\QueueContract;
 use ModerationAPI\Services\Queue\ItemsService;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 final class QueueService implements QueueContract
 {
     /**
@@ -40,12 +43,13 @@ final class QueueService implements QueueContract
      * Get a queue
      *
      * @param string $id The queue ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): QueueGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -60,13 +64,14 @@ final class QueueService implements QueueContract
      *
      * @param string $id The queue ID
      * @param string $withinDays Number of days to analyze statistics for
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getStats(
         string $id,
         string $withinDays = '30',
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): QueueGetStatsResponse {
         $params = Util::removeNulls(['withinDays' => $withinDays]);
 

@@ -13,6 +13,11 @@ use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\ContentRawContract;
 
+/**
+ * @phpstan-import-type ContentShape from \ModerationAPI\Content\ContentSubmitParams\Content
+ * @phpstan-import-type PolicyShape from \ModerationAPI\Content\ContentSubmitParams\Policy
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 final class ContentRawService implements ContentRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,16 +30,17 @@ final class ContentRawService implements ContentRawContract
      * @api
      *
      * @param array{
-     *   content: array<string,mixed>,
+     *   content: ContentShape,
      *   authorID?: string,
      *   channel?: string,
      *   contentID?: string,
      *   conversationID?: string,
      *   doNotStore?: bool,
      *   metadata?: array<string,mixed>,
-     *   metaType?: 'profile'|'message'|'post'|'comment'|'event'|'product'|'review'|'other'|MetaType,
-     *   policies?: list<array<string,mixed>>,
+     *   metaType?: MetaType|value-of<MetaType>,
+     *   policies?: list<PolicyShape>,
      * }|ContentSubmitParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ContentSubmitResponse>
      *
@@ -42,7 +48,7 @@ final class ContentRawService implements ContentRawContract
      */
     public function submit(
         array|ContentSubmitParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ContentSubmitParams::parseRequest(
             $params,

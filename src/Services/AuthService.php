@@ -11,6 +11,9 @@ use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\AuthContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 final class AuthService implements AuthContract
 {
     /**
@@ -31,10 +34,12 @@ final class AuthService implements AuthContract
      *
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function create(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AuthNewResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(requestOptions: $requestOptions);
@@ -47,10 +52,12 @@ final class AuthService implements AuthContract
      *
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AuthGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve(requestOptions: $requestOptions);
