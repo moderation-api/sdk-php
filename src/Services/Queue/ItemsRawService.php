@@ -19,6 +19,9 @@ use ModerationAPI\Queue\Items\ItemUnresolveResponse;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\Queue\ItemsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 final class ItemsRawService implements ItemsRawContract
 {
     // @phpstan-ignore-next-line
@@ -43,9 +46,10 @@ final class ItemsRawService implements ItemsRawContract
      *   labels?: string,
      *   pageNumber?: float,
      *   pageSize?: float,
-     *   sortDirection?: 'asc'|'desc'|SortDirection,
-     *   sortField?: 'createdAt'|'severity'|'reviewedAt'|SortField,
+     *   sortDirection?: SortDirection|value-of<SortDirection>,
+     *   sortField?: SortField|value-of<SortField>,
      * }|ItemListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ItemListResponse>
      *
@@ -54,7 +58,7 @@ final class ItemsRawService implements ItemsRawContract
     public function list(
         string $id,
         array|ItemListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ItemListParams::parseRequest(
             $params,
@@ -85,6 +89,7 @@ final class ItemsRawService implements ItemsRawContract
      *
      * @param string $itemID Path param: The item ID to resolve
      * @param array{id: string, comment?: string}|ItemResolveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ItemResolveResponse>
      *
@@ -93,7 +98,7 @@ final class ItemsRawService implements ItemsRawContract
     public function resolve(
         string $itemID,
         array|ItemResolveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ItemResolveParams::parseRequest(
             $params,
@@ -119,6 +124,7 @@ final class ItemsRawService implements ItemsRawContract
      *
      * @param string $itemID Path param: The item ID to unresolve
      * @param array{id: string, comment?: string}|ItemUnresolveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ItemUnresolveResponse>
      *
@@ -127,7 +133,7 @@ final class ItemsRawService implements ItemsRawContract
     public function unresolve(
         string $itemID,
         array|ItemUnresolveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ItemUnresolveParams::parseRequest(
             $params,

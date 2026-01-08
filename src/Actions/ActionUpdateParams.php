@@ -30,11 +30,11 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   key?: string|null,
  *   name?: string|null,
  *   position?: null|Position|value-of<Position>,
- *   possibleValues?: list<PossibleValueShape>|null,
+ *   possibleValues?: list<PossibleValue|PossibleValueShape>|null,
  *   queueBehaviour?: null|QueueBehaviour|value-of<QueueBehaviour>,
  *   type?: null|Type|value-of<Type>,
  *   valueRequired?: bool|null,
- *   webhooks?: list<WebhookShape>|null,
+ *   webhooks?: list<Webhook|WebhookShape>|null,
  * }
  */
 final class ActionUpdateParams implements BaseModel
@@ -139,10 +139,10 @@ final class ActionUpdateParams implements BaseModel
      *
      * @param list<string>|null $filterInQueueIDs
      * @param Position|value-of<Position>|null $position
-     * @param list<PossibleValueShape>|null $possibleValues
+     * @param list<PossibleValue|PossibleValueShape>|null $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour>|null $queueBehaviour
      * @param Type|value-of<Type>|null $type
-     * @param list<WebhookShape>|null $webhooks
+     * @param list<Webhook|WebhookShape>|null $webhooks
      */
     public static function with(
         ?bool $builtIn = null,
@@ -260,7 +260,7 @@ final class ActionUpdateParams implements BaseModel
     /**
      * The possible values of the action. The user will be prompted to select one of these values when executing the action.
      *
-     * @param list<PossibleValueShape> $possibleValues
+     * @param list<PossibleValue|PossibleValueShape> $possibleValues
      */
     public function withPossibleValues(array $possibleValues): self
     {
@@ -311,7 +311,7 @@ final class ActionUpdateParams implements BaseModel
     /**
      * The action's webhooks.
      *
-     * @param list<WebhookShape> $webhooks
+     * @param list<Webhook|WebhookShape> $webhooks
      */
     public function withWebhooks(array $webhooks): self
     {

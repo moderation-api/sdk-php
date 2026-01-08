@@ -8,14 +8,19 @@ use ModerationAPI\Account\AccountListResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 interface AccountContract
 {
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AccountListResponse;
 }

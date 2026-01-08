@@ -15,6 +15,9 @@ use ModerationAPI\Queue\Items\ItemUnresolveResponse;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\Queue\ItemsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 final class ItemsService implements ItemsContract
 {
     /**
@@ -38,8 +41,9 @@ final class ItemsService implements ItemsContract
      * @param string $id The queue ID
      * @param float $pageNumber Page number to fetch
      * @param float $pageSize Number of items per page
-     * @param 'asc'|'desc'|SortDirection $sortDirection Sort direction
-     * @param 'createdAt'|'severity'|'reviewedAt'|SortField $sortField
+     * @param SortDirection|value-of<SortDirection> $sortDirection Sort direction
+     * @param SortField|value-of<SortField> $sortField
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -54,9 +58,9 @@ final class ItemsService implements ItemsContract
         ?string $labels = null,
         float $pageNumber = 1,
         float $pageSize = 20,
-        string|SortDirection $sortDirection = 'desc',
-        string|SortField|null $sortField = null,
-        ?RequestOptions $requestOptions = null,
+        SortDirection|string $sortDirection = 'desc',
+        SortField|string|null $sortField = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ItemListResponse {
         $params = Util::removeNulls(
             [
@@ -88,6 +92,7 @@ final class ItemsService implements ItemsContract
      * @param string $itemID Path param: The item ID to resolve
      * @param string $id Path param: The queue ID
      * @param string $comment Body param: Optional comment
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -95,7 +100,7 @@ final class ItemsService implements ItemsContract
         string $itemID,
         string $id,
         ?string $comment = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ItemResolveResponse {
         $params = Util::removeNulls(['id' => $id, 'comment' => $comment]);
 
@@ -113,6 +118,7 @@ final class ItemsService implements ItemsContract
      * @param string $itemID Path param: The item ID to unresolve
      * @param string $id Path param: The queue ID
      * @param string $comment Body param: Optional reason for unresolving the item
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -120,7 +126,7 @@ final class ItemsService implements ItemsContract
         string $itemID,
         string $id,
         ?string $comment = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ItemUnresolveResponse {
         $params = Util::removeNulls(['id' => $id, 'comment' => $comment]);
 

@@ -16,12 +16,16 @@ use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ActionCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionNewResponse>
      *
@@ -29,13 +33,14 @@ interface ActionsRawContract
      */
     public function create(
         array|ActionCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id the ID of the action to get
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionGetResponse>
      *
@@ -43,7 +48,7 @@ interface ActionsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -51,6 +56,7 @@ interface ActionsRawContract
      *
      * @param string $id the ID of the action to update
      * @param array<string,mixed>|ActionUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionUpdateResponse>
      *
@@ -59,13 +65,14 @@ interface ActionsRawContract
     public function update(
         string $id,
         array|ActionUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ActionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<ActionListResponseItem>>
      *
@@ -73,13 +80,14 @@ interface ActionsRawContract
      */
     public function list(
         array|ActionListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id the ID of the action to delete
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionDeleteResponse>
      *
@@ -87,6 +95,6 @@ interface ActionsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

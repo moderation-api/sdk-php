@@ -11,12 +11,16 @@ use ModerationAPI\Queue\QueueGetStatsParams;
 use ModerationAPI\Queue\QueueGetStatsResponse;
 use ModerationAPI\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 interface QueueRawContract
 {
     /**
      * @api
      *
      * @param string $id The queue ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<QueueGetResponse>
      *
@@ -24,7 +28,7 @@ interface QueueRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -32,6 +36,7 @@ interface QueueRawContract
      *
      * @param string $id The queue ID
      * @param array<string,mixed>|QueueGetStatsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<QueueGetStatsResponse>
      *
@@ -40,6 +45,6 @@ interface QueueRawContract
     public function getStats(
         string $id,
         array|QueueGetStatsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

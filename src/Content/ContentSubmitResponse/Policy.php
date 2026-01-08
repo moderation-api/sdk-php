@@ -16,7 +16,8 @@ use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type ClassifierOutputShape from \ModerationAPI\Content\ContentSubmitResponse\Policy\ClassifierOutput
  * @phpstan-import-type EntityMatcherOutputShape from \ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput
  *
- * @phpstan-type PolicyShape = ClassifierOutputShape|EntityMatcherOutputShape
+ * @phpstan-type PolicyVariants = ClassifierOutput|EntityMatcherOutput
+ * @phpstan-type PolicyShape = PolicyVariants|ClassifierOutputShape|EntityMatcherOutputShape
  */
 final class Policy implements ConverterSource
 {

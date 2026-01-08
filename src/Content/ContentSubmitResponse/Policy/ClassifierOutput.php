@@ -21,7 +21,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   probability: float,
  *   type: 'classifier',
  *   flaggedFields?: list<string>|null,
- *   labels?: list<LabelShape>|null,
+ *   labels?: list<Label|LabelShape>|null,
  * }
  */
 final class ClassifierOutput implements BaseModel
@@ -82,7 +82,7 @@ final class ClassifierOutput implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string>|null $flaggedFields
-     * @param list<LabelShape>|null $labels
+     * @param list<Label|LabelShape>|null $labels
      */
     public static function with(
         string $id,
@@ -144,7 +144,7 @@ final class ClassifierOutput implements BaseModel
     }
 
     /**
-     * @param list<LabelShape> $labels
+     * @param list<Label|LabelShape> $labels
      */
     public function withLabels(array $labels): self
     {

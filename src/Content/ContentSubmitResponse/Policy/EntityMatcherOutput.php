@@ -18,7 +18,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @phpstan-type EntityMatcherOutputShape = array{
  *   id: string,
  *   flagged: bool,
- *   matches: list<MatchShape>,
+ *   matches: list<Match_|MatchShape>,
  *   probability: float,
  *   type: 'entity_matcher',
  *   flaggedFields?: list<string>|null,
@@ -78,7 +78,7 @@ final class EntityMatcherOutput implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MatchShape> $matches
+     * @param list<Match_|MatchShape> $matches
      * @param list<string>|null $flaggedFields
      */
     public static function with(
@@ -117,7 +117,7 @@ final class EntityMatcherOutput implements BaseModel
     }
 
     /**
-     * @param list<MatchShape> $matches
+     * @param list<Match_|MatchShape> $matches
      */
     public function withMatches(array $matches): self
     {

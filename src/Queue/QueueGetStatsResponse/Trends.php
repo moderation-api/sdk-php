@@ -15,8 +15,8 @@ use ModerationAPI\Queue\QueueGetStatsResponse\Trends\FlaggedContentTrend;
  * @phpstan-import-type FlaggedContentTrendShape from \ModerationAPI\Queue\QueueGetStatsResponse\Trends\FlaggedContentTrend
  *
  * @phpstan-type TrendsShape = array{
- *   dailyReviewCounts: list<DailyReviewCountShape>,
- *   flaggedContentTrends: list<FlaggedContentTrendShape>,
+ *   dailyReviewCounts: list<DailyReviewCount|DailyReviewCountShape>,
+ *   flaggedContentTrends: list<FlaggedContentTrend|FlaggedContentTrendShape>,
  * }
  */
 final class Trends implements BaseModel
@@ -56,8 +56,8 @@ final class Trends implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DailyReviewCountShape> $dailyReviewCounts
-     * @param list<FlaggedContentTrendShape> $flaggedContentTrends
+     * @param list<DailyReviewCount|DailyReviewCountShape> $dailyReviewCounts
+     * @param list<FlaggedContentTrend|FlaggedContentTrendShape> $flaggedContentTrends
      */
     public static function with(
         array $dailyReviewCounts,
@@ -72,7 +72,7 @@ final class Trends implements BaseModel
     }
 
     /**
-     * @param list<DailyReviewCountShape> $dailyReviewCounts
+     * @param list<DailyReviewCount|DailyReviewCountShape> $dailyReviewCounts
      */
     public function withDailyReviewCounts(array $dailyReviewCounts): self
     {
@@ -83,7 +83,7 @@ final class Trends implements BaseModel
     }
 
     /**
-     * @param list<FlaggedContentTrendShape> $flaggedContentTrends
+     * @param list<FlaggedContentTrend|FlaggedContentTrendShape> $flaggedContentTrends
      */
     public function withFlaggedContentTrends(array $flaggedContentTrends): self
     {

@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitParams\Content;
 
 use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data;
-use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Audio;
-use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Image;
-use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Text;
-use ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Video;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -16,6 +12,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * Object.
  *
+ * @phpstan-import-type DataVariants from \ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data
  * @phpstan-import-type DataShape from \ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data
  *
  * @phpstan-type ObjectShape = array{data: array<string,DataShape>, type: 'object'}
@@ -32,7 +29,7 @@ final class Object_ implements BaseModel
     /**
      * Values in the object. Can be mixed content types.
      *
-     * @var array<string,Text|Image|Video|Audio> $data
+     * @var array<string,DataVariants> $data
      */
     #[Required(map: Data::class)]
     public array $data;

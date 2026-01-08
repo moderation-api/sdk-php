@@ -10,6 +10,9 @@ use ModerationAPI\Core\Contracts\BaseResponse;
 use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 interface AuthRawContract
 {
     /**
@@ -17,12 +20,14 @@ interface AuthRawContract
      *
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AuthNewResponse>
      *
      * @throws APIException
      */
     public function create(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -30,11 +35,13 @@ interface AuthRawContract
      *
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AuthGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

@@ -14,6 +14,9 @@ use ModerationAPI\Core\Exceptions\APIException;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\Actions\ExecuteRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 final class ExecuteRawService implements ExecuteRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,6 +38,7 @@ final class ExecuteRawService implements ExecuteRawContract
      *   queueID?: string,
      *   value?: string,
      * }|ExecuteExecuteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExecuteExecuteResponse>
      *
@@ -42,7 +46,7 @@ final class ExecuteRawService implements ExecuteRawContract
      */
     public function execute(
         array|ExecuteExecuteParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ExecuteExecuteParams::parseRequest(
             $params,
@@ -73,6 +77,7 @@ final class ExecuteRawService implements ExecuteRawContract
      *   queueID?: string,
      *   value?: string,
      * }|ExecuteExecuteByIDParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExecuteExecuteByIDResponse>
      *
@@ -81,7 +86,7 @@ final class ExecuteRawService implements ExecuteRawContract
     public function executeByID(
         string $actionID,
         array|ExecuteExecuteByIDParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ExecuteExecuteByIDParams::parseRequest(
             $params,

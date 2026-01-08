@@ -56,7 +56,8 @@ use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type URLMaskingShape from \ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking
  * @phpstan-import-type GuidelineShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Guideline
  *
- * @phpstan-type PolicyShape = ToxicityShape|PersonalInformationShape|ToxicitySevereShape|HateShape|IllicitShape|IllicitDrugsShape|IllicitAlcoholShape|IllicitFirearmsShape|IllicitTobaccoShape|IllicitGamblingShape|SexualShape|FlirtationShape|ProfanityShape|ViolenceShape|SelfHarmShape|SpamShape|SelfPromotionShape|PoliticalShape|ReligionShape|CodeAbuseShape|PiiMaskingShape|URLMaskingShape|GuidelineShape
+ * @phpstan-type PolicyVariants = Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Sexual|Flirtation|Profanity|Violence|SelfHarm|Spam|SelfPromotion|Political|Religion|CodeAbuse|PiiMasking|URLMasking|Guideline
+ * @phpstan-type PolicyShape = PolicyVariants|ToxicityShape|PersonalInformationShape|ToxicitySevereShape|HateShape|IllicitShape|IllicitDrugsShape|IllicitAlcoholShape|IllicitFirearmsShape|IllicitTobaccoShape|IllicitGamblingShape|SexualShape|FlirtationShape|ProfanityShape|ViolenceShape|SelfHarmShape|SpamShape|SelfPromotionShape|PoliticalShape|ReligionShape|CodeAbuseShape|PiiMaskingShape|URLMaskingShape|GuidelineShape
  */
 final class Policy implements ConverterSource
 {

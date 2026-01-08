@@ -13,7 +13,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @phpstan-import-type EntityShape from \ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking\Entity
  *
  * @phpstan-type URLMaskingShape = array{
- *   id: 'url', entities: array<string,EntityShape>
+ *   id: 'url', entities: array<string,Entity|EntityShape>
  * }
  */
 final class URLMasking implements BaseModel
@@ -53,7 +53,7 @@ final class URLMasking implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,EntityShape> $entities
+     * @param array<string,Entity|EntityShape> $entities
      */
     public static function with(array $entities): self
     {
@@ -65,7 +65,7 @@ final class URLMasking implements BaseModel
     }
 
     /**
-     * @param array<string,EntityShape> $entities
+     * @param array<string,Entity|EntityShape> $entities
      */
     public function withEntities(array $entities): self
     {

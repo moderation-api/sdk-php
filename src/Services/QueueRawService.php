@@ -13,6 +13,9 @@ use ModerationAPI\Queue\QueueGetStatsResponse;
 use ModerationAPI\RequestOptions;
 use ModerationAPI\ServiceContracts\QueueRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
+ */
 final class QueueRawService implements QueueRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,6 +30,7 @@ final class QueueRawService implements QueueRawContract
      * Get a queue
      *
      * @param string $id The queue ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<QueueGetResponse>
      *
@@ -34,7 +38,7 @@ final class QueueRawService implements QueueRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -52,6 +56,7 @@ final class QueueRawService implements QueueRawContract
      *
      * @param string $id The queue ID
      * @param array{withinDays?: string}|QueueGetStatsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<QueueGetStatsResponse>
      *
@@ -60,7 +65,7 @@ final class QueueRawService implements QueueRawContract
     public function getStats(
         string $id,
         array|QueueGetStatsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = QueueGetStatsParams::parseRequest(
             $params,

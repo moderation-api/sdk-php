@@ -9,12 +9,8 @@ use ModerationAPI\Content\ContentSubmitResponse\Content;
 use ModerationAPI\Content\ContentSubmitResponse\Error;
 use ModerationAPI\Content\ContentSubmitResponse\Evaluation;
 use ModerationAPI\Content\ContentSubmitResponse\Insight;
-use ModerationAPI\Content\ContentSubmitResponse\Insight\LanguageInsight;
-use ModerationAPI\Content\ContentSubmitResponse\Insight\SentimentInsight;
 use ModerationAPI\Content\ContentSubmitResponse\Meta;
 use ModerationAPI\Content\ContentSubmitResponse\Policy;
-use ModerationAPI\Content\ContentSubmitResponse\Policy\ClassifierOutput;
-use ModerationAPI\Content\ContentSubmitResponse\Policy\EntityMatcherOutput;
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation;
 use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Attributes\Required;
@@ -22,6 +18,8 @@ use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type InsightVariants from \ModerationAPI\Content\ContentSubmitResponse\Insight
+ * @phpstan-import-type PolicyVariants from \ModerationAPI\Content\ContentSubmitResponse\Policy
  * @phpstan-import-type AuthorShape from \ModerationAPI\Content\ContentSubmitResponse\Author
  * @phpstan-import-type ContentShape from \ModerationAPI\Content\ContentSubmitResponse\Content
  * @phpstan-import-type EvaluationShape from \ModerationAPI\Content\ContentSubmitResponse\Evaluation
@@ -39,7 +37,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   meta: Meta|MetaShape,
  *   policies: list<PolicyShape>,
  *   recommendation: Recommendation|RecommendationShape,
- *   errors?: list<ErrorShape>|null,
+ *   errors?: list<Error|ErrorShape>|null,
  * }
  */
 final class ContentSubmitResponse implements BaseModel
@@ -68,7 +66,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * Results of all insights enabled in the channel.
      *
-     * @var list<SentimentInsight|LanguageInsight> $insights
+     * @var list<InsightVariants> $insights
      */
     #[Required(list: Insight::class)]
     public array $insights;
@@ -82,7 +80,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * Results of all policies in the channel. Sorted by highest probability.
      *
-     * @var list<ClassifierOutput|EntityMatcherOutput> $policies
+     * @var list<PolicyVariants> $policies
      */
     #[Required(list: Policy::class)]
     public array $policies;
@@ -147,7 +145,7 @@ final class ContentSubmitResponse implements BaseModel
      * @param Meta|MetaShape $meta
      * @param list<PolicyShape> $policies
      * @param Recommendation|RecommendationShape $recommendation
-     * @param list<ErrorShape>|null $errors
+     * @param list<Error|ErrorShape>|null $errors
      */
     public static function with(
         Author|array|null $author,
@@ -269,7 +267,7 @@ final class ContentSubmitResponse implements BaseModel
     /**
      * Policies that had errors.
      *
-     * @param list<ErrorShape> $errors
+     * @param list<Error|ErrorShape> $errors
      */
     public function withErrors(array $errors): self
     {

@@ -20,7 +20,8 @@ use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type VideoShape from \ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Video
  * @phpstan-import-type AudioShape from \ModerationAPI\Content\ContentSubmitParams\Content\Object_\Data\Audio
  *
- * @phpstan-type DataShape = TextShape|ImageShape|VideoShape|AudioShape
+ * @phpstan-type DataVariants = Text|Image|Video|Audio
+ * @phpstan-type DataShape = DataVariants|TextShape|ImageShape|VideoShape|AudioShape
  */
 final class Data implements ConverterSource
 {
