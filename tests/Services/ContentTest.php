@@ -59,6 +59,7 @@ final class ContentTest extends TestCase
             metadata: ['foo' => 'bar'],
             metaType: 'profile',
             policies: [['id' => 'toxicity', 'flag' => true, 'threshold' => 0]],
+            timestamp: 0,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

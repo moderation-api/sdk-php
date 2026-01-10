@@ -49,6 +49,7 @@ final class ContentService implements ContentContract
      * @param array<string,mixed> $metadata Any metadata you want to store with the content
      * @param MetaType|value-of<MetaType> $metaType The meta type of content being moderated
      * @param list<PolicyShape> $policies (Enterprise) override the channel policies for this moderation request only
+     * @param float $timestamp Unix timestamp (in milliseconds) of when the content was created. Use if content is not submitted in real-time.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -63,6 +64,7 @@ final class ContentService implements ContentContract
         ?array $metadata = null,
         MetaType|string|null $metaType = null,
         ?array $policies = null,
+        ?float $timestamp = null,
         RequestOptions|array|null $requestOptions = null,
     ): ContentSubmitResponse {
         $params = Util::removeNulls(
@@ -76,6 +78,7 @@ final class ContentService implements ContentContract
                 'metadata' => $metadata,
                 'metaType' => $metaType,
                 'policies' => $policies,
+                'timestamp' => $timestamp,
             ],
         );
 
