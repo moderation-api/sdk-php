@@ -39,6 +39,7 @@ final class ContentRawService implements ContentRawContract
      *   metadata?: array<string,mixed>,
      *   metaType?: MetaType|value-of<MetaType>,
      *   policies?: list<PolicyShape>,
+     *   timestamp?: float,
      * }|ContentSubmitParams $params
      * @param RequestOpts|null $requestOptions
      *
