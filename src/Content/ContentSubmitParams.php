@@ -35,6 +35,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   metadata?: array<string,mixed>|null,
  *   metaType?: null|MetaType|value-of<MetaType>,
  *   policies?: list<PolicyShape>|null,
+ *   timestamp?: float|null,
  * }
  */
 final class ContentSubmitParams implements BaseModel
@@ -106,6 +107,12 @@ final class ContentSubmitParams implements BaseModel
     public ?array $policies;
 
     /**
+     * Unix timestamp (in milliseconds) of when the content was created. Use if content is not submitted in real-time.
+     */
+    #[Optional]
+    public ?float $timestamp;
+
+    /**
      * `new ContentSubmitParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -144,6 +151,7 @@ final class ContentSubmitParams implements BaseModel
         ?array $metadata = null,
         MetaType|string|null $metaType = null,
         ?array $policies = null,
+        ?float $timestamp = null,
     ): self {
         $self = new self;
 
@@ -157,6 +165,7 @@ final class ContentSubmitParams implements BaseModel
         null !== $metadata && $self['metadata'] = $metadata;
         null !== $metaType && $self['metaType'] = $metaType;
         null !== $policies && $self['policies'] = $policies;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
 
         return $self;
     }
@@ -265,6 +274,17 @@ final class ContentSubmitParams implements BaseModel
     {
         $self = clone $this;
         $self['policies'] = $policies;
+
+        return $self;
+    }
+
+    /**
+     * Unix timestamp (in milliseconds) of when the content was created. Use if content is not submitted in real-time.
+     */
+    public function withTimestamp(float $timestamp): self
+    {
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
         return $self;
     }
