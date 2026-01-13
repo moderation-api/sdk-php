@@ -59,6 +59,8 @@ When the library is unable to connect to the API, or if the API returns a non-su
 <?php
 
 use ModerationAPI\Core\Exceptions\APIConnectionException;
+use ModerationAPI\Core\Exceptions\RateLimitException;
+use ModerationAPI\Core\Exceptions\APIStatusException;
 
 try {
   $response = $client->content->submit(
@@ -67,9 +69,9 @@ try {
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
-} catch (RateLimitError $e) {
+} catch (RateLimitException $e) {
   echo "A 429 status code was received; we should back off a bit.", PHP_EOL;
-} catch (APIStatusError $e) {
+} catch (APIStatusException $e) {
   echo "Another non-200-range status code was received", PHP_EOL;
   echo $e->getMessage();
 }
