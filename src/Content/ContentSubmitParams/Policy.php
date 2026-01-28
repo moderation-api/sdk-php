@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitParams;
 
+use ModerationAPI\Content\ContentSubmitParams\Policy\Adult;
 use ModerationAPI\Content\ContentSubmitParams\Policy\Cannabis;
 use ModerationAPI\Content\ContentSubmitParams\Policy\CodeAbuse;
+use ModerationAPI\Content\ContentSubmitParams\Policy\Crypto;
 use ModerationAPI\Content\ContentSubmitParams\Policy\Flirtation;
 use ModerationAPI\Content\ContentSubmitParams\Policy\Guideline;
 use ModerationAPI\Content\ContentSubmitParams\Policy\Hate;
@@ -44,6 +46,8 @@ use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type IllicitTobaccoShape from \ModerationAPI\Content\ContentSubmitParams\Policy\IllicitTobacco
  * @phpstan-import-type IllicitGamblingShape from \ModerationAPI\Content\ContentSubmitParams\Policy\IllicitGambling
  * @phpstan-import-type CannabisShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Cannabis
+ * @phpstan-import-type AdultShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Adult
+ * @phpstan-import-type CryptoShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Crypto
  * @phpstan-import-type SexualShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Sexual
  * @phpstan-import-type FlirtationShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Flirtation
  * @phpstan-import-type ProfanityShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Profanity
@@ -58,8 +62,8 @@ use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type URLMaskingShape from \ModerationAPI\Content\ContentSubmitParams\Policy\URLMasking
  * @phpstan-import-type GuidelineShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Guideline
  *
- * @phpstan-type PolicyVariants = Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Cannabis|Sexual|Flirtation|Profanity|Violence|SelfHarm|Spam|SelfPromotion|Political|Religion|CodeAbuse|PiiMasking|URLMasking|Guideline
- * @phpstan-type PolicyShape = PolicyVariants|ToxicityShape|PersonalInformationShape|ToxicitySevereShape|HateShape|IllicitShape|IllicitDrugsShape|IllicitAlcoholShape|IllicitFirearmsShape|IllicitTobaccoShape|IllicitGamblingShape|CannabisShape|SexualShape|FlirtationShape|ProfanityShape|ViolenceShape|SelfHarmShape|SpamShape|SelfPromotionShape|PoliticalShape|ReligionShape|CodeAbuseShape|PiiMaskingShape|URLMaskingShape|GuidelineShape
+ * @phpstan-type PolicyVariants = Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Cannabis|Adult|Crypto|Sexual|Flirtation|Profanity|Violence|SelfHarm|Spam|SelfPromotion|Political|Religion|CodeAbuse|PiiMasking|URLMasking|Guideline
+ * @phpstan-type PolicyShape = PolicyVariants|ToxicityShape|PersonalInformationShape|ToxicitySevereShape|HateShape|IllicitShape|IllicitDrugsShape|IllicitAlcoholShape|IllicitFirearmsShape|IllicitTobaccoShape|IllicitGamblingShape|CannabisShape|AdultShape|CryptoShape|SexualShape|FlirtationShape|ProfanityShape|ViolenceShape|SelfHarmShape|SpamShape|SelfPromotionShape|PoliticalShape|ReligionShape|CodeAbuseShape|PiiMaskingShape|URLMaskingShape|GuidelineShape
  */
 final class Policy implements ConverterSource
 {
@@ -82,6 +86,8 @@ final class Policy implements ConverterSource
             IllicitTobacco::class,
             IllicitGambling::class,
             Cannabis::class,
+            Adult::class,
+            Crypto::class,
             Sexual::class,
             Flirtation::class,
             Profanity::class,
