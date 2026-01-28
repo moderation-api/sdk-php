@@ -1,4 +1,4 @@
 configured_endpoints: 27
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/moderation-api%2Fmoderation-api-4c45cb81092c51edd3affb49ac04582b6416054870f15e8bb30565375cd390eb.yml
-openapi_spec_hash: 9ff39aca0794f22638ac710075bf70fe
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/moderation-api%2Fmoderation-api-d63cb4b89d39d82fa1d4600501ad5cedfddfbcf7a8806cac61634873b5211a9f.yml
+openapi_spec_hash: 5a8d51e52ea8e52681c77eed584fb21c
 config_hash: 6a52f6ae7d55cf3b4e91538cc7752aeb
