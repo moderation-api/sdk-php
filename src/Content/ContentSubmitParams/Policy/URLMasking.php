@@ -65,6 +65,17 @@ final class URLMasking implements BaseModel
     }
 
     /**
+     * @param 'url' $id
+     */
+    public function withID(string $id): self
+    {
+        $self = clone $this;
+        $self['id'] = $id;
+
+        return $self;
+    }
+
+    /**
      * @param array<string,Entity|EntityShape> $entities
      */
     public function withEntities(array $entities): self

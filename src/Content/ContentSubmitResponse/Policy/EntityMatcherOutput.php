@@ -136,6 +136,17 @@ final class EntityMatcherOutput implements BaseModel
     }
 
     /**
+     * @param 'entity_matcher' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
      * @param list<string> $flaggedFields
      */
     public function withFlaggedFields(array $flaggedFields): self

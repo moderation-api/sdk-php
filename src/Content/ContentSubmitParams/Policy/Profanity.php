@@ -64,6 +64,17 @@ final class Profanity implements BaseModel
         return $self;
     }
 
+    /**
+     * @param 'profanity' $id
+     */
+    public function withID(string $id): self
+    {
+        $self = clone $this;
+        $self['id'] = $id;
+
+        return $self;
+    }
+
     public function withFlag(bool $flag): self
     {
         $self = clone $this;

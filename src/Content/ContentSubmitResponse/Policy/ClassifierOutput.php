@@ -131,6 +131,17 @@ final class ClassifierOutput implements BaseModel
     }
 
     /**
+     * @param 'classifier' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
      * The keys of the flagged fields if submitting an object.
      *
      * @param list<string> $flaggedFields

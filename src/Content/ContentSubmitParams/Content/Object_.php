@@ -81,4 +81,15 @@ final class Object_ implements BaseModel
 
         return $self;
     }
+
+    /**
+     * @param 'object' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
 }

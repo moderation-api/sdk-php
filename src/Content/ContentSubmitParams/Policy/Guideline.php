@@ -80,6 +80,17 @@ final class Guideline implements BaseModel
         return $self;
     }
 
+    /**
+     * @param 'guideline' $id
+     */
+    public function withID(string $id): self
+    {
+        $self = clone $this;
+        $self['id'] = $id;
+
+        return $self;
+    }
+
     public function withFlag(bool $flag): self
     {
         $self = clone $this;
