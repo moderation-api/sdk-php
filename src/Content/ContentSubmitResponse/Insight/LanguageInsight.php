@@ -68,10 +68,32 @@ final class LanguageInsight implements BaseModel
         return $self;
     }
 
+    /**
+     * @param 'language' $id
+     */
+    public function withID(string $id): self
+    {
+        $self = clone $this;
+        $self['id'] = $id;
+
+        return $self;
+    }
+
     public function withProbability(float $probability): self
     {
         $self = clone $this;
         $self['probability'] = $probability;
+
+        return $self;
+    }
+
+    /**
+     * @param 'insight' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
 
         return $self;
     }

@@ -62,6 +62,17 @@ final class Video implements BaseModel
     }
 
     /**
+     * @param 'video' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
      * A public URL of the video content.
      */
     public function withURL(string $url): self
