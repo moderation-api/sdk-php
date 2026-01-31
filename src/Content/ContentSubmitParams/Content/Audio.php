@@ -62,6 +62,17 @@ final class Audio implements BaseModel
     }
 
     /**
+     * @param 'audio' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
      * The URL of the audio content.
      */
     public function withURL(string $url): self

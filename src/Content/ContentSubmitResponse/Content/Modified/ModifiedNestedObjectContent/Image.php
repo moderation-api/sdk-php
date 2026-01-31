@@ -62,6 +62,17 @@ final class Image implements BaseModel
     }
 
     /**
+     * @param 'image' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
      * A public URL of the image content.
      */
     public function withURL(string $url): self
