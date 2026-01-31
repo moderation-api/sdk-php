@@ -1,5 +1,56 @@
 # Changelog
 
+## 0.4.0 (2026-01-31)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/moderation-api/sdk-php/compare/v0.3.0...v0.4.0)
+
+### ⚠ BREAKING CHANGES
+
+* replace special flag type `omittable` with just `null`
+* use aliases for phpstan types
+* improve identifier renaming for names that clash with builtins
+
+### Features
+
+* add idempotency header support ([4b941bd](https://github.com/moderation-api/sdk-php/commit/4b941bd0c16b8fe812da9ad660d49a4cb24e936d))
+* **api:** api update ([4e4f842](https://github.com/moderation-api/sdk-php/commit/4e4f8424fce03d262c50b50b060b8103c41f4d0e))
+* **api:** api update ([859828f](https://github.com/moderation-api/sdk-php/commit/859828f8d807016ae945da409a699e399236640c))
+* **api:** api update ([c7142a7](https://github.com/moderation-api/sdk-php/commit/c7142a7b0a048a20c420d935420f9108b7546088))
+* improve identifier renaming for names that clash with builtins ([8028859](https://github.com/moderation-api/sdk-php/commit/8028859af7460243fc4c23f2e2541ff65ba542d6))
+* improved phpstan type annotations ([1e1c3c6](https://github.com/moderation-api/sdk-php/commit/1e1c3c6816b004ce6126a7d757a2c8c4cbf4c40f))
+* replace special flag type `omittable` with just `null` ([5294f9f](https://github.com/moderation-api/sdk-php/commit/5294f9fe1ceeb4443c20c709a6a6e1e7e269d53b))
+* simplify and make the phpstan types more consistent ([0735967](https://github.com/moderation-api/sdk-php/commit/07359676f9a4e714a1ea6e06cbd39a03563f7980))
+* support unwrapping envelopes ([50fbe5d](https://github.com/moderation-api/sdk-php/commit/50fbe5dfebbe02573f73df5c190512a0e566784d))
+* use aliases for phpstan types ([e17e879](https://github.com/moderation-api/sdk-php/commit/e17e879f4fd01c07356de5ed18f2021ad9e5e426))
+
+
+### Bug Fixes
+
+* a number of serialization errors ([4a43323](https://github.com/moderation-api/sdk-php/commit/4a4332385de4fd74a5b6d6499fc915d6ad3b5ade))
+* correctly serialize dates ([8b350ba](https://github.com/moderation-api/sdk-php/commit/8b350ba2b06ecf19174392a8b9b8bcc0b1a500c0))
+* support arrays in query param construction ([032b424](https://github.com/moderation-api/sdk-php/commit/032b424bd40e42f0ec67191d1c5a067d1dd84e2b))
+* typos in README.md ([edeefaf](https://github.com/moderation-api/sdk-php/commit/edeefaf7b79b4104fd9e8eacf93095720b840533))
+
+
+### Chores
+
+* add git attributes and composer lock file ([0ec3ea1](https://github.com/moderation-api/sdk-php/commit/0ec3ea12cfcb0f72172bb144d3adae63a6dd2082))
+* **internal:** add a basic client test ([36b8433](https://github.com/moderation-api/sdk-php/commit/36b8433b78f6f885049c83049a60add2368bb04d))
+* **internal:** codegen related update ([d600edc](https://github.com/moderation-api/sdk-php/commit/d600edc6cb485d3eb97c56682e75a5c800a0c717))
+* **internal:** codegen related update ([597bdf7](https://github.com/moderation-api/sdk-php/commit/597bdf718c72f298fd94157b21e9f64c17a2449d))
+* **internal:** codegen related update ([c26566d](https://github.com/moderation-api/sdk-php/commit/c26566d911dda034a275bef8a4ef280ee6a49255))
+* **internal:** codegen related update ([b2aba3e](https://github.com/moderation-api/sdk-php/commit/b2aba3e999c1375da44e8a8b9a6f0fdb7a649950))
+* **internal:** codegen related update ([5e43726](https://github.com/moderation-api/sdk-php/commit/5e4372642129cea14086a71f584d75ee3b52b5f8))
+* **internal:** codegen related update ([9b7c72f](https://github.com/moderation-api/sdk-php/commit/9b7c72f4df8838a5c2e5a597e95fccc625e828f5))
+* **internal:** codegen related update ([7cbad4c](https://github.com/moderation-api/sdk-php/commit/7cbad4c86abc4a9ac9dde0f97d4e9adc9f127c5e))
+* **internal:** codegen related update ([e6f45f4](https://github.com/moderation-api/sdk-php/commit/e6f45f4733e0da4e79072d7d76644e2bb8fc1f78))
+* **internal:** codegen related update ([b7631a0](https://github.com/moderation-api/sdk-php/commit/b7631a0f4a9fa10af3f6eda50be50fb78e66e222))
+* **internal:** codegen related update ([6171347](https://github.com/moderation-api/sdk-php/commit/6171347fc5833d947bf081bcac878e965555bf91))
+* **internal:** minor test script reformatting ([50ba7b7](https://github.com/moderation-api/sdk-php/commit/50ba7b776f4ef78948611ea7ecefcde18195dd73))
+* **internal:** refactor auth by moving concern from base client into client ([37eeb69](https://github.com/moderation-api/sdk-php/commit/37eeb691d9f06d91fa71e39e70ef335472621ee0))
+* **internal:** update `actions/checkout` version ([f3c6d09](https://github.com/moderation-api/sdk-php/commit/f3c6d09511b60b4d3b9fc5a01399a2eaaad3d76e))
+* **readme:** remove beta warning now that we're in ga ([dd62d54](https://github.com/moderation-api/sdk-php/commit/dd62d5463f2ff7c50e593a063f7db60fcaa6bcde))
+
 ## 0.3.0 (2025-12-10)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/moderation-api/sdk-php/compare/v0.2.0...v0.3.0)
