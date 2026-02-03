@@ -67,9 +67,11 @@ class Client extends BaseClient
         ?string $baseUrl = null,
         RequestOptions|array|null $requestOptions = null,
     ) {
-        $this->secretKey = (string) ($secretKey ?? getenv('MODAPI_SECRET_KEY'));
+        $this->secretKey = (string) ($secretKey ?? Util::getenv(
+            'MODAPI_SECRET_KEY'
+        ));
 
-        $baseUrl ??= getenv(
+        $baseUrl ??= Util::getenv(
             'MODERATION_API_BASE_URL'
         ) ?: 'https://api.moderationapi.com/v1';
 
