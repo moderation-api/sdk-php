@@ -5,6 +5,7 @@ namespace Tests\Services;
 use ModerationAPI\Auth\AuthGetResponse;
 use ModerationAPI\Auth\AuthNewResponse;
 use ModerationAPI\Client;
+use ModerationAPI\Core\Util;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -22,7 +23,7 @@ final class AuthTest extends TestCase
     {
         parent::setUp();
 
-        $testUrl = getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
+        $testUrl = Util::getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
         $client = new Client(secretKey: 'My Secret Key', baseUrl: $testUrl);
 
         $this->client = $client;
