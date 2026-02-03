@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.0 (2026-02-03)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/moderation-api/sdk-php/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* use `$_ENV` aware getenv helper ([74f3ced](https://github.com/moderation-api/sdk-php/commit/74f3ced21bafe42f2be6ced3dcaedb5768eddf9f))
+
+
+### Chores
+
+* **internal:** php cs fixer should not be memory limited ([d6b7284](https://github.com/moderation-api/sdk-php/commit/d6b7284ff014ceac8dbac28c8a46aad5da2a3ffe))
+
 ## 0.4.0 (2026-01-31)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/moderation-api/sdk-php/compare/v0.3.0...v0.4.0)
