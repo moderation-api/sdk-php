@@ -13,4 +13,8 @@ enum ReasonCode: string
     case AUTHOR_BLOCK = 'author_block';
 
     case DRY_RUN = 'dry_run';
+
+    case TRUSTED_ALLOW = 'trusted_allow';
+
+    case UNTRUSTED_SEVERITY = 'untrusted_severity';
 }
