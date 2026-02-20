@@ -33,7 +33,7 @@ final class ExecuteTest extends TestCase
     public function testExecute(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->actions->execute->execute(actionKey: 'actionKey');
@@ -46,7 +46,7 @@ final class ExecuteTest extends TestCase
     public function testExecuteWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->actions->execute->execute(
@@ -66,7 +66,7 @@ final class ExecuteTest extends TestCase
     public function testExecuteByID(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->actions->execute->executeByID('actionId');
