@@ -33,7 +33,7 @@ final class WordsTest extends TestCase
     public function testAdd(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->wordlist->words->add('id', words: ['string']);
@@ -46,7 +46,7 @@ final class WordsTest extends TestCase
     public function testAddWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->wordlist->words->add('id', words: ['string']);
@@ -59,7 +59,7 @@ final class WordsTest extends TestCase
     public function testRemove(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->wordlist->words->remove('id', words: ['string']);
@@ -72,7 +72,7 @@ final class WordsTest extends TestCase
     public function testRemoveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->wordlist->words->remove('id', words: ['string']);

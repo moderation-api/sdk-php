@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.1 (2026-02-20)
+
+Full Changelog: [v0.7.0...v0.7.1](https://github.com/moderation-api/sdk-php/compare/v0.7.0...v0.7.1)
+
+### Chores
+
+* update mock server docs ([497f083](https://github.com/moderation-api/sdk-php/commit/497f0832fa69f666332f9e533304ecef044de57b))
+
 ## 0.7.0 (2026-02-20)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/moderation-api/sdk-php/compare/v0.6.0...v0.7.0)
