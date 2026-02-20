@@ -34,7 +34,7 @@ final class ItemsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->queue->items->list('id');
@@ -47,7 +47,7 @@ final class ItemsTest extends TestCase
     public function testResolve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->queue->items->resolve('itemId', id: 'id');
@@ -60,7 +60,7 @@ final class ItemsTest extends TestCase
     public function testResolveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->queue->items->resolve(
@@ -77,7 +77,7 @@ final class ItemsTest extends TestCase
     public function testUnresolve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->queue->items->unresolve('itemId', id: 'id');
@@ -90,7 +90,7 @@ final class ItemsTest extends TestCase
     public function testUnresolveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->queue->items->unresolve(
