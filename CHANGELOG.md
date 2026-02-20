@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.7.0 (2026-02-20)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/moderation-api/sdk-php/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** api update ([c14acbd](https://github.com/moderation-api/sdk-php/commit/c14acbdd4629949741d09844179ad7340ef031e8))
+
+
+### Chores
+
+* **internal:** remove mock server code ([e31efc6](https://github.com/moderation-api/sdk-php/commit/e31efc645e253b254f8fe91c76a105e9e72c2ff5))
+* **release:** add packagist trigger on published release ([7f1cbff](https://github.com/moderation-api/sdk-php/commit/7f1cbffe57af54ddf5f22a108843f293664171ba))
+
 ## 0.6.0 (2026-02-06)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/moderation-api/sdk-php/compare/v0.5.0...v0.6.0)
