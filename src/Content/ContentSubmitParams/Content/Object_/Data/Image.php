@@ -26,13 +26,13 @@ final class Image implements BaseModel
     public string $type = 'image';
 
     /**
-     * Base64-encoded image data.
+     * Base64-encoded image data. Either url or data must be provided. Note: base64 images are not stored and will not appear in the review queue.
      */
     #[Optional]
     public ?string $data;
 
     /**
-     * A public URL of the image content.
+     * A public URL of the image content. Either url or data must be provided.
      */
     #[Optional]
     public ?string $url;
@@ -69,7 +69,7 @@ final class Image implements BaseModel
     }
 
     /**
-     * Base64-encoded image data.
+     * Base64-encoded image data. Either url or data must be provided. Note: base64 images are not stored and will not appear in the review queue.
      */
     public function withData(string $data): self
     {
@@ -80,7 +80,7 @@ final class Image implements BaseModel
     }
 
     /**
-     * A public URL of the image content.
+     * A public URL of the image content. Either url or data must be provided.
      */
     public function withURL(string $url): self
     {
