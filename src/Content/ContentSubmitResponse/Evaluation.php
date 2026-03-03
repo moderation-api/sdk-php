@@ -16,6 +16,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   flagProbability: float,
  *   flagged: bool,
  *   severityScore: float,
+ *   shadowFlagged?: bool|null,
  *   unicodeSpoofed?: bool|null,
  * }
  */
@@ -41,6 +42,12 @@ final class Evaluation implements BaseModel
      */
     #[Required('severity_score')]
     public float $severityScore;
+
+    /**
+     * Whether the content would have been flagged by analyze-only policies (flag: false).
+     */
+    #[Optional('shadow_flagged')]
+    public ?bool $shadowFlagged;
 
     /**
      * Whether the content was flagged for Unicode spoofing.
@@ -79,6 +86,7 @@ final class Evaluation implements BaseModel
         float $flagProbability,
         bool $flagged,
         float $severityScore,
+        ?bool $shadowFlagged = null,
         ?bool $unicodeSpoofed = null,
     ): self {
         $self = new self;
@@ -87,6 +95,7 @@ final class Evaluation implements BaseModel
         $self['flagged'] = $flagged;
         $self['severityScore'] = $severityScore;
 
+        null !== $shadowFlagged && $self['shadowFlagged'] = $shadowFlagged;
         null !== $unicodeSpoofed && $self['unicodeSpoofed'] = $unicodeSpoofed;
 
         return $self;
@@ -121,6 +130,17 @@ final class Evaluation implements BaseModel
     {
         $self = clone $this;
         $self['severityScore'] = $severityScore;
+
+        return $self;
+    }
+
+    /**
+     * Whether the content would have been flagged by analyze-only policies (flag: false).
+     */
+    public function withShadowFlagged(bool $shadowFlagged): self
+    {
+        $self = clone $this;
+        $self['shadowFlagged'] = $shadowFlagged;
 
         return $self;
     }
