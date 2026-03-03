@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.9.0 (2026-03-03)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/moderation-api/sdk-php/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** api update ([6312a28](https://github.com/moderation-api/sdk-php/commit/6312a28d96040139078a3db3d01c6167d89be556))
+
+
+### Chores
+
+* **internal:** upgrade phpunit ([6a808b4](https://github.com/moderation-api/sdk-php/commit/6a808b430727b89ca9ddaaa20043075f03a8452f))
+
 ## 0.8.0 (2026-02-23)
 
 Full Changelog: [v0.7.1...v0.8.0](https://github.com/moderation-api/sdk-php/compare/v0.7.1...v0.8.0)
