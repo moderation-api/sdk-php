@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitResponse;
 
 use ModerationAPI\Content\ContentSubmitResponse\Content\Modified;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -16,7 +17,10 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @phpstan-import-type ModifiedShape from \ModerationAPI\Content\ContentSubmitResponse\Content\Modified
  *
  * @phpstan-type ContentShape = array{
- *   id: string, masked: bool, modified: ModifiedShape|null
+ *   id: string,
+ *   masked: bool,
+ *   modified: ModifiedShape|null,
+ *   transcript?: string|null,
  * }
  */
 final class Content implements BaseModel
@@ -43,6 +47,12 @@ final class Content implements BaseModel
      */
     #[Required(union: Modified::class)]
     public string|array|null $modified;
+
+    /**
+     * The transcribed text from audio content. Only present when audio moderation is used and transcript inclusion is enabled on the channel.
+     */
+    #[Optional(nullable: true)]
+    public ?string $transcript;
 
     /**
      * `new Content()` is missing required properties by the API.
@@ -73,13 +83,16 @@ final class Content implements BaseModel
     public static function with(
         string $id,
         bool $masked,
-        string|array|null $modified
+        string|array|null $modified,
+        ?string $transcript = null,
     ): self {
         $self = new self;
 
         $self['id'] = $id;
         $self['masked'] = $masked;
         $self['modified'] = $modified;
+
+        null !== $transcript && $self['transcript'] = $transcript;
 
         return $self;
     }
@@ -115,6 +128,17 @@ final class Content implements BaseModel
     {
         $self = clone $this;
         $self['modified'] = $modified;
+
+        return $self;
+    }
+
+    /**
+     * The transcribed text from audio content. Only present when audio moderation is used and transcript inclusion is enabled on the channel.
+     */
+    public function withTranscript(?string $transcript): self
+    {
+        $self = clone $this;
+        $self['transcript'] = $transcript;
 
         return $self;
     }
