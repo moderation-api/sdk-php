@@ -13,7 +13,7 @@ The REST API documentation can be found on [docs.moderationapi.com](https://docs
 <!-- x-release-please-start-version -->
 
 ```
-composer require "moderation-api/sdk-php 0.11.1"
+composer require "moderation-api/sdk-php 0.11.2"
 ```
 
 <!-- x-release-please-end -->
