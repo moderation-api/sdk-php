@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.3 (2026-04-18)
+
+Full Changelog: [v0.11.2...v0.11.3](https://github.com/moderation-api/sdk-php/compare/v0.11.2...v0.11.3)
+
+### Bug Fixes
+
+* populate enum-typed properties with enum instances ([9187f82](https://github.com/moderation-api/sdk-php/commit/9187f8218b177950d895987b087d3ee6b742aaf4))
+
 ## 0.11.2 (2026-04-18)
 
 Full Changelog: [v0.11.1...v0.11.2](https://github.com/moderation-api/sdk-php/compare/v0.11.1...v0.11.2)
