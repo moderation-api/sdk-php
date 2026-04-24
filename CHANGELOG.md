@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.12.0 (2026-04-24)
+
+Full Changelog: [v0.11.3...v0.12.0](https://github.com/moderation-api/sdk-php/compare/v0.11.3...v0.12.0)
+
+### Features
+
+* **api:** api update ([7ac5a57](https://github.com/moderation-api/sdk-php/commit/7ac5a5735852a169496b45c37438aa49a3fa7551))
+
 ## 0.11.3 (2026-04-18)
 
 Full Changelog: [v0.11.2...v0.11.3](https://github.com/moderation-api/sdk-php/compare/v0.11.2...v0.11.3)
