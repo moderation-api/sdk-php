@@ -11,7 +11,11 @@ use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type URLRiskShape = array{
- *   id: 'url_risk', flag: bool, threshold?: float|null
+ *   id: 'url_risk',
+ *   flag: bool,
+ *   allowlistWordlistIDs?: list<string>|null,
+ *   blocklistWordlistIDs?: list<string>|null,
+ *   threshold?: float|null,
  * }
  */
 final class URLRisk implements BaseModel
@@ -25,6 +29,22 @@ final class URLRisk implements BaseModel
 
     #[Required]
     public bool $flag;
+
+    /**
+     * IDs of wordlists whose entries are treated as allowed URL domains. Matches short-circuit the risk model and are never flagged.
+     *
+     * @var list<string>|null $allowlistWordlistIDs
+     */
+    #[Optional('allowlistWordlistIds', list: 'string')]
+    public ?array $allowlistWordlistIDs;
+
+    /**
+     * IDs of wordlists whose entries are treated as blocked URL domains. Matches short-circuit the risk model and are always flagged. Blocklists take precedence over allowlists.
+     *
+     * @var list<string>|null $blocklistWordlistIDs
+     */
+    #[Optional('blocklistWordlistIds', list: 'string')]
+    public ?array $blocklistWordlistIDs;
 
     #[Optional]
     public ?float $threshold;
@@ -52,13 +72,22 @@ final class URLRisk implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<string>|null $allowlistWordlistIDs
+     * @param list<string>|null $blocklistWordlistIDs
      */
-    public static function with(bool $flag, ?float $threshold = null): self
-    {
+    public static function with(
+        bool $flag,
+        ?array $allowlistWordlistIDs = null,
+        ?array $blocklistWordlistIDs = null,
+        ?float $threshold = null,
+    ): self {
         $self = new self;
 
         $self['flag'] = $flag;
 
+        null !== $allowlistWordlistIDs && $self['allowlistWordlistIDs'] = $allowlistWordlistIDs;
+        null !== $blocklistWordlistIDs && $self['blocklistWordlistIDs'] = $blocklistWordlistIDs;
         null !== $threshold && $self['threshold'] = $threshold;
 
         return $self;
@@ -79,6 +108,32 @@ final class URLRisk implements BaseModel
     {
         $self = clone $this;
         $self['flag'] = $flag;
+
+        return $self;
+    }
+
+    /**
+     * IDs of wordlists whose entries are treated as allowed URL domains. Matches short-circuit the risk model and are never flagged.
+     *
+     * @param list<string> $allowlistWordlistIDs
+     */
+    public function withAllowlistWordlistIDs(array $allowlistWordlistIDs): self
+    {
+        $self = clone $this;
+        $self['allowlistWordlistIDs'] = $allowlistWordlistIDs;
+
+        return $self;
+    }
+
+    /**
+     * IDs of wordlists whose entries are treated as blocked URL domains. Matches short-circuit the risk model and are always flagged. Blocklists take precedence over allowlists.
+     *
+     * @param list<string> $blocklistWordlistIDs
+     */
+    public function withBlocklistWordlistIDs(array $blocklistWordlistIDs): self
+    {
+        $self = clone $this;
+        $self['blocklistWordlistIDs'] = $blocklistWordlistIDs;
 
         return $self;
     }
