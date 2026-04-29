@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace ModerationAPI\Content\ContentSubmitResponse;
 
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation\Action;
+use ModerationAPI\Content\ContentSubmitResponse\Recommendation\MatchedRule;
 use ModerationAPI\Content\ContentSubmitResponse\Recommendation\ReasonCode;
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
@@ -13,9 +15,12 @@ use ModerationAPI\Core\Contracts\BaseModel;
 /**
  * The recommendation for the content based on the evaluation.
  *
+ * @phpstan-import-type MatchedRuleShape from \ModerationAPI\Content\ContentSubmitResponse\Recommendation\MatchedRule
+ *
  * @phpstan-type RecommendationShape = array{
  *   action: Action|value-of<Action>,
  *   reasonCodes: list<ReasonCode|value-of<ReasonCode>>,
+ *   matchedRules?: list<MatchedRule|MatchedRuleShape>|null,
  * }
  */
 final class Recommendation implements BaseModel
@@ -38,6 +43,14 @@ final class Recommendation implements BaseModel
      */
     #[Required('reason_codes', list: ReasonCode::class)]
     public array $reasonCodes;
+
+    /**
+     * Rules that matched during evaluation, if rules engine is active.
+     *
+     * @var list<MatchedRule>|null $matchedRules
+     */
+    #[Optional('matched_rules', list: MatchedRule::class)]
+    public ?array $matchedRules;
 
     /**
      * `new Recommendation()` is missing required properties by the API.
@@ -65,13 +78,19 @@ final class Recommendation implements BaseModel
      *
      * @param Action|value-of<Action> $action
      * @param list<ReasonCode|value-of<ReasonCode>> $reasonCodes
+     * @param list<MatchedRule|MatchedRuleShape>|null $matchedRules
      */
-    public static function with(Action|string $action, array $reasonCodes): self
-    {
+    public static function with(
+        Action|string $action,
+        array $reasonCodes,
+        ?array $matchedRules = null
+    ): self {
         $self = new self;
 
         $self['action'] = $action;
         $self['reasonCodes'] = $reasonCodes;
+
+        null !== $matchedRules && $self['matchedRules'] = $matchedRules;
 
         return $self;
     }
@@ -98,6 +117,19 @@ final class Recommendation implements BaseModel
     {
         $self = clone $this;
         $self['reasonCodes'] = $reasonCodes;
+
+        return $self;
+    }
+
+    /**
+     * Rules that matched during evaluation, if rules engine is active.
+     *
+     * @param list<MatchedRule|MatchedRuleShape> $matchedRules
+     */
+    public function withMatchedRules(array $matchedRules): self
+    {
+        $self = clone $this;
+        $self['matchedRules'] = $matchedRules;
 
         return $self;
     }

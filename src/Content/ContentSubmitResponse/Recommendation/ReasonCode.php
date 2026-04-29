@@ -17,4 +17,10 @@ enum ReasonCode: string
     case TRUSTED_ALLOW = 'trusted_allow';
 
     case UNTRUSTED_SEVERITY = 'untrusted_severity';
+
+    case RULE_MATCH = 'rule_match';
+
+    case RULE_DEFAULT = 'rule_default';
+
+    case RULE_FALLBACK = 'rule_fallback';
 }
