@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.13.0 (2026-05-06)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/moderation-api/sdk-php/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **api:** api update ([310af04](https://github.com/moderation-api/sdk-php/commit/310af04e579e4ce88191363cfa2bbb43b2ded418))
+* support setting headers via env ([ecf2343](https://github.com/moderation-api/sdk-php/commit/ecf2343555c3471a0391ed5c47a0bac53276ca5c))
+
+
+### Bug Fixes
+
+* **release:** use canonical GitHub URL in Packagist publish script ([d7cc502](https://github.com/moderation-api/sdk-php/commit/d7cc502f0a15686973504f9651b6e48b5736230e))
+* revert enum parsing change that lead to unconditional failure ([2b7940c](https://github.com/moderation-api/sdk-php/commit/2b7940cb3ee83e404b2ba0e926d511a30e99b5ca))
+
 ## 0.12.0 (2026-04-24)
 
 Full Changelog: [v0.11.3...v0.12.0](https://github.com/moderation-api/sdk-php/compare/v0.11.3...v0.12.0)
