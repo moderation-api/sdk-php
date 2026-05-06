@@ -18,6 +18,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @phpstan-import-type MetadataShape from \ModerationAPI\Authors\AuthorUpdateParams\Metadata
  *
  * @phpstan-type AuthorUpdateParamsShape = array{
+ *   company?: string|null,
  *   email?: string|null,
  *   externalLink?: string|null,
  *   firstSeen?: float|null,
@@ -33,6 +34,12 @@ final class AuthorUpdateParams implements BaseModel
     /** @use SdkModel<AuthorUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
+
+    /**
+     * The author's company or organization.
+     */
+    #[Optional(nullable: true)]
+    public ?string $company;
 
     /**
      * Author email address.
@@ -92,6 +99,7 @@ final class AuthorUpdateParams implements BaseModel
      * @param Metadata|MetadataShape|null $metadata
      */
     public static function with(
+        ?string $company = null,
         ?string $email = null,
         ?string $externalLink = null,
         ?float $firstSeen = null,
@@ -103,6 +111,7 @@ final class AuthorUpdateParams implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $company && $self['company'] = $company;
         null !== $email && $self['email'] = $email;
         null !== $externalLink && $self['externalLink'] = $externalLink;
         null !== $firstSeen && $self['firstSeen'] = $firstSeen;
@@ -111,6 +120,17 @@ final class AuthorUpdateParams implements BaseModel
         null !== $metadata && $self['metadata'] = $metadata;
         null !== $name && $self['name'] = $name;
         null !== $profilePicture && $self['profilePicture'] = $profilePicture;
+
+        return $self;
+    }
+
+    /**
+     * The author's company or organization.
+     */
+    public function withCompany(?string $company): self
+    {
+        $self = clone $this;
+        $self['company'] = $company;
 
         return $self;
     }

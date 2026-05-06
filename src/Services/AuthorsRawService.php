@@ -41,6 +41,7 @@ final class AuthorsRawService implements AuthorsRawContract
      *
      * @param array{
      *   externalID: string,
+     *   company?: string|null,
      *   email?: string|null,
      *   externalLink?: string|null,
      *   firstSeen?: float,
@@ -107,6 +108,7 @@ final class AuthorsRawService implements AuthorsRawContract
      *
      * @param string $id either external ID or the ID assigned by moderation API
      * @param array{
+     *   company?: string|null,
      *   email?: string|null,
      *   externalLink?: string|null,
      *   firstSeen?: float,

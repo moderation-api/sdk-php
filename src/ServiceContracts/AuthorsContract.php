@@ -26,6 +26,7 @@ interface AuthorsContract
      * @api
      *
      * @param string $externalID external ID of the user, typically the ID of the author in your database
+     * @param string|null $company The author's company or organization
      * @param string|null $email Author email address
      * @param string|null $externalLink URL of the author's external profile
      * @param float $firstSeen Timestamp when author first appeared
@@ -39,6 +40,7 @@ interface AuthorsContract
      */
     public function create(
         string $externalID,
+        ?string $company = null,
         ?string $email = null,
         ?string $externalLink = null,
         ?float $firstSeen = null,
@@ -67,6 +69,7 @@ interface AuthorsContract
      * @api
      *
      * @param string $id either external ID or the ID assigned by moderation API
+     * @param string|null $company The author's company or organization
      * @param string|null $email Author email address
      * @param string|null $externalLink URL of the author's external profile
      * @param float $firstSeen Timestamp when author first appeared
@@ -80,6 +83,7 @@ interface AuthorsContract
      */
     public function update(
         string $id,
+        ?string $company = null,
         ?string $email = null,
         ?string $externalLink = null,
         ?float $firstSeen = null,

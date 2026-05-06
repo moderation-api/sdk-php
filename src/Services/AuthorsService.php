@@ -44,6 +44,7 @@ final class AuthorsService implements AuthorsContract
      * Create a new author. Typically not needed as authors are created automatically when content is moderated.
      *
      * @param string $externalID external ID of the user, typically the ID of the author in your database
+     * @param string|null $company The author's company or organization
      * @param string|null $email Author email address
      * @param string|null $externalLink URL of the author's external profile
      * @param float $firstSeen Timestamp when author first appeared
@@ -57,6 +58,7 @@ final class AuthorsService implements AuthorsContract
      */
     public function create(
         string $externalID,
+        ?string $company = null,
         ?string $email = null,
         ?string $externalLink = null,
         ?float $firstSeen = null,
@@ -70,6 +72,7 @@ final class AuthorsService implements AuthorsContract
         $params = Util::removeNulls(
             [
                 'externalID' => $externalID,
+                'company' => $company,
                 'email' => $email,
                 'externalLink' => $externalLink,
                 'firstSeen' => $firstSeen,
@@ -113,6 +116,7 @@ final class AuthorsService implements AuthorsContract
      * Update the details of a specific author
      *
      * @param string $id either external ID or the ID assigned by moderation API
+     * @param string|null $company The author's company or organization
      * @param string|null $email Author email address
      * @param string|null $externalLink URL of the author's external profile
      * @param float $firstSeen Timestamp when author first appeared
@@ -126,6 +130,7 @@ final class AuthorsService implements AuthorsContract
      */
     public function update(
         string $id,
+        ?string $company = null,
         ?string $email = null,
         ?string $externalLink = null,
         ?float $firstSeen = null,
@@ -138,6 +143,7 @@ final class AuthorsService implements AuthorsContract
     ): AuthorUpdateResponse {
         $params = Util::removeNulls(
             [
+                'company' => $company,
                 'email' => $email,
                 'externalLink' => $externalLink,
                 'firstSeen' => $firstSeen,
