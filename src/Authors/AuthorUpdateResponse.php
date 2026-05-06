@@ -32,6 +32,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   riskEvaluation: null|RiskEvaluation|RiskEvaluationShape,
  *   status: Status|value-of<Status>,
  *   trustLevel: TrustLevel|TrustLevelShape,
+ *   company?: string|null,
  *   email?: string|null,
  *   externalID?: string|null,
  *   externalLink?: string|null,
@@ -94,6 +95,12 @@ final class AuthorUpdateResponse implements BaseModel
 
     #[Required('trust_level')]
     public TrustLevel $trustLevel;
+
+    /**
+     * The author's company or organization.
+     */
+    #[Optional(nullable: true)]
+    public ?string $company;
 
     /**
      * Author email address.
@@ -191,6 +198,7 @@ final class AuthorUpdateResponse implements BaseModel
         RiskEvaluation|array|null $riskEvaluation,
         Status|string $status,
         TrustLevel|array $trustLevel,
+        ?string $company = null,
         ?string $email = null,
         ?string $externalID = null,
         ?string $externalLink = null,
@@ -210,6 +218,7 @@ final class AuthorUpdateResponse implements BaseModel
         $self['status'] = $status;
         $self['trustLevel'] = $trustLevel;
 
+        null !== $company && $self['company'] = $company;
         null !== $email && $self['email'] = $email;
         null !== $externalID && $self['externalID'] = $externalID;
         null !== $externalLink && $self['externalLink'] = $externalLink;
@@ -324,6 +333,17 @@ final class AuthorUpdateResponse implements BaseModel
     {
         $self = clone $this;
         $self['trustLevel'] = $trustLevel;
+
+        return $self;
+    }
+
+    /**
+     * The author's company or organization.
+     */
+    public function withCompany(?string $company): self
+    {
+        $self = clone $this;
+        $self['company'] = $company;
 
         return $self;
     }

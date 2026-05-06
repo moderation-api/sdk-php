@@ -54,6 +54,7 @@ final class AuthorsTest extends TestCase
 
         $result = $this->client->authors->create(
             externalID: 'external_id',
+            company: 'company',
             email: 'dev@stainless.com',
             externalLink: 'https://example.com',
             firstSeen: 0,
