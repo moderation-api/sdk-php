@@ -20,6 +20,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @phpstan-type AuthorCreateParamsShape = array{
  *   externalID: string,
+ *   company?: string|null,
  *   email?: string|null,
  *   externalLink?: string|null,
  *   firstSeen?: float|null,
@@ -41,6 +42,12 @@ final class AuthorCreateParams implements BaseModel
      */
     #[Required('external_id')]
     public string $externalID;
+
+    /**
+     * The author's company or organization.
+     */
+    #[Optional(nullable: true)]
+    public ?string $company;
 
     /**
      * Author email address.
@@ -115,6 +122,7 @@ final class AuthorCreateParams implements BaseModel
      */
     public static function with(
         string $externalID,
+        ?string $company = null,
         ?string $email = null,
         ?string $externalLink = null,
         ?float $firstSeen = null,
@@ -128,6 +136,7 @@ final class AuthorCreateParams implements BaseModel
 
         $self['externalID'] = $externalID;
 
+        null !== $company && $self['company'] = $company;
         null !== $email && $self['email'] = $email;
         null !== $externalLink && $self['externalLink'] = $externalLink;
         null !== $firstSeen && $self['firstSeen'] = $firstSeen;
@@ -147,6 +156,17 @@ final class AuthorCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['externalID'] = $externalID;
+
+        return $self;
+    }
+
+    /**
+     * The author's company or organization.
+     */
+    public function withCompany(?string $company): self
+    {
+        $self = clone $this;
+        $self['company'] = $company;
 
         return $self;
     }

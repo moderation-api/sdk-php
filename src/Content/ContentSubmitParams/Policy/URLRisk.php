@@ -15,6 +15,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   flag: bool,
  *   allowlistWordlistIDs?: list<string>|null,
  *   blocklistWordlistIDs?: list<string>|null,
+ *   flagLinkShorteners?: bool|null,
  *   threshold?: float|null,
  * }
  */
@@ -45,6 +46,12 @@ final class URLRisk implements BaseModel
      */
     #[Optional('blocklistWordlistIds', list: 'string')]
     public ?array $blocklistWordlistIDs;
+
+    /**
+     * When true, any URL detected as a free link shortener (bit.ly, t.co, tinyurl, etc.) is always flagged regardless of risk score. Allowlist matches still win.
+     */
+    #[Optional]
+    public ?bool $flagLinkShorteners;
 
     #[Optional]
     public ?float $threshold;
@@ -80,6 +87,7 @@ final class URLRisk implements BaseModel
         bool $flag,
         ?array $allowlistWordlistIDs = null,
         ?array $blocklistWordlistIDs = null,
+        ?bool $flagLinkShorteners = null,
         ?float $threshold = null,
     ): self {
         $self = new self;
@@ -88,6 +96,7 @@ final class URLRisk implements BaseModel
 
         null !== $allowlistWordlistIDs && $self['allowlistWordlistIDs'] = $allowlistWordlistIDs;
         null !== $blocklistWordlistIDs && $self['blocklistWordlistIDs'] = $blocklistWordlistIDs;
+        null !== $flagLinkShorteners && $self['flagLinkShorteners'] = $flagLinkShorteners;
         null !== $threshold && $self['threshold'] = $threshold;
 
         return $self;
@@ -134,6 +143,17 @@ final class URLRisk implements BaseModel
     {
         $self = clone $this;
         $self['blocklistWordlistIDs'] = $blocklistWordlistIDs;
+
+        return $self;
+    }
+
+    /**
+     * When true, any URL detected as a free link shortener (bit.ly, t.co, tinyurl, etc.) is always flagged regardless of risk score. Allowlist matches still win.
+     */
+    public function withFlagLinkShorteners(bool $flagLinkShorteners): self
+    {
+        $self = clone $this;
+        $self['flagLinkShorteners'] = $flagLinkShorteners;
 
         return $self;
     }
