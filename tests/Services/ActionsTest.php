@@ -63,14 +63,6 @@ final class ActionsTest extends TestCase
             queueBehaviour: 'REMOVE',
             type: 'AUTHOR_BLOCK',
             valueRequired: true,
-            webhooks: [
-                [
-                    'name' => 'name',
-                    'url' => 'https://example.com',
-                    'id' => 'id',
-                    'description' => 'description',
-                ],
-            ],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

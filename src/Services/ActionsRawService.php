@@ -9,7 +9,6 @@ use ModerationAPI\Actions\ActionCreateParams\Position;
 use ModerationAPI\Actions\ActionCreateParams\PossibleValue;
 use ModerationAPI\Actions\ActionCreateParams\QueueBehaviour;
 use ModerationAPI\Actions\ActionCreateParams\Type;
-use ModerationAPI\Actions\ActionCreateParams\Webhook;
 use ModerationAPI\Actions\ActionDeleteResponse;
 use ModerationAPI\Actions\ActionGetResponse;
 use ModerationAPI\Actions\ActionListParams;
@@ -27,9 +26,7 @@ use ModerationAPI\ServiceContracts\ActionsRawContract;
 
 /**
  * @phpstan-import-type PossibleValueShape from \ModerationAPI\Actions\ActionCreateParams\PossibleValue
- * @phpstan-import-type WebhookShape from \ModerationAPI\Actions\ActionCreateParams\Webhook
  * @phpstan-import-type PossibleValueShape from \ModerationAPI\Actions\ActionUpdateParams\PossibleValue as PossibleValueShape1
- * @phpstan-import-type WebhookShape from \ModerationAPI\Actions\ActionUpdateParams\Webhook as WebhookShape1
  * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
  */
 final class ActionsRawService implements ActionsRawContract
@@ -57,7 +54,6 @@ final class ActionsRawService implements ActionsRawContract
      *   queueBehaviour?: QueueBehaviour|value-of<QueueBehaviour>,
      *   type?: value-of<Type>,
      *   valueRequired?: bool,
-     *   webhooks?: list<Webhook|WebhookShape>,
      * }|ActionCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -127,7 +123,6 @@ final class ActionsRawService implements ActionsRawContract
      *   queueBehaviour?: ActionUpdateParams\QueueBehaviour|value-of<ActionUpdateParams\QueueBehaviour>,
      *   type?: value-of<ActionUpdateParams\Type>,
      *   valueRequired?: bool,
-     *   webhooks?: list<ActionUpdateParams\Webhook|WebhookShape1>,
      * }|ActionUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
