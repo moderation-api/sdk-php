@@ -8,7 +8,6 @@ use ModerationAPI\Actions\ActionCreateParams\Position;
 use ModerationAPI\Actions\ActionCreateParams\PossibleValue;
 use ModerationAPI\Actions\ActionCreateParams\QueueBehaviour;
 use ModerationAPI\Actions\ActionCreateParams\Type;
-use ModerationAPI\Actions\ActionCreateParams\Webhook;
 use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
@@ -21,7 +20,6 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @see ModerationAPI\Services\ActionsService::create()
  *
  * @phpstan-import-type PossibleValueShape from \ModerationAPI\Actions\ActionCreateParams\PossibleValue
- * @phpstan-import-type WebhookShape from \ModerationAPI\Actions\ActionCreateParams\Webhook
  *
  * @phpstan-type ActionCreateParamsShape = array{
  *   name: string,
@@ -35,7 +33,6 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   queueBehaviour?: null|QueueBehaviour|value-of<QueueBehaviour>,
  *   type?: null|Type|value-of<Type>,
  *   valueRequired?: bool|null,
- *   webhooks?: list<Webhook|WebhookShape>|null,
  * }
  */
 final class ActionCreateParams implements BaseModel
@@ -121,14 +118,6 @@ final class ActionCreateParams implements BaseModel
     public ?bool $valueRequired;
 
     /**
-     * The action's webhooks.
-     *
-     * @var list<Webhook>|null $webhooks
-     */
-    #[Optional(list: Webhook::class)]
-    public ?array $webhooks;
-
-    /**
      * `new ActionCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -157,7 +146,6 @@ final class ActionCreateParams implements BaseModel
      * @param list<PossibleValue|PossibleValueShape>|null $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour>|null $queueBehaviour
      * @param Type|value-of<Type>|null $type
-     * @param list<Webhook|WebhookShape>|null $webhooks
      */
     public static function with(
         string $name,
@@ -171,7 +159,6 @@ final class ActionCreateParams implements BaseModel
         QueueBehaviour|string|null $queueBehaviour = null,
         Type|string|null $type = null,
         ?bool $valueRequired = null,
-        ?array $webhooks = null,
     ): self {
         $self = new self;
 
@@ -187,7 +174,6 @@ final class ActionCreateParams implements BaseModel
         null !== $queueBehaviour && $self['queueBehaviour'] = $queueBehaviour;
         null !== $type && $self['type'] = $type;
         null !== $valueRequired && $self['valueRequired'] = $valueRequired;
-        null !== $webhooks && $self['webhooks'] = $webhooks;
 
         return $self;
     }
@@ -320,19 +306,6 @@ final class ActionCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['valueRequired'] = $valueRequired;
-
-        return $self;
-    }
-
-    /**
-     * The action's webhooks.
-     *
-     * @param list<Webhook|WebhookShape> $webhooks
-     */
-    public function withWebhooks(array $webhooks): self
-    {
-        $self = clone $this;
-        $self['webhooks'] = $webhooks;
 
         return $self;
     }

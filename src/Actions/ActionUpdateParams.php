@@ -8,7 +8,6 @@ use ModerationAPI\Actions\ActionUpdateParams\Position;
 use ModerationAPI\Actions\ActionUpdateParams\PossibleValue;
 use ModerationAPI\Actions\ActionUpdateParams\QueueBehaviour;
 use ModerationAPI\Actions\ActionUpdateParams\Type;
-use ModerationAPI\Actions\ActionUpdateParams\Webhook;
 use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Concerns\SdkParams;
@@ -20,7 +19,6 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @see ModerationAPI\Services\ActionsService::update()
  *
  * @phpstan-import-type PossibleValueShape from \ModerationAPI\Actions\ActionUpdateParams\PossibleValue
- * @phpstan-import-type WebhookShape from \ModerationAPI\Actions\ActionUpdateParams\Webhook
  *
  * @phpstan-type ActionUpdateParamsShape = array{
  *   builtIn?: bool|null,
@@ -34,7 +32,6 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   queueBehaviour?: null|QueueBehaviour|value-of<QueueBehaviour>,
  *   type?: null|Type|value-of<Type>,
  *   valueRequired?: bool|null,
- *   webhooks?: list<Webhook|WebhookShape>|null,
  * }
  */
 final class ActionUpdateParams implements BaseModel
@@ -119,14 +116,6 @@ final class ActionUpdateParams implements BaseModel
     #[Optional]
     public ?bool $valueRequired;
 
-    /**
-     * The action's webhooks.
-     *
-     * @var list<Webhook>|null $webhooks
-     */
-    #[Optional(list: Webhook::class)]
-    public ?array $webhooks;
-
     public function __construct()
     {
         $this->initialize();
@@ -142,7 +131,6 @@ final class ActionUpdateParams implements BaseModel
      * @param list<PossibleValue|PossibleValueShape>|null $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour>|null $queueBehaviour
      * @param Type|value-of<Type>|null $type
-     * @param list<Webhook|WebhookShape>|null $webhooks
      */
     public static function with(
         ?bool $builtIn = null,
@@ -156,7 +144,6 @@ final class ActionUpdateParams implements BaseModel
         QueueBehaviour|string|null $queueBehaviour = null,
         Type|string|null $type = null,
         ?bool $valueRequired = null,
-        ?array $webhooks = null,
     ): self {
         $self = new self;
 
@@ -171,7 +158,6 @@ final class ActionUpdateParams implements BaseModel
         null !== $queueBehaviour && $self['queueBehaviour'] = $queueBehaviour;
         null !== $type && $self['type'] = $type;
         null !== $valueRequired && $self['valueRequired'] = $valueRequired;
-        null !== $webhooks && $self['webhooks'] = $webhooks;
 
         return $self;
     }
@@ -304,19 +290,6 @@ final class ActionUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['valueRequired'] = $valueRequired;
-
-        return $self;
-    }
-
-    /**
-     * The action's webhooks.
-     *
-     * @param list<Webhook|WebhookShape> $webhooks
-     */
-    public function withWebhooks(array $webhooks): self
-    {
-        $self = clone $this;
-        $self['webhooks'] = $webhooks;
 
         return $self;
     }
