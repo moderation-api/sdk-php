@@ -1,0 +1,95 @@
+<?php
+
+declare(strict_types=1);
+
+namespace ModerationAPI\Queue\WebhookEvent\QueueItemRejectedEvent\Data\Object_\Item\Content;
+
+use ModerationAPI\Core\Attributes\Required;
+use ModerationAPI\Core\Concerns\SdkModel;
+use ModerationAPI\Core\Contracts\BaseModel;
+use ModerationAPI\Queue\WebhookEvent\QueueItemRejectedEvent\Data\Object_\Item\Content\Object_\Data;
+
+/**
+ * Object.
+ *
+ * @phpstan-import-type DataVariants from \ModerationAPI\Queue\WebhookEvent\QueueItemRejectedEvent\Data\Object_\Item\Content\Object_\Data
+ * @phpstan-import-type DataShape from \ModerationAPI\Queue\WebhookEvent\QueueItemRejectedEvent\Data\Object_\Item\Content\Object_\Data
+ *
+ * @phpstan-type ObjectShape = array{data: array<string,DataShape>, type: 'object'}
+ */
+final class Object_ implements BaseModel
+{
+    /** @use SdkModel<ObjectShape> */
+    use SdkModel;
+
+    /** @var 'object' $type */
+    #[Required]
+    public string $type = 'object';
+
+    /**
+     * Values in the object. Can be mixed content types.
+     *
+     * @var array<string,DataVariants> $data
+     */
+    #[Required(map: Data::class)]
+    public array $data;
+
+    /**
+     * `new Object_()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * Object_::with(data: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new Object_)->withData(...)
+     * ```
+     */
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param array<string,DataShape> $data
+     */
+    public static function with(array $data): self
+    {
+        $self = new self;
+
+        $self['data'] = $data;
+
+        return $self;
+    }
+
+    /**
+     * Values in the object. Can be mixed content types.
+     *
+     * @param array<string,DataShape> $data
+     */
+    public function withData(array $data): self
+    {
+        $self = clone $this;
+        $self['data'] = $data;
+
+        return $self;
+    }
+
+    /**
+     * @param 'object' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
+}
