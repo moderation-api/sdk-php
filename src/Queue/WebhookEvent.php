@@ -56,7 +56,7 @@ final class WebhookEvent implements ConverterSource
             'author.updated' => AuthorUpdatedEvent::class,
             'author.trust_level_changed' => AuthorTrustLevelChangedEvent::class,
             'author.action' => AuthorActionEvent::class,
-            'queue_item.completed' => QueueItemCompletedEvent::class,
+            'queue_item.resolved' => QueueItemCompletedEvent::class,
             'queue_item.action' => QueueItemActionEvent::class,
             'queue_item.rejected' => QueueItemRejectedEvent::class,
             'queue_item.allowed' => QueueItemAllowedEvent::class,
