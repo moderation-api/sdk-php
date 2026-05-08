@@ -17,7 +17,7 @@ use ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data;
  *   apiVersion: 'v2',
  *   created: \DateTimeInterface,
  *   data: Data|DataShape,
- *   type: 'queue_item.completed',
+ *   type: 'queue_item.resolved',
  * }
  */
 final class QueueItemCompletedEvent implements BaseModel
@@ -32,10 +32,10 @@ final class QueueItemCompletedEvent implements BaseModel
     /**
      * The event type.
      *
-     * @var 'queue_item.completed' $type
+     * @var 'queue_item.resolved' $type
      */
     #[Required]
-    public string $type = 'queue_item.completed';
+    public string $type = 'queue_item.resolved';
 
     /**
      * Stable event ID. Use this to dedupe retries.
@@ -139,7 +139,7 @@ final class QueueItemCompletedEvent implements BaseModel
     /**
      * The event type.
      *
-     * @param 'queue_item.completed' $type
+     * @param 'queue_item.resolved' $type
      */
     public function withType(string $type): self
     {
