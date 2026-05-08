@@ -8,7 +8,6 @@ use ModerationAPI\Actions\ActionCreateParams\Position;
 use ModerationAPI\Actions\ActionCreateParams\PossibleValue;
 use ModerationAPI\Actions\ActionCreateParams\QueueBehaviour;
 use ModerationAPI\Actions\ActionCreateParams\Type;
-use ModerationAPI\Actions\ActionCreateParams\Webhook;
 use ModerationAPI\Actions\ActionDeleteResponse;
 use ModerationAPI\Actions\ActionGetResponse;
 use ModerationAPI\Actions\ActionListResponseItem;
@@ -23,9 +22,7 @@ use ModerationAPI\Services\Actions\ExecuteService;
 
 /**
  * @phpstan-import-type PossibleValueShape from \ModerationAPI\Actions\ActionCreateParams\PossibleValue
- * @phpstan-import-type WebhookShape from \ModerationAPI\Actions\ActionCreateParams\Webhook
  * @phpstan-import-type PossibleValueShape from \ModerationAPI\Actions\ActionUpdateParams\PossibleValue as PossibleValueShape1
- * @phpstan-import-type WebhookShape from \ModerationAPI\Actions\ActionUpdateParams\Webhook as WebhookShape1
  * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
  */
 final class ActionsService implements ActionsContract
@@ -65,7 +62,6 @@ final class ActionsService implements ActionsContract
      * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour whether the action resolves and removes the item, unresolves and re-add it to the queue, or does not change the resolve status
      * @param Type|value-of<Type>|null $type the type of the action
      * @param bool $valueRequired whether the action requires a value to be executed
-     * @param list<Webhook|WebhookShape> $webhooks the action's webhooks
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -82,7 +78,6 @@ final class ActionsService implements ActionsContract
         QueueBehaviour|string $queueBehaviour = 'NO_CHANGE',
         Type|string|null $type = null,
         bool $valueRequired = false,
-        array $webhooks = [],
         RequestOptions|array|null $requestOptions = null,
     ): ActionNewResponse {
         $params = Util::removeNulls(
@@ -98,7 +93,6 @@ final class ActionsService implements ActionsContract
                 'queueBehaviour' => $queueBehaviour,
                 'type' => $type,
                 'valueRequired' => $valueRequired,
-                'webhooks' => $webhooks,
             ],
         );
 
@@ -145,7 +139,6 @@ final class ActionsService implements ActionsContract
      * @param \ModerationAPI\Actions\ActionUpdateParams\QueueBehaviour|value-of<\ModerationAPI\Actions\ActionUpdateParams\QueueBehaviour> $queueBehaviour whether the action resolves and removes the item, unresolves and re-add it to the queue, or does not change the resolve status
      * @param \ModerationAPI\Actions\ActionUpdateParams\Type|value-of<\ModerationAPI\Actions\ActionUpdateParams\Type>|null $type the type of the action
      * @param bool $valueRequired whether the action requires a value to be executed
-     * @param list<\ModerationAPI\Actions\ActionUpdateParams\Webhook|WebhookShape1> $webhooks the action's webhooks
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -163,7 +156,6 @@ final class ActionsService implements ActionsContract
         \ModerationAPI\Actions\ActionUpdateParams\QueueBehaviour|string $queueBehaviour = 'NO_CHANGE',
         \ModerationAPI\Actions\ActionUpdateParams\Type|string|null $type = null,
         bool $valueRequired = false,
-        array $webhooks = [],
         RequestOptions|array|null $requestOptions = null,
     ): ActionUpdateResponse {
         $params = Util::removeNulls(
@@ -179,7 +171,6 @@ final class ActionsService implements ActionsContract
                 'queueBehaviour' => $queueBehaviour,
                 'type' => $type,
                 'valueRequired' => $valueRequired,
-                'webhooks' => $webhooks,
             ],
         );
 

@@ -8,7 +8,6 @@ use ModerationAPI\Actions\ActionGetResponse\Position;
 use ModerationAPI\Actions\ActionGetResponse\PossibleValue;
 use ModerationAPI\Actions\ActionGetResponse\QueueBehaviour;
 use ModerationAPI\Actions\ActionGetResponse\Type;
-use ModerationAPI\Actions\ActionGetResponse\Webhook;
 use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
@@ -16,7 +15,6 @@ use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-import-type PossibleValueShape from \ModerationAPI\Actions\ActionGetResponse\PossibleValue
- * @phpstan-import-type WebhookShape from \ModerationAPI\Actions\ActionGetResponse\Webhook
  *
  * @phpstan-type ActionGetResponseShape = array{
  *   id: string,
@@ -29,7 +27,6 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   possibleValues: list<PossibleValue|PossibleValueShape>,
  *   queueBehaviour: QueueBehaviour|value-of<QueueBehaviour>,
  *   valueRequired: bool,
- *   webhooks: list<Webhook|WebhookShape>,
  *   description?: string|null,
  *   key?: string|null,
  *   type?: null|Type|value-of<Type>,
@@ -109,14 +106,6 @@ final class ActionGetResponse implements BaseModel
     public bool $valueRequired;
 
     /**
-     * The action's webhooks.
-     *
-     * @var list<Webhook> $webhooks
-     */
-    #[Required(list: Webhook::class)]
-    public array $webhooks;
-
-    /**
      * The description of the action.
      */
     #[Optional(nullable: true)]
@@ -152,7 +141,6 @@ final class ActionGetResponse implements BaseModel
      *   possibleValues: ...,
      *   queueBehaviour: ...,
      *   valueRequired: ...,
-     *   webhooks: ...,
      * )
      * ```
      *
@@ -170,7 +158,6 @@ final class ActionGetResponse implements BaseModel
      *   ->withPossibleValues(...)
      *   ->withQueueBehaviour(...)
      *   ->withValueRequired(...)
-     *   ->withWebhooks(...)
      * ```
      */
     public function __construct()
@@ -187,7 +174,6 @@ final class ActionGetResponse implements BaseModel
      * @param Position|value-of<Position> $position
      * @param list<PossibleValue|PossibleValueShape> $possibleValues
      * @param QueueBehaviour|value-of<QueueBehaviour> $queueBehaviour
-     * @param list<Webhook|WebhookShape> $webhooks
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
@@ -201,7 +187,6 @@ final class ActionGetResponse implements BaseModel
         array $possibleValues = [],
         QueueBehaviour|string $queueBehaviour = 'NO_CHANGE',
         bool $valueRequired = false,
-        array $webhooks = [],
         ?string $description = null,
         ?string $key = null,
         Type|string|null $type = null,
@@ -218,7 +203,6 @@ final class ActionGetResponse implements BaseModel
         $self['possibleValues'] = $possibleValues;
         $self['queueBehaviour'] = $queueBehaviour;
         $self['valueRequired'] = $valueRequired;
-        $self['webhooks'] = $webhooks;
 
         null !== $description && $self['description'] = $description;
         null !== $key && $self['key'] = $key;
@@ -342,19 +326,6 @@ final class ActionGetResponse implements BaseModel
     {
         $self = clone $this;
         $self['valueRequired'] = $valueRequired;
-
-        return $self;
-    }
-
-    /**
-     * The action's webhooks.
-     *
-     * @param list<Webhook|WebhookShape> $webhooks
-     */
-    public function withWebhooks(array $webhooks): self
-    {
-        $self = clone $this;
-        $self['webhooks'] = $webhooks;
 
         return $self;
     }
