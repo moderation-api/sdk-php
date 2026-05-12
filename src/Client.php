@@ -7,6 +7,7 @@ namespace ModerationAPI;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 use ModerationAPI\Core\BaseClient;
+use ModerationAPI\Core\Implementation\StreamingHttpClient;
 use ModerationAPI\Core\Util;
 use ModerationAPI\Services\AccountService;
 use ModerationAPI\Services\ActionsService;
@@ -84,6 +85,11 @@ class Client extends BaseClient
             ),
             $requestOptions,
         );
+
+        if (is_null($options->streamingTransporter)) {
+            assert(!is_null($options->transporter));
+            $options->streamingTransporter = new StreamingHttpClient($options->transporter);
+        }
 
         /** @var array<string, string|null> $headers */
         $headers = [
