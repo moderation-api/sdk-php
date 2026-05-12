@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.17.1 (2026-05-12)
+
+Full Changelog: [v0.17.0...v0.17.1](https://github.com/moderation-api/sdk-php/compare/v0.17.0...v0.17.1)
+
+### Bug Fixes
+
+* guzzle requires special handling to enable streaming ([b1aa461](https://github.com/moderation-api/sdk-php/commit/b1aa46133e842c3d12f3bb202a11e7cd8eb0ffa3))
+
 ## 0.17.0 (2026-05-08)
 
 Full Changelog: [v0.16.0...v0.17.0](https://github.com/moderation-api/sdk-php/compare/v0.16.0...v0.17.0)
