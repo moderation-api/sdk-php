@@ -36,7 +36,7 @@ final class ContentTest extends TestCase
         }
 
         $result = $this->client->content->submit(
-            content: ['text' => 'x', 'type' => 'text']
+            content: ['text' => 'text', 'type' => 'text']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -51,7 +51,7 @@ final class ContentTest extends TestCase
         }
 
         $result = $this->client->content->submit(
-            content: ['text' => 'x', 'type' => 'text'],
+            content: ['text' => 'text', 'type' => 'text'],
             authorID: 'authorId',
             channel: 'channel',
             contentID: 'contentId',
