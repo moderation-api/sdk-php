@@ -31,7 +31,7 @@ use ModerationAPI\Client;
 $client = new Client(secretKey: getenv('MODAPI_SECRET_KEY') ?: 'My Secret Key');
 
 $response = $client->content->submit(
-  content: ['text' => 'x', 'type' => 'text']
+  content: ['text' => 'text', 'type' => 'text']
 );
 
 var_dump($response->recommendation);
@@ -57,7 +57,7 @@ use ModerationAPI\Core\Exceptions\APIStatusException;
 
 try {
   $response = $client->content->submit(
-    content: ['text' => 'x', 'type' => 'text']
+    content: ['text' => 'text', 'type' => 'text']
   );
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
@@ -104,7 +104,7 @@ $client = new Client(requestOptions: ['maxRetries' => 0]);
 
 // Or, configure per-request:
 $result = $client->content->submit(
-  content: ['text' => 'x', 'type' => 'text'],
+  content: ['text' => 'text', 'type' => 'text'],
   requestOptions: ['maxRetries' => 5],
 );
 ```
@@ -123,7 +123,7 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 <?php
 
 $response = $client->content->submit(
-  content: ['text' => 'x', 'type' => 'text'],
+  content: ['text' => 'text', 'type' => 'text'],
   requestOptions: [
     'extraQueryParams' => ['my_query_parameter' => 'value'],
     'extraBodyParams' => ['my_body_parameter' => 'value'],
