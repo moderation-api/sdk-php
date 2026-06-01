@@ -20,6 +20,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   flagged: bool,
  *   probability: float,
  *   type: 'classifier',
+ *   data?: array<string,mixed>|null,
  *   flaggedFields?: list<string>|null,
  *   labels?: list<Label|LabelShape>|null,
  * }
@@ -44,6 +45,14 @@ final class ClassifierOutput implements BaseModel
 
     #[Required]
     public float $probability;
+
+    /**
+     * Optional structured data produced by the policy. For face detection: { count, faces: [{ confidence, gender, age }] }.
+     *
+     * @var array<string,mixed>|null $data
+     */
+    #[Optional(map: 'mixed')]
+    public ?array $data;
 
     /**
      * The keys of the flagged fields if submitting an object.
@@ -81,6 +90,7 @@ final class ClassifierOutput implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param array<string,mixed>|null $data
      * @param list<string>|null $flaggedFields
      * @param list<Label|LabelShape>|null $labels
      */
@@ -88,6 +98,7 @@ final class ClassifierOutput implements BaseModel
         string $id,
         bool $flagged,
         float $probability,
+        ?array $data = null,
         ?array $flaggedFields = null,
         ?array $labels = null,
     ): self {
@@ -97,6 +108,7 @@ final class ClassifierOutput implements BaseModel
         $self['flagged'] = $flagged;
         $self['probability'] = $probability;
 
+        null !== $data && $self['data'] = $data;
         null !== $flaggedFields && $self['flaggedFields'] = $flaggedFields;
         null !== $labels && $self['labels'] = $labels;
 
@@ -137,6 +149,19 @@ final class ClassifierOutput implements BaseModel
     {
         $self = clone $this;
         $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
+     * Optional structured data produced by the policy. For face detection: { count, faces: [{ confidence, gender, age }] }.
+     *
+     * @param array<string,mixed> $data
+     */
+    public function withData(array $data): self
+    {
+        $self = clone $this;
+        $self['data'] = $data;
 
         return $self;
     }
