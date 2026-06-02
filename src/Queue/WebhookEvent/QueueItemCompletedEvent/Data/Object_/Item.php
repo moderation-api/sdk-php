@@ -30,6 +30,7 @@ use ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data\Object_\Item\M
  *   content: ContentShape,
  *   conversationID: string|null,
  *   flagged: bool|null,
+ *   flaggedFields: list<string>,
  *   labels: list<Label|LabelShape>|null,
  *   language: string|null,
  *   metaType: null|MetaType|value-of<MetaType>,
@@ -87,6 +88,14 @@ final class Item implements BaseModel
     public ?bool $flagged;
 
     /**
+     * For object content, the field keys (e.g. "bio") that triggered a flag. Empty when no fields were flagged or the content is not an object.
+     *
+     * @var list<string> $flaggedFields
+     */
+    #[Required('flagged_fields', list: 'string')]
+    public array $flaggedFields;
+
+    /**
      * Moderation labels applied to the content.
      *
      * @var list<Label>|null $labels
@@ -135,6 +144,7 @@ final class Item implements BaseModel
      *   content: ...,
      *   conversationID: ...,
      *   flagged: ...,
+     *   flaggedFields: ...,
      *   labels: ...,
      *   language: ...,
      *   metaType: ...,
@@ -154,6 +164,7 @@ final class Item implements BaseModel
      *   ->withContent(...)
      *   ->withConversationID(...)
      *   ->withFlagged(...)
+     *   ->withFlaggedFields(...)
      *   ->withLabels(...)
      *   ->withLanguage(...)
      *   ->withMetaType(...)
@@ -173,6 +184,7 @@ final class Item implements BaseModel
      *
      * @param ClientAction|ClientActionShape|null $clientAction
      * @param ContentShape $content
+     * @param list<string> $flaggedFields
      * @param list<Label|LabelShape>|null $labels
      * @param MetaType|value-of<MetaType>|null $metaType
      * @param array<string,mixed>|null $metadata
@@ -185,6 +197,7 @@ final class Item implements BaseModel
         Text|array|Image|Video|Audio|Object_ $content,
         ?string $conversationID,
         ?bool $flagged,
+        array $flaggedFields,
         ?array $labels,
         ?string $language,
         MetaType|string|null $metaType,
@@ -200,6 +213,7 @@ final class Item implements BaseModel
         $self['content'] = $content;
         $self['conversationID'] = $conversationID;
         $self['flagged'] = $flagged;
+        $self['flaggedFields'] = $flaggedFields;
         $self['labels'] = $labels;
         $self['language'] = $language;
         $self['metaType'] = $metaType;
@@ -288,6 +302,19 @@ final class Item implements BaseModel
     {
         $self = clone $this;
         $self['flagged'] = $flagged;
+
+        return $self;
+    }
+
+    /**
+     * For object content, the field keys (e.g. "bio") that triggered a flag. Empty when no fields were flagged or the content is not an object.
+     *
+     * @param list<string> $flaggedFields
+     */
+    public function withFlaggedFields(array $flaggedFields): self
+    {
+        $self = clone $this;
+        $self['flaggedFields'] = $flaggedFields;
 
         return $self;
     }
