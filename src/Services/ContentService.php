@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Services;
 
 use ModerationAPI\Client;
+use ModerationAPI\Content\ContentSubmitParams\ClientAction;
 use ModerationAPI\Content\ContentSubmitParams\Content\Audio;
 use ModerationAPI\Content\ContentSubmitParams\Content\Image;
 use ModerationAPI\Content\ContentSubmitParams\Content\Object_;
@@ -19,6 +20,7 @@ use ModerationAPI\ServiceContracts\ContentContract;
 
 /**
  * @phpstan-import-type ContentShape from \ModerationAPI\Content\ContentSubmitParams\Content
+ * @phpstan-import-type ClientActionShape from \ModerationAPI\Content\ContentSubmitParams\ClientAction
  * @phpstan-import-type PolicyShape from \ModerationAPI\Content\ContentSubmitParams\Policy
  * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
  */
@@ -43,6 +45,7 @@ final class ContentService implements ContentContract
      * @param ContentShape $content The content sent for moderation
      * @param string $authorID the author of the content
      * @param string $channel Provide a channel ID or key. Will use the project's default channel if not provided.
+     * @param ClientAction|ClientActionShape $clientAction A recommendation from your own client-side flagging (e.g. a banned-IP list or a third-party tool). Feeds the rules engine and can escalate or override the recommended action. Does not change whether our analysis flagged the content.
      * @param string $contentID the unique ID of the content in your database
      * @param string $conversationID For example the ID of a chat room or a post
      * @param bool $doNotStore Do not store the content. The content won't enter the review queue
@@ -58,6 +61,7 @@ final class ContentService implements ContentContract
         Text|array|Image|Video|Audio|Object_ $content,
         ?string $authorID = null,
         ?string $channel = null,
+        ClientAction|array|null $clientAction = null,
         ?string $contentID = null,
         ?string $conversationID = null,
         ?bool $doNotStore = null,
@@ -72,6 +76,7 @@ final class ContentService implements ContentContract
                 'content' => $content,
                 'authorID' => $authorID,
                 'channel' => $channel,
+                'clientAction' => $clientAction,
                 'contentID' => $contentID,
                 'conversationID' => $conversationID,
                 'doNotStore' => $doNotStore,

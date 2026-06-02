@@ -6,6 +6,7 @@ namespace ModerationAPI\Services;
 
 use ModerationAPI\Client;
 use ModerationAPI\Content\ContentSubmitParams;
+use ModerationAPI\Content\ContentSubmitParams\ClientAction;
 use ModerationAPI\Content\ContentSubmitParams\MetaType;
 use ModerationAPI\Content\ContentSubmitResponse;
 use ModerationAPI\Core\Contracts\BaseResponse;
@@ -15,6 +16,7 @@ use ModerationAPI\ServiceContracts\ContentRawContract;
 
 /**
  * @phpstan-import-type ContentShape from \ModerationAPI\Content\ContentSubmitParams\Content
+ * @phpstan-import-type ClientActionShape from \ModerationAPI\Content\ContentSubmitParams\ClientAction
  * @phpstan-import-type PolicyShape from \ModerationAPI\Content\ContentSubmitParams\Policy
  * @phpstan-import-type RequestOpts from \ModerationAPI\RequestOptions
  */
@@ -33,6 +35,7 @@ final class ContentRawService implements ContentRawContract
      *   content: ContentShape,
      *   authorID?: string,
      *   channel?: string,
+     *   clientAction?: ClientAction|ClientActionShape,
      *   contentID?: string,
      *   conversationID?: string,
      *   doNotStore?: bool,
