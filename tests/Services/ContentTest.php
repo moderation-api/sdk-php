@@ -54,6 +54,12 @@ final class ContentTest extends TestCase
             content: ['text' => 'text', 'type' => 'text'],
             authorID: 'authorId',
             channel: 'channel',
+            clientAction: [
+                'action' => 'review',
+                'behavior' => 'override',
+                'reason' => 'reason',
+                'source' => 'source',
+            ],
             contentID: 'contentId',
             conversationID: 'conversationId',
             doNotStore: true,

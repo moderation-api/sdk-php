@@ -7,6 +7,7 @@ namespace ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data\Object_;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
+use ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data\Object_\Item\ClientAction;
 use ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data\Object_\Item\Content\Audio;
 use ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data\Object_\Item\Content\Image;
 use ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data\Object_\Item\Content\Object_;
@@ -17,6 +18,7 @@ use ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data\Object_\Item\M
 
 /**
  * @phpstan-import-type ContentVariants from \ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data\Object_\Item\Content
+ * @phpstan-import-type ClientActionShape from \ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data\Object_\Item\ClientAction
  * @phpstan-import-type ContentShape from \ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data\Object_\Item\Content
  * @phpstan-import-type LabelShape from \ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data\Object_\Item\Label
  *
@@ -24,6 +26,7 @@ use ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data\Object_\Item\M
  *   id: string,
  *   authorID: string|null,
  *   channelKey: string|null,
+ *   clientAction: null|ClientAction|ClientActionShape,
  *   content: ContentShape,
  *   conversationID: string|null,
  *   flagged: bool|null,
@@ -56,6 +59,12 @@ final class Item implements BaseModel
      */
     #[Required('channel_key')]
     public ?string $channelKey;
+
+    /**
+     * A recommendation from your own client-side flagging.
+     */
+    #[Required('client_action')]
+    public ?ClientAction $clientAction;
 
     /**
      * The original content payload.
@@ -122,6 +131,7 @@ final class Item implements BaseModel
      *   id: ...,
      *   authorID: ...,
      *   channelKey: ...,
+     *   clientAction: ...,
      *   content: ...,
      *   conversationID: ...,
      *   flagged: ...,
@@ -140,6 +150,7 @@ final class Item implements BaseModel
      *   ->withID(...)
      *   ->withAuthorID(...)
      *   ->withChannelKey(...)
+     *   ->withClientAction(...)
      *   ->withContent(...)
      *   ->withConversationID(...)
      *   ->withFlagged(...)
@@ -160,6 +171,7 @@ final class Item implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param ClientAction|ClientActionShape|null $clientAction
      * @param ContentShape $content
      * @param list<Label|LabelShape>|null $labels
      * @param MetaType|value-of<MetaType>|null $metaType
@@ -169,6 +181,7 @@ final class Item implements BaseModel
         string $id,
         ?string $authorID,
         ?string $channelKey,
+        ClientAction|array|null $clientAction,
         Text|array|Image|Video|Audio|Object_ $content,
         ?string $conversationID,
         ?bool $flagged,
@@ -183,6 +196,7 @@ final class Item implements BaseModel
         $self['id'] = $id;
         $self['authorID'] = $authorID;
         $self['channelKey'] = $channelKey;
+        $self['clientAction'] = $clientAction;
         $self['content'] = $content;
         $self['conversationID'] = $conversationID;
         $self['flagged'] = $flagged;
@@ -224,6 +238,20 @@ final class Item implements BaseModel
     {
         $self = clone $this;
         $self['channelKey'] = $channelKey;
+
+        return $self;
+    }
+
+    /**
+     * A recommendation from your own client-side flagging.
+     *
+     * @param ClientAction|ClientActionShape|null $clientAction
+     */
+    public function withClientAction(
+        ClientAction|array|null $clientAction
+    ): self {
+        $self = clone $this;
+        $self['clientAction'] = $clientAction;
 
         return $self;
     }

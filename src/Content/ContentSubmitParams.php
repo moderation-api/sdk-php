@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content;
 
+use ModerationAPI\Content\ContentSubmitParams\ClientAction;
 use ModerationAPI\Content\ContentSubmitParams\Content\Audio;
 use ModerationAPI\Content\ContentSubmitParams\Content\Image;
 use ModerationAPI\Content\ContentSubmitParams\Content\Object_;
@@ -23,12 +24,14 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @phpstan-import-type ContentVariants from \ModerationAPI\Content\ContentSubmitParams\Content
  * @phpstan-import-type PolicyVariants from \ModerationAPI\Content\ContentSubmitParams\Policy
  * @phpstan-import-type ContentShape from \ModerationAPI\Content\ContentSubmitParams\Content
+ * @phpstan-import-type ClientActionShape from \ModerationAPI\Content\ContentSubmitParams\ClientAction
  * @phpstan-import-type PolicyShape from \ModerationAPI\Content\ContentSubmitParams\Policy
  *
  * @phpstan-type ContentSubmitParamsShape = array{
  *   content: ContentShape,
  *   authorID?: string|null,
  *   channel?: string|null,
+ *   clientAction?: null|ClientAction|ClientActionShape,
  *   contentID?: string|null,
  *   conversationID?: string|null,
  *   doNotStore?: bool|null,
@@ -63,6 +66,12 @@ final class ContentSubmitParams implements BaseModel
      */
     #[Optional]
     public ?string $channel;
+
+    /**
+     * A recommendation from your own client-side flagging (e.g. a banned-IP list or a third-party tool). Feeds the rules engine and can escalate or override the recommended action. Does not change whether our analysis flagged the content.
+     */
+    #[Optional]
+    public ?ClientAction $clientAction;
 
     /**
      * The unique ID of the content in your database.
@@ -137,6 +146,7 @@ final class ContentSubmitParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ContentShape $content
+     * @param ClientAction|ClientActionShape|null $clientAction
      * @param array<string,mixed>|null $metadata
      * @param MetaType|value-of<MetaType>|null $metaType
      * @param list<PolicyShape>|null $policies
@@ -145,6 +155,7 @@ final class ContentSubmitParams implements BaseModel
         Text|array|Image|Video|Audio|Object_ $content,
         ?string $authorID = null,
         ?string $channel = null,
+        ClientAction|array|null $clientAction = null,
         ?string $contentID = null,
         ?string $conversationID = null,
         ?bool $doNotStore = null,
@@ -159,6 +170,7 @@ final class ContentSubmitParams implements BaseModel
 
         null !== $authorID && $self['authorID'] = $authorID;
         null !== $channel && $self['channel'] = $channel;
+        null !== $clientAction && $self['clientAction'] = $clientAction;
         null !== $contentID && $self['contentID'] = $contentID;
         null !== $conversationID && $self['conversationID'] = $conversationID;
         null !== $doNotStore && $self['doNotStore'] = $doNotStore;
@@ -202,6 +214,19 @@ final class ContentSubmitParams implements BaseModel
     {
         $self = clone $this;
         $self['channel'] = $channel;
+
+        return $self;
+    }
+
+    /**
+     * A recommendation from your own client-side flagging (e.g. a banned-IP list or a third-party tool). Feeds the rules engine and can escalate or override the recommended action. Does not change whether our analysis flagged the content.
+     *
+     * @param ClientAction|ClientActionShape $clientAction
+     */
+    public function withClientAction(ClientAction|array $clientAction): self
+    {
+        $self = clone $this;
+        $self['clientAction'] = $clientAction;
 
         return $self;
     }
