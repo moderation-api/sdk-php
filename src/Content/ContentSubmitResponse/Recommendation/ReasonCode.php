@@ -23,4 +23,6 @@ enum ReasonCode: string
     case RULE_DEFAULT = 'rule_default';
 
     case RULE_FALLBACK = 'rule_fallback';
+
+    case CLIENT_OVERRIDE = 'client_override';
 }
