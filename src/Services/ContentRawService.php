@@ -40,7 +40,7 @@ final class ContentRawService implements ContentRawContract
      *   conversationID?: string,
      *   doNotStore?: bool,
      *   metadata?: array<string,mixed>,
-     *   metaType?: MetaType|value-of<MetaType>,
+     *   metaType?: value-of<MetaType>,
      *   policies?: list<PolicyShape>,
      *   timestamp?: float,
      * }|ContentSubmitParams $params
