@@ -23,5 +23,7 @@ enum MetaType: string
 
     case REVIEW = 'review';
 
+    case VOICE = 'voice';
+
     case OTHER = 'other';
 }
