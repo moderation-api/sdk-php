@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.24.0 (2026-07-18)
+
+Full Changelog: [v0.23.0...v0.24.0](https://github.com/moderation-api/sdk-php/compare/v0.23.0...v0.24.0)
+
+### Features
+
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([ce92779](https://github.com/moderation-api/sdk-php/commit/ce92779dff8dbcfdbc20a60ba0db9e75d0fd6581))
+
 ## 0.23.0 (2026-06-18)
 
 Full Changelog: [v0.22.0...v0.23.0](https://github.com/moderation-api/sdk-php/compare/v0.22.0...v0.23.0)
