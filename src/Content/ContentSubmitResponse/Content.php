@@ -21,6 +21,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   masked: bool,
  *   modified: ModifiedShape|null,
  *   transcript?: string|null,
+ *   unicodeCleaned?: bool|null,
  * }
  */
 final class Content implements BaseModel
@@ -55,6 +56,12 @@ final class Content implements BaseModel
     public ?string $transcript;
 
     /**
+     * Whether Unicode spoofing normalization rewrote the content — confusables folded to their Latin lookalikes, invisible characters and combining-mark abuse stripped.
+     */
+    #[Optional('unicode_cleaned')]
+    public ?bool $unicodeCleaned;
+
+    /**
      * `new Content()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -85,6 +92,7 @@ final class Content implements BaseModel
         bool $masked,
         string|array|null $modified,
         ?string $transcript = null,
+        ?bool $unicodeCleaned = null,
     ): self {
         $self = new self;
 
@@ -93,6 +101,7 @@ final class Content implements BaseModel
         $self['modified'] = $modified;
 
         null !== $transcript && $self['transcript'] = $transcript;
+        null !== $unicodeCleaned && $self['unicodeCleaned'] = $unicodeCleaned;
 
         return $self;
     }
@@ -139,6 +148,17 @@ final class Content implements BaseModel
     {
         $self = clone $this;
         $self['transcript'] = $transcript;
+
+        return $self;
+    }
+
+    /**
+     * Whether Unicode spoofing normalization rewrote the content — confusables folded to their Latin lookalikes, invisible characters and combining-mark abuse stripped.
+     */
+    public function withUnicodeCleaned(bool $unicodeCleaned): self
+    {
+        $self = clone $this;
+        $self['unicodeCleaned'] = $unicodeCleaned;
 
         return $self;
     }
