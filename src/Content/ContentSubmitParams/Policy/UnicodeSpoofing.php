@@ -33,7 +33,7 @@ final class UnicodeSpoofing implements BaseModel
     public bool $flag;
 
     /**
-     * Per-signal flag toggles. Omitted signals are enabled. A signal set to { flag: false } is still detected and reported as a label, but does not by itself flag the policy.
+     * Per-signal flag toggles. Omitted spoofing signals are enabled; encoding_damage defaults to off because decode damage (U+FFFD) marks a broken pipeline, not an attack. A disabled signal is still detected and reported as a label, but does not by itself flag the policy.
      *
      * @var array<string,Signal>|null $signals
      */
@@ -104,7 +104,7 @@ final class UnicodeSpoofing implements BaseModel
     }
 
     /**
-     * Per-signal flag toggles. Omitted signals are enabled. A signal set to { flag: false } is still detected and reported as a label, but does not by itself flag the policy.
+     * Per-signal flag toggles. Omitted spoofing signals are enabled; encoding_damage defaults to off because decode damage (U+FFFD) marks a broken pipeline, not an attack. A disabled signal is still detected and reported as a label, but does not by itself flag the policy.
      *
      * @param array<string,Signal|SignalShape> $signals
      */
