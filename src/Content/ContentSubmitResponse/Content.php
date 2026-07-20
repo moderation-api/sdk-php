@@ -20,8 +20,8 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *   id: string,
  *   masked: bool,
  *   modified: ModifiedShape|null,
+ *   unicodeCleaned: bool,
  *   transcript?: string|null,
- *   unicodeCleaned?: bool|null,
  * }
  */
 final class Content implements BaseModel
@@ -50,29 +50,33 @@ final class Content implements BaseModel
     public string|array|null $modified;
 
     /**
+     * Whether Unicode spoofing normalization rewrote the content — confusables folded to their Latin lookalikes, invisible characters and combining-mark abuse stripped.
+     */
+    #[Required('unicode_cleaned')]
+    public bool $unicodeCleaned;
+
+    /**
      * The transcribed text from audio content. Only present when audio moderation is used and transcript inclusion is enabled on the channel.
      */
     #[Optional(nullable: true)]
     public ?string $transcript;
 
     /**
-     * Whether Unicode spoofing normalization rewrote the content — confusables folded to their Latin lookalikes, invisible characters and combining-mark abuse stripped.
-     */
-    #[Optional('unicode_cleaned')]
-    public ?bool $unicodeCleaned;
-
-    /**
      * `new Content()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Content::with(id: ..., masked: ..., modified: ...)
+     * Content::with(id: ..., masked: ..., modified: ..., unicodeCleaned: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Content)->withID(...)->withMasked(...)->withModified(...)
+     * (new Content)
+     *   ->withID(...)
+     *   ->withMasked(...)
+     *   ->withModified(...)
+     *   ->withUnicodeCleaned(...)
      * ```
      */
     public function __construct()
@@ -91,17 +95,17 @@ final class Content implements BaseModel
         string $id,
         bool $masked,
         string|array|null $modified,
+        bool $unicodeCleaned,
         ?string $transcript = null,
-        ?bool $unicodeCleaned = null,
     ): self {
         $self = new self;
 
         $self['id'] = $id;
         $self['masked'] = $masked;
         $self['modified'] = $modified;
+        $self['unicodeCleaned'] = $unicodeCleaned;
 
         null !== $transcript && $self['transcript'] = $transcript;
-        null !== $unicodeCleaned && $self['unicodeCleaned'] = $unicodeCleaned;
 
         return $self;
     }
@@ -142,23 +146,23 @@ final class Content implements BaseModel
     }
 
     /**
-     * The transcribed text from audio content. Only present when audio moderation is used and transcript inclusion is enabled on the channel.
-     */
-    public function withTranscript(?string $transcript): self
-    {
-        $self = clone $this;
-        $self['transcript'] = $transcript;
-
-        return $self;
-    }
-
-    /**
      * Whether Unicode spoofing normalization rewrote the content — confusables folded to their Latin lookalikes, invisible characters and combining-mark abuse stripped.
      */
     public function withUnicodeCleaned(bool $unicodeCleaned): self
     {
         $self = clone $this;
         $self['unicodeCleaned'] = $unicodeCleaned;
+
+        return $self;
+    }
+
+    /**
+     * The transcribed text from audio content. Only present when audio moderation is used and transcript inclusion is enabled on the channel.
+     */
+    public function withTranscript(?string $transcript): self
+    {
+        $self = clone $this;
+        $self['transcript'] = $transcript;
 
         return $self;
     }
