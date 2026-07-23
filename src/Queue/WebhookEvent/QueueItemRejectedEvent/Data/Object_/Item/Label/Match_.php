@@ -20,7 +20,9 @@ use ModerationAPI\Queue\WebhookEvent\QueueItemRejectedEvent\Data\Object_\Item\La
  *   entityType?: string|null,
  *   mask?: string|null,
  *   reasons?: list<string>|null,
+ *   scripts?: list<string>|null,
  *   signals?: null|Signals|SignalsShape,
+ *   skeleton?: string|null,
  * }
  */
 final class Match_ implements BaseModel
@@ -58,8 +60,15 @@ final class Match_ implements BaseModel
     #[Optional(list: 'string')]
     public ?array $reasons;
 
+    /** @var list<string>|null $scripts */
+    #[Optional(list: 'string')]
+    public ?array $scripts;
+
     #[Optional]
     public ?Signals $signals;
+
+    #[Optional]
+    public ?string $skeleton;
 
     /**
      * `new Match_()` is missing required properties by the API.
@@ -87,6 +96,7 @@ final class Match_ implements BaseModel
      *
      * @param list<mixed> $span
      * @param list<string>|null $reasons
+     * @param list<string>|null $scripts
      * @param Signals|SignalsShape|null $signals
      */
     public static function with(
@@ -96,7 +106,9 @@ final class Match_ implements BaseModel
         ?string $entityType = null,
         ?string $mask = null,
         ?array $reasons = null,
+        ?array $scripts = null,
         Signals|array|null $signals = null,
+        ?string $skeleton = null,
     ): self {
         $self = new self;
 
@@ -107,7 +119,9 @@ final class Match_ implements BaseModel
         null !== $entityType && $self['entityType'] = $entityType;
         null !== $mask && $self['mask'] = $mask;
         null !== $reasons && $self['reasons'] = $reasons;
+        null !== $scripts && $self['scripts'] = $scripts;
         null !== $signals && $self['signals'] = $signals;
+        null !== $skeleton && $self['skeleton'] = $skeleton;
 
         return $self;
     }
@@ -175,12 +189,31 @@ final class Match_ implements BaseModel
     }
 
     /**
+     * @param list<string> $scripts
+     */
+    public function withScripts(array $scripts): self
+    {
+        $self = clone $this;
+        $self['scripts'] = $scripts;
+
+        return $self;
+    }
+
+    /**
      * @param Signals|SignalsShape $signals
      */
     public function withSignals(Signals|array $signals): self
     {
         $self = clone $this;
         $self['signals'] = $signals;
+
+        return $self;
+    }
+
+    public function withSkeleton(string $skeleton): self
+    {
+        $self = clone $this;
+        $self['skeleton'] = $skeleton;
 
         return $self;
     }
