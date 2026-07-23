@@ -19,6 +19,7 @@ use ModerationAPI\Queue\WebhookEvent\QueueItemCompletedEvent\Data\Object_\Item\L
  *   flagged?: bool|null,
  *   manual?: bool|null,
  *   matches?: list<Match_|MatchShape>|null,
+ *   shadowFlagged?: bool|null,
  * }
  */
 final class Label implements BaseModel
@@ -55,6 +56,12 @@ final class Label implements BaseModel
     public ?array $matches;
 
     /**
+     * Whether this label crossed its threshold under a shadowed policy — reported for visibility, never counted toward a flagging decision.
+     */
+    #[Optional('shadow_flagged')]
+    public ?bool $shadowFlagged;
+
+    /**
      * `new Label()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -86,6 +93,7 @@ final class Label implements BaseModel
         ?bool $flagged = null,
         ?bool $manual = null,
         ?array $matches = null,
+        ?bool $shadowFlagged = null,
     ): self {
         $self = new self;
 
@@ -95,6 +103,7 @@ final class Label implements BaseModel
         null !== $flagged && $self['flagged'] = $flagged;
         null !== $manual && $self['manual'] = $manual;
         null !== $matches && $self['matches'] = $matches;
+        null !== $shadowFlagged && $self['shadowFlagged'] = $shadowFlagged;
 
         return $self;
     }
@@ -150,6 +159,17 @@ final class Label implements BaseModel
     {
         $self = clone $this;
         $self['matches'] = $matches;
+
+        return $self;
+    }
+
+    /**
+     * Whether this label crossed its threshold under a shadowed policy — reported for visibility, never counted toward a flagging decision.
+     */
+    public function withShadowFlagged(bool $shadowFlagged): self
+    {
+        $self = clone $this;
+        $self['shadowFlagged'] = $shadowFlagged;
 
         return $self;
     }
