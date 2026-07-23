@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace ModerationAPI\Content\ContentSubmitResponse\Policy\ClassifierOutput;
 
+use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Attributes\Required;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type LabelShape = array{id: string, flagged: bool, probability: float}
+ * @phpstan-type LabelShape = array{
+ *   id: string, flagged: bool, probability: float, shadowFlagged?: bool|null
+ * }
  */
 final class Label implements BaseModel
 {
@@ -24,6 +27,9 @@ final class Label implements BaseModel
 
     #[Required]
     public float $probability;
+
+    #[Optional]
+    public ?bool $shadowFlagged;
 
     /**
      * `new Label()` is missing required properties by the API.
@@ -52,13 +58,16 @@ final class Label implements BaseModel
     public static function with(
         string $id,
         bool $flagged,
-        float $probability
+        float $probability,
+        ?bool $shadowFlagged = null
     ): self {
         $self = new self;
 
         $self['id'] = $id;
         $self['flagged'] = $flagged;
         $self['probability'] = $probability;
+
+        null !== $shadowFlagged && $self['shadowFlagged'] = $shadowFlagged;
 
         return $self;
     }
@@ -83,6 +92,14 @@ final class Label implements BaseModel
     {
         $self = clone $this;
         $self['probability'] = $probability;
+
+        return $self;
+    }
+
+    public function withShadowFlagged(bool $shadowFlagged): self
+    {
+        $self = clone $this;
+        $self['shadowFlagged'] = $shadowFlagged;
 
         return $self;
     }
