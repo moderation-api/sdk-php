@@ -19,7 +19,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @phpstan-type RecommendationShape = array{
  *   action: Action|value-of<Action>,
- *   reasonCodes: list<ReasonCode|value-of<ReasonCode>>,
+ *   reasonCodes: list<string|ReasonCode|value-of<ReasonCode>>,
  *   matchedRules?: list<MatchedRule|MatchedRuleShape>|null,
  * }
  */
@@ -37,9 +37,9 @@ final class Recommendation implements BaseModel
     public string $action;
 
     /**
-     * The reason code for the recommendation. Can be used to display a reason to the user.
+     * Reason codes for the recommendation. Standard codes plus a `rule:<key>` code identifying the rule that produced the action. Can be used to display a reason to the user.
      *
-     * @var list<value-of<ReasonCode>> $reasonCodes
+     * @var list<string|value-of<ReasonCode>> $reasonCodes
      */
     #[Required('reason_codes', list: ReasonCode::class)]
     public array $reasonCodes;
@@ -77,7 +77,7 @@ final class Recommendation implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Action|value-of<Action> $action
-     * @param list<ReasonCode|value-of<ReasonCode>> $reasonCodes
+     * @param list<string|ReasonCode|value-of<ReasonCode>> $reasonCodes
      * @param list<MatchedRule|MatchedRuleShape>|null $matchedRules
      */
     public static function with(
@@ -109,9 +109,9 @@ final class Recommendation implements BaseModel
     }
 
     /**
-     * The reason code for the recommendation. Can be used to display a reason to the user.
+     * Reason codes for the recommendation. Standard codes plus a `rule:<key>` code identifying the rule that produced the action. Can be used to display a reason to the user.
      *
-     * @param list<ReasonCode|value-of<ReasonCode>> $reasonCodes
+     * @param list<string|ReasonCode|value-of<ReasonCode>> $reasonCodes
      */
     public function withReasonCodes(array $reasonCodes): self
     {
