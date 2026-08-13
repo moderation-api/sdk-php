@@ -11,4 +11,6 @@ enum Type: string
     case NOT_FLAGGED = 'NOT_FLAGGED';
 
     case THRESHOLDS = 'THRESHOLDS';
+
+    case MATCHED = 'MATCHED';
 }
