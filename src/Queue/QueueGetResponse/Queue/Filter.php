@@ -35,7 +35,9 @@ use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\WithinUnit;
  *   isFlagged?: null|IsFlagged|value-of<IsFlagged>,
  *   labels?: list<string>|null,
  *   languages?: list<string>|null,
+ *   maxSeverity?: int|null,
  *   mediaTypes?: list<MediaType|value-of<MediaType>>|null,
+ *   minSeverity?: int|null,
  *   recommendationActions?: list<RecommendationAction|value-of<RecommendationAction>>|null,
  *   search?: list<string>|null,
  *   within?: float|null,
@@ -102,9 +104,15 @@ final class Filter implements BaseModel
     #[Optional(list: 'string')]
     public ?array $languages;
 
+    #[Optional]
+    public ?int $maxSeverity;
+
     /** @var list<value-of<MediaType>>|null $mediaTypes */
     #[Optional(list: MediaType::class)]
     public ?array $mediaTypes;
+
+    #[Optional]
+    public ?int $minSeverity;
 
     /** @var list<value-of<RecommendationAction>>|null $recommendationActions */
     #[Optional(list: RecommendationAction::class)]
@@ -162,7 +170,9 @@ final class Filter implements BaseModel
         IsFlagged|string|null $isFlagged = null,
         ?array $labels = null,
         ?array $languages = null,
+        ?int $maxSeverity = null,
         ?array $mediaTypes = null,
+        ?int $minSeverity = null,
         ?array $recommendationActions = null,
         ?array $search = null,
         ?float $within = null,
@@ -185,7 +195,9 @@ final class Filter implements BaseModel
         null !== $isFlagged && $self['isFlagged'] = $isFlagged;
         null !== $labels && $self['labels'] = $labels;
         null !== $languages && $self['languages'] = $languages;
+        null !== $maxSeverity && $self['maxSeverity'] = $maxSeverity;
         null !== $mediaTypes && $self['mediaTypes'] = $mediaTypes;
+        null !== $minSeverity && $self['minSeverity'] = $minSeverity;
         null !== $recommendationActions && $self['recommendationActions'] = $recommendationActions;
         null !== $search && $self['search'] = $search;
         null !== $within && $self['within'] = $within;
@@ -344,6 +356,14 @@ final class Filter implements BaseModel
         return $self;
     }
 
+    public function withMaxSeverity(int $maxSeverity): self
+    {
+        $self = clone $this;
+        $self['maxSeverity'] = $maxSeverity;
+
+        return $self;
+    }
+
     /**
      * @param list<MediaType|value-of<MediaType>> $mediaTypes
      */
@@ -351,6 +371,14 @@ final class Filter implements BaseModel
     {
         $self = clone $this;
         $self['mediaTypes'] = $mediaTypes;
+
+        return $self;
+    }
+
+    public function withMinSeverity(int $minSeverity): self
+    {
+        $self = clone $this;
+        $self['minSeverity'] = $minSeverity;
 
         return $self;
     }
