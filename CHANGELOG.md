@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.33.1 (2026-08-18)
+
+Full Changelog: [v0.33.0...v0.33.1](https://github.com/moderation-api/sdk-php/compare/v0.33.0...v0.33.1)
+
+### Chores
+
+* **internal:** codegen related update ([d83f1db](https://github.com/moderation-api/sdk-php/commit/d83f1dbabc1fa405978638cfeb8715134d724ac0))
+
 ## 0.33.0 (2026-08-14)
 
 Full Changelog: [v0.32.0...v0.33.0](https://github.com/moderation-api/sdk-php/compare/v0.32.0...v0.33.0)
