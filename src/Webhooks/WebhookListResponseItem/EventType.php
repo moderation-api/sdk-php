@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types=1);
+
+namespace ModerationAPI\Webhooks\WebhookListResponseItem;
+
+enum EventType: string
+{
+    case QUEUE_ITEM_NEW = 'QUEUE_ITEM_NEW';
+
+    case QUEUE_ITEM_COMPLETED = 'QUEUE_ITEM_COMPLETED';
+
+    case QUEUE_ITEM_ACTION = 'QUEUE_ITEM_ACTION';
+
+    case QUEUE_ITEM_REJECTED = 'QUEUE_ITEM_REJECTED';
+
+    case QUEUE_ITEM_ALLOWED = 'QUEUE_ITEM_ALLOWED';
+
+    case AUTHOR_BLOCKED = 'AUTHOR_BLOCKED';
+
+    case AUTHOR_UNBLOCKED = 'AUTHOR_UNBLOCKED';
+
+    case AUTHOR_SUSPENDED = 'AUTHOR_SUSPENDED';
+
+    case AUTHOR_UPDATED = 'AUTHOR_UPDATED';
+
+    case AUTHOR_TRUST_LEVEL_CHANGED = 'AUTHOR_TRUST_LEVEL_CHANGED';
+
+    case AUTHOR_ACTION = 'AUTHOR_ACTION';
+}

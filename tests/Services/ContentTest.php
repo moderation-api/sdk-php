@@ -29,6 +29,36 @@ final class ContentTest extends TestCase
     }
 
     #[Test]
+    public function testStream(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->content->stream(
+            secWebSocketProtocol: 'moderationapi.v1'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
+    }
+
+    #[Test]
+    public function testStreamWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->content->stream(
+            secWebSocketProtocol: 'moderationapi.v1'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
+    }
+
+    #[Test]
     public function testSubmit(): void
     {
         if (UnsupportedMockTests::$skip) {

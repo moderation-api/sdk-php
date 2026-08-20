@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ModerationAPI\ServiceContracts;
 
+use ModerationAPI\Content\ContentStreamParams\SecWebSocketProtocol;
 use ModerationAPI\Content\ContentSubmitParams\ClientAction;
 use ModerationAPI\Content\ContentSubmitParams\Content\Audio;
 use ModerationAPI\Content\ContentSubmitParams\Content\Image;
@@ -23,6 +24,19 @@ use ModerationAPI\RequestOptions;
  */
 interface ContentContract
 {
+    /**
+     * @api
+     *
+     * @param SecWebSocketProtocol|value-of<SecWebSocketProtocol> $secWebSocketProtocol requested subprotocol
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function stream(
+        SecWebSocketProtocol|string $secWebSocketProtocol,
+        RequestOptions|array|null $requestOptions = null,
+    ): mixed;
+
     /**
      * @api
      *
