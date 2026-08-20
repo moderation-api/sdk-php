@@ -15,6 +15,8 @@ use ModerationAPI\Services\AuthorsService;
 use ModerationAPI\Services\AuthService;
 use ModerationAPI\Services\ContentService;
 use ModerationAPI\Services\QueueService;
+use ModerationAPI\Services\WebhookSecretService;
+use ModerationAPI\Services\WebhooksService;
 use ModerationAPI\Services\WordlistService;
 
 /**
@@ -24,6 +26,8 @@ use ModerationAPI\Services\WordlistService;
 class Client extends BaseClient
 {
     public string $secretKey;
+
+    public bool $baseUrlOverridden;
 
     /**
      * @api
@@ -61,6 +65,16 @@ class Client extends BaseClient
     public WordlistService $wordlist;
 
     /**
+     * @api
+     */
+    public WebhooksService $webhooks;
+
+    /**
+     * @api
+     */
+    public WebhookSecretService $webhookSecret;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -71,6 +85,8 @@ class Client extends BaseClient
         $this->secretKey = (string) ($secretKey ?? Util::getenv(
             'MODAPI_SECRET_KEY'
         ));
+
+        $this->baseUrlOverridden = !is_null($baseUrl);
 
         $baseUrl ??= Util::getenv(
             'MODERATION_API_BASE_URL'
@@ -127,6 +143,8 @@ class Client extends BaseClient
         $this->account = new AccountService($this);
         $this->auth = new AuthService($this);
         $this->wordlist = new WordlistService($this);
+        $this->webhooks = new WebhooksService($this);
+        $this->webhookSecret = new WebhookSecretService($this);
     }
 
     /** @return array<string,string> */
