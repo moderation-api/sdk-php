@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.34.0 (2026-08-20)
+
+Full Changelog: [v0.33.1...v0.34.0](https://github.com/moderation-api/sdk-php/compare/v0.33.1...v0.34.0)
+
+### Features
+
+* **api:** webhooks and stream ([0f5e062](https://github.com/moderation-api/sdk-php/commit/0f5e0620df0e1a485996e0981fdf29a8dfce0acf))
+
 ## 0.33.1 (2026-08-18)
 
 Full Changelog: [v0.33.0...v0.33.1](https://github.com/moderation-api/sdk-php/compare/v0.33.0...v0.33.1)
