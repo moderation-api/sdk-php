@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Services;
 
 use ModerationAPI\Client;
+use ModerationAPI\Content\ContentStreamParams\SecWebSocketProtocol;
 use ModerationAPI\Content\ContentSubmitParams\ClientAction;
 use ModerationAPI\Content\ContentSubmitParams\Content\Audio;
 use ModerationAPI\Content\ContentSubmitParams\Content\Image;
@@ -37,6 +38,39 @@ final class ContentService implements ContentContract
     public function __construct(private Client $client)
     {
         $this->raw = new ContentRawService($client);
+    }
+
+    /**
+     * @api
+     *
+     * Open a WebSocket to moderate live voice/call audio in real time. Speech is transcribed and each finalized utterance is moderated by your enabled text policies; you receive a verdict per utterance as it's spoken.
+     *
+     * **This is a WebSocket upgrade, not a regular HTTP call.** The request body below documents the frames you *send* over the socket; the `101` response documents the events you *receive*.
+     *
+     * - **Auth:** `Authorization: Bearer <api_key>` on the upgrade. A missing/invalid key closes `4401`; voice not enabled on the plan/channel closes `4403`.
+     * - **Subprotocol:** request `moderationapi.v1`.
+     * - **Flow:** send one `start` frame, then `media` frames as audio arrives, then `stop` (or disconnect). You receive `session.started`, `utterance.final` per utterance, optional `utterance.partial`/`warning`, and `session.ended`.
+     * - **Close codes:** `1000` normal · `1011` server error · `4400` bad request · `4401` auth failed · `4403` voice not enabled · `4429` concurrency limit.
+     *
+     * See the [Real-time voice guide](https://docs.moderationapi.com/content-moderation/real-time-voice) for the full walkthrough and code examples.
+     *
+     * @param SecWebSocketProtocol|value-of<SecWebSocketProtocol> $secWebSocketProtocol requested subprotocol
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function stream(
+        SecWebSocketProtocol|string $secWebSocketProtocol,
+        RequestOptions|array|null $requestOptions = null,
+    ): mixed {
+        $params = Util::removeNulls(
+            ['secWebSocketProtocol' => $secWebSocketProtocol]
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->stream(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
