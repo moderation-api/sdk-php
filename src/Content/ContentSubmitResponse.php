@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ModerationAPI\Content;
 
 use ModerationAPI\Content\ContentSubmitResponse\Author;
+use ModerationAPI\Content\ContentSubmitResponse\Casebook;
 use ModerationAPI\Content\ContentSubmitResponse\Content;
 use ModerationAPI\Content\ContentSubmitResponse\Error;
 use ModerationAPI\Content\ContentSubmitResponse\Evaluation;
@@ -21,6 +22,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  * @phpstan-import-type InsightVariants from \ModerationAPI\Content\ContentSubmitResponse\Insight
  * @phpstan-import-type PolicyVariants from \ModerationAPI\Content\ContentSubmitResponse\Policy
  * @phpstan-import-type AuthorShape from \ModerationAPI\Content\ContentSubmitResponse\Author
+ * @phpstan-import-type CasebookShape from \ModerationAPI\Content\ContentSubmitResponse\Casebook
  * @phpstan-import-type ContentShape from \ModerationAPI\Content\ContentSubmitResponse\Content
  * @phpstan-import-type EvaluationShape from \ModerationAPI\Content\ContentSubmitResponse\Evaluation
  * @phpstan-import-type InsightShape from \ModerationAPI\Content\ContentSubmitResponse\Insight
@@ -31,6 +33,7 @@ use ModerationAPI\Core\Contracts\BaseModel;
  *
  * @phpstan-type ContentSubmitResponseShape = array{
  *   author: null|Author|AuthorShape,
+ *   casebook: null|Casebook|CasebookShape,
  *   content: Content|ContentShape,
  *   evaluation: Evaluation|EvaluationShape,
  *   insights: list<InsightShape>,
@@ -50,6 +53,12 @@ final class ContentSubmitResponse implements BaseModel
      */
     #[Required]
     public ?Author $author;
+
+    /**
+     * What your casebook — the record of your past moderation decisions — found for this content, or null when it had nothing close enough to say, when the matching cases disagreed, or when casebook lookups are not switched on for this channel. Reports what the casebook found; whether it decided the outcome is shown in `recommendation`, where a higher-priority rule may have settled the item first.
+     */
+    #[Required]
+    public ?Casebook $casebook;
 
     /**
      * Potentially modified content.
@@ -106,6 +115,7 @@ final class ContentSubmitResponse implements BaseModel
      * ```
      * ContentSubmitResponse::with(
      *   author: ...,
+     *   casebook: ...,
      *   content: ...,
      *   evaluation: ...,
      *   insights: ...,
@@ -120,6 +130,7 @@ final class ContentSubmitResponse implements BaseModel
      * ```
      * (new ContentSubmitResponse)
      *   ->withAuthor(...)
+     *   ->withCasebook(...)
      *   ->withContent(...)
      *   ->withEvaluation(...)
      *   ->withInsights(...)
@@ -139,6 +150,7 @@ final class ContentSubmitResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Author|AuthorShape|null $author
+     * @param Casebook|CasebookShape|null $casebook
      * @param Content|ContentShape $content
      * @param Evaluation|EvaluationShape $evaluation
      * @param list<InsightShape> $insights
@@ -149,6 +161,7 @@ final class ContentSubmitResponse implements BaseModel
      */
     public static function with(
         Author|array|null $author,
+        Casebook|array|null $casebook,
         Content|array $content,
         Evaluation|array $evaluation,
         array $insights,
@@ -160,6 +173,7 @@ final class ContentSubmitResponse implements BaseModel
         $self = new self;
 
         $self['author'] = $author;
+        $self['casebook'] = $casebook;
         $self['content'] = $content;
         $self['evaluation'] = $evaluation;
         $self['insights'] = $insights;
@@ -181,6 +195,19 @@ final class ContentSubmitResponse implements BaseModel
     {
         $self = clone $this;
         $self['author'] = $author;
+
+        return $self;
+    }
+
+    /**
+     * What your casebook — the record of your past moderation decisions — found for this content, or null when it had nothing close enough to say, when the matching cases disagreed, or when casebook lookups are not switched on for this channel. Reports what the casebook found; whether it decided the outcome is shown in `recommendation`, where a higher-priority rule may have settled the item first.
+     *
+     * @param Casebook|CasebookShape|null $casebook
+     */
+    public function withCasebook(Casebook|array|null $casebook): self
+    {
+        $self = clone $this;
+        $self['casebook'] = $casebook;
 
         return $self;
     }
