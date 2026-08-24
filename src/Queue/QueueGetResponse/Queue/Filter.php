@@ -8,6 +8,7 @@ use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Core\Conversion\ListOf;
+use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\CasebookHandled;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\CheckStatus;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\ContentType;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\FilterLabel;
@@ -24,6 +25,7 @@ use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\WithinUnit;
  *   authorID?: string|null,
  *   authorTrustLevels?: list<int>|null,
  *   beforeDate?: string|null,
+ *   casebookHandled?: null|CasebookHandled|value-of<CasebookHandled>,
  *   checkStatus?: null|CheckStatus|value-of<CheckStatus>,
  *   clearDateWindow?: bool|null,
  *   contentID?: string|null,
@@ -61,6 +63,10 @@ final class Filter implements BaseModel
 
     #[Optional]
     public ?string $beforeDate;
+
+    /** @var value-of<CasebookHandled>|null $casebookHandled */
+    #[Optional(enum: CasebookHandled::class)]
+    public ?string $casebookHandled;
 
     /** @var value-of<CheckStatus>|null $checkStatus */
     #[Optional(enum: CheckStatus::class, nullable: true)]
@@ -140,6 +146,7 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<int>|null $authorTrustLevels
+     * @param CasebookHandled|value-of<CasebookHandled>|null $casebookHandled
      * @param CheckStatus|value-of<CheckStatus>|null $checkStatus
      * @param list<ContentType|value-of<ContentType>>|null $contentTypes
      * @param list<string|null>|null $conversationIDs
@@ -159,6 +166,7 @@ final class Filter implements BaseModel
         ?string $authorID = null,
         ?array $authorTrustLevels = null,
         ?string $beforeDate = null,
+        CasebookHandled|string|null $casebookHandled = null,
         CheckStatus|string|null $checkStatus = null,
         ?bool $clearDateWindow = null,
         ?string $contentID = null,
@@ -184,6 +192,7 @@ final class Filter implements BaseModel
         null !== $authorID && $self['authorID'] = $authorID;
         null !== $authorTrustLevels && $self['authorTrustLevels'] = $authorTrustLevels;
         null !== $beforeDate && $self['beforeDate'] = $beforeDate;
+        null !== $casebookHandled && $self['casebookHandled'] = $casebookHandled;
         null !== $checkStatus && $self['checkStatus'] = $checkStatus;
         null !== $clearDateWindow && $self['clearDateWindow'] = $clearDateWindow;
         null !== $contentID && $self['contentID'] = $contentID;
@@ -237,6 +246,18 @@ final class Filter implements BaseModel
     {
         $self = clone $this;
         $self['beforeDate'] = $beforeDate;
+
+        return $self;
+    }
+
+    /**
+     * @param CasebookHandled|value-of<CasebookHandled> $casebookHandled
+     */
+    public function withCasebookHandled(
+        CasebookHandled|string $casebookHandled
+    ): self {
+        $self = clone $this;
+        $self['casebookHandled'] = $casebookHandled;
 
         return $self;
     }
