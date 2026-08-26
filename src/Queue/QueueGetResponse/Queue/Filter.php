@@ -14,11 +14,13 @@ use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\ContentType;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\FilterLabel;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\IsFlagged;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\MediaType;
+use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\MetadataFilter;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\RecommendationAction;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\WithinUnit;
 
 /**
  * @phpstan-import-type FilterLabelShape from \ModerationAPI\Queue\QueueGetResponse\Queue\Filter\FilterLabel
+ * @phpstan-import-type MetadataFilterShape from \ModerationAPI\Queue\QueueGetResponse\Queue\Filter\MetadataFilter
  *
  * @phpstan-type FilterShape = array{
  *   afterDate?: string|null,
@@ -39,6 +41,7 @@ use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\WithinUnit;
  *   languages?: list<string>|null,
  *   maxSeverity?: int|null,
  *   mediaTypes?: list<MediaType|value-of<MediaType>>|null,
+ *   metadataFilters?: list<MetadataFilter|MetadataFilterShape>|null,
  *   minSeverity?: int|null,
  *   recommendationActions?: list<RecommendationAction|value-of<RecommendationAction>>|null,
  *   search?: list<string>|null,
@@ -117,6 +120,10 @@ final class Filter implements BaseModel
     #[Optional(list: MediaType::class)]
     public ?array $mediaTypes;
 
+    /** @var list<MetadataFilter>|null $metadataFilters */
+    #[Optional(list: MetadataFilter::class)]
+    public ?array $metadataFilters;
+
     #[Optional]
     public ?int $minSeverity;
 
@@ -157,6 +164,7 @@ final class Filter implements BaseModel
      * @param list<string>|null $labels
      * @param list<string>|null $languages
      * @param list<MediaType|value-of<MediaType>>|null $mediaTypes
+     * @param list<MetadataFilter|MetadataFilterShape>|null $metadataFilters
      * @param list<RecommendationAction|value-of<RecommendationAction>>|null $recommendationActions
      * @param list<string>|null $search
      * @param WithinUnit|value-of<WithinUnit>|null $withinUnit
@@ -180,6 +188,7 @@ final class Filter implements BaseModel
         ?array $languages = null,
         ?int $maxSeverity = null,
         ?array $mediaTypes = null,
+        ?array $metadataFilters = null,
         ?int $minSeverity = null,
         ?array $recommendationActions = null,
         ?array $search = null,
@@ -206,6 +215,7 @@ final class Filter implements BaseModel
         null !== $languages && $self['languages'] = $languages;
         null !== $maxSeverity && $self['maxSeverity'] = $maxSeverity;
         null !== $mediaTypes && $self['mediaTypes'] = $mediaTypes;
+        null !== $metadataFilters && $self['metadataFilters'] = $metadataFilters;
         null !== $minSeverity && $self['minSeverity'] = $minSeverity;
         null !== $recommendationActions && $self['recommendationActions'] = $recommendationActions;
         null !== $search && $self['search'] = $search;
@@ -392,6 +402,17 @@ final class Filter implements BaseModel
     {
         $self = clone $this;
         $self['mediaTypes'] = $mediaTypes;
+
+        return $self;
+    }
+
+    /**
+     * @param list<MetadataFilter|MetadataFilterShape> $metadataFilters
+     */
+    public function withMetadataFilters(array $metadataFilters): self
+    {
+        $self = clone $this;
+        $self['metadataFilters'] = $metadataFilters;
 
         return $self;
     }
