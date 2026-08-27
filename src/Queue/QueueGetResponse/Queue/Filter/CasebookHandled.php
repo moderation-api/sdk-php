@@ -8,7 +8,9 @@ enum CasebookHandled: string
 {
     case ALL = 'ALL';
 
-    case HANDLED = 'HANDLED';
+    case ALLOWED = 'ALLOWED';
+
+    case REJECTED = 'REJECTED';
 
     case OVERRULED = 'OVERRULED';
 }
