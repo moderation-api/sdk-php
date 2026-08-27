@@ -10,5 +10,5 @@ enum CasebookHandled: string
 
     case HANDLED = 'HANDLED';
 
-    case WOULD_HAVE_HANDLED = 'WOULD_HAVE_HANDLED';
+    case OVERRULED = 'OVERRULED';
 }
