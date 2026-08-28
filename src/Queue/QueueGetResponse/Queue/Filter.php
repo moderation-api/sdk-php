@@ -8,7 +8,8 @@ use ModerationAPI\Core\Attributes\Optional;
 use ModerationAPI\Core\Concerns\SdkModel;
 use ModerationAPI\Core\Contracts\BaseModel;
 use ModerationAPI\Core\Conversion\ListOf;
-use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\CasebookHandled;
+use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\CasebookAgreement;
+use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\CasebookAnswer;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\CheckStatus;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\ContentType;
 use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\FilterLabel;
@@ -27,7 +28,8 @@ use ModerationAPI\Queue\QueueGetResponse\Queue\Filter\WithinUnit;
  *   authorID?: string|null,
  *   authorTrustLevels?: list<int>|null,
  *   beforeDate?: string|null,
- *   casebookHandled?: null|CasebookHandled|value-of<CasebookHandled>,
+ *   casebookAgreement?: null|CasebookAgreement|value-of<CasebookAgreement>,
+ *   casebookAnswer?: null|CasebookAnswer|value-of<CasebookAnswer>,
  *   checkStatus?: null|CheckStatus|value-of<CheckStatus>,
  *   clearDateWindow?: bool|null,
  *   contentID?: string|null,
@@ -67,9 +69,13 @@ final class Filter implements BaseModel
     #[Optional]
     public ?string $beforeDate;
 
-    /** @var value-of<CasebookHandled>|null $casebookHandled */
-    #[Optional(enum: CasebookHandled::class)]
-    public ?string $casebookHandled;
+    /** @var value-of<CasebookAgreement>|null $casebookAgreement */
+    #[Optional(enum: CasebookAgreement::class)]
+    public ?string $casebookAgreement;
+
+    /** @var value-of<CasebookAnswer>|null $casebookAnswer */
+    #[Optional(enum: CasebookAnswer::class)]
+    public ?string $casebookAnswer;
 
     /** @var value-of<CheckStatus>|null $checkStatus */
     #[Optional(enum: CheckStatus::class, nullable: true)]
@@ -153,7 +159,8 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<int>|null $authorTrustLevels
-     * @param CasebookHandled|value-of<CasebookHandled>|null $casebookHandled
+     * @param CasebookAgreement|value-of<CasebookAgreement>|null $casebookAgreement
+     * @param CasebookAnswer|value-of<CasebookAnswer>|null $casebookAnswer
      * @param CheckStatus|value-of<CheckStatus>|null $checkStatus
      * @param list<ContentType|value-of<ContentType>>|null $contentTypes
      * @param list<string|null>|null $conversationIDs
@@ -174,7 +181,8 @@ final class Filter implements BaseModel
         ?string $authorID = null,
         ?array $authorTrustLevels = null,
         ?string $beforeDate = null,
-        CasebookHandled|string|null $casebookHandled = null,
+        CasebookAgreement|string|null $casebookAgreement = null,
+        CasebookAnswer|string|null $casebookAnswer = null,
         CheckStatus|string|null $checkStatus = null,
         ?bool $clearDateWindow = null,
         ?string $contentID = null,
@@ -201,7 +209,8 @@ final class Filter implements BaseModel
         null !== $authorID && $self['authorID'] = $authorID;
         null !== $authorTrustLevels && $self['authorTrustLevels'] = $authorTrustLevels;
         null !== $beforeDate && $self['beforeDate'] = $beforeDate;
-        null !== $casebookHandled && $self['casebookHandled'] = $casebookHandled;
+        null !== $casebookAgreement && $self['casebookAgreement'] = $casebookAgreement;
+        null !== $casebookAnswer && $self['casebookAnswer'] = $casebookAnswer;
         null !== $checkStatus && $self['checkStatus'] = $checkStatus;
         null !== $clearDateWindow && $self['clearDateWindow'] = $clearDateWindow;
         null !== $contentID && $self['contentID'] = $contentID;
@@ -261,13 +270,25 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param CasebookHandled|value-of<CasebookHandled> $casebookHandled
+     * @param CasebookAgreement|value-of<CasebookAgreement> $casebookAgreement
      */
-    public function withCasebookHandled(
-        CasebookHandled|string $casebookHandled
+    public function withCasebookAgreement(
+        CasebookAgreement|string $casebookAgreement
     ): self {
         $self = clone $this;
-        $self['casebookHandled'] = $casebookHandled;
+        $self['casebookAgreement'] = $casebookAgreement;
+
+        return $self;
+    }
+
+    /**
+     * @param CasebookAnswer|value-of<CasebookAnswer> $casebookAnswer
+     */
+    public function withCasebookAnswer(
+        CasebookAnswer|string $casebookAnswer
+    ): self {
+        $self = clone $this;
+        $self['casebookAnswer'] = $casebookAnswer;
 
         return $self;
     }
