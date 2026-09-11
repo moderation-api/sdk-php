@@ -27,6 +27,7 @@ use ModerationAPI\Content\ContentSubmitParams\Policy\Religion;
 use ModerationAPI\Content\ContentSubmitParams\Policy\SelfHarm;
 use ModerationAPI\Content\ContentSubmitParams\Policy\SelfPromotion;
 use ModerationAPI\Content\ContentSubmitParams\Policy\Sexual;
+use ModerationAPI\Content\ContentSubmitParams\Policy\SexualMinors;
 use ModerationAPI\Content\ContentSubmitParams\Policy\Spam;
 use ModerationAPI\Content\ContentSubmitParams\Policy\Toxicity;
 use ModerationAPI\Content\ContentSubmitParams\Policy\ToxicitySevere;
@@ -53,6 +54,7 @@ use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type AdultShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Adult
  * @phpstan-import-type CryptoShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Crypto
  * @phpstan-import-type SexualShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Sexual
+ * @phpstan-import-type SexualMinorsShape from \ModerationAPI\Content\ContentSubmitParams\Policy\SexualMinors
  * @phpstan-import-type FlirtationShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Flirtation
  * @phpstan-import-type ProfanityShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Profanity
  * @phpstan-import-type ViolenceShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Violence
@@ -70,8 +72,8 @@ use ModerationAPI\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type URLRiskShape from \ModerationAPI\Content\ContentSubmitParams\Policy\URLRisk
  * @phpstan-import-type GuidelineShape from \ModerationAPI\Content\ContentSubmitParams\Policy\Guideline
  *
- * @phpstan-type PolicyVariants = Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Cannabis|Adult|Crypto|Sexual|Flirtation|Profanity|Violence|SelfHarm|Spam|LowQualityContent|FaceDetection|SelfPromotion|Political|Religion|CodeAbuse|UnicodeSpoofing|PiiMasking|URLMasking|URLRisk|Guideline
- * @phpstan-type PolicyShape = PolicyVariants|ToxicityShape|PersonalInformationShape|ToxicitySevereShape|HateShape|IllicitShape|IllicitDrugsShape|IllicitAlcoholShape|IllicitFirearmsShape|IllicitTobaccoShape|IllicitGamblingShape|CannabisShape|AdultShape|CryptoShape|SexualShape|FlirtationShape|ProfanityShape|ViolenceShape|SelfHarmShape|SpamShape|LowQualityContentShape|FaceDetectionShape|SelfPromotionShape|PoliticalShape|ReligionShape|CodeAbuseShape|UnicodeSpoofingShape|PiiMaskingShape|URLMaskingShape|URLRiskShape|GuidelineShape
+ * @phpstan-type PolicyVariants = Toxicity|PersonalInformation|ToxicitySevere|Hate|Illicit|IllicitDrugs|IllicitAlcohol|IllicitFirearms|IllicitTobacco|IllicitGambling|Cannabis|Adult|Crypto|Sexual|SexualMinors|Flirtation|Profanity|Violence|SelfHarm|Spam|LowQualityContent|FaceDetection|SelfPromotion|Political|Religion|CodeAbuse|UnicodeSpoofing|PiiMasking|URLMasking|URLRisk|Guideline
+ * @phpstan-type PolicyShape = PolicyVariants|ToxicityShape|PersonalInformationShape|ToxicitySevereShape|HateShape|IllicitShape|IllicitDrugsShape|IllicitAlcoholShape|IllicitFirearmsShape|IllicitTobaccoShape|IllicitGamblingShape|CannabisShape|AdultShape|CryptoShape|SexualShape|SexualMinorsShape|FlirtationShape|ProfanityShape|ViolenceShape|SelfHarmShape|SpamShape|LowQualityContentShape|FaceDetectionShape|SelfPromotionShape|PoliticalShape|ReligionShape|CodeAbuseShape|UnicodeSpoofingShape|PiiMaskingShape|URLMaskingShape|URLRiskShape|GuidelineShape
  */
 final class Policy implements ConverterSource
 {
@@ -97,6 +99,7 @@ final class Policy implements ConverterSource
             Adult::class,
             Crypto::class,
             Sexual::class,
+            SexualMinors::class,
             Flirtation::class,
             Profanity::class,
             Violence::class,
