@@ -86,6 +86,7 @@ interface AuthorsRawContract
     /**
      * @api
      *
+     * @param string $id either external ID or the ID assigned by moderation API
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthorDeleteResponse>
