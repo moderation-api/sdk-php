@@ -205,8 +205,9 @@ final class AuthorsService implements AuthorsContract
     /**
      * @api
      *
-     * Delete a specific author
+     * Delete a specific author. This resets the author: status, blocks, trust level, metrics and action history are removed. The author is created again with a clean record the next time content is moderated for the same ID.
      *
+     * @param string $id either external ID or the ID assigned by moderation API
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
