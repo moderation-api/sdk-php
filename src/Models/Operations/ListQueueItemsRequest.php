@@ -79,6 +79,14 @@ class ListQueueItemsRequest
     public ?array $filteredActionIds = null;
 
     /**
+     * The project to act on, when you call with an organization key. Optional when the organization has one project. A project key acts on its own project: naming another one is an error.
+     *
+     * @var ?string $projectId
+     */
+    #[SpeakeasyMetadata('header:style=simple,explode=false,name=Project-Id')]
+    public ?string $projectId = null;
+
+    /**
      *
      * @var ?int $page
      */
@@ -113,9 +121,10 @@ class ListQueueItemsRequest
      * @param  ?bool  $includeResolved
      * @param  ?string  $authorId
      * @param  ?array<string>  $filteredActionIds
+     * @param  ?string  $projectId
      * @phpstan-pure
      */
-    public function __construct(string $id, ?SortField $sortField = null, ?array $conversationIds = null, ?array $labels = null, ?string $afterDate = null, ?string $beforeDate = null, ?bool $includeResolved = null, ?string $authorId = null, ?array $filteredActionIds = null, ?int $page = 1, ?int $pageSize = 20, ?ListQueueItemsSortDirection $sortDirection = ListQueueItemsSortDirection::Desc)
+    public function __construct(string $id, ?SortField $sortField = null, ?array $conversationIds = null, ?array $labels = null, ?string $afterDate = null, ?string $beforeDate = null, ?bool $includeResolved = null, ?string $authorId = null, ?array $filteredActionIds = null, ?string $projectId = null, ?int $page = 1, ?int $pageSize = 20, ?ListQueueItemsSortDirection $sortDirection = ListQueueItemsSortDirection::Desc)
     {
         $this->id = $id;
         $this->sortField = $sortField;
@@ -126,6 +135,7 @@ class ListQueueItemsRequest
         $this->includeResolved = $includeResolved;
         $this->authorId = $authorId;
         $this->filteredActionIds = $filteredActionIds;
+        $this->projectId = $projectId;
         $this->page = $page;
         $this->pageSize = $pageSize;
         $this->sortDirection = $sortDirection;

@@ -8,55 +8,32 @@ declare(strict_types=1);
 
 namespace ModerationApi\Models\Operations;
 
-
+use ModerationApi\Utils\SpeakeasyMetadata;
 class CreateWebhookRequest
 {
     /**
-     * The webhook's name, used to identify it in the dashboard
      *
-     * @var string $name
+     * @var \ModerationApi\Models\Operations\CreateWebhookRequestBody $body
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('name')]
-    public string $name;
+    #[SpeakeasyMetadata('request:mediaType=application/json')]
+    public CreateWebhookRequestBody $body;
 
     /**
-     * The webhook's URL. We'll call this URL when an event occurs.
+     * The project to act on, when you call with an organization key. Optional when the organization has one project. A project key acts on its own project: naming another one is an error.
      *
-     * @var string $url
+     * @var ?string $projectId
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('url')]
-    public string $url;
+    #[SpeakeasyMetadata('header:style=simple,explode=false,name=Project-Id')]
+    public ?string $projectId = null;
 
     /**
-     * Event types this webhook subscribes to. One webhook URL receives all events you list here.
-     *
-     * @var array<\ModerationApi\Models\Operations\CreateWebhookEventTypeRequest> $eventTypes
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('eventTypes')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\ModerationApi\Models\Operations\CreateWebhookEventTypeRequest>')]
-    public array $eventTypes;
-
-    /**
-     * The webhook's description
-     *
-     * @var ?string $description
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('description')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?string $description = null;
-
-    /**
-     * @param  string  $name
-     * @param  string  $url
-     * @param  array<\ModerationApi\Models\Operations\CreateWebhookEventTypeRequest>  $eventTypes
-     * @param  ?string  $description
+     * @param  \ModerationApi\Models\Operations\CreateWebhookRequestBody  $body
+     * @param  ?string  $projectId
      * @phpstan-pure
      */
-    public function __construct(string $name, string $url, array $eventTypes, ?string $description = null)
+    public function __construct(CreateWebhookRequestBody $body, ?string $projectId = null)
     {
-        $this->name = $name;
-        $this->url = $url;
-        $this->eventTypes = $eventTypes;
-        $this->description = $description;
+        $this->body = $body;
+        $this->projectId = $projectId;
     }
 }

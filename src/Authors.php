@@ -49,21 +49,30 @@ class Authors
      *
      * Create a new author. Typically not needed as authors are created automatically when content is moderated.
      *
-     * @param  \ModerationApi\Models\Operations\CreateAuthorRequest  $request
+     * @param  \ModerationApi\Models\Operations\CreateAuthorRequestBody  $body
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\CreateAuthorResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function create(Operations\CreateAuthorRequest $request, ?Options $options = null): Operations\CreateAuthorResponse
+    public function create(Operations\CreateAuthorRequestBody $body, ?string $projectId = null, ?Options $options = null): Operations\CreateAuthorResponse
     {
+        $request = new Operations\CreateAuthorRequest(
+            body: $body,
+            projectId: $projectId,
+        );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/authors');
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
-        $body = Utils\Utils::serializeRequestBody($request, 'request', 'json');
+        $body = Utils\Utils::serializeRequestBody($request, 'body', 'json');
         if ($body === null) {
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('POST', $url);
@@ -177,18 +186,24 @@ class Authors
      * Delete a specific author. This resets the author: status, blocks, trust level, metrics and action history are removed. The author is created again with a clean record the next time content is moderated for the same ID.
      *
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\DeleteAuthorResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function delete(string $id, ?Options $options = null): Operations\DeleteAuthorResponse
+    public function delete(string $id, ?string $projectId = null, ?Options $options = null): Operations\DeleteAuthorResponse
     {
         $request = new Operations\DeleteAuthorRequest(
             id: $id,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/authors/{id}', Operations\DeleteAuthorRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('DELETE', $url);
@@ -314,18 +329,24 @@ class Authors
      * Get detailed information about a specific author including historical data and analysis
      *
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\GetAuthorResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function retrieve(string $id, ?Options $options = null): Operations\GetAuthorResponse
+    public function retrieve(string $id, ?string $projectId = null, ?Options $options = null): Operations\GetAuthorResponse
     {
         $request = new Operations\GetAuthorRequest(
             id: $id,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/authors/{id}', Operations\GetAuthorRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
@@ -462,6 +483,10 @@ class Authors
         $httpOptions = ['http_errors' => false];
 
         $qp = Utils\Utils::getQueryParams(Operations\ListAuthorsRequest::class, $request, $urlOverride);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
@@ -532,6 +557,7 @@ class Authors
                             memberSinceDate: $request != null ? $request->memberSinceDate : null,
                             lastActiveDate: $request != null ? $request->lastActiveDate : null,
                             contentTypes: $request != null ? $request->contentTypes : null,
+                            projectId: $request != null ? $request->projectId : null,
                         ),
                     );
                 };
@@ -646,14 +672,16 @@ class Authors
      *
      * @param  \ModerationApi\Models\Operations\UpdateAuthorRequestBody  $body
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\UpdateAuthorResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function update(Operations\UpdateAuthorRequestBody $body, string $id, ?Options $options = null): Operations\UpdateAuthorResponse
+    public function update(Operations\UpdateAuthorRequestBody $body, string $id, ?string $projectId = null, ?Options $options = null): Operations\UpdateAuthorResponse
     {
         $request = new Operations\UpdateAuthorRequest(
             id: $id,
             body: $body,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/authors/{id}', Operations\UpdateAuthorRequest::class, $request);
@@ -664,6 +692,10 @@ class Authors
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('PUT', $url);

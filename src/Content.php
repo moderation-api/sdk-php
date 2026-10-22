@@ -45,23 +45,32 @@ class Content
     }
 
     /**
-     * submit
+     * Submit content
      *
-     * @param  \ModerationApi\Models\Operations\SubmitContentRequest  $request
+     * @param  \ModerationApi\Models\Operations\SubmitContentRequestBody  $body
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\SubmitContentResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function submit(Operations\SubmitContentRequest $request, ?Options $options = null): Operations\SubmitContentResponse
+    public function submit(Operations\SubmitContentRequestBody $body, ?string $projectId = null, ?Options $options = null): Operations\SubmitContentResponse
     {
+        $request = new Operations\SubmitContentRequest(
+            body: $body,
+            projectId: $projectId,
+        );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/moderate');
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
-        $body = Utils\Utils::serializeRequestBody($request, 'request', 'json');
+        $body = Utils\Utils::serializeRequestBody($request, 'body', 'json');
         if ($body === null) {
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('POST', $url);

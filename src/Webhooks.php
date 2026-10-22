@@ -49,21 +49,30 @@ class Webhooks
      *
      * Create a webhook subscribed to one or more event types. Deliveries use the v2 envelope and are signed with the project signing secret (see the signing secret endpoint).
      *
-     * @param  \ModerationApi\Models\Operations\CreateWebhookRequest  $request
+     * @param  \ModerationApi\Models\Operations\CreateWebhookRequestBody  $body
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\CreateWebhookResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function create(Operations\CreateWebhookRequest $request, ?Options $options = null): Operations\CreateWebhookResponse
+    public function create(Operations\CreateWebhookRequestBody $body, ?string $projectId = null, ?Options $options = null): Operations\CreateWebhookResponse
     {
+        $request = new Operations\CreateWebhookRequest(
+            body: $body,
+            projectId: $projectId,
+        );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/webhooks');
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
-        $body = Utils\Utils::serializeRequestBody($request, 'request', 'json');
+        $body = Utils\Utils::serializeRequestBody($request, 'body', 'json');
         if ($body === null) {
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('POST', $url);
@@ -153,18 +162,24 @@ class Webhooks
      * Delete a webhook.
      *
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\DeleteWebhookResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function delete(string $id, ?Options $options = null): Operations\DeleteWebhookResponse
+    public function delete(string $id, ?string $projectId = null, ?Options $options = null): Operations\DeleteWebhookResponse
     {
         $request = new Operations\DeleteWebhookRequest(
             id: $id,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/webhooks/{id}', Operations\DeleteWebhookRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('DELETE', $url);
@@ -254,18 +269,24 @@ class Webhooks
      * Get a webhook by ID.
      *
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\GetWebhookResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function retrieve(string $id, ?Options $options = null): Operations\GetWebhookResponse
+    public function retrieve(string $id, ?string $projectId = null, ?Options $options = null): Operations\GetWebhookResponse
     {
         $request = new Operations\GetWebhookRequest(
             id: $id,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/webhooks/{id}', Operations\GetWebhookRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
@@ -356,14 +377,16 @@ class Webhooks
      *
      * @param  ?int  $page
      * @param  ?int  $pageSize
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\ListWebhooksResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    private function listIndividual(?int $page = null, ?int $pageSize = null, ?Options $options = null): Operations\ListWebhooksResponse
+    private function listIndividual(?int $page = null, ?int $pageSize = null, ?string $projectId = null, ?Options $options = null): Operations\ListWebhooksResponse
     {
         $request = new Operations\ListWebhooksRequest(
             page: $page,
             pageSize: $pageSize,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/webhooks');
@@ -371,6 +394,10 @@ class Webhooks
         $httpOptions = ['http_errors' => false];
 
         $qp = Utils\Utils::getQueryParams(Operations\ListWebhooksRequest::class, $request, $urlOverride);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
@@ -435,6 +462,7 @@ class Webhooks
                     return $sdk->listIndividual(
                         page: $nextPage,
                         pageSize: $request != null ? $request->pageSize : null,
+                        projectId: $request != null ? $request->projectId : null,
                     );
                 };
 
@@ -482,12 +510,13 @@ class Webhooks
      *
      * @param  ?int  $page
      * @param  ?int  $pageSize
+     * @param  ?string  $projectId
      * @return \Generator<\ModerationApi\Models\Operations\ListWebhooksResponse>
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function list(?int $page = null, ?int $pageSize = null, ?Options $options = null): \Generator
+    public function list(?int $page = null, ?int $pageSize = null, ?string $projectId = null, ?Options $options = null): \Generator
     {
-        $res = $this->listIndividual($page, $pageSize, $options);
+        $res = $this->listIndividual($page, $pageSize, $projectId, $options);
         while ($res !== null) {
             yield $res;
             $res = $res->next($res);
@@ -501,14 +530,16 @@ class Webhooks
      *
      * @param  \ModerationApi\Models\Operations\UpdateWebhookRequestBody  $body
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\UpdateWebhookResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function update(Operations\UpdateWebhookRequestBody $body, string $id, ?Options $options = null): Operations\UpdateWebhookResponse
+    public function update(Operations\UpdateWebhookRequestBody $body, string $id, ?string $projectId = null, ?Options $options = null): Operations\UpdateWebhookResponse
     {
         $request = new Operations\UpdateWebhookRequest(
             id: $id,
             body: $body,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/webhooks/{id}', Operations\UpdateWebhookRequest::class, $request);
@@ -519,6 +550,10 @@ class Webhooks
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('PUT', $url);

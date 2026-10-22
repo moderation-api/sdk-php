@@ -19,6 +19,14 @@ class ListActionsRequest
     public ?string $queueId = null;
 
     /**
+     * The project to act on, when you call with an organization key. Optional when the organization has one project. A project key acts on its own project: naming another one is an error.
+     *
+     * @var ?string $projectId
+     */
+    #[SpeakeasyMetadata('header:style=simple,explode=false,name=Project-Id')]
+    public ?string $projectId = null;
+
+    /**
      *
      * @var ?int $page
      */
@@ -36,11 +44,13 @@ class ListActionsRequest
      * @param  ?string  $queueId
      * @param  ?int  $page
      * @param  ?int  $pageSize
+     * @param  ?string  $projectId
      * @phpstan-pure
      */
-    public function __construct(?string $queueId = null, ?int $page = 1, ?int $pageSize = 20)
+    public function __construct(?string $queueId = null, ?string $projectId = null, ?int $page = 1, ?int $pageSize = 20)
     {
         $this->queueId = $queueId;
+        $this->projectId = $projectId;
         $this->page = $page;
         $this->pageSize = $pageSize;
     }

@@ -4,9 +4,11 @@
 
 ### Available Operations
 
-* [submit](#submit)
+* [submit](#submit) - Submit content
 
 ## submit
+
+Submit content
 
 ### Example Usage
 
@@ -25,7 +27,7 @@ $sdk = ModerationApi\ModerationApi::builder()
     )
     ->build();
 
-$request = new Operations\SubmitContentRequest(
+$body = new Operations\SubmitContentRequestBody(
     content: new Operations\TextRequest(
         text: 'Hey, check out my profile for a deal!',
     ),
@@ -38,7 +40,7 @@ $request = new Operations\SubmitContentRequest(
 );
 
 $response = $sdk->content->submit(
-    request: $request
+    body: $body
 );
 
 if ($response->object !== null) {
@@ -48,9 +50,10 @@ if ($response->object !== null) {
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `$request`                                                                         | [Operations\SubmitContentRequest](../../Models/Operations/SubmitContentRequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| Parameter                                                                                                                                                                             | Type                                                                                                                                                                                  | Required                                                                                                                                                                              | Description                                                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `body`                                                                                                                                                                                | [Operations\SubmitContentRequestBody](../../Models/Operations/SubmitContentRequestBody.md)                                                                                            | :heavy_check_mark:                                                                                                                                                                    | N/A                                                                                                                                                                                   |
+| `projectId`                                                                                                                                                                           | *?string*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                    | The project to act on, when you call with an organization key. Optional when the organization has one project. A project key acts on its own project: naming another one is an error. |
 
 ### Response
 

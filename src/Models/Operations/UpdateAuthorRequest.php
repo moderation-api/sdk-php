@@ -27,13 +27,23 @@ class UpdateAuthorRequest
     public UpdateAuthorRequestBody $body;
 
     /**
+     * The project to act on, when you call with an organization key. Optional when the organization has one project. A project key acts on its own project: naming another one is an error.
+     *
+     * @var ?string $projectId
+     */
+    #[SpeakeasyMetadata('header:style=simple,explode=false,name=Project-Id')]
+    public ?string $projectId = null;
+
+    /**
      * @param  string  $id
      * @param  \ModerationApi\Models\Operations\UpdateAuthorRequestBody  $body
+     * @param  ?string  $projectId
      * @phpstan-pure
      */
-    public function __construct(string $id, UpdateAuthorRequestBody $body)
+    public function __construct(string $id, UpdateAuthorRequestBody $body, ?string $projectId = null)
     {
         $this->id = $id;
         $this->body = $body;
+        $this->projectId = $projectId;
     }
 }

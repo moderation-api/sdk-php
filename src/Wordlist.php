@@ -53,18 +53,24 @@ class Wordlist
      * Get a specific wordlist by ID
      *
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\GetWordlistResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function retrieve(string $id, ?Options $options = null): Operations\GetWordlistResponse
+    public function retrieve(string $id, ?string $projectId = null, ?Options $options = null): Operations\GetWordlistResponse
     {
         $request = new Operations\GetWordlistRequest(
             id: $id,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/wordlist/{id}', Operations\GetWordlistRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
@@ -190,18 +196,24 @@ class Wordlist
      * Get the current embedding progress status for a wordlist
      *
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\GetWordlistEmbeddingStatusResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function getEmbeddingStatus(string $id, ?Options $options = null): Operations\GetWordlistEmbeddingStatusResponse
+    public function getEmbeddingStatus(string $id, ?string $projectId = null, ?Options $options = null): Operations\GetWordlistEmbeddingStatusResponse
     {
         $request = new Operations\GetWordlistEmbeddingStatusRequest(
             id: $id,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/wordlist/{id}/embedding-status', Operations\GetWordlistEmbeddingStatusRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
@@ -328,14 +340,16 @@ class Wordlist
      *
      * @param  ?int  $page
      * @param  ?int  $pageSize
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\ListWordlistsResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    private function listIndividual(?int $page = null, ?int $pageSize = null, ?Options $options = null): Operations\ListWordlistsResponse
+    private function listIndividual(?int $page = null, ?int $pageSize = null, ?string $projectId = null, ?Options $options = null): Operations\ListWordlistsResponse
     {
         $request = new Operations\ListWordlistsRequest(
             page: $page,
             pageSize: $pageSize,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/wordlist');
@@ -343,6 +357,10 @@ class Wordlist
         $httpOptions = ['http_errors' => false];
 
         $qp = Utils\Utils::getQueryParams(Operations\ListWordlistsRequest::class, $request, $urlOverride);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
@@ -407,6 +425,7 @@ class Wordlist
                     return $sdk->listIndividual(
                         page: $nextPage,
                         pageSize: $request != null ? $request->pageSize : null,
+                        projectId: $request != null ? $request->projectId : null,
                     );
                 };
 
@@ -502,12 +521,13 @@ class Wordlist
      *
      * @param  ?int  $page
      * @param  ?int  $pageSize
+     * @param  ?string  $projectId
      * @return \Generator<\ModerationApi\Models\Operations\ListWordlistsResponse>
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function list(?int $page = null, ?int $pageSize = null, ?Options $options = null): \Generator
+    public function list(?int $page = null, ?int $pageSize = null, ?string $projectId = null, ?Options $options = null): \Generator
     {
-        $res = $this->listIndividual($page, $pageSize, $options);
+        $res = $this->listIndividual($page, $pageSize, $projectId, $options);
         while ($res !== null) {
             yield $res;
             $res = $res->next($res);
@@ -521,14 +541,16 @@ class Wordlist
      *
      * @param  \ModerationApi\Models\Operations\UpdateWordlistRequestBody  $body
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\UpdateWordlistResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function update(Operations\UpdateWordlistRequestBody $body, string $id, ?Options $options = null): Operations\UpdateWordlistResponse
+    public function update(Operations\UpdateWordlistRequestBody $body, string $id, ?string $projectId = null, ?Options $options = null): Operations\UpdateWordlistResponse
     {
         $request = new Operations\UpdateWordlistRequest(
             id: $id,
             body: $body,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/wordlist/{id}', Operations\UpdateWordlistRequest::class, $request);
@@ -539,6 +561,10 @@ class Wordlist
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('PUT', $url);

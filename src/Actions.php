@@ -49,21 +49,30 @@ class Actions
      *
      * Create an action.
      *
-     * @param  \ModerationApi\Models\Operations\CreateActionRequest  $request
+     * @param  \ModerationApi\Models\Operations\CreateActionRequestBody  $body
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\CreateActionResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function create(Operations\CreateActionRequest $request, ?Options $options = null): Operations\CreateActionResponse
+    public function create(Operations\CreateActionRequestBody $body, ?string $projectId = null, ?Options $options = null): Operations\CreateActionResponse
     {
+        $request = new Operations\CreateActionRequest(
+            body: $body,
+            projectId: $projectId,
+        );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/actions');
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
-        $body = Utils\Utils::serializeRequestBody($request, 'request', 'json');
+        $body = Utils\Utils::serializeRequestBody($request, 'body', 'json');
         if ($body === null) {
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('POST', $url);
@@ -165,18 +174,24 @@ class Actions
      * Delete an action and all of its webhooks.
      *
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\DeleteActionResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function delete(string $id, ?Options $options = null): Operations\DeleteActionResponse
+    public function delete(string $id, ?string $projectId = null, ?Options $options = null): Operations\DeleteActionResponse
     {
         $request = new Operations\DeleteActionRequest(
             id: $id,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/actions/{id}', Operations\DeleteActionRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('DELETE', $url);
@@ -277,21 +292,30 @@ class Actions
      *
      * Execute a moderation action on one or more content items.
      *
-     * @param  \ModerationApi\Models\Operations\ExecuteActionRequest  $request
+     * @param  \ModerationApi\Models\Operations\ExecuteActionRequestBody  $body
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\ExecuteActionResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function execute(Operations\ExecuteActionRequest $request, ?Options $options = null): Operations\ExecuteActionResponse
+    public function execute(Operations\ExecuteActionRequestBody $body, ?string $projectId = null, ?Options $options = null): Operations\ExecuteActionResponse
     {
+        $request = new Operations\ExecuteActionRequest(
+            body: $body,
+            projectId: $projectId,
+        );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/actions/execute');
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
-        $body = Utils\Utils::serializeRequestBody($request, 'request', 'json');
+        $body = Utils\Utils::serializeRequestBody($request, 'body', 'json');
         if ($body === null) {
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('POST', $url);
@@ -393,18 +417,24 @@ class Actions
      * Get an action by ID.
      *
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\GetActionResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function retrieve(string $id, ?Options $options = null): Operations\GetActionResponse
+    public function retrieve(string $id, ?string $projectId = null, ?Options $options = null): Operations\GetActionResponse
     {
         $request = new Operations\GetActionRequest(
             id: $id,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/actions/{id}', Operations\GetActionRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
@@ -508,15 +538,17 @@ class Actions
      * @param  ?string  $queueId
      * @param  ?int  $page
      * @param  ?int  $pageSize
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\ListActionsResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    private function listIndividual(?string $queueId = null, ?int $page = null, ?int $pageSize = null, ?Options $options = null): Operations\ListActionsResponse
+    private function listIndividual(?string $queueId = null, ?int $page = null, ?int $pageSize = null, ?string $projectId = null, ?Options $options = null): Operations\ListActionsResponse
     {
         $request = new Operations\ListActionsRequest(
             queueId: $queueId,
             page: $page,
             pageSize: $pageSize,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/actions');
@@ -524,6 +556,10 @@ class Actions
         $httpOptions = ['http_errors' => false];
 
         $qp = Utils\Utils::getQueryParams(Operations\ListActionsRequest::class, $request, $urlOverride);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
@@ -589,6 +625,7 @@ class Actions
                         queueId: $request != null ? $request->queueId : null,
                         page: $nextPage,
                         pageSize: $request != null ? $request->pageSize : null,
+                        projectId: $request != null ? $request->projectId : null,
                     );
                 };
 
@@ -685,12 +722,13 @@ class Actions
      * @param  ?string  $queueId
      * @param  ?int  $page
      * @param  ?int  $pageSize
+     * @param  ?string  $projectId
      * @return \Generator<\ModerationApi\Models\Operations\ListActionsResponse>
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function list(?string $queueId = null, ?int $page = null, ?int $pageSize = null, ?Options $options = null): \Generator
+    public function list(?string $queueId = null, ?int $page = null, ?int $pageSize = null, ?string $projectId = null, ?Options $options = null): \Generator
     {
-        $res = $this->listIndividual($queueId, $page, $pageSize, $options);
+        $res = $this->listIndividual($queueId, $page, $pageSize, $projectId, $options);
         while ($res !== null) {
             yield $res;
             $res = $res->next($res);
@@ -704,14 +742,16 @@ class Actions
      *
      * @param  \ModerationApi\Models\Operations\UpdateActionRequestBody  $body
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\UpdateActionResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function update(Operations\UpdateActionRequestBody $body, string $id, ?Options $options = null): Operations\UpdateActionResponse
+    public function update(Operations\UpdateActionRequestBody $body, string $id, ?string $projectId = null, ?Options $options = null): Operations\UpdateActionResponse
     {
         $request = new Operations\UpdateActionRequest(
             id: $id,
             body: $body,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/actions/{id}', Operations\UpdateActionRequest::class, $request);
@@ -722,6 +762,10 @@ class Actions
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('PUT', $url);

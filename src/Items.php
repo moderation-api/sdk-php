@@ -61,6 +61,10 @@ class Items
         $httpOptions = ['http_errors' => false];
 
         $qp = Utils\Utils::getQueryParams(Operations\ListQueueItemsRequest::class, $request, $urlOverride);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
@@ -136,6 +140,7 @@ class Items
                             includeResolved: $request != null ? $request->includeResolved : null,
                             authorId: $request != null ? $request->authorId : null,
                             filteredActionIds: $request != null ? $request->filteredActionIds : null,
+                            projectId: $request != null ? $request->projectId : null,
                         ),
                     );
                 };
@@ -251,15 +256,17 @@ class Items
      * @param  \ModerationApi\Models\Operations\ResolveQueueItemRequestBody  $body
      * @param  string  $id
      * @param  string  $itemId
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\ResolveQueueItemResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function resolve(Operations\ResolveQueueItemRequestBody $body, string $id, string $itemId, ?Options $options = null): Operations\ResolveQueueItemResponse
+    public function resolve(Operations\ResolveQueueItemRequestBody $body, string $id, string $itemId, ?string $projectId = null, ?Options $options = null): Operations\ResolveQueueItemResponse
     {
         $request = new Operations\ResolveQueueItemRequest(
             id: $id,
             itemId: $itemId,
             body: $body,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/queue/{id}/items/{itemId}/resolve', Operations\ResolveQueueItemRequest::class, $request);
@@ -270,6 +277,10 @@ class Items
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('POST', $url);
@@ -385,15 +396,17 @@ class Items
      * @param  \ModerationApi\Models\Operations\UnresolveQueueItemRequestBody  $body
      * @param  string  $id
      * @param  string  $itemId
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\UnresolveQueueItemResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function unresolve(Operations\UnresolveQueueItemRequestBody $body, string $id, string $itemId, ?Options $options = null): Operations\UnresolveQueueItemResponse
+    public function unresolve(Operations\UnresolveQueueItemRequestBody $body, string $id, string $itemId, ?string $projectId = null, ?Options $options = null): Operations\UnresolveQueueItemResponse
     {
         $request = new Operations\UnresolveQueueItemRequest(
             id: $id,
             itemId: $itemId,
             body: $body,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/queue/{id}/items/{itemId}/unresolve', Operations\UnresolveQueueItemRequest::class, $request);
@@ -404,6 +417,10 @@ class Items
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('POST', $url);
