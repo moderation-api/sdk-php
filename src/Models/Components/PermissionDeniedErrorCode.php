@@ -18,7 +18,6 @@ namespace ModerationApi\Models\Components;
  * - `quota_exceeded`: The organization has used all API requests on its plan.
  * - `plan_feature_unavailable`: The current plan does not include this feature.
  * - `plan_limit_exceeded`: The request goes over a limit of the current plan.
- * - `project_key_required`: This endpoint needs a project API key, but an organization key was used.
  * - `organization_key_required`: This endpoint needs an organization API key, but a project key was used.
  * - `missing_key_permission`: The organization key does not have the permission this endpoint needs.
  * - `project_not_reachable`: The organization key is limited to other projects.
@@ -30,7 +29,6 @@ enum PermissionDeniedErrorCode: string
     case QuotaExceeded = 'quota_exceeded';
     case PlanFeatureUnavailable = 'plan_feature_unavailable';
     case PlanLimitExceeded = 'plan_limit_exceeded';
-    case ProjectKeyRequired = 'project_key_required';
     case OrganizationKeyRequired = 'organization_key_required';
     case MissingKeyPermission = 'missing_key_permission';
     case ProjectNotReachable = 'project_not_reachable';

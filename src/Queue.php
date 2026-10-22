@@ -53,18 +53,24 @@ class Queue
      * Get a queue
      *
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\GetQueueResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function retrieve(string $id, ?Options $options = null): Operations\GetQueueResponse
+    public function retrieve(string $id, ?string $projectId = null, ?Options $options = null): Operations\GetQueueResponse
     {
         $request = new Operations\GetQueueRequest(
             id: $id,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/queue/{id}', Operations\GetQueueRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
@@ -191,14 +197,16 @@ class Queue
      *
      * @param  string  $id
      * @param  ?int  $withinDays
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\GetQueueStatsResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function getStats(string $id, ?int $withinDays = null, ?Options $options = null): Operations\GetQueueStatsResponse
+    public function getStats(string $id, ?int $withinDays = null, ?string $projectId = null, ?Options $options = null): Operations\GetQueueStatsResponse
     {
         $request = new Operations\GetQueueStatsRequest(
             id: $id,
             withinDays: $withinDays,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/queue/{id}/stats', Operations\GetQueueStatsRequest::class, $request);
@@ -206,6 +214,10 @@ class Queue
         $httpOptions = ['http_errors' => false];
 
         $qp = Utils\Utils::getQueryParams(Operations\GetQueueStatsRequest::class, $request, $urlOverride);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);

@@ -49,15 +49,23 @@ class WebhookSecret
      *
      * Get the signing secret used to sign webhook deliveries for this project, creating one if none exists yet. Verify deliveries by comparing the `modapi-signature` header to HMAC-SHA256(raw request body, secret) hex-encoded.
      *
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\GetWebhookSecretResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function retrieve(?Options $options = null): Operations\GetWebhookSecretResponse
+    public function retrieve(?string $projectId = null, ?Options $options = null): Operations\GetWebhookSecretResponse
     {
+        $request = new Operations\GetWebhookSecretRequest(
+            projectId: $projectId,
+        );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/webhook-secret');
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);

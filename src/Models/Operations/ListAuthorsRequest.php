@@ -41,6 +41,14 @@ class ListAuthorsRequest
     public ?array $contentTypes = null;
 
     /**
+     * The project to act on, when you call with an organization key. Optional when the organization has one project. A project key acts on its own project: naming another one is an error.
+     *
+     * @var ?string $projectId
+     */
+    #[SpeakeasyMetadata('header:style=simple,explode=false,name=Project-Id')]
+    public ?string $projectId = null;
+
+    /**
      *
      * @var ?int $page
      */
@@ -70,14 +78,16 @@ class ListAuthorsRequest
      * @param  ?string  $memberSinceDate
      * @param  ?string  $lastActiveDate
      * @param  ?array<string>  $contentTypes
+     * @param  ?string  $projectId
      * @phpstan-pure
      */
-    public function __construct(?SortBy $sortBy = null, ?string $memberSinceDate = null, ?string $lastActiveDate = null, ?array $contentTypes = null, ?int $page = 1, ?int $pageSize = 20, ?ListAuthorsSortDirection $sortDirection = ListAuthorsSortDirection::Desc)
+    public function __construct(?SortBy $sortBy = null, ?string $memberSinceDate = null, ?string $lastActiveDate = null, ?array $contentTypes = null, ?string $projectId = null, ?int $page = 1, ?int $pageSize = 20, ?ListAuthorsSortDirection $sortDirection = ListAuthorsSortDirection::Desc)
     {
         $this->sortBy = $sortBy;
         $this->memberSinceDate = $memberSinceDate;
         $this->lastActiveDate = $lastActiveDate;
         $this->contentTypes = $contentTypes;
+        $this->projectId = $projectId;
         $this->page = $page;
         $this->pageSize = $pageSize;
         $this->sortDirection = $sortDirection;

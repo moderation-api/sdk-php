@@ -20,11 +20,21 @@ class GetQueueRequest
     public string $id;
 
     /**
+     * The project to act on, when you call with an organization key. Optional when the organization has one project. A project key acts on its own project: naming another one is an error.
+     *
+     * @var ?string $projectId
+     */
+    #[SpeakeasyMetadata('header:style=simple,explode=false,name=Project-Id')]
+    public ?string $projectId = null;
+
+    /**
      * @param  string  $id
+     * @param  ?string  $projectId
      * @phpstan-pure
      */
-    public function __construct(string $id)
+    public function __construct(string $id, ?string $projectId = null)
     {
         $this->id = $id;
+        $this->projectId = $projectId;
     }
 }

@@ -8,122 +8,32 @@ declare(strict_types=1);
 
 namespace ModerationApi\Models\Operations;
 
-
+use ModerationApi\Utils\SpeakeasyMetadata;
 class CreateAuthorRequest
 {
     /**
-     * External ID of the user, typically the ID of the author in your database.
      *
-     * @var string $externalId
+     * @var \ModerationApi\Models\Operations\CreateAuthorRequestBody $body
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('external_id')]
-    public string $externalId;
+    #[SpeakeasyMetadata('request:mediaType=application/json')]
+    public CreateAuthorRequestBody $body;
 
     /**
-     * Additional metadata provided by your system. We recommend including any relevant information that may assist in the moderation process.
+     * The project to act on, when you call with an organization key. Optional when the organization has one project. A project key acts on its own project: naming another one is an error.
      *
-     * @var ?\ModerationApi\Models\Operations\CreateAuthorMetadata $metadata
+     * @var ?string $projectId
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('metadata')]
-    #[\Speakeasy\Serializer\Annotation\Type('\ModerationApi\Models\Operations\CreateAuthorMetadata|null')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?CreateAuthorMetadata $metadata = null;
+    #[SpeakeasyMetadata('header:style=simple,explode=false,name=Project-Id')]
+    public ?string $projectId = null;
 
     /**
-     * Timestamp when author first appeared
-     *
-     * @var ?float $firstSeen
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('first_seen')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?float $firstSeen = null;
-
-    /**
-     * Timestamp of last activity
-     *
-     * @var ?float $lastSeen
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('last_seen')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?float $lastSeen = null;
-
-    /**
-     * URL of the author's profile picture
-     *
-     * @var ?string $profilePicture
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('profile_picture')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?string $profilePicture = null;
-
-    /**
-     * URL of the author's external profile
-     *
-     * @var ?string $externalLink
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('external_link')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?string $externalLink = null;
-
-    /**
-     * Author name or identifier
-     *
-     * @var ?string $name
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('name')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?string $name = null;
-
-    /**
-     * Author email address
-     *
-     * @var ?string $email
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('email')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?string $email = null;
-
-    /**
-     * The author's company or organization
-     *
-     * @var ?string $company
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('company')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?string $company = null;
-
-    /**
-     *
-     * @var ?float $manualTrustLevel
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('manual_trust_level')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?float $manualTrustLevel = null;
-
-    /**
-     * @param  string  $externalId
-     * @param  ?\ModerationApi\Models\Operations\CreateAuthorMetadata  $metadata
-     * @param  ?float  $firstSeen
-     * @param  ?float  $lastSeen
-     * @param  ?string  $profilePicture
-     * @param  ?string  $externalLink
-     * @param  ?string  $name
-     * @param  ?string  $email
-     * @param  ?string  $company
-     * @param  ?float  $manualTrustLevel
+     * @param  \ModerationApi\Models\Operations\CreateAuthorRequestBody  $body
+     * @param  ?string  $projectId
      * @phpstan-pure
      */
-    public function __construct(string $externalId, ?CreateAuthorMetadata $metadata = null, ?float $firstSeen = null, ?float $lastSeen = null, ?string $profilePicture = null, ?string $externalLink = null, ?string $name = null, ?string $email = null, ?string $company = null, ?float $manualTrustLevel = null)
+    public function __construct(CreateAuthorRequestBody $body, ?string $projectId = null)
     {
-        $this->externalId = $externalId;
-        $this->metadata = $metadata;
-        $this->firstSeen = $firstSeen;
-        $this->lastSeen = $lastSeen;
-        $this->profilePicture = $profilePicture;
-        $this->externalLink = $externalLink;
-        $this->name = $name;
-        $this->email = $email;
-        $this->company = $company;
-        $this->manualTrustLevel = $manualTrustLevel;
+        $this->body = $body;
+        $this->projectId = $projectId;
     }
 }

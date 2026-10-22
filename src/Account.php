@@ -49,15 +49,23 @@ class Account
      *
      * Get account details
      *
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\GetAccountResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function retrieve(?Options $options = null): Operations\GetAccountResponse
+    public function retrieve(?string $projectId = null, ?Options $options = null): Operations\GetAccountResponse
     {
+        $request = new Operations\GetAccountRequest(
+            projectId: $projectId,
+        );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/account');
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);

@@ -13,7 +13,7 @@ $sdk = ModerationApi\ModerationApi::builder()
     )
     ->build();
 
-$request = new Operations\SubmitContentRequest(
+$body = new Operations\SubmitContentRequestBody(
     content: new Operations\TextRequest(
         text: 'Hey, check out my profile for a deal!',
     ),
@@ -26,7 +26,7 @@ $request = new Operations\SubmitContentRequest(
 );
 
 $response = $sdk->content->submit(
-    request: $request
+    body: $body
 );
 
 if ($response->object !== null) {

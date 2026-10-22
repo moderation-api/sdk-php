@@ -1,7 +1,6 @@
 # Maintained in moderation-api/sdk-generator (custom/php). Edits here are overwritten.
 # Every push to main whose package version has no release tag yet publishes
-# that version and creates the GitHub release (notes: .github/release-notes/vX.Y.Z.md
-# if present, otherwise generated from the merged pull requests).
+# that version and creates the GitHub release (notes: the CHANGELOG.md entry).
 # Packagist reads the version from the tag, so the release comes first.
 name: Publish Packagist
 on:
@@ -37,8 +36,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          notes=".github/release-notes/v${VERSION}.md"
-          if [ -f "$notes" ]; then
+          # Notes: the CHANGELOG.md entry of this version, then the release notes file,
+          # then the merged pull requests.
+          notes="$RUNNER_TEMP/notes.md"
+          awk -v v="$VERSION" 'index($0, "## " v " (") == 1 {f = 1; next} f && /^## / {exit} f' CHANGELOG.md > "$notes" || true
+          if [ ! -s "$notes" ] && [ -f ".github/release-notes/v${VERSION}.md" ]; then
+            cp ".github/release-notes/v${VERSION}.md" "$notes"
+          fi
+          if [ -s "$notes" ]; then
             gh release create "v${VERSION}" --target "$GITHUB_SHA" --title "v${VERSION}" --notes-file "$notes"
           else
             gh release create "v${VERSION}" --target "$GITHUB_SHA" --title "v${VERSION}" --generate-notes

@@ -69,7 +69,7 @@ $sdk = ModerationApi\ModerationApi::builder()
     )
     ->build();
 
-$request = new Operations\SubmitContentRequest(
+$body = new Operations\SubmitContentRequestBody(
     content: new Operations\TextRequest(
         text: 'Hey, check out my profile for a deal!',
     ),
@@ -82,7 +82,7 @@ $request = new Operations\SubmitContentRequest(
 );
 
 $response = $sdk->content->submit(
-    request: $request
+    body: $body
 );
 
 if ($response->object !== null) {
@@ -314,7 +314,7 @@ Create the organization client only where you manage projects and channels, for 
 
 ### [Content](docs/sdks/content/README.md)
 
-* [submit](docs/sdks/content/README.md#submit)
+* [submit](docs/sdks/content/README.md#submit) - Submit content
 
 ### [Projects](docs/sdks/projects/README.md)
 

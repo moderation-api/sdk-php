@@ -51,14 +51,16 @@ class Words
      *
      * @param  \ModerationApi\Models\Operations\AddWordlistWordsRequestBody  $body
      * @param  string  $id
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\AddWordlistWordsResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function add(Operations\AddWordlistWordsRequestBody $body, string $id, ?Options $options = null): Operations\AddWordlistWordsResponse
+    public function add(Operations\AddWordlistWordsRequestBody $body, string $id, ?string $projectId = null, ?Options $options = null): Operations\AddWordlistWordsResponse
     {
         $request = new Operations\AddWordlistWordsRequest(
             id: $id,
             body: $body,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/wordlist/{id}/words', Operations\AddWordlistWordsRequest::class, $request);
@@ -69,6 +71,10 @@ class Words
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('POST', $url);
@@ -171,14 +177,16 @@ class Words
      *
      * @param  string  $id
      * @param  array<string>  $words
+     * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\RemoveWordlistWordsResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function remove(string $id, array $words, ?Options $options = null): Operations\RemoveWordlistWordsResponse
+    public function remove(string $id, array $words, ?string $projectId = null, ?Options $options = null): Operations\RemoveWordlistWordsResponse
     {
         $request = new Operations\RemoveWordlistWordsRequest(
             id: $id,
             words: $words,
+            projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/wordlist/{id}/words', Operations\RemoveWordlistWordsRequest::class, $request);
@@ -186,6 +194,10 @@ class Words
         $httpOptions = ['http_errors' => false];
 
         $qp = Utils\Utils::getQueryParams(Operations\RemoveWordlistWordsRequest::class, $request, $urlOverride);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('DELETE', $url);
