@@ -20,7 +20,7 @@ namespace ModerationApi;
 class ModerationApi
 {
     public const SERVERS = [
-        'https://moderationapi.com/api/v1',
+        'https://api.moderationapi.com/v1',
     ];
 
     public Authors $authors;

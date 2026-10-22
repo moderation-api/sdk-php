@@ -110,7 +110,7 @@ $sdk = ModerationApi::builder()
     ->build();
 
 // Text
-$sdk->content->submit(new Operations\SubmitContentRequest(
+$sdk->content->submit(new Operations\SubmitContentRequestBody(
     content: new Operations\TextRequest(text: 'Your text here'),
     contentId: 'message-123', // your ID for the content
     authorId: 'user-123', // your ID for the user who wrote it
@@ -119,18 +119,18 @@ $sdk->content->submit(new Operations\SubmitContentRequest(
 ));
 
 // Image, video and audio: send a URL
-$sdk->content->submit(new Operations\SubmitContentRequest(
+$sdk->content->submit(new Operations\SubmitContentRequestBody(
     content: new Operations\ImageRequest(url: 'https://example.com/image.jpg'),
 ));
-$sdk->content->submit(new Operations\SubmitContentRequest(
+$sdk->content->submit(new Operations\SubmitContentRequestBody(
     content: new Operations\VideoRequest(url: 'https://example.com/video.mp4'),
 ));
-$sdk->content->submit(new Operations\SubmitContentRequest(
+$sdk->content->submit(new Operations\SubmitContentRequestBody(
     content: new Operations\AudioRequest(url: 'https://example.com/audio.mp3'),
 ));
 
 // An object with several fields, moderated together
-$sdk->content->submit(new Operations\SubmitContentRequest(
+$sdk->content->submit(new Operations\SubmitContentRequestBody(
     content: new Operations\ObjectT(data: [
         'title' => new Operations\DataText(text: 'Post title'),
         'body' => new Operations\DataText(text: 'Post content'),
@@ -144,7 +144,7 @@ $sdk->content->submit(new Operations\SubmitContentRequest(
 `evaluation->flagged` tells you if any policy flagged the content. `recommendation->action` is the action the API recommends after it applies your thresholds and rules: `allow`, `review` or `reject`.
 
 ```php
-$response = $sdk->content->submit(new Operations\SubmitContentRequest(
+$response = $sdk->content->submit(new Operations\SubmitContentRequestBody(
     content: new Operations\TextRequest(text: 'Some content'),
 ));
 $result = $response->object;
@@ -494,7 +494,7 @@ use ModerationApi;
 use ModerationApi\Models\Operations;
 
 $sdk = ModerationApi\ModerationApi::builder()
-    ->setServerURL('https://moderationapi.com/api/v1')
+    ->setServerURL('https://api.moderationapi.com/v1')
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
