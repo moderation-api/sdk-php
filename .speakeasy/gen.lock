@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 0199302d-9d48-4081-a021-a66e7a11ce41
 management:
-  docChecksum: c27787b45fc5b72aafff31ba945a9e61
+  docChecksum: 38730339aa1da77855e86c169896f12f
   docVersion: 1.1.0
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 1.1.0
-  configChecksum: 02c26a6ca40c5c5326664594c00efaf8
+  releaseVersion: 1.1.1
+  configChecksum: fc3cb529f9d6cc0b51976839fc7521ff
   repoURL: https://github.com/moderation-api/sdk-php
   installationURL: https://github.com/moderation-api/sdk-php.git
   published: true
@@ -1460,7 +1460,7 @@ trackedFiles:
   src/Models/Operations/WithinUnit.php:
     last_write_checksum: sha1:2bcee79806e20da2d6ea91de1185cbef7b687a2c
   src/ModerationApi.php:
-    last_write_checksum: sha1:51aa6c5b26801f0dedc546eff7fa3e210972787f
+    last_write_checksum: sha1:125a0b3d40a2adc7cb0392536b632611a2842a16
   src/ModerationApiBuilder.php:
     last_write_checksum: sha1:16809f5bed82b4ad4c18f3322de18d04e32a372d
   src/Projects.php:
@@ -1468,7 +1468,7 @@ trackedFiles:
   src/Queue.php:
     last_write_checksum: sha1:6e827e98b2489b7f06b1d5869e54f47e6ae2816c
   src/SDKConfiguration.php:
-    last_write_checksum: sha1:83f89b5b0365374df283316c53a96f9cfc99f1d5
+    last_write_checksum: sha1:63ff169e43e51e25c2eaa43940df61e4c0fdcd25
   src/Utils/BigDecimalHandler.php:
     last_write_checksum: sha1:2d36b5ae690b042acfcdfe7e7277d44c5055416f
   src/Utils/BigIntHandler.php:
