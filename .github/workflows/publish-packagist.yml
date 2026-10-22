@@ -1,19 +1,50 @@
 # Maintained in moderation-api/sdk-generator (custom/php). Edits here are overwritten.
-# Packagist reads the version from the release tag.
+# Every push to main whose package version has no release tag yet publishes
+# that version and creates the GitHub release (notes: .github/release-notes/vX.Y.Z.md
+# if present, otherwise generated from the merged pull requests).
+# Packagist reads the version from the tag, so the release comes first.
 name: Publish Packagist
 on:
-  release:
-    types: [published]
+  push:
+    branches: [main]
   workflow_dispatch:
 
+concurrency: release
+
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Read the version
+        run: |
+          echo "VERSION=$(sed -n 's/^  version: //p' .speakeasy/gen.yaml | head -n 1)" >> "$GITHUB_ENV"
+      - name: Check for an unreleased version
+        id: version
+        run: |
+          echo "VERSION=${VERSION}" >> "$GITHUB_ENV"
+          if git ls-remote --exit-code --tags origin "refs/tags/v${VERSION}" >/dev/null; then
+            echo "v${VERSION} is already released."
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Create the GitHub release
+        if: steps.version.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notes=".github/release-notes/v${VERSION}.md"
+          if [ -f "$notes" ]; then
+            gh release create "v${VERSION}" --target "$GITHUB_SHA" --title "v${VERSION}" --notes-file "$notes"
+          else
+            gh release create "v${VERSION}" --target "$GITHUB_SHA" --title "v${VERSION}" --generate-notes
+          fi
       - name: Tell Packagist to update
+        if: steps.version.outputs.release == 'true'
         run: |-
           curl --fail-with-body -X POST -H 'Content-Type: application/json' "https://packagist.org/api/update-package?username=${PACKAGIST_USERNAME}&apiToken=${PACKAGIST_SAFE_KEY}" -d '{"repository":"https://github.com/moderation-api/sdk-php"}'
         env:
