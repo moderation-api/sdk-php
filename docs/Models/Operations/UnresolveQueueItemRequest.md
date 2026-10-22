@@ -1,0 +1,10 @@
+# UnresolveQueueItemRequest
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                 | *string*                                                                                             | :heavy_check_mark:                                                                                   | The queue ID                                                                                         |
+| `itemId`                                                                                             | *string*                                                                                             | :heavy_check_mark:                                                                                   | The item ID to unresolve                                                                             |
+| `body`                                                                                               | [Operations\UnresolveQueueItemRequestBody](../../Models/Operations/UnresolveQueueItemRequestBody.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

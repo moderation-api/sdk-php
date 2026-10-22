@@ -1,0 +1,9 @@
+# DuplicateProjectRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `id`                                                                                             | *string*                                                                                         | :heavy_check_mark:                                                                               | The ID of the project to copy.                                                                   |
+| `body`                                                                                           | [Operations\DuplicateProjectRequestBody](../../Models/Operations/DuplicateProjectRequestBody.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
