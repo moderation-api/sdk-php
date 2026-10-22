@@ -1,54 +1,29 @@
+# Maintained in moderation-api/sdk-generator (custom/php). Edits here are overwritten.
 name: CI
 on:
   push:
-    branches:
-      - '**'
-      - '!integrated/**'
-      - '!stl-preview-head/**'
-      - '!stl-preview-base/**'
-      - '!generated'
-      - '!codegen/**'
-      - 'codegen/stl/**'
+    branches: [main]
   pull_request:
-    branches-ignore:
-      - 'stl-preview-head/**'
-      - 'stl-preview-base/**'
+
+permissions:
+  contents: read
 
 jobs:
-  lint:
-    timeout-minutes: 10
-    name: lint
-    runs-on: ${{ startsWith(github.repository, 'stainless-sdks/') && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
-
+  build:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # 2.37.0
+      - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
-
-      - name: Run Bootstrap
-        run: ./scripts/bootstrap
-
-      - name: Run lints
-        run: ./scripts/lint
-  test:
-    timeout-minutes: 10
-    name: test
-    runs-on: ${{ startsWith(github.repository, 'stainless-sdks/') && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # 2.37.0
-        with:
-          php-version: '8.3'
-
-      - name: Run bootstrap
-        run: ./scripts/bootstrap
-
-      - name: Run tests
-        run: ./scripts/test
+          php-version: "8.2"
+      - run: composer install --no-interaction --no-progress
+      - name: Static analysis
+        run: |
+          set -o pipefail
+          if ! vendor/bin/phpstan analyse --level=5 --memory-limit=2g --no-progress --error-format=raw > phpstan.txt 2>&1; then
+            head -n 40 phpstan.txt | sed 's/^/::error title=phpstan::/'
+            exit 1
+          fi
+      - name: Load the package
+        run: |
+          php -r 'require "vendor/autoload.php"; foreach (["ModerationApi\\ModerationApi", "ModerationApi\\WebhookSignature"] as $c) { if (!class_exists($c)) { fwrite(STDERR, "missing $c\n"); exit(1); } }'

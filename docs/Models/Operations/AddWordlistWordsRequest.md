@@ -1,0 +1,9 @@
+# AddWordlistWordsRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `id`                                                                                             | *string*                                                                                         | :heavy_check_mark:                                                                               | ID of the wordlist to add words to                                                               |
+| `body`                                                                                           | [Operations\AddWordlistWordsRequestBody](../../Models/Operations/AddWordlistWordsRequestBody.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

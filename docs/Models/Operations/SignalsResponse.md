@@ -1,0 +1,18 @@
+# SignalsResponse
+
+Observable properties of a URL (URL Risk only). Absent for allow/block list matches.
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `brandImpersonation`                                                           | [Operations\BrandImpersonation](../../Models/Operations/BrandImpersonation.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| `hasSuspiciousCharacters`                                                      | *bool*                                                                         | :heavy_check_mark:                                                             | N/A                                                                            |
+| `isLinkShortener`                                                              | *bool*                                                                         | :heavy_check_mark:                                                             | N/A                                                                            |
+| `domainAgeDays`                                                                | *int*                                                                          | :heavy_check_mark:                                                             | N/A                                                                            |
+| `hasEmailSetup`                                                                | *bool*                                                                         | :heavy_check_mark:                                                             | N/A                                                                            |
+| `redirectCount`                                                                | *int*                                                                          | :heavy_check_mark:                                                             | N/A                                                                            |
+| `finalUrl`                                                                     | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
+| `botProtection`                                                                | *bool*                                                                         | :heavy_check_mark:                                                             | N/A                                                                            |
+| `isReported`                                                                   | *bool*                                                                         | :heavy_check_mark:                                                             | N/A                                                                            |

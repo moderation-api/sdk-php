@@ -1,0 +1,9 @@
+# DuplicateChannelRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `id`                                                                                             | *string*                                                                                         | :heavy_check_mark:                                                                               | The ID of the channel to copy.                                                                   |
+| `body`                                                                                           | [Operations\DuplicateChannelRequestBody](../../Models/Operations/DuplicateChannelRequestBody.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
