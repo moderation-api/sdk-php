@@ -16,12 +16,15 @@ use Speakeasy\Serializer\DeserializationContext;
 class Projects
 {
     private SDKConfiguration $sdkConfiguration;
+    public ApiKeys $apiKeys;
+
     /**
      * @param  SDKConfiguration  $sdkConfig
      */
     public function __construct(public SDKConfiguration $sdkConfig)
     {
         $this->sdkConfiguration = $sdkConfig;
+        $this->apiKeys = new ApiKeys($this->sdkConfiguration);
     }
     /**
      * @param  string  $baseUrl
