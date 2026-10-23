@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 0199302d-9d48-4081-a021-a66e7a11ce41
 management:
-  docChecksum: 38730339aa1da77855e86c169896f12f
+  docChecksum: 1f41f7f3f1f9652138167d27f8b4518c
   docVersion: 1.1.0
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 1.1.1
-  configChecksum: fc3cb529f9d6cc0b51976839fc7521ff
+  releaseVersion: 1.2.0
+  configChecksum: 4e4cfea4aa60d3918e951e102b49ec3b
   repoURL: https://github.com/moderation-api/sdk-php
   installationURL: https://github.com/moderation-api/sdk-php.git
   published: true
@@ -38,7 +38,7 @@ trackedFiles:
   docs/Models/Components/AuthenticationErrorCode.md:
     last_write_checksum: sha1:77a5b839e6e9801a15872fd82d47fd77651016c5
   docs/Models/Components/BadRequestErrorCode.md:
-    last_write_checksum: sha1:f1b2867eb97dd660b63d8c77821b33406e97a1af
+    last_write_checksum: sha1:e0aa4e35fcb0f270d6680f0b52ae47f2fc7b107c
   docs/Models/Components/Block.md:
     last_write_checksum: sha1:334b51a56857c865c3777021eef19c61b8e41b37
   docs/Models/Components/Channel.md:
@@ -67,6 +67,8 @@ trackedFiles:
     last_write_checksum: sha1:8d2215f0f16d48c277c84e25b3534fc17dd3498f
   docs/Models/Components/Project.md:
     last_write_checksum: sha1:4e1138762d9b1c2535fcc30a738c33f367446552
+  docs/Models/Components/ProjectApiKey.md:
+    last_write_checksum: sha1:0fc9714b212e2500e4b8166b672e08d5bbc684b6
   docs/Models/Components/ProjectGlobalFlaggingMode.md:
     last_write_checksum: sha1:5df81293264af4fd845a411be31d7129a6bac840
   docs/Models/Components/ProjectWithKey.md:
@@ -90,7 +92,7 @@ trackedFiles:
   docs/Models/Errors/AuthenticationError.md:
     last_write_checksum: sha1:19eddc52faa3565fd9b66d39b55e727711eb5b12
   docs/Models/Errors/BadRequestError.md:
-    last_write_checksum: sha1:c31c0f5b7444f18e2ef8b5a6b63d45a6bd411849
+    last_write_checksum: sha1:6f3813c727556ab141601f80f10693ff24e90292
   docs/Models/Errors/ConflictError.md:
     last_write_checksum: sha1:b1c7a7a062a6822a0604151f257f401afd969c41
   docs/Models/Errors/InternalServerError.md:
@@ -106,7 +108,7 @@ trackedFiles:
   docs/Models/Operations/ActionStat.md:
     last_write_checksum: sha1:034f55d8bf87a2e062cb242a8da2220c4d0754db
   docs/Models/Operations/AddWordlistWordsRequest.md:
-    last_write_checksum: sha1:ca66de87647fa35c062d5d758c8a531cb6c7a8a0
+    last_write_checksum: sha1:fc1b67e5871bd65e38ac505a624742cbcbd4cd6e
   docs/Models/Operations/AddWordlistWordsRequestBody.md:
     last_write_checksum: sha1:5622b3b98b1276644fe08116a626fd2649003632
   docs/Models/Operations/AddWordlistWordsResponse.md:
@@ -174,7 +176,7 @@ trackedFiles:
   docs/Models/Operations/CreateActionQueueBehaviourResponse.md:
     last_write_checksum: sha1:97f02c2df095405ae5100f60ce4188c29fb7caa5
   docs/Models/Operations/CreateActionRequest.md:
-    last_write_checksum: sha1:4a89d2021662c1f7974550977d9c6b52651ee038
+    last_write_checksum: sha1:306a9b4e3cf77a332ea51d223564ea716ae57123
   docs/Models/Operations/CreateActionRequestBody.md:
     last_write_checksum: sha1:4301b6c396498c2099be259ecba75004e59605b2
   docs/Models/Operations/CreateActionResponse.md:
@@ -188,7 +190,7 @@ trackedFiles:
   docs/Models/Operations/CreateAuthorMetadata.md:
     last_write_checksum: sha1:cf046cd307e8a834bb4b2c4aad5d8031022ba16b
   docs/Models/Operations/CreateAuthorRequest.md:
-    last_write_checksum: sha1:f2708d51c0eff657bb2ddceca06dd2c7b50187d4
+    last_write_checksum: sha1:576a07adf27cf22a6cff75fea2c6215218de19e3
   docs/Models/Operations/CreateAuthorRequestBody.md:
     last_write_checksum: sha1:99f2d4900c44691cd5d41330c169c5da5ad3b827
   docs/Models/Operations/CreateAuthorResponse.md:
@@ -201,6 +203,12 @@ trackedFiles:
     last_write_checksum: sha1:5845cde685b144f1a550724657bbb4678095667d
   docs/Models/Operations/CreateChannelResponse.md:
     last_write_checksum: sha1:75149c76721ba5187c331604410351365d587758
+  docs/Models/Operations/CreateProjectApiKeyRequest.md:
+    last_write_checksum: sha1:4c8ab8c412c45258cf49721759536f04804bcc76
+  docs/Models/Operations/CreateProjectApiKeyRequestBody.md:
+    last_write_checksum: sha1:1b43e951d48c5c70929a8eae06cc5645ae685bea
+  docs/Models/Operations/CreateProjectApiKeyResponse.md:
+    last_write_checksum: sha1:fe6681d7876dbcfbd0cee5c1de507695d0affddd
   docs/Models/Operations/CreateProjectRequest.md:
     last_write_checksum: sha1:0ca1a670b74800679cc1e5891dea64eacc3d061d
   docs/Models/Operations/CreateProjectResponse.md:
@@ -212,7 +220,7 @@ trackedFiles:
   docs/Models/Operations/CreateWebhookPayloadVersion.md:
     last_write_checksum: sha1:2014e238e3e3f1e845d0edc6d69b0fc3608d6752
   docs/Models/Operations/CreateWebhookRequest.md:
-    last_write_checksum: sha1:6e4d43f1371567a8e5c47c04562944de66e264f2
+    last_write_checksum: sha1:3e34306ea799c4f6c8bddf69cfe19495acd113ca
   docs/Models/Operations/CreateWebhookRequestBody.md:
     last_write_checksum: sha1:bf54406bb72b5a2d37bb53813290161db9e58c07
   docs/Models/Operations/CreateWebhookResponse.md:
@@ -236,13 +244,13 @@ trackedFiles:
   docs/Models/Operations/DataVideo.md:
     last_write_checksum: sha1:1299100c36d4060d8c8d125b0ae92f674f94f2a3
   docs/Models/Operations/DeleteActionRequest.md:
-    last_write_checksum: sha1:d2a2b266b2829e578ab34af318a5798167b67d8b
+    last_write_checksum: sha1:1ba0eb3c86904f7a1a8039bae99874baa393503e
   docs/Models/Operations/DeleteActionResponse.md:
     last_write_checksum: sha1:d38fc0330e1c4c6cc4ff4a1f669d76991672d694
   docs/Models/Operations/DeleteActionResponseBody.md:
     last_write_checksum: sha1:9f56d6d9b5dd5c6bdd13d2ea9542bd4b06cc23b5
   docs/Models/Operations/DeleteAuthorRequest.md:
-    last_write_checksum: sha1:ce209f49281f23ddad217c0394543f45596638cc
+    last_write_checksum: sha1:964eca5e4ba3f3b8e9f5712f35cd56ac669949fe
   docs/Models/Operations/DeleteAuthorResponse.md:
     last_write_checksum: sha1:b21b20143ad0f5a3cb2b5f2b3bd5b9592bd32b1f
   docs/Models/Operations/DeleteAuthorResponseBody.md:
@@ -260,7 +268,7 @@ trackedFiles:
   docs/Models/Operations/DeleteProjectResponseBody.md:
     last_write_checksum: sha1:0438264cd7fd578d0d7aea8b2b57725304a94be8
   docs/Models/Operations/DeleteWebhookRequest.md:
-    last_write_checksum: sha1:8394ab30c9d0b2019409d776162fe412d08332b9
+    last_write_checksum: sha1:72cd36ea03d32b98dbc4b52d4e1f789e79ba874c
   docs/Models/Operations/DeleteWebhookResponse.md:
     last_write_checksum: sha1:dbe1e045ca97e7659e8812cf1a2d98e9858b52f3
   docs/Models/Operations/DeleteWebhookResponseBody.md:
@@ -290,7 +298,7 @@ trackedFiles:
   docs/Models/Operations/Evaluation.md:
     last_write_checksum: sha1:4b66033c588178d83a3b3672c9943fe022b512e4
   docs/Models/Operations/ExecuteActionRequest.md:
-    last_write_checksum: sha1:f24f4d64dc5f257f22a12c9e729943ab0d8aa038
+    last_write_checksum: sha1:ba51c15455a750d4153362120759a57f3399cfe7
   docs/Models/Operations/ExecuteActionRequestBody.md:
     last_write_checksum: sha1:fec12bfabf9159c95312a01b419137d122841935
   docs/Models/Operations/ExecuteActionResponse.md:
@@ -312,7 +320,7 @@ trackedFiles:
   docs/Models/Operations/Gambling.md:
     last_write_checksum: sha1:01f2ff59643479cc21a02287d43acd1d62d5b073
   docs/Models/Operations/GetAccountRequest.md:
-    last_write_checksum: sha1:ff6e41ea856cff666dc89a2c4aab97104cc241a1
+    last_write_checksum: sha1:20cda15b3eb530ac0cbe5be80fba1cf5b20f347f
   docs/Models/Operations/GetAccountResponse.md:
     last_write_checksum: sha1:f5f553b8548a75d4737c98b9e3bf911dc695f15a
   docs/Models/Operations/GetAccountResponseBody.md:
@@ -324,7 +332,7 @@ trackedFiles:
   docs/Models/Operations/GetActionQueueBehaviour.md:
     last_write_checksum: sha1:ff0521f4add44128f7fc18833a770be9769dc252
   docs/Models/Operations/GetActionRequest.md:
-    last_write_checksum: sha1:89dec2bc286056e4e7554f1a49e1874802ed1cd2
+    last_write_checksum: sha1:c0c7612054b0785f1c8f8af46ad8724896da46f4
   docs/Models/Operations/GetActionResponse.md:
     last_write_checksum: sha1:3de861dd9d7b52b5231033ecd07927f028cda330
   docs/Models/Operations/GetActionResponseBody.md:
@@ -332,7 +340,7 @@ trackedFiles:
   docs/Models/Operations/GetActionType.md:
     last_write_checksum: sha1:1b45f56d331c400c5135c3af59b9e2cd4141160c
   docs/Models/Operations/GetAuthorRequest.md:
-    last_write_checksum: sha1:38eb9602951fb1ff345d471d5b8e9ec835cd353f
+    last_write_checksum: sha1:78592e436628c6d192e85b614b3c3caeb2e8d5aa
   docs/Models/Operations/GetAuthorResponse.md:
     last_write_checksum: sha1:01855737e8ae45cba45c02cbbcbf5227a1daf3c3
   docs/Models/Operations/GetChannelRequest.md:
@@ -348,13 +356,13 @@ trackedFiles:
   docs/Models/Operations/GetQueueRecommendationAction.md:
     last_write_checksum: sha1:959b206a2f957168b3172b45f9f7fe43e75489b2
   docs/Models/Operations/GetQueueRequest.md:
-    last_write_checksum: sha1:271b0b92ab4c4ee657ce32d288380ab1e41478ff
+    last_write_checksum: sha1:2c0dd779cf2a2bb603db43ad395398f15feceee0
   docs/Models/Operations/GetQueueResponse.md:
     last_write_checksum: sha1:c87e3d4c8010544370dad7cb6a88faf68547cfba
   docs/Models/Operations/GetQueueResponseBody.md:
     last_write_checksum: sha1:f0f2e26a5b760e481c31045a3e36c4f3cd0e04d0
   docs/Models/Operations/GetQueueStatsRequest.md:
-    last_write_checksum: sha1:9e31575b53c8f1a92296ff425a379da938457bf5
+    last_write_checksum: sha1:fed139e234c681809bcf79bc3f226fd4522ee1f1
   docs/Models/Operations/GetQueueStatsResponse.md:
     last_write_checksum: sha1:590857365e4b87ccd7e77b96d6c1bcc950db6438
   docs/Models/Operations/GetQueueStatsResponseBody.md:
@@ -366,25 +374,25 @@ trackedFiles:
   docs/Models/Operations/GetWebhookPayloadVersion.md:
     last_write_checksum: sha1:85d85e2b79ffc5dff2bf655e31bc2f841b013343
   docs/Models/Operations/GetWebhookRequest.md:
-    last_write_checksum: sha1:5c0614c58e2807ff94329e7857cf9c3d66f8a0fd
+    last_write_checksum: sha1:f24b8ba7b24b3fd737e6b303114e721b61bd5810
   docs/Models/Operations/GetWebhookResponse.md:
     last_write_checksum: sha1:f7a91e8cff31fe6519f29202e9824a8ab6389056
   docs/Models/Operations/GetWebhookResponseBody.md:
     last_write_checksum: sha1:48568d4ced96eb856066c723f07633bb14d059a8
   docs/Models/Operations/GetWebhookSecretRequest.md:
-    last_write_checksum: sha1:56a01a4772bf2d0f07b0096a9cac9c8c636114b4
+    last_write_checksum: sha1:dc602a4e21a8f9a785a5bd7c23fd5e1c0e3ee287
   docs/Models/Operations/GetWebhookSecretResponse.md:
     last_write_checksum: sha1:6beee2803c94d7222f41c89159eefe81ae9933d7
   docs/Models/Operations/GetWebhookSecretResponseBody.md:
     last_write_checksum: sha1:32b8a9b5a6a45638bd8c3f97a2d231aa0257779f
   docs/Models/Operations/GetWordlistEmbeddingStatusRequest.md:
-    last_write_checksum: sha1:16de4e8c9fb1c9e292eaa2104f5bb601a6af53e7
+    last_write_checksum: sha1:848d8b8e97f09ec67313e426511b00ac84fe3491
   docs/Models/Operations/GetWordlistEmbeddingStatusResponse.md:
     last_write_checksum: sha1:9c3033144a1b46304107fdfa14a55a55e2ea0904
   docs/Models/Operations/GetWordlistEmbeddingStatusResponseBody.md:
     last_write_checksum: sha1:af312a1202ac03c542339923b8c7a6fb77b58554
   docs/Models/Operations/GetWordlistRequest.md:
-    last_write_checksum: sha1:c42243f43f4696b85c9a67b3a54e08632ac10147
+    last_write_checksum: sha1:ddaedc50b8a9eb5b2f05d70ea604f991a095ed11
   docs/Models/Operations/GetWordlistResponse.md:
     last_write_checksum: sha1:6aee57085d2c9c8e6ebb7be6c7995535120227e4
   docs/Models/Operations/GetWordlistResponseBody.md:
@@ -428,7 +436,7 @@ trackedFiles:
   docs/Models/Operations/ListActionsQueueBehaviour.md:
     last_write_checksum: sha1:2ce17ac10ce3c61b35fb177a088037d9485c9920
   docs/Models/Operations/ListActionsRequest.md:
-    last_write_checksum: sha1:1b52ccd546eca30307537ce73713f1ad955eca80
+    last_write_checksum: sha1:e748eaf0e05ab35387e61bd3fd648513750ea1f1
   docs/Models/Operations/ListActionsResponse.md:
     last_write_checksum: sha1:e2be97cbec27c544659baf908d5e9ecb52716229
   docs/Models/Operations/ListActionsResponseBody.md:
@@ -436,7 +444,7 @@ trackedFiles:
   docs/Models/Operations/ListActionsType.md:
     last_write_checksum: sha1:3faa1997dc8d38f0ca9a12309deca30dd193a32b
   docs/Models/Operations/ListAuthorsRequest.md:
-    last_write_checksum: sha1:d50641af94e59d90bbe9954253c1abed18607cad
+    last_write_checksum: sha1:0b25f7cdc9b274e55a5ab9d9386b9aa8a2a494d0
   docs/Models/Operations/ListAuthorsResponse.md:
     last_write_checksum: sha1:c94a1efc7f86964a9159fdc8fe1200cbf0dcb62b
   docs/Models/Operations/ListAuthorsResponseBody.md:
@@ -462,7 +470,7 @@ trackedFiles:
   docs/Models/Operations/ListQueueItemsLabel.md:
     last_write_checksum: sha1:57afb1138db827561edd8c574ad01dd7182a3506
   docs/Models/Operations/ListQueueItemsRequest.md:
-    last_write_checksum: sha1:d6d3a426d359dc1aad081185f598feee28741ba5
+    last_write_checksum: sha1:f1525a6b2ca3996f72ec3b62afebbef620d0b754
   docs/Models/Operations/ListQueueItemsResponse.md:
     last_write_checksum: sha1:76b991316ed29264e755e4415578e9f06a8e0c8f
   docs/Models/Operations/ListQueueItemsResponseBody.md:
@@ -478,7 +486,7 @@ trackedFiles:
   docs/Models/Operations/ListWebhooksPayloadVersion.md:
     last_write_checksum: sha1:340572c959aa5cdc165bc4e72868880bd774fd5f
   docs/Models/Operations/ListWebhooksRequest.md:
-    last_write_checksum: sha1:db168b3ffdacf5656f09c77fc632197293978094
+    last_write_checksum: sha1:77755d67cf3c3396831ebc09dcb05a110e4f753d
   docs/Models/Operations/ListWebhooksResponse.md:
     last_write_checksum: sha1:118987580439842a19d35b88f034c175d4b6a0c3
   docs/Models/Operations/ListWebhooksResponseBody.md:
@@ -486,7 +494,7 @@ trackedFiles:
   docs/Models/Operations/ListWordlistsData.md:
     last_write_checksum: sha1:acab4667f14a1aac32b9de3b62c29acdb198bfcb
   docs/Models/Operations/ListWordlistsRequest.md:
-    last_write_checksum: sha1:7ccfefbce646271f6bc1a0ecbbc194473d1ce7c3
+    last_write_checksum: sha1:b794c36da14f28a3a54cba739344e8439edcab8d
   docs/Models/Operations/ListWordlistsResponse.md:
     last_write_checksum: sha1:dbb76da5dc339cbe53a03338ce2ffd51016b59ea
   docs/Models/Operations/ListWordlistsResponseBody.md:
@@ -540,13 +548,13 @@ trackedFiles:
   docs/Models/Operations/Religion.md:
     last_write_checksum: sha1:4dafe8419b1c34e4b9db06ddf46ebf4d2e6a70f2
   docs/Models/Operations/RemoveWordlistWordsRequest.md:
-    last_write_checksum: sha1:eaeb0bd7aed4c9bb1342eeb940dae649ad9ace9a
+    last_write_checksum: sha1:8f3b76a51ead6c5b93ee5e1dcc22865fcd827915
   docs/Models/Operations/RemoveWordlistWordsResponse.md:
     last_write_checksum: sha1:e0e9b71e5809d6ee4d63070f34a1300c33f0dab5
   docs/Models/Operations/RemoveWordlistWordsResponseBody.md:
     last_write_checksum: sha1:fd7813fca61c3aedd3405949ae1e889bc151239d
   docs/Models/Operations/ResolveQueueItemRequest.md:
-    last_write_checksum: sha1:c0aff0ed331152fdaf301b29d8a563ebd92e2a7a
+    last_write_checksum: sha1:1758ac48ab9081e58c2edf1db0bd49c71adbce82
   docs/Models/Operations/ResolveQueueItemRequestBody.md:
     last_write_checksum: sha1:1800ca9c7d7cfaacca71957bb53adab7cd256fee
   docs/Models/Operations/ResolveQueueItemResponse.md:
@@ -586,9 +594,9 @@ trackedFiles:
   docs/Models/Operations/SubmitContentRecommendationAction.md:
     last_write_checksum: sha1:b8e9f6a5210ef87c29c7f350ccddfe883e83f605
   docs/Models/Operations/SubmitContentRequest.md:
-    last_write_checksum: sha1:9e8360977e279ef42497484f960092589a878ab0
+    last_write_checksum: sha1:25fa800fa8548999a79453bdd03304d0c4688a24
   docs/Models/Operations/SubmitContentRequestBody.md:
-    last_write_checksum: sha1:03b70e01abd797ae990c3511fc56fcf1a4c57796
+    last_write_checksum: sha1:f0d6bf9cec35a001cd2dffa967bf58d104f8e643
   docs/Models/Operations/SubmitContentResponse.md:
     last_write_checksum: sha1:e9c17f5657f3d9e6ef368d40240b85c53df4dff3
   docs/Models/Operations/SubmitContentResponseBody.md:
@@ -622,7 +630,7 @@ trackedFiles:
   docs/Models/Operations/UnicodeSpoofing.md:
     last_write_checksum: sha1:dcc11bf5e62c90b2ac0c2f11329dfdabd0c205ef
   docs/Models/Operations/UnresolveQueueItemRequest.md:
-    last_write_checksum: sha1:d9ef94ad5122c0c79e13462fdd09aa9e1c5cd52f
+    last_write_checksum: sha1:6f10b921bff7ff60f17327c2031f8bfe0c5f38a0
   docs/Models/Operations/UnresolveQueueItemRequestBody.md:
     last_write_checksum: sha1:fdb81f1fc9aa95002621d4cbf2379fbe8e289849
   docs/Models/Operations/UnresolveQueueItemResponse.md:
@@ -642,7 +650,7 @@ trackedFiles:
   docs/Models/Operations/UpdateActionQueueBehaviourResponse.md:
     last_write_checksum: sha1:0120c46dff33f5ff47ce5f561824e42ba45d3dbe
   docs/Models/Operations/UpdateActionRequest.md:
-    last_write_checksum: sha1:9a8d6b936481cd896a60ae162e24139e08f141f4
+    last_write_checksum: sha1:86d0b2cef38988cd42709fa38bb3ed852c460ccc
   docs/Models/Operations/UpdateActionRequestBody.md:
     last_write_checksum: sha1:341d1566c7ce1d4bfa2dad27ac874674cf16c7d8
   docs/Models/Operations/UpdateActionResponse.md:
@@ -656,7 +664,7 @@ trackedFiles:
   docs/Models/Operations/UpdateAuthorMetadata.md:
     last_write_checksum: sha1:4c3c1ddf47f6124a0acdaf8e659a5a9f10485116
   docs/Models/Operations/UpdateAuthorRequest.md:
-    last_write_checksum: sha1:bcf7e447d32a78dbe17e047949c75c43824cb6b6
+    last_write_checksum: sha1:9147a3e0389081884c9b63d2c191ac5558b70d67
   docs/Models/Operations/UpdateAuthorRequestBody.md:
     last_write_checksum: sha1:42460753284c620cc42fc696ab49ef61249cd20c
   docs/Models/Operations/UpdateAuthorResponse.md:
@@ -682,7 +690,7 @@ trackedFiles:
   docs/Models/Operations/UpdateWebhookPayloadVersion.md:
     last_write_checksum: sha1:a7b148d92f1d18cfb79b16fa3d716ed4593a28d5
   docs/Models/Operations/UpdateWebhookRequest.md:
-    last_write_checksum: sha1:d6478f187cd1f934cbbaa2b38df0a371e872c507
+    last_write_checksum: sha1:bf8650ed7174deee3ad48b04927b65a6b653440c
   docs/Models/Operations/UpdateWebhookRequestBody.md:
     last_write_checksum: sha1:685106d93400695395ccddb0814d70d2cd054c8f
   docs/Models/Operations/UpdateWebhookResponse.md:
@@ -690,7 +698,7 @@ trackedFiles:
   docs/Models/Operations/UpdateWebhookResponseBody.md:
     last_write_checksum: sha1:664bc06a56ec1a03dbaafad9b949bc6d24c2e18d
   docs/Models/Operations/UpdateWordlistRequest.md:
-    last_write_checksum: sha1:23291ec9e03a21aae2585bb960307180c9bf6b93
+    last_write_checksum: sha1:9342cc6fe33cb40310214de1bd4d8f60d490e5e3
   docs/Models/Operations/UpdateWordlistRequestBody.md:
     last_write_checksum: sha1:fe8075134703770b447178e9a79e32c053b63a36
   docs/Models/Operations/UpdateWordlistResponse.md:
@@ -712,29 +720,31 @@ trackedFiles:
   docs/Models/Operations/WithinUnit.md:
     last_write_checksum: sha1:569a6533d5762727109074fe181f89e0ea99eb6a
   docs/sdks/account/README.md:
-    last_write_checksum: sha1:627cabe2358331201ba5169a1e1fc8061601fa98
+    last_write_checksum: sha1:edc81d8fb02e7e2f907d5ac8563ad2961cf0d4df
   docs/sdks/actions/README.md:
-    last_write_checksum: sha1:cc8aa4c3106eb725d105abe1e0874b2045b0a139
+    last_write_checksum: sha1:e507621a42936c296ae03eac2ee068106ba47909
+  docs/sdks/apikeys/README.md:
+    last_write_checksum: sha1:21a124371058a8c58c26e033e3fa4038464f89bc
   docs/sdks/authors/README.md:
-    last_write_checksum: sha1:86778df7d7f476fbb4b163bcc15379856da9f9dd
+    last_write_checksum: sha1:5dfb8346d8478deeb5578721d920168921332567
   docs/sdks/channels/README.md:
     last_write_checksum: sha1:784bad3ada3395f36a632bf3a16f7cd944cb9c5e
   docs/sdks/content/README.md:
-    last_write_checksum: sha1:02f75654872e56352232dc3a50d56ed365f6edc1
+    last_write_checksum: sha1:79d4af3bc1f4c99ea7df6a1c85e6dd288ff08494
   docs/sdks/items/README.md:
-    last_write_checksum: sha1:afd4c5a33585f96a771a97cba8716b114e94ae47
+    last_write_checksum: sha1:8391365e0265ecad323975359cbf03afae0787c9
   docs/sdks/projects/README.md:
     last_write_checksum: sha1:867175adea7355b0fa2e9a014b6a62272d188d83
   docs/sdks/queue/README.md:
-    last_write_checksum: sha1:03794862dae3ea5754681ec0cfb1cb5e9336037d
+    last_write_checksum: sha1:8b64efe96edbc1f17b0cf95ca6ef42fa2a872654
   docs/sdks/webhooks/README.md:
-    last_write_checksum: sha1:7be9c12ff34316d7bf28d498e2507674f6b8b43b
+    last_write_checksum: sha1:d4e93656473a51ecd24ff3180275599dfdb08e65
   docs/sdks/webhooksecret/README.md:
-    last_write_checksum: sha1:c58e27014d24521f36998d3d36fd6c9fd382c46a
+    last_write_checksum: sha1:1b4551ad8328b2553709e01007eb1f1f2656f9fe
   docs/sdks/wordlist/README.md:
-    last_write_checksum: sha1:90141a2300cc924e8fe96d088a328390cb987bff
+    last_write_checksum: sha1:d99ec83eb2cbc17fb0360aa2a0a95ee0befa7dce
   docs/sdks/words/README.md:
-    last_write_checksum: sha1:636806c21a727454953ceadd95d96f75e9b92ee2
+    last_write_checksum: sha1:3b7fb592b91e8792b8140f9a74b22f68068982ff
   phpstan.neon:
     last_write_checksum: sha1:c76cf3ac20b114f85cd6c3b569a6e297d00b4612
   phpunit.xml:
@@ -747,6 +757,8 @@ trackedFiles:
     last_write_checksum: sha1:26391ec4892280e1d53af5902ee40e9972024151
   src/Actions.php:
     last_write_checksum: sha1:09b60a8e5784ab74e6fd02d13a167d41bad6df4f
+  src/ApiKeys.php:
+    last_write_checksum: sha1:ab8c7e1f03ca30a732ff145b5675d841931af57c
   src/Authors.php:
     last_write_checksum: sha1:b0c9ee7d6a181d5ec157a538c3bfc46e58aa9c5d
   src/Channels.php:
@@ -788,7 +800,7 @@ trackedFiles:
   src/Models/Components/AuthenticationErrorCode.php:
     last_write_checksum: sha1:903736b77081716fb731d0d241fd98149b46eee9
   src/Models/Components/BadRequestErrorCode.php:
-    last_write_checksum: sha1:f082dcf371b056285e05af321dd1a4a52147c426
+    last_write_checksum: sha1:de17722e221f05d0729c22f41a91580fdcec89ca
   src/Models/Components/Block.php:
     last_write_checksum: sha1:918ae12854bff879ffb2c47d83ffbb3f2538241b
   src/Models/Components/Channel.php:
@@ -815,6 +827,8 @@ trackedFiles:
     last_write_checksum: sha1:709ebf053fdacbbc87ea46cb9d3f5fb9746c2a99
   src/Models/Components/Project.php:
     last_write_checksum: sha1:4c8ff4f14ee36ea43736c54d4c5d55f9ae72d01e
+  src/Models/Components/ProjectApiKey.php:
+    last_write_checksum: sha1:0efb8ea755eaa6883eb8179d523ffaf0beff3dc4
   src/Models/Components/ProjectGlobalFlaggingMode.php:
     last_write_checksum: sha1:920d6e4b01b19955391b9f2287ace6ff7ace252f
   src/Models/Components/ProjectWithKey.php:
@@ -842,7 +856,7 @@ trackedFiles:
   src/Models/Errors/AuthenticationErrorThrowable.php:
     last_write_checksum: sha1:bacbc1ed3f9c68f87ba17890ec68903fb586ad38
   src/Models/Errors/BadRequestError.php:
-    last_write_checksum: sha1:3a4085c29360ca3b3ad39b59f7012abb1218a512
+    last_write_checksum: sha1:ad938e9ec75c959c1d4c33d9696dde470166dbea
   src/Models/Errors/BadRequestErrorThrowable.php:
     last_write_checksum: sha1:e61d38061c476360d7d4816f2dfbc45d2f3c6758
   src/Models/Errors/ConflictError.php:
@@ -870,7 +884,7 @@ trackedFiles:
   src/Models/Operations/ActionStat.php:
     last_write_checksum: sha1:044f1a6cf8fd19215358b3a711d6d4cc1d0637b3
   src/Models/Operations/AddWordlistWordsRequest.php:
-    last_write_checksum: sha1:88167e4e1c8fd124c54f665ea8d86dbc3d644f26
+    last_write_checksum: sha1:83b431ff6f2e69d90a3d6ca523e1a1dd06491a37
   src/Models/Operations/AddWordlistWordsRequestBody.php:
     last_write_checksum: sha1:cd9c142857de573a2d6af9837fba2309816ea0cd
   src/Models/Operations/AddWordlistWordsResponse.php:
@@ -932,7 +946,7 @@ trackedFiles:
   src/Models/Operations/CreateActionQueueBehaviourResponse.php:
     last_write_checksum: sha1:313bcd625e89178af4d06de97282b56f2f23380b
   src/Models/Operations/CreateActionRequest.php:
-    last_write_checksum: sha1:79560591ded44d12574eb1c6c71402e172ffeb5b
+    last_write_checksum: sha1:278ddaf315cba81465ea37977bf214dccadde7e7
   src/Models/Operations/CreateActionRequestBody.php:
     last_write_checksum: sha1:b3bf78b8e42667c7a73faed04293f2ef93d570e7
   src/Models/Operations/CreateActionResponse.php:
@@ -946,7 +960,7 @@ trackedFiles:
   src/Models/Operations/CreateAuthorMetadata.php:
     last_write_checksum: sha1:87d57a17914c29041de19c2bb4138a822ed24744
   src/Models/Operations/CreateAuthorRequest.php:
-    last_write_checksum: sha1:79b0e48646ed4687cd0ae848488e770749f0a11d
+    last_write_checksum: sha1:0d0add0ce37b7d13e79859ca4ecb5f7c78c74af1
   src/Models/Operations/CreateAuthorRequestBody.php:
     last_write_checksum: sha1:9bc05523bef9bdd6028286dc922ac81391b447bd
   src/Models/Operations/CreateAuthorResponse.php:
@@ -959,6 +973,12 @@ trackedFiles:
     last_write_checksum: sha1:6704da4d885154485ef3ba6ed76b04e1091113f3
   src/Models/Operations/CreateChannelResponse.php:
     last_write_checksum: sha1:9311e697bd0392f5132c1569d567710854e3052b
+  src/Models/Operations/CreateProjectApiKeyRequest.php:
+    last_write_checksum: sha1:232cc7e9cadf4666da5e4568a04fdef21f24b33d
+  src/Models/Operations/CreateProjectApiKeyRequestBody.php:
+    last_write_checksum: sha1:f6a0a9f54cbba3a2a56b94a6c0a4a5e0922d5114
+  src/Models/Operations/CreateProjectApiKeyResponse.php:
+    last_write_checksum: sha1:33a97f6ac8444cd793731409da701f6bedcbe038
   src/Models/Operations/CreateProjectRequest.php:
     last_write_checksum: sha1:0030064ee218a8e52d9c66c4054355045f749cad
   src/Models/Operations/CreateProjectResponse.php:
@@ -970,7 +990,7 @@ trackedFiles:
   src/Models/Operations/CreateWebhookPayloadVersion.php:
     last_write_checksum: sha1:dcddf61864e95fb647b43c892473995e7feb2560
   src/Models/Operations/CreateWebhookRequest.php:
-    last_write_checksum: sha1:4dc8fa0726b9d26ee1a4acff88cbc50e4e4b1679
+    last_write_checksum: sha1:1570f1098ea25b9ce76b2955e9a480b495d1830a
   src/Models/Operations/CreateWebhookRequestBody.php:
     last_write_checksum: sha1:c75c8528cdf902ab4d2e81f4b576a6a3e4cf7267
   src/Models/Operations/CreateWebhookResponse.php:
@@ -994,13 +1014,13 @@ trackedFiles:
   src/Models/Operations/DataVideo.php:
     last_write_checksum: sha1:4dccc253a0c8b286d38af7d806d11d8be7788ecc
   src/Models/Operations/DeleteActionRequest.php:
-    last_write_checksum: sha1:45c9a051e3b5827f8e68481d87c6a95bac26221b
+    last_write_checksum: sha1:db542d7f10566f576a5a03ff0ca7022960879f00
   src/Models/Operations/DeleteActionResponse.php:
     last_write_checksum: sha1:f2bf397d8a5338926aa4b7c210111a38e673c91b
   src/Models/Operations/DeleteActionResponseBody.php:
     last_write_checksum: sha1:1d484357e5d39e48a6c3f421fa2d9d817f0b4c68
   src/Models/Operations/DeleteAuthorRequest.php:
-    last_write_checksum: sha1:b847a944d9c673fdcbad8c9fc0b9e52f37c92ce3
+    last_write_checksum: sha1:bdb3de06b63b1ea7805b9ae2b0b5e7bedf773a31
   src/Models/Operations/DeleteAuthorResponse.php:
     last_write_checksum: sha1:c8ebb0b3287231ba23751000d2ef94f795b97cfa
   src/Models/Operations/DeleteAuthorResponseBody.php:
@@ -1018,7 +1038,7 @@ trackedFiles:
   src/Models/Operations/DeleteProjectResponseBody.php:
     last_write_checksum: sha1:f2e3f57e6e1c383dd374647b95d31bfec55f51e9
   src/Models/Operations/DeleteWebhookRequest.php:
-    last_write_checksum: sha1:7db3fa98d22df81339470990fbcad2847c03b22a
+    last_write_checksum: sha1:8a867b026d229f0a3d247ba595bc1585dea1e486
   src/Models/Operations/DeleteWebhookResponse.php:
     last_write_checksum: sha1:c02adbc6a20d61a9bef2a7e3a54f921be157e72d
   src/Models/Operations/DeleteWebhookResponseBody.php:
@@ -1048,7 +1068,7 @@ trackedFiles:
   src/Models/Operations/Evaluation.php:
     last_write_checksum: sha1:a63ce92e36cae2dc2be9305d04d3893d6a442ee4
   src/Models/Operations/ExecuteActionRequest.php:
-    last_write_checksum: sha1:12e7e2038d7b6a142c859e11576845c036d95977
+    last_write_checksum: sha1:ad852b1645811a78be00900705b5d423a5c1df9b
   src/Models/Operations/ExecuteActionRequestBody.php:
     last_write_checksum: sha1:3136009ab309a9f9b23a6618f6357cf8bcfe9351
   src/Models/Operations/ExecuteActionResponse.php:
@@ -1070,7 +1090,7 @@ trackedFiles:
   src/Models/Operations/Gambling.php:
     last_write_checksum: sha1:ce701dbd4fd3f3a2aaa509fbe1dc62e37b0cecc8
   src/Models/Operations/GetAccountRequest.php:
-    last_write_checksum: sha1:11c77490927e296bcee419651454becbcce62f45
+    last_write_checksum: sha1:750f2ffa80d153b07fcad95804b09b442a496053
   src/Models/Operations/GetAccountResponse.php:
     last_write_checksum: sha1:d8b431f1ea282814bdfc9ca80f068f39a5074d56
   src/Models/Operations/GetAccountResponseBody.php:
@@ -1082,7 +1102,7 @@ trackedFiles:
   src/Models/Operations/GetActionQueueBehaviour.php:
     last_write_checksum: sha1:ae630aa7d41eec1848123c9af1e901e48ce11e7c
   src/Models/Operations/GetActionRequest.php:
-    last_write_checksum: sha1:4ad67307bafe60b947d8129d00a0d51118024db5
+    last_write_checksum: sha1:d92a2766ef799ce2f0365a77d508ed802c9f1c62
   src/Models/Operations/GetActionResponse.php:
     last_write_checksum: sha1:baae3308fb5aa12a98b02595dcbdd3a48f75b959
   src/Models/Operations/GetActionResponseBody.php:
@@ -1090,7 +1110,7 @@ trackedFiles:
   src/Models/Operations/GetActionType.php:
     last_write_checksum: sha1:fcf2c33e09f6c896fded285f64d4bed9548c185a
   src/Models/Operations/GetAuthorRequest.php:
-    last_write_checksum: sha1:78420dbc05a9af8bcc46bf68cdbc9518416db798
+    last_write_checksum: sha1:38a3bb0d876cc0f937e63200dbad571db6768a1d
   src/Models/Operations/GetAuthorResponse.php:
     last_write_checksum: sha1:e5c6517e769fc7b0c5d8139327b1d12926dff8da
   src/Models/Operations/GetChannelRequest.php:
@@ -1106,13 +1126,13 @@ trackedFiles:
   src/Models/Operations/GetQueueRecommendationAction.php:
     last_write_checksum: sha1:0f5a10569d177612578212a0b9d97140a1296b7c
   src/Models/Operations/GetQueueRequest.php:
-    last_write_checksum: sha1:79d0e4f68038d18e84bb37b011bc933111b9af7d
+    last_write_checksum: sha1:04731bdde9b840068161772990636000ce207e41
   src/Models/Operations/GetQueueResponse.php:
     last_write_checksum: sha1:fd66044c894e522ac92cab79793b2f41169ec298
   src/Models/Operations/GetQueueResponseBody.php:
     last_write_checksum: sha1:2ca5dca83fd39bbafefca851d093a577e8bc12ac
   src/Models/Operations/GetQueueStatsRequest.php:
-    last_write_checksum: sha1:f3136afe2d481db1d0909063939d87234e4c42ff
+    last_write_checksum: sha1:744dfe91729ba41eb46bf15ebddb4f1da79f368d
   src/Models/Operations/GetQueueStatsResponse.php:
     last_write_checksum: sha1:dde9ab723d155e5e55f60e1c498d32c47181533d
   src/Models/Operations/GetQueueStatsResponseBody.php:
@@ -1124,25 +1144,25 @@ trackedFiles:
   src/Models/Operations/GetWebhookPayloadVersion.php:
     last_write_checksum: sha1:5ac2d564aa48f415a0fc29c7c89f281fee832f1a
   src/Models/Operations/GetWebhookRequest.php:
-    last_write_checksum: sha1:920ff90f7b649c0759c70941e37d93471afb1c0f
+    last_write_checksum: sha1:8e98d28ae4954b4f054150ff190af691779edf37
   src/Models/Operations/GetWebhookResponse.php:
     last_write_checksum: sha1:56e9ecda90f2f48ce9a0ab26ab517b7b18a967fb
   src/Models/Operations/GetWebhookResponseBody.php:
     last_write_checksum: sha1:4e0885fa5571b72a7e35b4f9374691e6e4c5f1c7
   src/Models/Operations/GetWebhookSecretRequest.php:
-    last_write_checksum: sha1:0b855ed6ac67aa6bdeb7973a7e7f2a62e42420d4
+    last_write_checksum: sha1:5bc7af9683292c3f4951116060cda7d4e8a38314
   src/Models/Operations/GetWebhookSecretResponse.php:
     last_write_checksum: sha1:da002d0f56812b48bd32105501c9f1b80afea107
   src/Models/Operations/GetWebhookSecretResponseBody.php:
     last_write_checksum: sha1:92a28e74d3e264c0c97f97a7a079a50ee6358bcb
   src/Models/Operations/GetWordlistEmbeddingStatusRequest.php:
-    last_write_checksum: sha1:8c29ac516030176fe3be275b22669c2718651d6f
+    last_write_checksum: sha1:a316d12c375b8667043cdff8ebf77721b769bbe4
   src/Models/Operations/GetWordlistEmbeddingStatusResponse.php:
     last_write_checksum: sha1:efd22df7e9ea92f09462d244e886d64c5005d00e
   src/Models/Operations/GetWordlistEmbeddingStatusResponseBody.php:
     last_write_checksum: sha1:63599f1504d30689717e8c73fdd62aaaa579e71f
   src/Models/Operations/GetWordlistRequest.php:
-    last_write_checksum: sha1:9478177efdd9c94bac6559e1071608c236ae9eb1
+    last_write_checksum: sha1:710172bd4f318865a5a112368c90fc07d04c2012
   src/Models/Operations/GetWordlistResponse.php:
     last_write_checksum: sha1:109838af6005b73b1d1c68ef254a9b5b18afaefd
   src/Models/Operations/GetWordlistResponseBody.php:
@@ -1184,7 +1204,7 @@ trackedFiles:
   src/Models/Operations/ListActionsQueueBehaviour.php:
     last_write_checksum: sha1:0c8e33b429fa9ca12b03cdac8223a6b201027b2f
   src/Models/Operations/ListActionsRequest.php:
-    last_write_checksum: sha1:39b6e1efd8a113b3cfba1132e5bb29f793b309cd
+    last_write_checksum: sha1:c0ec4e9e7a301b1c3e9c8afdac11059af5ad5f0a
   src/Models/Operations/ListActionsResponse.php:
     last_write_checksum: sha1:57db3b2d174ad07cdb1b5f5556d6e9dad9bd025c
   src/Models/Operations/ListActionsResponseBody.php:
@@ -1192,7 +1212,7 @@ trackedFiles:
   src/Models/Operations/ListActionsType.php:
     last_write_checksum: sha1:0c8962ffc3ef8451b1d12eaba04a61f24f51765f
   src/Models/Operations/ListAuthorsRequest.php:
-    last_write_checksum: sha1:f7bc29d33c9ddefbba5a1ad8e129a7ccd4168ec3
+    last_write_checksum: sha1:98bfe32288a8378b28c2a3db982b996793dc6c72
   src/Models/Operations/ListAuthorsResponse.php:
     last_write_checksum: sha1:310c8d4e136956f38222de060dc3460ede0c185e
   src/Models/Operations/ListAuthorsResponseBody.php:
@@ -1218,7 +1238,7 @@ trackedFiles:
   src/Models/Operations/ListQueueItemsLabel.php:
     last_write_checksum: sha1:0d5d3dcd6b113f05a8cbe0ea2a4a64a02c503edc
   src/Models/Operations/ListQueueItemsRequest.php:
-    last_write_checksum: sha1:a40c073e21c3dc66a2f3f9168c3371abfe8e73f2
+    last_write_checksum: sha1:3a65e9d3124bc8ca1ffe748e082ec846856a3763
   src/Models/Operations/ListQueueItemsResponse.php:
     last_write_checksum: sha1:3277eea35702e991534b8f51d1333fefde8e5779
   src/Models/Operations/ListQueueItemsResponseBody.php:
@@ -1234,7 +1254,7 @@ trackedFiles:
   src/Models/Operations/ListWebhooksPayloadVersion.php:
     last_write_checksum: sha1:fbeca33e8478ebfc89591df3e1b7b7fdf8527a9e
   src/Models/Operations/ListWebhooksRequest.php:
-    last_write_checksum: sha1:e193e65654c9ede48dc7424b54fc896f45a0b490
+    last_write_checksum: sha1:f7ae2e9de2a8bec5467cd117934db6f04889452f
   src/Models/Operations/ListWebhooksResponse.php:
     last_write_checksum: sha1:f9fb807c707dd6565fcbc4d589c7fc88c70f94bd
   src/Models/Operations/ListWebhooksResponseBody.php:
@@ -1242,7 +1262,7 @@ trackedFiles:
   src/Models/Operations/ListWordlistsData.php:
     last_write_checksum: sha1:69c58130e30f976fb171c36fc457df97cc8e4bd5
   src/Models/Operations/ListWordlistsRequest.php:
-    last_write_checksum: sha1:95efd159c7b0193bf434148f6ccbfbec1f279540
+    last_write_checksum: sha1:bad9823568744bc4a3fff25854dd1d1709b72850
   src/Models/Operations/ListWordlistsResponse.php:
     last_write_checksum: sha1:7cdcc8c5efdc90d59c57b26601660cfbed556dea
   src/Models/Operations/ListWordlistsResponseBody.php:
@@ -1288,13 +1308,13 @@ trackedFiles:
   src/Models/Operations/Religion.php:
     last_write_checksum: sha1:77cf485d673e50a293b5261c256cb572133adac7
   src/Models/Operations/RemoveWordlistWordsRequest.php:
-    last_write_checksum: sha1:e3698c6e02689d45316b3d1f7694afaed250f96c
+    last_write_checksum: sha1:80e3b7de8a2427a88bc117deb5cf950b333851c4
   src/Models/Operations/RemoveWordlistWordsResponse.php:
     last_write_checksum: sha1:0c8f1f021c5e4d53e010198da9ede996b7b232b9
   src/Models/Operations/RemoveWordlistWordsResponseBody.php:
     last_write_checksum: sha1:616012ca61922bfb310e29c791df90767b646c44
   src/Models/Operations/ResolveQueueItemRequest.php:
-    last_write_checksum: sha1:c9639d1518000013bf1e10033b76a90b0bc60337
+    last_write_checksum: sha1:a19a7840d04d11fffb2d4d6d58543f3b2c91c7b9
   src/Models/Operations/ResolveQueueItemRequestBody.php:
     last_write_checksum: sha1:eca8b3874e279a09dc505a2804be0e0e41ece1fc
   src/Models/Operations/ResolveQueueItemResponse.php:
@@ -1334,9 +1354,9 @@ trackedFiles:
   src/Models/Operations/SubmitContentRecommendationAction.php:
     last_write_checksum: sha1:828f11273d8233c82dbc41be5c2c12b907aad56c
   src/Models/Operations/SubmitContentRequest.php:
-    last_write_checksum: sha1:d320a1bcc1f66b1894134de9ce2cb41e003cc825
+    last_write_checksum: sha1:0c4dc9142e0ef4d6e38efc6ff080c789f292f4fe
   src/Models/Operations/SubmitContentRequestBody.php:
-    last_write_checksum: sha1:449c091e46d27cd4493654ed9c32f97d4068921f
+    last_write_checksum: sha1:d55aeeeaf7629364ca7d569e39b0b2091a6bf621
   src/Models/Operations/SubmitContentResponse.php:
     last_write_checksum: sha1:69f1b46bd44843fddb5c9ac81e89607ad6ca0019
   src/Models/Operations/SubmitContentResponseBody.php:
@@ -1370,7 +1390,7 @@ trackedFiles:
   src/Models/Operations/UnicodeSpoofing.php:
     last_write_checksum: sha1:280971a1558295ec10314a1f8ea945083b2b10e2
   src/Models/Operations/UnresolveQueueItemRequest.php:
-    last_write_checksum: sha1:6959683937a2a177ce5093803384cc31bcf1c9dd
+    last_write_checksum: sha1:c9ed465116bf9f671f083596162f227c72560ba1
   src/Models/Operations/UnresolveQueueItemRequestBody.php:
     last_write_checksum: sha1:850deadebf4b9e3044dbbdd56992525937f60cc1
   src/Models/Operations/UnresolveQueueItemResponse.php:
@@ -1390,7 +1410,7 @@ trackedFiles:
   src/Models/Operations/UpdateActionQueueBehaviourResponse.php:
     last_write_checksum: sha1:093e54a0e1695af1ebfafdd71d7000d9884d5b78
   src/Models/Operations/UpdateActionRequest.php:
-    last_write_checksum: sha1:1ab53d92cd1bbf516098eb4083760241dfae064b
+    last_write_checksum: sha1:42e9442683b443b9970f5e98849debef9d3448c6
   src/Models/Operations/UpdateActionRequestBody.php:
     last_write_checksum: sha1:9aa9023855c8c17e77ccfa516c9fb5eb3ad4dcad
   src/Models/Operations/UpdateActionResponse.php:
@@ -1404,7 +1424,7 @@ trackedFiles:
   src/Models/Operations/UpdateAuthorMetadata.php:
     last_write_checksum: sha1:f530dd3597b8dd3773d105b2af7930ae87f2c892
   src/Models/Operations/UpdateAuthorRequest.php:
-    last_write_checksum: sha1:d6efc3740cce71de26abb19925dc89e0574b1b9c
+    last_write_checksum: sha1:e0c9097accd6bb1ca9901bc030fa12fd2e0b1393
   src/Models/Operations/UpdateAuthorRequestBody.php:
     last_write_checksum: sha1:90a85a572f6a627e4b2f1215cff2a16bcf17cd7f
   src/Models/Operations/UpdateAuthorResponse.php:
@@ -1430,7 +1450,7 @@ trackedFiles:
   src/Models/Operations/UpdateWebhookPayloadVersion.php:
     last_write_checksum: sha1:ab86561e2cdf2076c60459152bf356b480b35b2e
   src/Models/Operations/UpdateWebhookRequest.php:
-    last_write_checksum: sha1:99b95fa8148a3257435b80b8c00a975e158ace6d
+    last_write_checksum: sha1:8417eece74e2c6b7c452eea6bfd5b067d68a0bc8
   src/Models/Operations/UpdateWebhookRequestBody.php:
     last_write_checksum: sha1:36c01c23a9efd73d603a99720530cd426300bfe0
   src/Models/Operations/UpdateWebhookResponse.php:
@@ -1438,7 +1458,7 @@ trackedFiles:
   src/Models/Operations/UpdateWebhookResponseBody.php:
     last_write_checksum: sha1:007baee2512abe6a851b7db47f728889ece8c146
   src/Models/Operations/UpdateWordlistRequest.php:
-    last_write_checksum: sha1:d0ada12c8093a8b11132f792007ab946cc80b72c
+    last_write_checksum: sha1:56b85ac0d16ba780a7213462c2f9ad688469c8ac
   src/Models/Operations/UpdateWordlistRequestBody.php:
     last_write_checksum: sha1:4c87601c65a232654f2fdaa080aa5e6e19e773f7
   src/Models/Operations/UpdateWordlistResponse.php:
@@ -1464,11 +1484,11 @@ trackedFiles:
   src/ModerationApiBuilder.php:
     last_write_checksum: sha1:16809f5bed82b4ad4c18f3322de18d04e32a372d
   src/Projects.php:
-    last_write_checksum: sha1:50ff2ba13fe33e6d62384ff9825977e6efd40a34
+    last_write_checksum: sha1:4be77e8c953851703399bb93d829273c7e839333
   src/Queue.php:
     last_write_checksum: sha1:6e827e98b2489b7f06b1d5869e54f47e6ae2816c
   src/SDKConfiguration.php:
-    last_write_checksum: sha1:63ff169e43e51e25c2eaa43940df61e4c0fdcd25
+    last_write_checksum: sha1:649e776e2649b016ac683bf1e01e36d49e23ab4f
   src/Utils/BigDecimalHandler.php:
     last_write_checksum: sha1:2d36b5ae690b042acfcdfe7e7277d44c5055416f
   src/Utils/BigIntHandler.php:
@@ -2297,4 +2317,24 @@ examples:
           application/json: {"type": "not_found_error", "code": "resource_not_found", "message": "Not found", "request_id": "h8fkz6kkzoa446ffve37atys", "doc_url": "https://insecure-premium.com/"}
         "429":
           application/json: {"type": "rate_limit_error", "code": "rate_limit_exceeded", "message": "Rate limit exceeded", "request_id": "h8fkz6kkzoa446ffve37atys", "doc_url": "https://upset-hydrant.info/"}
+  createProjectApiKey:
+    speakeasy-default-create-project-api-key:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"name": "API key"}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "name": "<value>", "projectId": "<id>", "createdAt": "1711588645112", "secretKey": "<value>"}
+        "400":
+          application/json: {"type": "invalid_request_error", "code": "invalid_request", "message": "Invalid input data", "request_id": "h8fkz6kkzoa446ffve37atys", "doc_url": "https://rusty-responsibility.com"}
+        "401":
+          application/json: {"type": "authentication_error", "code": "unauthorized", "message": "Authorization not provided", "request_id": "h8fkz6kkzoa446ffve37atys", "doc_url": "https://compassionate-chow.net"}
+        "403":
+          application/json: {"type": "permission_error", "code": "permission_denied", "message": "Insufficient access", "request_id": "h8fkz6kkzoa446ffve37atys", "doc_url": "https://buzzing-convection.com/"}
+        "404":
+          application/json: {"type": "not_found_error", "code": "resource_not_found", "message": "Not found", "request_id": "h8fkz6kkzoa446ffve37atys", "doc_url": "https://impractical-bin.info/"}
+        "429":
+          application/json: {"type": "rate_limit_error", "code": "rate_limit_exceeded", "message": "Rate limit exceeded", "request_id": "h8fkz6kkzoa446ffve37atys", "doc_url": "https://damaged-bandwidth.name"}
 examplesVersion: 1.0.2

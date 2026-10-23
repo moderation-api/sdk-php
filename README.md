@@ -248,9 +248,9 @@ foreach ($responses as $response) {
 Moderation API has two kinds of API keys:
 
 - A **project key** works with one project: content, authors, review queues, actions, wordlists, webhooks and the account. Most integrations need only this key.
-- An **organization key** works with the [management API](https://docs.moderationapi.com/api-reference/management-api): projects and channels. The management API is available on Enterprise plans.
+- An **organization key** works with the [management API](https://docs.moderationapi.com/api-reference/management-api): projects and channels. It can also use any project's endpoints: name the project with `projectId`.
 
-Each key works only with its own endpoints. With the wrong key the API returns `403` with the code `project_key_required` or `organization_key_required`. If you use both, create one client for each key:
+A project key can't call the management API: the API returns `403` with the code `organization_key_required`. If you use both kinds of key, create one client for each:
 
 ```php
 use ModerationApi\ModerationApi;
@@ -324,6 +324,10 @@ Create the organization client only where you manage projects and channels, for 
 * [update](docs/sdks/projects/README.md#update) - Update a project
 * [delete](docs/sdks/projects/README.md#delete) - Delete a project
 * [duplicate](docs/sdks/projects/README.md#duplicate) - Duplicate a project
+
+#### [Projects.ApiKeys](docs/sdks/apikeys/README.md)
+
+* [create](docs/sdks/apikeys/README.md#create) - Create a project API key
 
 ### [Queue](docs/sdks/queue/README.md)
 

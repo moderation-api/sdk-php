@@ -1,5 +1,51 @@
 # Changelog
 
+## 1.2.0 (2026-10-23)
+
+Full Changelog: [v1.1.1...v1.2.0](https://github.com/moderation-api/sdk-php/compare/v1.1.1...v1.2.0)
+
+### API changes
+
+- `GET /actions`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /actions`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /actions/execute`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /actions/{actionId}/execute`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `DELETE /actions/{id}`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `GET /actions/{id}`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `PUT /actions/{id}`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `GET /auth`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /auth`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `GET /authors`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /authors`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `DELETE /authors/{id}`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `GET /authors/{id}`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `PUT /authors/{id}`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `DELETE /channels/{id}`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `PUT /channels/{id}`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /channels/{id}/duplicate`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /moderate`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /moderate/image`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /moderate/text`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /projects`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `PUT /projects/{id}`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /projects/{id}/duplicate`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /projects/{projectId}/channels`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `GET /queue/{id}`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `GET /queue/{id}/items`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /queue/{id}/items/{itemId}/resolve`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /queue/{id}/items/{itemId}/unresolve`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `GET /queue/{id}/stats`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /webhooks`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `PUT /webhooks/{id}`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `GET /wordlist`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `GET /wordlist/{id}`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `PUT /wordlist/{id}`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `GET /wordlist/{id}/embedding-status`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `DELETE /wordlist/{id}/words`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- `POST /wordlist/{id}/words`: added the new `project_name_ambiguous` enum value to the `code` response property for the response status `400`
+- a breaking change was detected but the version is still `1.1.0`
+- `POST /projects/{id}/api-keys`: endpoint added
+
 ## 1.1.1 (2026-10-22)
 
 Full Changelog: [v1.1.0...v1.1.1](https://github.com/moderation-api/sdk-php/compare/v1.1.0...v1.1.1)
