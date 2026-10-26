@@ -15,10 +15,10 @@ class ListQueueItemsResponseBody
     /**
      * The items on this page.
      *
-     * @var array<\ModerationApi\Models\Operations\ListQueueItemsData> $data
+     * @var array<\ModerationApi\Models\Components\QueueItem> $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\ModerationApi\Models\Operations\ListQueueItemsData>')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\ModerationApi\Models\Components\QueueItem>')]
     public array $data;
 
     /**
@@ -31,7 +31,7 @@ class ListQueueItemsResponseBody
     public Components\Pagination $pagination;
 
     /**
-     * @param  array<\ModerationApi\Models\Operations\ListQueueItemsData>  $data
+     * @param  array<\ModerationApi\Models\Components\QueueItem>  $data
      * @param  \ModerationApi\Models\Components\Pagination  $pagination
      * @phpstan-pure
      */

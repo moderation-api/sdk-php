@@ -33,15 +33,7 @@ class ListAuthorsRequest
     public ?string $lastActiveDate = null;
 
     /**
-     * $contentTypes
-     *
-     * @var ?array<string> $contentTypes
-     */
-    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=contentTypes')]
-    public ?array $contentTypes = null;
-
-    /**
-     * The project to act on, when you call with an organization key. Optional when the organization has one project. A project key acts on its own project: naming another one is an error.
+     * The project to act on, by ID or name. Required with an organization key unless the key reaches only one project; list projects with GET /projects. A project key acts on its own project and needs no value: naming another one is an error.
      *
      * @var ?string $projectId
      */
@@ -65,28 +57,26 @@ class ListAuthorsRequest
     /**
      * Sort direction
      *
-     * @var ?\ModerationApi\Models\Operations\ListAuthorsSortDirection $sortDirection
+     * @var ?\ModerationApi\Models\Operations\SortDirection $sortDirection
      */
     #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=sortDirection')]
-    public ?ListAuthorsSortDirection $sortDirection = null;
+    public ?SortDirection $sortDirection = null;
 
     /**
      * @param  ?int  $page
      * @param  ?int  $pageSize
      * @param  ?\ModerationApi\Models\Operations\SortBy  $sortBy
-     * @param  ?\ModerationApi\Models\Operations\ListAuthorsSortDirection  $sortDirection
+     * @param  ?\ModerationApi\Models\Operations\SortDirection  $sortDirection
      * @param  ?string  $memberSinceDate
      * @param  ?string  $lastActiveDate
-     * @param  ?array<string>  $contentTypes
      * @param  ?string  $projectId
      * @phpstan-pure
      */
-    public function __construct(?SortBy $sortBy = null, ?string $memberSinceDate = null, ?string $lastActiveDate = null, ?array $contentTypes = null, ?string $projectId = null, ?int $page = 1, ?int $pageSize = 20, ?ListAuthorsSortDirection $sortDirection = ListAuthorsSortDirection::Desc)
+    public function __construct(?SortBy $sortBy = null, ?string $memberSinceDate = null, ?string $lastActiveDate = null, ?string $projectId = null, ?int $page = 1, ?int $pageSize = 20, ?SortDirection $sortDirection = SortDirection::Desc)
     {
         $this->sortBy = $sortBy;
         $this->memberSinceDate = $memberSinceDate;
         $this->lastActiveDate = $lastActiveDate;
-        $this->contentTypes = $contentTypes;
         $this->projectId = $projectId;
         $this->page = $page;
         $this->pageSize = $pageSize;

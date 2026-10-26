@@ -12,7 +12,7 @@ namespace ModerationApi\Models\Operations;
 class DailyReviewCount
 {
     /**
-     * Date in YYYY-MM-DD format
+     * Date in YYYY-MM-DD format (UTC).
      *
      * @var string $date
      */
@@ -20,19 +20,19 @@ class DailyReviewCount
     public string $date;
 
     /**
-     * Number of reviews on this date
+     * Number of items resolved.
      *
-     * @var float $count
+     * @var int $count
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('count')]
-    public float $count;
+    public int $count;
 
     /**
      * @param  string  $date
-     * @param  float  $count
+     * @param  int  $count
      * @phpstan-pure
      */
-    public function __construct(string $date, float $count)
+    public function __construct(string $date, int $count)
     {
         $this->date = $date;
         $this->count = $count;

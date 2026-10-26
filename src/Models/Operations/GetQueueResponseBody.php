@@ -8,23 +8,23 @@ declare(strict_types=1);
 
 namespace ModerationApi\Models\Operations;
 
-
+use ModerationApi\Models\Components;
 /** GetQueueResponseBody - Successful response */
 class GetQueueResponseBody
 {
     /**
      *
-     * @var \ModerationApi\Models\Operations\Queue $queue
+     * @var \ModerationApi\Models\Components\QueueWithCounts $queue
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('queue')]
-    #[\Speakeasy\Serializer\Annotation\Type('\ModerationApi\Models\Operations\Queue')]
-    public Queue $queue;
+    #[\Speakeasy\Serializer\Annotation\Type('\ModerationApi\Models\Components\QueueWithCounts')]
+    public Components\QueueWithCounts $queue;
 
     /**
-     * @param  \ModerationApi\Models\Operations\Queue  $queue
+     * @param  \ModerationApi\Models\Components\QueueWithCounts  $queue
      * @phpstan-pure
      */
-    public function __construct(Queue $queue)
+    public function __construct(Components\QueueWithCounts $queue)
     {
         $this->queue = $queue;
     }

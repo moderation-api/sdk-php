@@ -3,8 +3,7 @@
 
 ## Fields
 
-| Field                                          | Type                                           | Required                                       | Description                                    |
-| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| `averageTimeToReview`                          | *float*                                        | :heavy_check_mark:                             | Average time in milliseconds to review an item |
-| `totalReviewed`                                | *float*                                        | :heavy_check_mark:                             | Total number of items reviewed                 |
-| `totalPending`                                 | *float*                                        | :heavy_check_mark:                             | Total number of items pending review           |
+| Field                                                             | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `totalReviewed`                                                   | *int*                                                             | :heavy_check_mark:                                                | Number of items resolved in this queue in the period.             |
+| `totalPending`                                                    | *int*                                                             | :heavy_check_mark:                                                | Number of items submitted in the period that wait for review now. |

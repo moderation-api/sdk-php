@@ -20,15 +20,16 @@ class UnresolveQueueItemResponseBody
     public bool $success;
 
     /**
-     * New status of the item
+     * `pending` waits for review. `resolved` is reviewed.
      *
-     * @var string $status
+     * @var \ModerationApi\Models\Operations\UnresolveQueueItemStatus $status
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('status')]
-    public string $status;
+    #[\Speakeasy\Serializer\Annotation\Type('\ModerationApi\Models\Operations\UnresolveQueueItemStatus')]
+    public UnresolveQueueItemStatus $status;
 
     /**
-     * Timestamp when the item was unresolved
+     * When the item was unresolved (ISO 8601).
      *
      * @var string $unresolvedAt
      */
@@ -37,11 +38,11 @@ class UnresolveQueueItemResponseBody
 
     /**
      * @param  bool  $success
-     * @param  string  $status
+     * @param  \ModerationApi\Models\Operations\UnresolveQueueItemStatus  $status
      * @param  string  $unresolvedAt
      * @phpstan-pure
      */
-    public function __construct(bool $success, string $status, string $unresolvedAt)
+    public function __construct(bool $success, UnresolveQueueItemStatus $status, string $unresolvedAt)
     {
         $this->success = $success;
         $this->status = $status;

@@ -21,16 +21,7 @@ class GetQueueStatsResponseBody
     public ReviewStats $reviewStats;
 
     /**
-     * $actionStats
-     *
-     * @var array<\ModerationApi\Models\Operations\ActionStat> $actionStats
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('actionStats')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\ModerationApi\Models\Operations\ActionStat>')]
-    public array $actionStats;
-
-    /**
-     * List of top reviewers and their statistics
+     * Reviewers with the most resolved items, most first. Up to 10.
      *
      * @var array<\ModerationApi\Models\Operations\TopReviewer> $topReviewers
      */
@@ -48,15 +39,13 @@ class GetQueueStatsResponseBody
 
     /**
      * @param  \ModerationApi\Models\Operations\ReviewStats  $reviewStats
-     * @param  array<\ModerationApi\Models\Operations\ActionStat>  $actionStats
      * @param  array<\ModerationApi\Models\Operations\TopReviewer>  $topReviewers
      * @param  \ModerationApi\Models\Operations\Trends  $trends
      * @phpstan-pure
      */
-    public function __construct(ReviewStats $reviewStats, array $actionStats, array $topReviewers, Trends $trends)
+    public function __construct(ReviewStats $reviewStats, array $topReviewers, Trends $trends)
     {
         $this->reviewStats = $reviewStats;
-        $this->actionStats = $actionStats;
         $this->topReviewers = $topReviewers;
         $this->trends = $trends;
     }

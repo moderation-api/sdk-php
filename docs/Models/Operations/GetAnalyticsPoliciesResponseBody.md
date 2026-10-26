@@ -1,0 +1,12 @@
+# GetAnalyticsPoliciesResponseBody
+
+Successful response
+
+
+## Fields
+
+| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `range`                                                                                                      | [Operations\GetAnalyticsPoliciesRangeResponse](../../Models/Operations/GetAnalyticsPoliciesRangeResponse.md) | :heavy_check_mark:                                                                                           | The time window of the numbers.                                                                              |
+| `channelId`                                                                                                  | *string*                                                                                                     | :heavy_check_mark:                                                                                           | The channel the numbers are for. Null when they are for all channels.                                        |
+| `policies`                                                                                                   | array<[Operations\GetAnalyticsPoliciesPolicy](../../Models/Operations/GetAnalyticsPoliciesPolicy.md)>        | :heavy_check_mark:                                                                                           | The policy labels with the most flagged requests, largest first.                                             |

@@ -12,7 +12,7 @@ use ModerationApi\Utils\SpeakeasyMetadata;
 class ListQueueItemsRequest
 {
     /**
-     * The queue ID
+     * The queue ID.
      *
      * @var string $id
      */
@@ -21,10 +21,17 @@ class ListQueueItemsRequest
 
     /**
      *
-     * @var ?\ModerationApi\Models\Operations\SortField $sortField
+     * @var ?\ModerationApi\Models\Operations\Sort $sort
      */
-    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=sortField')]
-    public ?SortField $sortField = null;
+    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=sort')]
+    public ?Sort $sort = null;
+
+    /**
+     *
+     * @var ?bool $includeResolved
+     */
+    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=includeResolved')]
+    public ?bool $includeResolved = null;
 
     /**
      * $conversationIds
@@ -44,27 +51,6 @@ class ListQueueItemsRequest
 
     /**
      *
-     * @var ?string $afterDate
-     */
-    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=afterDate')]
-    public ?string $afterDate = null;
-
-    /**
-     *
-     * @var ?string $beforeDate
-     */
-    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=beforeDate')]
-    public ?string $beforeDate = null;
-
-    /**
-     *
-     * @var ?bool $includeResolved
-     */
-    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=includeResolved')]
-    public ?bool $includeResolved = null;
-
-    /**
-     *
      * @var ?string $authorId
      */
     #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=authorId')]
@@ -79,7 +65,21 @@ class ListQueueItemsRequest
     public ?array $filteredActionIds = null;
 
     /**
-     * The project to act on, when you call with an organization key. Optional when the organization has one project. A project key acts on its own project: naming another one is an error.
+     *
+     * @var ?string $afterDate
+     */
+    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=afterDate')]
+    public ?string $afterDate = null;
+
+    /**
+     *
+     * @var ?string $beforeDate
+     */
+    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=beforeDate')]
+    public ?string $beforeDate = null;
+
+    /**
+     * The project to act on, by ID or name. Required with an organization key unless the key reaches only one project; list projects with GET /projects. A project key acts on its own project and needs no value: naming another one is an error.
      *
      * @var ?string $projectId
      */
@@ -101,43 +101,33 @@ class ListQueueItemsRequest
     public ?int $pageSize = null;
 
     /**
-     * Sort direction
-     *
-     * @var ?\ModerationApi\Models\Operations\ListQueueItemsSortDirection $sortDirection
-     */
-    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=sortDirection')]
-    public ?ListQueueItemsSortDirection $sortDirection = null;
-
-    /**
      * @param  string  $id
      * @param  ?int  $page
      * @param  ?int  $pageSize
-     * @param  ?\ModerationApi\Models\Operations\SortField  $sortField
-     * @param  ?\ModerationApi\Models\Operations\ListQueueItemsSortDirection  $sortDirection
+     * @param  ?\ModerationApi\Models\Operations\Sort  $sort
+     * @param  ?bool  $includeResolved
      * @param  ?array<string>  $conversationIds
      * @param  ?array<string>  $labels
-     * @param  ?string  $afterDate
-     * @param  ?string  $beforeDate
-     * @param  ?bool  $includeResolved
      * @param  ?string  $authorId
      * @param  ?array<string>  $filteredActionIds
+     * @param  ?string  $afterDate
+     * @param  ?string  $beforeDate
      * @param  ?string  $projectId
      * @phpstan-pure
      */
-    public function __construct(string $id, ?SortField $sortField = null, ?array $conversationIds = null, ?array $labels = null, ?string $afterDate = null, ?string $beforeDate = null, ?bool $includeResolved = null, ?string $authorId = null, ?array $filteredActionIds = null, ?string $projectId = null, ?int $page = 1, ?int $pageSize = 20, ?ListQueueItemsSortDirection $sortDirection = ListQueueItemsSortDirection::Desc)
+    public function __construct(string $id, ?Sort $sort = null, ?bool $includeResolved = null, ?array $conversationIds = null, ?array $labels = null, ?string $authorId = null, ?array $filteredActionIds = null, ?string $afterDate = null, ?string $beforeDate = null, ?string $projectId = null, ?int $page = 1, ?int $pageSize = 20)
     {
         $this->id = $id;
-        $this->sortField = $sortField;
+        $this->sort = $sort;
+        $this->includeResolved = $includeResolved;
         $this->conversationIds = $conversationIds;
         $this->labels = $labels;
-        $this->afterDate = $afterDate;
-        $this->beforeDate = $beforeDate;
-        $this->includeResolved = $includeResolved;
         $this->authorId = $authorId;
         $this->filteredActionIds = $filteredActionIds;
+        $this->afterDate = $afterDate;
+        $this->beforeDate = $beforeDate;
         $this->projectId = $projectId;
         $this->page = $page;
         $this->pageSize = $pageSize;
-        $this->sortDirection = $sortDirection;
     }
 }

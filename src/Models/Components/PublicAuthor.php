@@ -38,11 +38,11 @@ class PublicAuthor
     /**
      * Current author status
      *
-     * @var \ModerationApi\Models\Components\Status $status
+     * @var \ModerationApi\Models\Components\PublicAuthorStatus $status
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('status')]
-    #[\Speakeasy\Serializer\Annotation\Type('\ModerationApi\Models\Components\Status')]
-    public Status $status;
+    #[\Speakeasy\Serializer\Annotation\Type('\ModerationApi\Models\Components\PublicAuthorStatus')]
+    public PublicAuthorStatus $status;
 
     /**
      *
@@ -154,7 +154,7 @@ class PublicAuthor
      * @param  string  $id
      * @param  float  $firstSeen
      * @param  float  $lastSeen
-     * @param  \ModerationApi\Models\Components\Status  $status
+     * @param  \ModerationApi\Models\Components\PublicAuthorStatus  $status
      * @param  \ModerationApi\Models\Components\TrustLevel  $trustLevel
      * @param  \ModerationApi\Models\Components\Metrics  $metrics
      * @param  \ModerationApi\Models\Components\Metadata  $metadata
@@ -169,7 +169,7 @@ class PublicAuthor
      * @param  ?float  $lastIncident
      * @phpstan-pure
      */
-    public function __construct(string $id, float $firstSeen, float $lastSeen, Status $status, TrustLevel $trustLevel, Metrics $metrics, Metadata $metadata, ?Block $block = null, ?RiskEvaluation $riskEvaluation = null, ?string $externalId = null, ?string $profilePicture = null, ?string $externalLink = null, ?string $name = null, ?string $email = null, ?string $company = null, ?float $lastIncident = null)
+    public function __construct(string $id, float $firstSeen, float $lastSeen, PublicAuthorStatus $status, TrustLevel $trustLevel, Metrics $metrics, Metadata $metadata, ?Block $block = null, ?RiskEvaluation $riskEvaluation = null, ?string $externalId = null, ?string $profilePicture = null, ?string $externalLink = null, ?string $name = null, ?string $email = null, ?string $company = null, ?float $lastIncident = null)
     {
         $this->id = $id;
         $this->firstSeen = $firstSeen;

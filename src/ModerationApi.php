@@ -23,7 +23,11 @@ class ModerationApi
         'https://api.moderationapi.com/v1',
     ];
 
+    public Analytics $analytics;
+
     public Authors $authors;
+
+    public Feedback $feedback;
 
     public Queue $queue;
 
@@ -59,7 +63,9 @@ class ModerationApi
     public function __construct(
         public SDKConfiguration $sdkConfiguration,
     ) {
+        $this->analytics = new Analytics($this->sdkConfiguration);
         $this->authors = new Authors($this->sdkConfiguration);
+        $this->feedback = new Feedback($this->sdkConfiguration);
         $this->queue = new Queue($this->sdkConfiguration);
         $this->actions = new Actions($this->sdkConfiguration);
         $this->webhooks = new Webhooks($this->sdkConfiguration);

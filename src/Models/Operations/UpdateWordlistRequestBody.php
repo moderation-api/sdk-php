@@ -39,7 +39,7 @@ class UpdateWordlistRequestBody
     public ?string $description = null;
 
     /**
-     * New words for the wordlist. Replace the existing words with these new ones. Duplicate words will be ignored.
+     * New words for the wordlist. Replace the existing words with these new ones. Words are converted to lowercase. Duplicate and empty words are ignored. Maximum 5000 words.
      *
      * @var ?array<string> $words
      */

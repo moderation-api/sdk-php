@@ -7,7 +7,6 @@
 | --------------------- | --------------------- |
 | `TrustLevel`          | trustLevel            |
 | `ViolationCount`      | violationCount        |
-| `ReportCount`         | reportCount           |
 | `MemberSince`         | memberSince           |
 | `LastActive`          | lastActive            |
 | `ContentCount`        | contentCount          |

@@ -20,7 +20,7 @@ class ResolveQueueItemResponseBody
     public bool $success;
 
     /**
-     * Timestamp when the item was resolved
+     * When the item was resolved (ISO 8601).
      *
      * @var string $resolvedAt
      */
@@ -28,24 +28,13 @@ class ResolveQueueItemResponseBody
     public string $resolvedAt;
 
     /**
-     * Optional comment
-     *
-     * @var ?string $comment
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('comment')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?string $comment = null;
-
-    /**
      * @param  bool  $success
      * @param  string  $resolvedAt
-     * @param  ?string  $comment
      * @phpstan-pure
      */
-    public function __construct(bool $success, string $resolvedAt, ?string $comment = null)
+    public function __construct(bool $success, string $resolvedAt)
     {
         $this->success = $success;
         $this->resolvedAt = $resolvedAt;
-        $this->comment = $comment;
     }
 }

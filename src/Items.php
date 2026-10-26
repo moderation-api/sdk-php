@@ -45,9 +45,9 @@ class Items
     }
 
     /**
-     * Get queue items
+     * List queue items
      *
-     * Get paginated list of items in a moderation queue with filtering options
+     * List the items of a review queue, with the filters and the date window of the queue applied. By default only pending items. The list is paginated. Use the item `id` to resolve or unresolve an item.
      *
      * @param  \ModerationApi\Models\Operations\ListQueueItemsRequest  $request
      * @return \ModerationApi\Models\Operations\ListQueueItemsResponse
@@ -131,15 +131,14 @@ class Items
                             id: $request != null ? $request->id : '',
                             page: $nextPage,
                             pageSize: $request != null ? $request->pageSize : null,
-                            sortField: $request != null ? $request->sortField : null,
-                            sortDirection: $request != null ? $request->sortDirection : null,
+                            sort: $request != null ? $request->sort : null,
+                            includeResolved: $request != null ? $request->includeResolved : null,
                             conversationIds: $request != null ? $request->conversationIds : null,
                             labels: $request != null ? $request->labels : null,
-                            afterDate: $request != null ? $request->afterDate : null,
-                            beforeDate: $request != null ? $request->beforeDate : null,
-                            includeResolved: $request != null ? $request->includeResolved : null,
                             authorId: $request != null ? $request->authorId : null,
                             filteredActionIds: $request != null ? $request->filteredActionIds : null,
+                            afterDate: $request != null ? $request->afterDate : null,
+                            beforeDate: $request != null ? $request->beforeDate : null,
                             projectId: $request != null ? $request->projectId : null,
                         ),
                     );
@@ -231,9 +230,9 @@ class Items
         }
     }
     /**
-     * Get queue items
+     * List queue items
      *
-     * Get paginated list of items in a moderation queue with filtering options
+     * List the items of a review queue, with the filters and the date window of the queue applied. By default only pending items. The list is paginated. Use the item `id` to resolve or unresolve an item.
      *
      * @param  \ModerationApi\Models\Operations\ListQueueItemsRequest  $request
      * @return \Generator<\ModerationApi\Models\Operations\ListQueueItemsResponse>
@@ -251,32 +250,25 @@ class Items
     /**
      * Resolve a queue item
      *
-     * Mark a queue item as resolved with a specific moderation action
+     * Mark an item of a queue as resolved. It is the same as a check-off in the dashboard: the item leaves the pending list and a QUEUE_ITEM_COMPLETED webhook is sent. To also take a moderation action, use `POST /actions/execute`.
      *
-     * @param  \ModerationApi\Models\Operations\ResolveQueueItemRequestBody  $body
      * @param  string  $id
      * @param  string  $itemId
      * @param  ?string  $projectId
      * @return \ModerationApi\Models\Operations\ResolveQueueItemResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function resolve(Operations\ResolveQueueItemRequestBody $body, string $id, string $itemId, ?string $projectId = null, ?Options $options = null): Operations\ResolveQueueItemResponse
+    public function resolve(string $id, string $itemId, ?string $projectId = null, ?Options $options = null): Operations\ResolveQueueItemResponse
     {
         $request = new Operations\ResolveQueueItemRequest(
             id: $id,
             itemId: $itemId,
-            body: $body,
             projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/queue/{id}/items/{itemId}/resolve', Operations\ResolveQueueItemRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
-        $body = Utils\Utils::serializeRequestBody($request, 'body', 'json');
-        if ($body === null) {
-            throw new \Exception('Request body is required');
-        }
-        $httpOptions = array_merge_recursive($httpOptions, $body);
         $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
         if (! array_key_exists('headers', $httpOptions)) {
             $httpOptions['headers'] = [];
@@ -389,27 +381,25 @@ class Items
     }
 
     /**
-     * Unresolve a queue item
+     * Resolve queue items
      *
-     * Mark a previously resolved queue item as unresolved/pending
+     * Mark up to 100 items of a queue as resolved in one request. Each item is resolved the same as with `POST /queue/{id}/items/{itemId}/resolve`. IDs that do not exist in the project are skipped and returned in `notFoundIds`.
      *
-     * @param  \ModerationApi\Models\Operations\UnresolveQueueItemRequestBody  $body
+     * @param  \ModerationApi\Models\Operations\ResolveQueueItemsRequestBody  $body
      * @param  string  $id
-     * @param  string  $itemId
      * @param  ?string  $projectId
-     * @return \ModerationApi\Models\Operations\UnresolveQueueItemResponse
+     * @return \ModerationApi\Models\Operations\ResolveQueueItemsResponse
      * @throws \ModerationApi\Models\Errors\APIException
      */
-    public function unresolve(Operations\UnresolveQueueItemRequestBody $body, string $id, string $itemId, ?string $projectId = null, ?Options $options = null): Operations\UnresolveQueueItemResponse
+    public function resolveMany(Operations\ResolveQueueItemsRequestBody $body, string $id, ?string $projectId = null, ?Options $options = null): Operations\ResolveQueueItemsResponse
     {
-        $request = new Operations\UnresolveQueueItemRequest(
+        $request = new Operations\ResolveQueueItemsRequest(
             id: $id,
-            itemId: $itemId,
             body: $body,
             projectId: $projectId,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
-        $url = Utils\Utils::generateUrl($baseUrl, '/queue/{id}/items/{itemId}/unresolve', Operations\UnresolveQueueItemRequest::class, $request);
+        $url = Utils\Utils::generateUrl($baseUrl, '/queue/{id}/items/resolve', Operations\ResolveQueueItemsRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
         $body = Utils\Utils::serializeRequestBody($request, 'body', 'json');
@@ -417,6 +407,139 @@ class Items
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
+        $httpOptions['headers']['Accept'] = 'application/json';
+        $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
+        $httpRequest = new \GuzzleHttp\Psr7\Request('POST', $url);
+        $hookContext = new HookContext($this->sdkConfiguration, $baseUrl, 'resolveQueueItems', null, $this->sdkConfiguration->securitySource);
+        $httpRequest = $this->sdkConfiguration->hooks->beforeRequest(new Hooks\BeforeRequestContext($hookContext), $httpRequest);
+        $httpOptions = Utils\Utils::convertHeadersToOptions($httpRequest, $httpOptions);
+        $httpRequest = Utils\Utils::removeHeaders($httpRequest);
+        try {
+            $httpResponse = $this->sdkConfiguration->client->send($httpRequest, $httpOptions);
+        } catch (\GuzzleHttp\Exception\GuzzleException $error) {
+            $res = $this->sdkConfiguration->hooks->afterError(new Hooks\AfterErrorContext($hookContext), null, $error);
+            $httpResponse = $res;
+        }
+        $contentType = $httpResponse->getHeader('Content-Type')[0] ?? '';
+
+        if (Utils\Utils::matchStatusCodes($httpResponse->getStatusCode(), ['4XX', '5XX'])) {
+            $res = $this->sdkConfiguration->hooks->afterError(new Hooks\AfterErrorContext($hookContext), $httpResponse, null);
+            $httpResponse = $res;
+        }
+
+        $statusCode = $httpResponse->getStatusCode();
+        if (Utils\Utils::matchStatusCodes($statusCode, ['200'])) {
+            if (Utils\Utils::matchContentType($contentType, 'application/json')) {
+                $httpResponse = $this->sdkConfiguration->hooks->afterSuccess(new Hooks\AfterSuccessContext($hookContext), $httpResponse);
+
+                $serializer = Utils\JSON::createSerializer();
+                $responseData = (string) $httpResponse->getBody();
+                $obj = $serializer->deserialize($responseData, '\ModerationApi\Models\Operations\ResolveQueueItemsResponseBody', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $response = new Operations\ResolveQueueItemsResponse(
+                    statusCode: $statusCode,
+                    contentType: $contentType,
+                    rawResponse: $httpResponse,
+                    object: $obj);
+
+                return $response;
+            } else {
+                throw new \ModerationApi\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            }
+        } elseif (Utils\Utils::matchStatusCodes($statusCode, ['400'])) {
+            if (Utils\Utils::matchContentType($contentType, 'application/json')) {
+                $httpResponse = $this->sdkConfiguration->hooks->afterSuccess(new Hooks\AfterSuccessContext($hookContext), $httpResponse);
+
+                $serializer = Utils\JSON::createSerializer();
+                $responseData = (string) $httpResponse->getBody();
+                $obj = $serializer->deserialize($responseData, '\ModerationApi\Models\Errors\BadRequestError', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj->rawResponse = $httpResponse;
+                throw $obj->toException();
+            } else {
+                throw new \ModerationApi\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            }
+        } elseif (Utils\Utils::matchStatusCodes($statusCode, ['401'])) {
+            if (Utils\Utils::matchContentType($contentType, 'application/json')) {
+                $httpResponse = $this->sdkConfiguration->hooks->afterSuccess(new Hooks\AfterSuccessContext($hookContext), $httpResponse);
+
+                $serializer = Utils\JSON::createSerializer();
+                $responseData = (string) $httpResponse->getBody();
+                $obj = $serializer->deserialize($responseData, '\ModerationApi\Models\Errors\AuthenticationError', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj->rawResponse = $httpResponse;
+                throw $obj->toException();
+            } else {
+                throw new \ModerationApi\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            }
+        } elseif (Utils\Utils::matchStatusCodes($statusCode, ['403'])) {
+            if (Utils\Utils::matchContentType($contentType, 'application/json')) {
+                $httpResponse = $this->sdkConfiguration->hooks->afterSuccess(new Hooks\AfterSuccessContext($hookContext), $httpResponse);
+
+                $serializer = Utils\JSON::createSerializer();
+                $responseData = (string) $httpResponse->getBody();
+                $obj = $serializer->deserialize($responseData, '\ModerationApi\Models\Errors\PermissionDeniedError', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj->rawResponse = $httpResponse;
+                throw $obj->toException();
+            } else {
+                throw new \ModerationApi\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            }
+        } elseif (Utils\Utils::matchStatusCodes($statusCode, ['429'])) {
+            if (Utils\Utils::matchContentType($contentType, 'application/json')) {
+                $httpResponse = $this->sdkConfiguration->hooks->afterSuccess(new Hooks\AfterSuccessContext($hookContext), $httpResponse);
+
+                $serializer = Utils\JSON::createSerializer();
+                $responseData = (string) $httpResponse->getBody();
+                $obj = $serializer->deserialize($responseData, '\ModerationApi\Models\Errors\RateLimitError', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj->rawResponse = $httpResponse;
+                throw $obj->toException();
+            } else {
+                throw new \ModerationApi\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            }
+        } elseif (Utils\Utils::matchStatusCodes($statusCode, ['500'])) {
+            if (Utils\Utils::matchContentType($contentType, 'application/json')) {
+                $httpResponse = $this->sdkConfiguration->hooks->afterSuccess(new Hooks\AfterSuccessContext($hookContext), $httpResponse);
+
+                $serializer = Utils\JSON::createSerializer();
+                $responseData = (string) $httpResponse->getBody();
+                $obj = $serializer->deserialize($responseData, '\ModerationApi\Models\Errors\InternalServerError', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj->rawResponse = $httpResponse;
+                throw $obj->toException();
+            } else {
+                throw new \ModerationApi\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            }
+        } elseif (Utils\Utils::matchStatusCodes($statusCode, ['4XX'])) {
+            throw new \ModerationApi\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+        } elseif (Utils\Utils::matchStatusCodes($statusCode, ['5XX'])) {
+            throw new \ModerationApi\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+        } else {
+            throw new \ModerationApi\Models\Errors\APIException('Unknown status code received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+        }
+    }
+
+    /**
+     * Unresolve a queue item
+     *
+     * Mark a resolved item of a queue as pending again. It is the same as removing a check-off in the dashboard: the item comes back in the pending list.
+     *
+     * @param  string  $id
+     * @param  string  $itemId
+     * @param  ?string  $projectId
+     * @return \ModerationApi\Models\Operations\UnresolveQueueItemResponse
+     * @throws \ModerationApi\Models\Errors\APIException
+     */
+    public function unresolve(string $id, string $itemId, ?string $projectId = null, ?Options $options = null): Operations\UnresolveQueueItemResponse
+    {
+        $request = new Operations\UnresolveQueueItemRequest(
+            id: $id,
+            itemId: $itemId,
+            projectId: $projectId,
+        );
+        $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
+        $url = Utils\Utils::generateUrl($baseUrl, '/queue/{id}/items/{itemId}/unresolve', Operations\UnresolveQueueItemRequest::class, $request);
+        $urlOverride = null;
+        $httpOptions = ['http_errors' => false];
         $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
         if (! array_key_exists('headers', $httpOptions)) {
             $httpOptions['headers'] = [];

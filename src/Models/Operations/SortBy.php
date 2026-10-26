@@ -14,7 +14,6 @@ enum SortBy: string
 {
     case TrustLevel = 'trustLevel';
     case ViolationCount = 'violationCount';
-    case ReportCount = 'reportCount';
     case MemberSince = 'memberSince';
     case LastActive = 'lastActive';
     case ContentCount = 'contentCount';
