@@ -12,7 +12,7 @@ namespace ModerationApi\Models\Operations;
 class Trends
 {
     /**
-     * $dailyReviewCounts
+     * Resolved items per day. Days with no reviews are left out.
      *
      * @var array<\ModerationApi\Models\Operations\DailyReviewCount> $dailyReviewCounts
      */
@@ -21,22 +21,11 @@ class Trends
     public array $dailyReviewCounts;
 
     /**
-     * $flaggedContentTrends
-     *
-     * @var array<\ModerationApi\Models\Operations\FlaggedContentTrend> $flaggedContentTrends
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('flaggedContentTrends')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\ModerationApi\Models\Operations\FlaggedContentTrend>')]
-    public array $flaggedContentTrends;
-
-    /**
      * @param  array<\ModerationApi\Models\Operations\DailyReviewCount>  $dailyReviewCounts
-     * @param  array<\ModerationApi\Models\Operations\FlaggedContentTrend>  $flaggedContentTrends
      * @phpstan-pure
      */
-    public function __construct(array $dailyReviewCounts, array $flaggedContentTrends)
+    public function __construct(array $dailyReviewCounts)
     {
         $this->dailyReviewCounts = $dailyReviewCounts;
-        $this->flaggedContentTrends = $flaggedContentTrends;
     }
 }

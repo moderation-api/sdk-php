@@ -12,7 +12,7 @@ use ModerationApi\Utils\SpeakeasyMetadata;
 class ResolveQueueItemRequest
 {
     /**
-     * The queue ID
+     * The queue ID.
      *
      * @var string $id
      */
@@ -20,7 +20,7 @@ class ResolveQueueItemRequest
     public string $id;
 
     /**
-     * The item ID to resolve
+     * The item ID to resolve.
      *
      * @var string $itemId
      */
@@ -28,14 +28,7 @@ class ResolveQueueItemRequest
     public string $itemId;
 
     /**
-     *
-     * @var \ModerationApi\Models\Operations\ResolveQueueItemRequestBody $body
-     */
-    #[SpeakeasyMetadata('request:mediaType=application/json')]
-    public ResolveQueueItemRequestBody $body;
-
-    /**
-     * The project to act on, when you call with an organization key. Optional when the organization has one project. A project key acts on its own project: naming another one is an error.
+     * The project to act on, by ID or name. Required with an organization key unless the key reaches only one project; list projects with GET /projects. A project key acts on its own project and needs no value: naming another one is an error.
      *
      * @var ?string $projectId
      */
@@ -45,15 +38,13 @@ class ResolveQueueItemRequest
     /**
      * @param  string  $id
      * @param  string  $itemId
-     * @param  \ModerationApi\Models\Operations\ResolveQueueItemRequestBody  $body
      * @param  ?string  $projectId
      * @phpstan-pure
      */
-    public function __construct(string $id, string $itemId, ResolveQueueItemRequestBody $body, ?string $projectId = null)
+    public function __construct(string $id, string $itemId, ?string $projectId = null)
     {
         $this->id = $id;
         $this->itemId = $itemId;
-        $this->body = $body;
         $this->projectId = $projectId;
     }
 }

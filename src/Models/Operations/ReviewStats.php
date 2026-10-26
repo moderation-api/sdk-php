@@ -12,38 +12,28 @@ namespace ModerationApi\Models\Operations;
 class ReviewStats
 {
     /**
-     * Average time in milliseconds to review an item
+     * Number of items resolved in this queue in the period.
      *
-     * @var float $averageTimeToReview
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('averageTimeToReview')]
-    public float $averageTimeToReview;
-
-    /**
-     * Total number of items reviewed
-     *
-     * @var float $totalReviewed
+     * @var int $totalReviewed
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('totalReviewed')]
-    public float $totalReviewed;
+    public int $totalReviewed;
 
     /**
-     * Total number of items pending review
+     * Number of items submitted in the period that wait for review now.
      *
-     * @var float $totalPending
+     * @var int $totalPending
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('totalPending')]
-    public float $totalPending;
+    public int $totalPending;
 
     /**
-     * @param  float  $averageTimeToReview
-     * @param  float  $totalReviewed
-     * @param  float  $totalPending
+     * @param  int  $totalReviewed
+     * @param  int  $totalPending
      * @phpstan-pure
      */
-    public function __construct(float $averageTimeToReview, float $totalReviewed, float $totalPending)
+    public function __construct(int $totalReviewed, int $totalPending)
     {
-        $this->averageTimeToReview = $averageTimeToReview;
         $this->totalReviewed = $totalReviewed;
         $this->totalPending = $totalPending;
     }

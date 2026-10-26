@@ -15,11 +15,11 @@ class Recommendation
     /**
      * The action to take based on the recommendation
      *
-     * @var \ModerationApi\Models\Operations\SubmitContentRecommendationAction $action
+     * @var \ModerationApi\Models\Operations\ActionResponse $action
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('action')]
-    #[\Speakeasy\Serializer\Annotation\Type('\ModerationApi\Models\Operations\SubmitContentRecommendationAction')]
-    public SubmitContentRecommendationAction $action;
+    #[\Speakeasy\Serializer\Annotation\Type('\ModerationApi\Models\Operations\ActionResponse')]
+    public ActionResponse $action;
 
     /**
      * Reason codes for the recommendation. Standard codes plus a `rule:<key>` code identifying the rule that produced the action. Can be used to display a reason to the user.
@@ -41,12 +41,12 @@ class Recommendation
     public ?array $matchedRules = null;
 
     /**
-     * @param  \ModerationApi\Models\Operations\SubmitContentRecommendationAction  $action
+     * @param  \ModerationApi\Models\Operations\ActionResponse  $action
      * @param  array<\ModerationApi\Models\Operations\ReasonCodeEnum|string>  $reasonCodes
      * @param  ?array<\ModerationApi\Models\Operations\MatchedRule>  $matchedRules
      * @phpstan-pure
      */
-    public function __construct(SubmitContentRecommendationAction $action, array $reasonCodes, ?array $matchedRules = null)
+    public function __construct(ActionResponse $action, array $reasonCodes, ?array $matchedRules = null)
     {
         $this->action = $action;
         $this->reasonCodes = $reasonCodes;

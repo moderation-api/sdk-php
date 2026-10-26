@@ -69,11 +69,11 @@ class SubmitContentResponseBody
     /**
      * The author of the content if your account has authors enabled. Requires you to send authorId when submitting content.
      *
-     * @var ?\ModerationApi\Models\Operations\Author $author
+     * @var ?\ModerationApi\Models\Operations\SubmitContentAuthor $author
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('author')]
-    #[\Speakeasy\Serializer\Annotation\Type('\ModerationApi\Models\Operations\Author|null')]
-    public ?Author $author;
+    #[\Speakeasy\Serializer\Annotation\Type('\ModerationApi\Models\Operations\SubmitContentAuthor|null')]
+    public ?SubmitContentAuthor $author;
 
     /**
      * What your casebook — the record of your past moderation decisions — found for this content, or null when it had nothing close enough to say, when the matching cases disagreed, or when casebook lookups are not switched on for this channel. Reports what the casebook found; whether it decided the outcome is shown in `recommendation`, where a higher-priority rule may have settled the item first.
@@ -101,12 +101,12 @@ class SubmitContentResponseBody
      * @param  array<\ModerationApi\Models\Operations\ClassifierOutput|\ModerationApi\Models\Operations\EntityMatcherOutput>  $policies
      * @param  array<\ModerationApi\Models\Operations\SentimentInsight|\ModerationApi\Models\Operations\LanguageInsight|\ModerationApi\Models\Operations\CuriosityInsight|\ModerationApi\Models\Operations\RespectInsight|\ModerationApi\Models\Operations\PersonalStoryInsight|\ModerationApi\Models\Operations\CompassionInsight>  $insights
      * @param  \ModerationApi\Models\Operations\Meta  $meta
-     * @param  ?\ModerationApi\Models\Operations\Author  $author
+     * @param  ?\ModerationApi\Models\Operations\SubmitContentAuthor  $author
      * @param  ?\ModerationApi\Models\Operations\Casebook  $casebook
      * @param  ?array<\ModerationApi\Models\Operations\Error>  $errors
      * @phpstan-pure
      */
-    public function __construct(ContentResponse $content, Evaluation $evaluation, Recommendation $recommendation, array $policies, array $insights, Meta $meta, ?Author $author = null, ?Casebook $casebook = null, ?array $errors = null)
+    public function __construct(ContentResponse $content, Evaluation $evaluation, Recommendation $recommendation, array $policies, array $insights, Meta $meta, ?SubmitContentAuthor $author = null, ?Casebook $casebook = null, ?array $errors = null)
     {
         $this->content = $content;
         $this->evaluation = $evaluation;

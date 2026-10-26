@@ -12,71 +12,39 @@ namespace ModerationApi\Models\Operations;
 class TopReviewer
 {
     /**
-     * ID of the reviewer
+     * Number of items the reviewer resolved in the period.
      *
-     * @var string $userId
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('userId')]
-    public string $userId;
-
-    /**
-     * Name of the reviewer
-     *
-     * @var string $name
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('name')]
-    public string $name;
-
-    /**
-     * Number of items reviewed
-     *
-     * @var float $reviewCount
+     * @var int $reviewCount
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('reviewCount')]
-    public float $reviewCount;
+    public int $reviewCount;
 
     /**
-     * Average review time in milliseconds
+     * The user ID of the reviewer. `null` for items resolved with an API key.
      *
-     * @var float $averageTimePerReview
+     * @var ?string $userId
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('averageTimePerReview')]
-    public float $averageTimePerReview;
+    #[\Speakeasy\Serializer\Annotation\SerializedName('userId')]
+    public ?string $userId;
 
     /**
-     * Most common actions taken by this reviewer
+     * The name of the reviewer.
      *
-     * @var array<\ModerationApi\Models\Operations\TopAction> $topActions
+     * @var ?string $name
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('topActions')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\ModerationApi\Models\Operations\TopAction>')]
-    public array $topActions;
+    #[\Speakeasy\Serializer\Annotation\SerializedName('name')]
+    public ?string $name;
 
     /**
-     * Optional accuracy score based on review quality metrics
-     *
-     * @var ?float $accuracyScore
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('accuracyScore')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?float $accuracyScore = null;
-
-    /**
-     * @param  string  $userId
-     * @param  string  $name
-     * @param  float  $reviewCount
-     * @param  float  $averageTimePerReview
-     * @param  array<\ModerationApi\Models\Operations\TopAction>  $topActions
-     * @param  ?float  $accuracyScore
+     * @param  int  $reviewCount
+     * @param  ?string  $userId
+     * @param  ?string  $name
      * @phpstan-pure
      */
-    public function __construct(string $userId, string $name, float $reviewCount, float $averageTimePerReview, array $topActions, ?float $accuracyScore = null)
+    public function __construct(int $reviewCount, ?string $userId = null, ?string $name = null)
     {
+        $this->reviewCount = $reviewCount;
         $this->userId = $userId;
         $this->name = $name;
-        $this->reviewCount = $reviewCount;
-        $this->averageTimePerReview = $averageTimePerReview;
-        $this->topActions = $topActions;
-        $this->accuracyScore = $accuracyScore;
     }
 }

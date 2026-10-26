@@ -469,7 +469,7 @@ class Authors
     /**
      * List authors
      *
-     * List authors with their activity metrics and reputation. The list is paginated.
+     * List the authors of the project, with their status, trust level and content metrics. The list is paginated. By default, the authors that were active most recently come first.
      *
      * @param  ?\ModerationApi\Models\Operations\ListAuthorsRequest  $request
      * @return \ModerationApi\Models\Operations\ListAuthorsResponse
@@ -556,7 +556,6 @@ class Authors
                             sortDirection: $request != null ? $request->sortDirection : null,
                             memberSinceDate: $request != null ? $request->memberSinceDate : null,
                             lastActiveDate: $request != null ? $request->lastActiveDate : null,
-                            contentTypes: $request != null ? $request->contentTypes : null,
                             projectId: $request != null ? $request->projectId : null,
                         ),
                     );
@@ -650,7 +649,7 @@ class Authors
     /**
      * List authors
      *
-     * List authors with their activity metrics and reputation. The list is paginated.
+     * List the authors of the project, with their status, trust level and content metrics. The list is paginated. By default, the authors that were active most recently come first.
      *
      * @param  ?\ModerationApi\Models\Operations\ListAuthorsRequest  $request
      * @return \Generator<\ModerationApi\Models\Operations\ListAuthorsResponse>

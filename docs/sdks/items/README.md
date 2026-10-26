@@ -4,13 +4,14 @@
 
 ### Available Operations
 
-* [list](#list) - Get queue items
+* [list](#list) - List queue items
 * [resolve](#resolve) - Resolve a queue item
+* [resolveMany](#resolvemany) - Resolve queue items
 * [unresolve](#unresolve) - Unresolve a queue item
 
 ## list
 
-Get paginated list of items in a moderation queue with filtering options
+List the items of a review queue, with the filters and the date window of the queue applied. By default only pending items. The list is paginated. Use the item `id` to resolve or unresolve an item.
 
 ### Example Usage
 
@@ -69,7 +70,7 @@ foreach ($responses as $response) {
 
 ## resolve
 
-Mark a queue item as resolved with a specific moderation action
+Mark an item of a queue as resolved. It is the same as a check-off in the dashboard: the item leaves the pending list and a QUEUE_ITEM_COMPLETED webhook is sent. To also take a moderation action, use `POST /actions/execute`.
 
 ### Example Usage
 
@@ -80,7 +81,6 @@ declare(strict_types=1);
 require 'vendor/autoload.php';
 
 use ModerationApi;
-use ModerationApi\Models\Operations;
 
 $sdk = ModerationApi\ModerationApi::builder()
     ->setSecurity(
@@ -88,14 +88,11 @@ $sdk = ModerationApi\ModerationApi::builder()
     )
     ->build();
 
-$body = new Operations\ResolveQueueItemRequestBody(
-    comment: 'Reviewed: no violation.',
-);
+
 
 $response = $sdk->queue->items->resolve(
     id: '<id>',
-    itemId: '<id>',
-    body: $body
+    itemId: '<id>'
 
 );
 
@@ -106,12 +103,11 @@ if ($response->object !== null) {
 
 ### Parameters
 
-| Parameter                                                                                                                                                                             | Type                                                                                                                                                                                  | Required                                                                                                                                                                              | Description                                                                                                                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                                                                                                                                                                                  | *string*                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                    | The queue ID                                                                                                                                                                          |
-| `itemId`                                                                                                                                                                              | *string*                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                    | The item ID to resolve                                                                                                                                                                |
-| `body`                                                                                                                                                                                | [Operations\ResolveQueueItemRequestBody](../../Models/Operations/ResolveQueueItemRequestBody.md)                                                                                      | :heavy_check_mark:                                                                                                                                                                    | N/A                                                                                                                                                                                   |
-| `projectId`                                                                                                                                                                           | *?string*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                    | The project to act on, when you call with an organization key. Optional when the organization has one project. A project key acts on its own project: naming another one is an error. |
+| Parameter                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                           | The queue ID.                                                                                                                                                                                                                                |
+| `itemId`                                                                                                                                                                                                                                     | *string*                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                           | The item ID to resolve.                                                                                                                                                                                                                      |
+| `projectId`                                                                                                                                                                                                                                  | *?string*                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                           | The project to act on, by ID or name. Required with an organization key unless the key reaches only one project; list projects with GET /projects. A project key acts on its own project and needs no value: naming another one is an error. |
 
 ### Response
 
@@ -128,13 +124,13 @@ if ($response->object !== null) {
 | Errors\InternalServerError   | 500                          | application/json             |
 | Errors\APIException          | 4XX, 5XX                     | \*/\*                        |
 
-## unresolve
+## resolveMany
 
-Mark a previously resolved queue item as unresolved/pending
+Mark up to 100 items of a queue as resolved in one request. Each item is resolved the same as with `POST /queue/{id}/items/{itemId}/resolve`. IDs that do not exist in the project are skipped and returned in `notFoundIds`.
 
 ### Example Usage
 
-<!-- UsageSnippet language="php" operationID="unresolveQueueItem" method="post" path="/queue/{id}/items/{itemId}/unresolve" -->
+<!-- UsageSnippet language="php" operationID="resolveQueueItems" method="post" path="/queue/{id}/items/resolve" -->
 ```php
 declare(strict_types=1);
 
@@ -149,13 +145,15 @@ $sdk = ModerationApi\ModerationApi::builder()
     )
     ->build();
 
-$body = new Operations\UnresolveQueueItemRequestBody(
-    comment: 'Reopened after an appeal.',
+$body = new Operations\ResolveQueueItemsRequestBody(
+    itemIds: [
+        'clx8k2v0e000108l4a9bz3f7q',
+        'clx8k2v0e000208l4h2mc6d1r',
+    ],
 );
 
-$response = $sdk->queue->items->unresolve(
+$response = $sdk->queue->items->resolveMany(
     id: '<id>',
-    itemId: '<id>',
     body: $body
 
 );
@@ -167,12 +165,67 @@ if ($response->object !== null) {
 
 ### Parameters
 
-| Parameter                                                                                                                                                                             | Type                                                                                                                                                                                  | Required                                                                                                                                                                              | Description                                                                                                                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                                                                                                                                                                                  | *string*                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                    | The queue ID                                                                                                                                                                          |
-| `itemId`                                                                                                                                                                              | *string*                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                    | The item ID to unresolve                                                                                                                                                              |
-| `body`                                                                                                                                                                                | [Operations\UnresolveQueueItemRequestBody](../../Models/Operations/UnresolveQueueItemRequestBody.md)                                                                                  | :heavy_check_mark:                                                                                                                                                                    | N/A                                                                                                                                                                                   |
-| `projectId`                                                                                                                                                                           | *?string*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                    | The project to act on, when you call with an organization key. Optional when the organization has one project. A project key acts on its own project: naming another one is an error. |
+| Parameter                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                           | The queue ID.                                                                                                                                                                                                                                |
+| `body`                                                                                                                                                                                                                                       | [Operations\ResolveQueueItemsRequestBody](../../Models/Operations/ResolveQueueItemsRequestBody.md)                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                                          |
+| `projectId`                                                                                                                                                                                                                                  | *?string*                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                           | The project to act on, by ID or name. Required with an organization key unless the key reaches only one project; list projects with GET /projects. A project key acts on its own project and needs no value: naming another one is an error. |
+
+### Response
+
+**[?Operations\ResolveQueueItemsResponse](../../Models/Operations/ResolveQueueItemsResponse.md)**
+
+### Errors
+
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| Errors\BadRequestError       | 400                          | application/json             |
+| Errors\AuthenticationError   | 401                          | application/json             |
+| Errors\PermissionDeniedError | 403                          | application/json             |
+| Errors\RateLimitError        | 429                          | application/json             |
+| Errors\InternalServerError   | 500                          | application/json             |
+| Errors\APIException          | 4XX, 5XX                     | \*/\*                        |
+
+## unresolve
+
+Mark a resolved item of a queue as pending again. It is the same as removing a check-off in the dashboard: the item comes back in the pending list.
+
+### Example Usage
+
+<!-- UsageSnippet language="php" operationID="unresolveQueueItem" method="post" path="/queue/{id}/items/{itemId}/unresolve" -->
+```php
+declare(strict_types=1);
+
+require 'vendor/autoload.php';
+
+use ModerationApi;
+
+$sdk = ModerationApi\ModerationApi::builder()
+    ->setSecurity(
+        '<YOUR_BEARER_TOKEN_HERE>'
+    )
+    ->build();
+
+
+
+$response = $sdk->queue->items->unresolve(
+    id: '<id>',
+    itemId: '<id>'
+
+);
+
+if ($response->object !== null) {
+    // handle response
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                           | The queue ID.                                                                                                                                                                                                                                |
+| `itemId`                                                                                                                                                                                                                                     | *string*                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                           | The item ID to unresolve.                                                                                                                                                                                                                    |
+| `projectId`                                                                                                                                                                                                                                  | *?string*                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                           | The project to act on, by ID or name. Required with an organization key unless the key reaches only one project; list projects with GET /projects. A project key acts on its own project and needs no value: naming another one is an error. |
 
 ### Response
 

@@ -1,0 +1,13 @@
+# GetAnalyticsVolumesResponseBody
+
+Successful response
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `range`                                                                                                    | [Operations\GetAnalyticsVolumesRangeResponse](../../Models/Operations/GetAnalyticsVolumesRangeResponse.md) | :heavy_check_mark:                                                                                         | The time window of the numbers.                                                                            |
+| `channelId`                                                                                                | *string*                                                                                                   | :heavy_check_mark:                                                                                         | The channel the numbers are for. Null when they are for all channels.                                      |
+| `bucket`                                                                                                   | [Operations\Bucket](../../Models/Operations/Bucket.md)                                                     | :heavy_check_mark:                                                                                         | The size of each entry in `volumes`.                                                                       |
+| `volumes`                                                                                                  | array<[Operations\Volume](../../Models/Operations/Volume.md)>                                              | :heavy_check_mark:                                                                                         | Counts over time, oldest first. Buckets with no requests are included with zeros.                          |

@@ -47,10 +47,10 @@ class ClassifierOutput
     /**
      * $labels
      *
-     * @var ?array<\ModerationApi\Models\Operations\SubmitContentLabel> $labels
+     * @var ?array<\ModerationApi\Models\Operations\Label> $labels
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('labels')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\ModerationApi\Models\Operations\SubmitContentLabel>|null')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\ModerationApi\Models\Operations\Label>|null')]
     #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
     public ?array $labels = null;
 
@@ -77,7 +77,7 @@ class ClassifierOutput
      * @param  float  $probability
      * @param  bool  $flagged
      * @param  ?array<string>  $flaggedFields
-     * @param  ?array<\ModerationApi\Models\Operations\SubmitContentLabel>  $labels
+     * @param  ?array<\ModerationApi\Models\Operations\Label>  $labels
      * @param  ?array<string, mixed>  $data
      * @phpstan-pure
      */
