@@ -68,15 +68,35 @@ class ExecuteActionRequestBody
     public ?float $duration = null;
 
     /**
+     * The user ID or email of the organization member who made the decision. The action is recorded as theirs.
+     *
+     * @var ?string $moderator
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('moderator')]
+    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
+    public ?string $moderator = null;
+
+    /**
+     * Record an allow or reject decision as a casebook case. Defaults to true when `moderator` is set, else false. Without `moderator`, the case is recorded as System.
+     *
+     * @var ?bool $createCasebookCase
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('createCasebookCase')]
+    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
+    public ?bool $createCasebookCase = null;
+
+    /**
      * @param  string  $actionKey
      * @param  ?array<string>  $contentIds
      * @param  ?array<string>  $authorIds
      * @param  ?string  $value
      * @param  ?string  $queueId
      * @param  ?float  $duration
+     * @param  ?string  $moderator
+     * @param  ?bool  $createCasebookCase
      * @phpstan-pure
      */
-    public function __construct(string $actionKey, ?array $contentIds = null, ?array $authorIds = null, ?string $value = null, ?string $queueId = null, ?float $duration = null)
+    public function __construct(string $actionKey, ?array $contentIds = null, ?array $authorIds = null, ?string $value = null, ?string $queueId = null, ?float $duration = null, ?string $moderator = null, ?bool $createCasebookCase = null)
     {
         $this->actionKey = $actionKey;
         $this->contentIds = $contentIds;
@@ -84,5 +104,7 @@ class ExecuteActionRequestBody
         $this->value = $value;
         $this->queueId = $queueId;
         $this->duration = $duration;
+        $this->moderator = $moderator;
+        $this->createCasebookCase = $createCasebookCase;
     }
 }

@@ -308,6 +308,9 @@ Create the organization client only where you manage projects and channels, for 
 * [retrieve](docs/sdks/authors/README.md#retrieve) - Get author details
 * [update](docs/sdks/authors/README.md#update) - Update author details
 * [delete](docs/sdks/authors/README.md#delete) - Delete an author
+* [block](docs/sdks/authors/README.md#block) - Block author
+* [suspend](docs/sdks/authors/README.md#suspend) - Suspend author
+* [unblock](docs/sdks/authors/README.md#unblock) - Unblock author
 
 ### [Channels](docs/sdks/channels/README.md)
 
@@ -320,6 +323,8 @@ Create the organization client only where you manage projects and channels, for 
 
 ### [Content](docs/sdks/content/README.md)
 
+* [reject](docs/sdks/content/README.md#reject) - Reject content
+* [allow](docs/sdks/content/README.md#allow) - Allow content
 * [submit](docs/sdks/content/README.md#submit) - Submit content
 
 ### [Feedback](docs/sdks/feedback/README.md)

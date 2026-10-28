@@ -33,6 +33,8 @@ class ModerationApi
 
     public Actions $actions;
 
+    public Content $content;
+
     public Webhooks $webhooks;
 
     public WebhookSecret $webhookSecret;
@@ -40,8 +42,6 @@ class ModerationApi
     public Account $account;
 
     public Wordlist $wordlist;
-
-    public Content $content;
 
     public Projects $projects;
 
@@ -68,11 +68,11 @@ class ModerationApi
         $this->feedback = new Feedback($this->sdkConfiguration);
         $this->queue = new Queue($this->sdkConfiguration);
         $this->actions = new Actions($this->sdkConfiguration);
+        $this->content = new Content($this->sdkConfiguration);
         $this->webhooks = new Webhooks($this->sdkConfiguration);
         $this->webhookSecret = new WebhookSecret($this->sdkConfiguration);
         $this->account = new Account($this->sdkConfiguration);
         $this->wordlist = new Wordlist($this->sdkConfiguration);
-        $this->content = new Content($this->sdkConfiguration);
         $this->projects = new Projects($this->sdkConfiguration);
         $this->channels = new Channels($this->sdkConfiguration);
         $this->initHooks();
