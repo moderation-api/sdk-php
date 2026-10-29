@@ -47,7 +47,7 @@ class Items
     /**
      * List queue items
      *
-     * List the items of a review queue, with the filters and the date window of the queue applied. By default only pending items. The list is paginated. Use the item `id` to resolve or unresolve an item.
+     * List the items of a review queue, with the filters and the date window of the queue applied. By default only pending items. The list is paginated. Use the item `id` or `contentId` to resolve or unresolve an item.
      *
      * @param  \ModerationApi\Models\Operations\ListQueueItemsRequest  $request
      * @return \ModerationApi\Models\Operations\ListQueueItemsResponse
@@ -232,7 +232,7 @@ class Items
     /**
      * List queue items
      *
-     * List the items of a review queue, with the filters and the date window of the queue applied. By default only pending items. The list is paginated. Use the item `id` to resolve or unresolve an item.
+     * List the items of a review queue, with the filters and the date window of the queue applied. By default only pending items. The list is paginated. Use the item `id` or `contentId` to resolve or unresolve an item.
      *
      * @param  \ModerationApi\Models\Operations\ListQueueItemsRequest  $request
      * @return \Generator<\ModerationApi\Models\Operations\ListQueueItemsResponse>
@@ -250,7 +250,7 @@ class Items
     /**
      * Resolve a queue item
      *
-     * Mark an item of a queue as resolved. It is the same as a check-off in the dashboard: the item leaves the pending list and a QUEUE_ITEM_COMPLETED webhook is sent. To also take a moderation action, use `POST /actions/execute`.
+     * Mark an item of a queue as resolved. It is the same as a check-off in the dashboard: the item leaves the pending list and a QUEUE_ITEM_COMPLETED webhook is sent. `itemId` is the item `id` or your `contentId`. To also take a moderation action, use `POST /actions/execute`.
      *
      * @param  string  $id
      * @param  string  $itemId
@@ -383,7 +383,7 @@ class Items
     /**
      * Resolve queue items
      *
-     * Mark up to 100 items of a queue as resolved in one request. Each item is resolved the same as with `POST /queue/{id}/items/{itemId}/resolve`. IDs that do not exist in the project are skipped and returned in `notFoundIds`.
+     * Mark up to 100 items of a queue as resolved in one request. Each item is resolved the same as with `POST /queue/{id}/items/{itemId}/resolve`, and each ID is an item `id` or your `contentId`. IDs that match no item in the project are skipped and returned in `notFoundIds`.
      *
      * @param  \ModerationApi\Models\Operations\ResolveQueueItemsRequestBody  $body
      * @param  string  $id
@@ -521,7 +521,7 @@ class Items
     /**
      * Unresolve a queue item
      *
-     * Mark a resolved item of a queue as pending again. It is the same as removing a check-off in the dashboard: the item comes back in the pending list.
+     * Mark a resolved item of a queue as pending again. It is the same as removing a check-off in the dashboard: the item comes back in the pending list. `itemId` is the item `id` or your `contentId`.
      *
      * @param  string  $id
      * @param  string  $itemId

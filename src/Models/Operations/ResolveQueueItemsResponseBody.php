@@ -21,7 +21,7 @@ class ResolveQueueItemsResponseBody
     public int $resolved;
 
     /**
-     * Item IDs that do not exist in the project.
+     * IDs from `itemIds` that match no item or content ID in the project.
      *
      * @var array<string> $notFoundIds
      */

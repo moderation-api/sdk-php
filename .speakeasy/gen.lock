@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 0199302d-9d48-4081-a021-a66e7a11ce41
 management:
-  docChecksum: d6bce8a263f0ec11d54bdf026957ba2f
+  docChecksum: 29c7bb10b9655dcfe925eacf9d5f4758
   docVersion: 1.1.0
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 1.3.0
-  configChecksum: cba30f585a63d0da38fb70b401b25d5e
+  releaseVersion: 1.4.0
+  configChecksum: 8dd588e2f67e2feb90c248cfac22e589
   repoURL: https://github.com/moderation-api/sdk-php
   installationURL: https://github.com/moderation-api/sdk-php.git
   published: true
@@ -84,7 +84,7 @@ trackedFiles:
   docs/Models/Components/Queue.md:
     last_write_checksum: sha1:2beff4d4c2ceff7b9f3d7196e8b8e05249566b74
   docs/Models/Components/QueueItem.md:
-    last_write_checksum: sha1:12aad26aa74df0600dcb2bc512d72fffefc7eb3a
+    last_write_checksum: sha1:b13839a6f8189012f2e941d2601fa173495d18af
   docs/Models/Components/QueueItemAudio.md:
     last_write_checksum: sha1:4fdfd0ffb2285b940fa1453812e5d4dbdfdba727
   docs/Models/Components/QueueItemBrandImpersonation.md:
@@ -341,6 +341,12 @@ trackedFiles:
     last_write_checksum: sha1:dbe1e045ca97e7659e8812cf1a2d98e9858b52f3
   docs/Models/Operations/DeleteWebhookResponseBody.md:
     last_write_checksum: sha1:2e336ec503f487c015ddc5583b49df6da5697cb5
+  docs/Models/Operations/DeleteWordlistRequest.md:
+    last_write_checksum: sha1:8241b2c8b49bac7cd9d204731bfe658043ee7ed8
+  docs/Models/Operations/DeleteWordlistResponse.md:
+    last_write_checksum: sha1:7fe7101c2e8b9517843549152fd88f507696abbd
+  docs/Models/Operations/DeleteWordlistResponseBody.md:
+    last_write_checksum: sha1:ed5f0f0e203d9d940a08151af8f164c42383bbc2
   docs/Models/Operations/Drugs.md:
     last_write_checksum: sha1:a53499427c75cb4239f8c1afe9ce8af01bc6ed2f
   docs/Models/Operations/DuplicateChannelRequest.md:
@@ -672,7 +678,7 @@ trackedFiles:
   docs/Models/Operations/RemoveWordlistWordsResponseBody.md:
     last_write_checksum: sha1:fd7813fca61c3aedd3405949ae1e889bc151239d
   docs/Models/Operations/ResolveQueueItemRequest.md:
-    last_write_checksum: sha1:f91c967ea892e6f33596bf83208c5e5231ad0fdd
+    last_write_checksum: sha1:6fc389615ddec51f42021eb0fcbc88cccba0bc61
   docs/Models/Operations/ResolveQueueItemResponse.md:
     last_write_checksum: sha1:045ce38326d9ff36e7ec593be667cf0fcfc042f8
   docs/Models/Operations/ResolveQueueItemResponseBody.md:
@@ -680,11 +686,11 @@ trackedFiles:
   docs/Models/Operations/ResolveQueueItemsRequest.md:
     last_write_checksum: sha1:033c70664e31a9deb0f31992868b67530da3a1a3
   docs/Models/Operations/ResolveQueueItemsRequestBody.md:
-    last_write_checksum: sha1:0f82d0cc3c9fd7ebf5313da8ad417dc0f0f83362
+    last_write_checksum: sha1:39ed65a478aef539983b0a024fc6214c17a14564
   docs/Models/Operations/ResolveQueueItemsResponse.md:
     last_write_checksum: sha1:8bafedce19f5709c554178c10350c13461e22e99
   docs/Models/Operations/ResolveQueueItemsResponseBody.md:
-    last_write_checksum: sha1:0d2fc602321205502b6f83dd5dd3b8429f32d547
+    last_write_checksum: sha1:c9b1220e1363fd336443c00949ea0910f3010d44
   docs/Models/Operations/RespectInsight.md:
     last_write_checksum: sha1:bd2d45e1df3eeb9c4be98781dcc625d41892a777
   docs/Models/Operations/ReviewStats.md:
@@ -774,9 +780,9 @@ trackedFiles:
   docs/Models/Operations/UnblockAuthorResponseBody.md:
     last_write_checksum: sha1:af868cee06a14fe460e0c033458bdd6a573bab22
   docs/Models/Operations/UnicodeSpoofing.md:
-    last_write_checksum: sha1:dcc11bf5e62c90b2ac0c2f11329dfdabd0c205ef
+    last_write_checksum: sha1:2296695724c48e20c5521e2924ff25bf9a7b11fb
   docs/Models/Operations/UnresolveQueueItemRequest.md:
-    last_write_checksum: sha1:c978170bc5ad02a63805869da25d2d3365b4a2ee
+    last_write_checksum: sha1:fe972127bb6b28ca0d0bfa9c949119a58ad12632
   docs/Models/Operations/UnresolveQueueItemResponse.md:
     last_write_checksum: sha1:e28749d8dd7c7f06578dc5822f2b7a293f489bc4
   docs/Models/Operations/UnresolveQueueItemResponseBody.md:
@@ -882,7 +888,7 @@ trackedFiles:
   docs/sdks/feedback/README.md:
     last_write_checksum: sha1:c94088099f0c490ede88e5a6e31de669fe2a2cd5
   docs/sdks/items/README.md:
-    last_write_checksum: sha1:2c198ec31dd36ed1088c4c23e511463ad4ed03ca
+    last_write_checksum: sha1:a7425571d838d47f8714c12e76668241b38752d0
   docs/sdks/projects/README.md:
     last_write_checksum: sha1:867175adea7355b0fa2e9a014b6a62272d188d83
   docs/sdks/queue/README.md:
@@ -892,7 +898,7 @@ trackedFiles:
   docs/sdks/webhooksecret/README.md:
     last_write_checksum: sha1:1b4551ad8328b2553709e01007eb1f1f2656f9fe
   docs/sdks/wordlist/README.md:
-    last_write_checksum: sha1:f36eac428751331c3f688e4f177c6df6ced6e976
+    last_write_checksum: sha1:d1eb4ed27eaced9b9b1d43160bc5588c6b66e06f
   docs/sdks/words/README.md:
     last_write_checksum: sha1:3b7fb592b91e8792b8140f9a74b22f68068982ff
   phpstan.neon:
@@ -950,7 +956,7 @@ trackedFiles:
   src/Hooks/TokenResponse.php:
     last_write_checksum: sha1:4f4b445bf43144d2d423367512caf2ac8f63341d
   src/Items.php:
-    last_write_checksum: sha1:c8457dd9ad091f087674e2a34a9bc8d1b05c11a6
+    last_write_checksum: sha1:a445f4f4bd83af8ff722e9b93eeb7c9fceb61e94
   src/Models/Components/AuthenticationErrorCode.php:
     last_write_checksum: sha1:903736b77081716fb731d0d241fd98149b46eee9
   src/Models/Components/BadRequestErrorCode.php:
@@ -998,7 +1004,7 @@ trackedFiles:
   src/Models/Components/Queue.php:
     last_write_checksum: sha1:f5c6fb3b984f03d40685344d53186d761b6927b0
   src/Models/Components/QueueItem.php:
-    last_write_checksum: sha1:98d038430ecfac2335253f57f3950e8d10f5ab2a
+    last_write_checksum: sha1:3c1e15de8040aaf9c393a5bfd1d733fda36e9046
   src/Models/Components/QueueItemAudio.php:
     last_write_checksum: sha1:7e8618a6988da402fb0c06c892da52e61ba3456c
   src/Models/Components/QueueItemBrandImpersonation.php:
@@ -1261,6 +1267,12 @@ trackedFiles:
     last_write_checksum: sha1:c02adbc6a20d61a9bef2a7e3a54f921be157e72d
   src/Models/Operations/DeleteWebhookResponseBody.php:
     last_write_checksum: sha1:c009dbf6fd2e394e010bc881e88de2d437c5b4cf
+  src/Models/Operations/DeleteWordlistRequest.php:
+    last_write_checksum: sha1:91a009e7a6655c7e263811aa5429c4a23a69d858
+  src/Models/Operations/DeleteWordlistResponse.php:
+    last_write_checksum: sha1:f0e462de6707ab44f5133206f31eb34d317ee142
+  src/Models/Operations/DeleteWordlistResponseBody.php:
+    last_write_checksum: sha1:c3c638e52501c34d695a0b5f3a6eb7012e67fb6a
   src/Models/Operations/Drugs.php:
     last_write_checksum: sha1:28ca14192e186489807005748d6f926ac09c8bc7
   src/Models/Operations/DuplicateChannelRequest.php:
@@ -1584,7 +1596,7 @@ trackedFiles:
   src/Models/Operations/RemoveWordlistWordsResponseBody.php:
     last_write_checksum: sha1:616012ca61922bfb310e29c791df90767b646c44
   src/Models/Operations/ResolveQueueItemRequest.php:
-    last_write_checksum: sha1:ecf2f34b3e9196d7bf7b0c15577753b04a4ac440
+    last_write_checksum: sha1:1ba75f7a631c707aa99e1d7beab561ad92be34ce
   src/Models/Operations/ResolveQueueItemResponse.php:
     last_write_checksum: sha1:633e4f018e58afd3489001095a8e53e6d4a007cb
   src/Models/Operations/ResolveQueueItemResponseBody.php:
@@ -1592,11 +1604,11 @@ trackedFiles:
   src/Models/Operations/ResolveQueueItemsRequest.php:
     last_write_checksum: sha1:3ccff66584e3587d7bdce0adf4593e3d087dbe6f
   src/Models/Operations/ResolveQueueItemsRequestBody.php:
-    last_write_checksum: sha1:373db95f4a4eab8fd92b2b6be569df1a31e2feb6
+    last_write_checksum: sha1:2fab683e5195d7528acdab8f67fba1799e1872d7
   src/Models/Operations/ResolveQueueItemsResponse.php:
     last_write_checksum: sha1:5ad92db0f28554426f7fe10e21f96d8935feebc7
   src/Models/Operations/ResolveQueueItemsResponseBody.php:
-    last_write_checksum: sha1:c36317d7e6b697bf1913c672c8b0bb82fc240ced
+    last_write_checksum: sha1:6b443c374db2b4418d9e49902ab85813c6922819
   src/Models/Operations/RespectInsight.php:
     last_write_checksum: sha1:c762707b020bd49e5342940627e1babf9142fc64
   src/Models/Operations/ReviewStats.php:
@@ -1684,9 +1696,9 @@ trackedFiles:
   src/Models/Operations/UnblockAuthorResponseBody.php:
     last_write_checksum: sha1:c7bbdc50394aba4df6b98d748407ed42a34dda80
   src/Models/Operations/UnicodeSpoofing.php:
-    last_write_checksum: sha1:280971a1558295ec10314a1f8ea945083b2b10e2
+    last_write_checksum: sha1:eba70d14b8f981ffea6b671acf9f4b3ac9029b6c
   src/Models/Operations/UnresolveQueueItemRequest.php:
-    last_write_checksum: sha1:c4eec26b08994710d880c2b559cb6e954fb688e2
+    last_write_checksum: sha1:58c409c212b97e0fa5bff1e5ea93239f4b8b43c1
   src/Models/Operations/UnresolveQueueItemResponse.php:
     last_write_checksum: sha1:2f5ec7c6a563b965063f5a5708b8edd7a1934b52
   src/Models/Operations/UnresolveQueueItemResponseBody.php:
@@ -1784,7 +1796,7 @@ trackedFiles:
   src/Queue.php:
     last_write_checksum: sha1:be966a810109ae154cee3d97d78b3dec2c7512ef
   src/SDKConfiguration.php:
-    last_write_checksum: sha1:173a42d3f25b734c175524888318a21c747aa42b
+    last_write_checksum: sha1:d94629e6785e23d2f3eae32160d246604ef5724d
   src/Utils/BigDecimalHandler.php:
     last_write_checksum: sha1:2d36b5ae690b042acfcdfe7e7277d44c5055416f
   src/Utils/BigIntHandler.php:
@@ -1860,7 +1872,7 @@ trackedFiles:
   src/Webhooks.php:
     last_write_checksum: sha1:bcaee6b9579d83bca24b0082b34d43af8ae3ec48
   src/Wordlist.php:
-    last_write_checksum: sha1:6da5968931e849b59a3edd523ca051f261a4b424
+    last_write_checksum: sha1:a29d7b86819721c6991a9495b83f454fff5f12dc
   src/Words.php:
     last_write_checksum: sha1:4637eb2d0b501a92de44a21f70e7326408ff892b
 examples:
@@ -2912,4 +2924,18 @@ examples:
           application/json: {"type": "not_found_error", "code": "resource_not_found", "message": "Not found", "request_id": "h8fkz6kkzoa446ffve37atys", "doc_url": "https://confused-bell.org"}
         "429":
           application/json: {"type": "rate_limit_error", "code": "rate_limit_exceeded", "message": "Rate limit exceeded", "request_id": "h8fkz6kkzoa446ffve37atys", "doc_url": "https://nervous-partridge.org/"}
+  deleteWordlist:
+    speakeasy-default-delete-wordlist:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "deleted": true, "detachedChannelIds": ["<value 1>", "<value 2>", "<value 3>"]}
+        "401":
+          application/json: {"type": "authentication_error", "code": "unauthorized", "message": "Authorization not provided", "request_id": "h8fkz6kkzoa446ffve37atys", "doc_url": "https://rotating-exterior.biz/"}
+        "404":
+          application/json: {"type": "not_found_error", "code": "resource_not_found", "message": "Not found", "request_id": "h8fkz6kkzoa446ffve37atys", "doc_url": "https://flickering-airmail.org/"}
+        "429":
+          application/json: {"type": "rate_limit_error", "code": "rate_limit_exceeded", "message": "Rate limit exceeded", "request_id": "h8fkz6kkzoa446ffve37atys", "doc_url": "https://decent-millet.biz"}
 examplesVersion: 1.0.2

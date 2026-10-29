@@ -95,7 +95,7 @@ if ($response->object !== null) {
 
 Use `content->submit` to moderate text, images, video, audio, or objects with several fields. All parameters except `content` are optional.
 
-Pass your API key to `setSecurity`. The examples read it from the `MODAPI_SECRET_KEY` environment variable.
+The client reads your API key from the `MODAPI_SECRET_KEY` environment variable. To set it in code, call `setSecurity`.
 
 ```php
 declare(strict_types=1);
@@ -105,9 +105,7 @@ require 'vendor/autoload.php';
 use ModerationApi\ModerationApi;
 use ModerationApi\Models\Operations;
 
-$sdk = ModerationApi::builder()
-    ->setSecurity(getenv('MODAPI_SECRET_KEY'))
-    ->build();
+$sdk = ModerationApi::builder()->build(); // reads MODAPI_SECRET_KEY
 
 // Text
 $sdk->content->submit(new Operations\SubmitContentRequestBody(
@@ -252,10 +250,8 @@ A project key can't call the management API: the API returns `403` with the code
 ```php
 use ModerationApi\ModerationApi;
 
-// Project key
-$sdk = ModerationApi::builder()
-    ->setSecurity(getenv('MODAPI_SECRET_KEY'))
-    ->build();
+// Project key, from MODAPI_SECRET_KEY
+$sdk = ModerationApi::builder()->build();
 
 // Organization key
 $management = ModerationApi::builder()
@@ -375,6 +371,7 @@ Create the organization client only where you manage projects and channels, for 
 * [create](docs/sdks/wordlist/README.md#create) - Create wordlist
 * [retrieve](docs/sdks/wordlist/README.md#retrieve) - Get wordlist
 * [update](docs/sdks/wordlist/README.md#update) - Update wordlist
+* [delete](docs/sdks/wordlist/README.md#delete) - Delete wordlist
 * [getEmbeddingStatus](docs/sdks/wordlist/README.md#getembeddingstatus) - Get embedding status
 
 #### [Wordlist.Words](docs/sdks/words/README.md)
@@ -539,7 +536,6 @@ The SDK sends requests with [Guzzle](https://docs.guzzlephp.org). To set a timeo
 
 ```php
 $sdk = ModerationApi::builder()
-    ->setSecurity(getenv('MODAPI_SECRET_KEY'))
     ->setClient(new \GuzzleHttp\Client(['timeout' => 10]))
     ->build();
 ```
