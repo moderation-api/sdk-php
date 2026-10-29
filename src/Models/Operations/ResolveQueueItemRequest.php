@@ -20,7 +20,7 @@ class ResolveQueueItemRequest
     public string $id;
 
     /**
-     * The item ID to resolve.
+     * The item to resolve: the item `id` from `GET /queue/{id}/items`, or the `contentId` you sent to `POST /moderate` (webhooks send it as `item.id`). For a content ID, the newest submission with that content ID is used, as the queue shows it.
      *
      * @var string $itemId
      */

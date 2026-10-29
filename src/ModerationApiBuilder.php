@@ -110,6 +110,13 @@ class ModerationApiBuilder
             ]);
         }
 
+        if (! $this->sdkConfig->hasSecurity()) {
+            $secretKey = getenv('MODAPI_SECRET_KEY');
+            if (is_string($secretKey) && $secretKey !== '') {
+                $this->setSecurity($secretKey);
+            }
+        }
+
         $this->sdkConfig->defaultClient = $this->sdkConfig->client;
         if ($this->sdkConfig->hasSecurity()) {
             $this->sdkConfig->client = Utils\Utils::configureSecurityClient($this->sdkConfig->client, $this->sdkConfig->getSecurity());
