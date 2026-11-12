@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 0199302d-9d48-4081-a021-a66e7a11ce41
 management:
-  docChecksum: 29c7bb10b9655dcfe925eacf9d5f4758
+  docChecksum: d1c7a760d4c00f34fad01646ab23b9eb
   docVersion: 1.1.0
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 1.4.0
-  configChecksum: 8dd588e2f67e2feb90c248cfac22e589
+  releaseVersion: 1.5.0
+  configChecksum: 89b0ece60d4724cedee3ea727e567e05
   repoURL: https://github.com/moderation-api/sdk-php
   installationURL: https://github.com/moderation-api/sdk-php.git
   published: true
@@ -716,7 +716,7 @@ trackedFiles:
   docs/Models/Operations/SignalsResponse.md:
     last_write_checksum: sha1:ab81434597d9401b483d689acf9cc993b1fd8473
   docs/Models/Operations/Sort.md:
-    last_write_checksum: sha1:4933f2964f135a5d6b74596b625ff254d35a123b
+    last_write_checksum: sha1:f38e9c8cbbbd61470a5fc037960d81aa043be448
   docs/Models/Operations/SortBy.md:
     last_write_checksum: sha1:64e38bedd26e4d3fca155a257e6536945f56a453
   docs/Models/Operations/SortDirection.md:
@@ -874,7 +874,7 @@ trackedFiles:
   docs/sdks/account/README.md:
     last_write_checksum: sha1:edc81d8fb02e7e2f907d5ac8563ad2961cf0d4df
   docs/sdks/actions/README.md:
-    last_write_checksum: sha1:e507621a42936c296ae03eac2ee068106ba47909
+    last_write_checksum: sha1:d72df4833b739ecdfa036962266dc9215f4b7dfd
   docs/sdks/analytics/README.md:
     last_write_checksum: sha1:47430172462b2cc2a9ca4f0f3487d5137f60e0ab
   docs/sdks/apikeys/README.md:
@@ -884,7 +884,7 @@ trackedFiles:
   docs/sdks/channels/README.md:
     last_write_checksum: sha1:784bad3ada3395f36a632bf3a16f7cd944cb9c5e
   docs/sdks/content/README.md:
-    last_write_checksum: sha1:64ddd93e4d2dca3fb7f7df27c04eb1ee82a4d680
+    last_write_checksum: sha1:d4b359b0315bc1664c5147eaaa7d96c2c07b4676
   docs/sdks/feedback/README.md:
     last_write_checksum: sha1:c94088099f0c490ede88e5a6e31de669fe2a2cd5
   docs/sdks/items/README.md:
@@ -912,7 +912,7 @@ trackedFiles:
   src/Account.php:
     last_write_checksum: sha1:26391ec4892280e1d53af5902ee40e9972024151
   src/Actions.php:
-    last_write_checksum: sha1:09b60a8e5784ab74e6fd02d13a167d41bad6df4f
+    last_write_checksum: sha1:a8627b6dc24757c3d7121042647cff184c8166ec
   src/Analytics.php:
     last_write_checksum: sha1:ee29552223bc73767994879c3b1ecfc041c9abd3
   src/ApiKeys.php:
@@ -922,7 +922,7 @@ trackedFiles:
   src/Channels.php:
     last_write_checksum: sha1:e21a72abd3bcc3c758a5b6be405a9c9ae913e2f6
   src/Content.php:
-    last_write_checksum: sha1:0af180b999501ccaf0bd250ea6c63531a8859f2a
+    last_write_checksum: sha1:1374011165519449ac78e69ca9836bec861b0392
   src/Feedback.php:
     last_write_checksum: sha1:9bcf1711ab2b98d185316c243fea74a34e33d949
   src/Hooks/AfterErrorContext.php:
@@ -1634,7 +1634,7 @@ trackedFiles:
   src/Models/Operations/SignalsResponse.php:
     last_write_checksum: sha1:def75e4b92c4ea9f8e01724d9ff1847e261b976e
   src/Models/Operations/Sort.php:
-    last_write_checksum: sha1:8ae288dc521988dcbfebae3ddc0e53959bdc197a
+    last_write_checksum: sha1:1c519243572868034035a6ddd8525a4298e56737
   src/Models/Operations/SortBy.php:
     last_write_checksum: sha1:5958d560878c915648566a433afc382a2c010d11
   src/Models/Operations/SortDirection.php:
@@ -1796,7 +1796,7 @@ trackedFiles:
   src/Queue.php:
     last_write_checksum: sha1:be966a810109ae154cee3d97d78b3dec2c7512ef
   src/SDKConfiguration.php:
-    last_write_checksum: sha1:d94629e6785e23d2f3eae32160d246604ef5724d
+    last_write_checksum: sha1:fb9aae471e87833318ef78fba6fbd03b9f113dc2
   src/Utils/BigDecimalHandler.php:
     last_write_checksum: sha1:2d36b5ae690b042acfcdfe7e7277d44c5055416f
   src/Utils/BigIntHandler.php:

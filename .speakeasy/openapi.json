@@ -394,7 +394,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -591,7 +592,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -790,7 +792,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -972,7 +975,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -1179,7 +1183,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -1433,7 +1438,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -1624,7 +1630,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         },
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -1874,7 +1881,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -1993,7 +2001,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       },
       "put": {
@@ -2234,7 +2243,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": false
         }
       },
       "delete": {
@@ -2360,7 +2370,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": false
         }
       }
     },
@@ -2510,7 +2521,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -2658,7 +2670,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         },
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -2805,7 +2818,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -3025,7 +3039,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -3084,7 +3099,8 @@
                 "FIFO",
                 "LIFO",
                 "RANDOM",
-                "SEVERITY_DESC"
+                "SEVERITY_DESC",
+                "ROBOCALL_DESC"
               ]
             }
           },
@@ -3254,7 +3270,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         },
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -3406,7 +3423,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": true
         }
       }
     },
@@ -3563,7 +3581,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": true
         }
       }
     },
@@ -3705,7 +3724,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -3713,7 +3733,7 @@
       "get": {
         "operationId": "listActions",
         "summary": "List moderation actions",
-        "description": "List the moderation actions of the project. The list is paginated.",
+        "description": "List the moderation actions of the project, with their webhooks. An action is a decision that a reviewer or a rule can take on content or an author. Built-in actions (for example reject an item or block an author) change the item or author in Moderation API. Custom actions record the decision and send it to the webhooks of the action, where the customer platform acts on it. The list is paginated.",
         "tags": [
           "Actions"
         ],
@@ -3988,7 +4008,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         },
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -4013,7 +4034,7 @@
       "post": {
         "operationId": "createAction",
         "summary": "Create an action",
-        "description": "Create an action.",
+        "description": "Create an action that reviewers and rules can take. `type` sets what it does: a built-in type changes the item or author in Moderation API, and a custom type (`ITEM_CUSTOM`, `AUTHOR_CUSTOM`) only records the decision for the webhooks to deliver. Creating an action does not execute it.",
         "tags": [
           "Actions"
         ],
@@ -4347,7 +4368,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -4355,7 +4377,7 @@
       "get": {
         "operationId": "getAction",
         "summary": "Get an action",
-        "description": "Get an action by ID.",
+        "description": "Get an action by ID: its type, where it shows in the review queues, the values it takes and its webhooks.",
         "tags": [
           "Actions"
         ],
@@ -4574,13 +4596,14 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       },
       "put": {
         "operationId": "updateAction",
         "summary": "Update an action",
-        "description": "Update an action.",
+        "description": "Update the settings of an action: its name, type, queues and values. The new settings apply the next time the action is executed. Updating an action does not execute it.",
         "tags": [
           "Actions"
         ],
@@ -4925,7 +4948,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": false
         }
       },
       "delete": {
@@ -5037,7 +5061,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": false
         }
       }
     },
@@ -5045,7 +5070,7 @@
       "post": {
         "operationId": "executeAction",
         "summary": "Execute moderation action",
-        "description": "Execute a moderation action on one or more content items.",
+        "description": "Execute one action of the project, by ID or key, on content items or authors. A built-in action changes them in Moderation API (for example rejects the items or blocks the authors). Every executed action is recorded, and the project sends it to the webhooks of the action and to its other webhook endpoints, where the customer platform can act on it. List the actions first to see what each one does.",
         "tags": [
           "Actions"
         ],
@@ -5198,7 +5223,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": true
         }
       }
     },
@@ -5206,7 +5232,7 @@
       "post": {
         "operationId": "executeActionById",
         "summary": "Execute an action",
-        "description": "Execute an action on a set of content items in a queue.",
+        "description": "Execute an action on a set of content items in a queue. The project sends the result to the webhooks of the action. Use `POST /actions/execute` instead.",
         "tags": [
           "Actions"
         ],
@@ -5487,7 +5513,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": true
         }
       }
     },
@@ -5625,7 +5652,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": true
         }
       }
     },
@@ -5751,7 +5779,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": true
         }
       }
     },
@@ -5886,7 +5915,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": true
         }
       }
     },
@@ -6012,7 +6042,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": true
         }
       }
     },
@@ -6183,7 +6214,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         },
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -6405,7 +6437,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": true
         }
       }
     },
@@ -6557,7 +6590,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       },
       "put": {
@@ -6767,7 +6801,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": true
         }
       },
       "delete": {
@@ -6869,7 +6904,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": false
         }
       }
     },
@@ -7664,7 +7700,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -8066,7 +8103,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         },
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -8255,7 +8293,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -8431,7 +8470,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       },
       "put": {
@@ -8620,7 +8660,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": false
         }
       },
       "delete": {
@@ -8730,7 +8771,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": false
         }
       }
     },
@@ -8870,7 +8912,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -9020,7 +9063,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       },
       "delete": {
@@ -9153,7 +9197,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": false
         }
       }
     },
@@ -9161,6 +9206,7 @@
       "post": {
         "operationId": "submitContent",
         "summary": "Submit content",
+        "description": "Moderate one piece of content: text, an image, a video, audio or an object with several fields. The project checks it against the policies of its channel and returns the result. Act on `recommendation.action` (allow, review or reject). The content is stored in the project unless `doNotStore` is set, and items to review go to the review queue. The project can send the result to its webhook endpoints.",
         "tags": [
           "Content"
         ],
@@ -11552,7 +11598,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": true
         }
       }
     },
@@ -11660,7 +11707,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         },
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -11796,7 +11844,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -11885,7 +11934,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       },
       "put": {
@@ -12052,7 +12102,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": false
         }
       },
       "delete": {
@@ -12154,7 +12205,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": false
         }
       }
     },
@@ -12271,7 +12323,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -12389,7 +12442,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -12517,7 +12571,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         },
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -12681,7 +12736,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
@@ -12770,7 +12826,8 @@
             "read"
           ],
           "readOnlyHint": true,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       },
       "put": {
@@ -12980,7 +13037,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": false
         }
       },
       "delete": {
@@ -13092,7 +13150,8 @@
             "destructive"
           ],
           "readOnlyHint": false,
-          "destructiveHint": true
+          "destructiveHint": true,
+          "openWorldHint": false
         }
       }
     },
@@ -13216,7 +13275,8 @@
             "write"
           ],
           "readOnlyHint": false,
-          "destructiveHint": false
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },

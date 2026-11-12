@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.0 (2026-11-12)
+
+Full Changelog: [v1.4.0...v1.5.0](https://github.com/moderation-api/sdk-php/compare/v1.4.0...v1.5.0)
+
+### API changes
+
+- `GET /queue/{id}/items`: added the new enum value `ROBOCALL_DESC` to the `query` request parameter `sort`
+
 ## 1.4.0 (2026-10-29)
 
 Full Changelog: [v1.3.0...v1.4.0](https://github.com/moderation-api/sdk-php/compare/v1.3.0...v1.4.0)
