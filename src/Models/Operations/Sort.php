@@ -16,4 +16,5 @@ enum Sort: string
     case Lifo = 'LIFO';
     case Random = 'RANDOM';
     case SeverityDesc = 'SEVERITY_DESC';
+    case RobocallDesc = 'ROBOCALL_DESC';
 }

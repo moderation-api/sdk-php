@@ -9,3 +9,4 @@
 | `Lifo`         | LIFO           |
 | `Random`       | RANDOM         |
 | `SeverityDesc` | SEVERITY_DESC  |
+| `RobocallDesc` | ROBOCALL_DESC  |
